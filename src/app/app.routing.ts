@@ -6,8 +6,11 @@ import { DefaultLayoutComponent } from './containers';
 
 import { P404Component } from './views/error/404.component';
 import { P500Component } from './views/error/500.component';
-import { LoginComponent } from './views/login/login.component';
+// import { LoginComponent } from './views/auth/login/login.component';
 import { RegisterComponent } from './views/register/register.component';
+import { LoginComponent } from './views/auth/login/login/login.component';
+import { ChangePasswordComponent } from './views/auth/login/change-password/change-password.component';
+
 
 export const routes: Routes = [
   {
@@ -30,11 +33,25 @@ export const routes: Routes = [
     }
   },
   {
-    path: 'login',
-    component: LoginComponent,
+    path: 'auth/login',
+    component: LoginComponent
+  },
+  // {
+  //   path: 'auth/change-password',
+  //   component: ChangePasswordComponent
+  // },
+  {
+    path: '',
+    component: DefaultLayoutComponent,
     data: {
-      title: 'Login Page'
-    }
+      title: 'Home'
+    },
+    children: [
+      {
+        path: 'auth',
+        loadChildren: './views/auth/auth.module#AuthModule'
+      },
+    ]
   },
   {
     path: 'register',
