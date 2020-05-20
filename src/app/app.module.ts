@@ -16,9 +16,9 @@ import { AppComponent } from './app.component';
 // Import containers
 import { DefaultLayoutComponent } from './containers';
 
-import { P404Component } from './views/error/404.component';
-import { P500Component } from './views/error/500.component';
-import { RegisterComponent } from './views/register/register.component';
+import { P404Component } from './modules/error/404.component';
+import { P500Component } from './modules/error/500.component';
+import { RegisterComponent } from './modules/register/register.component';
 
 const APP_CONTAINERS = [
   DefaultLayoutComponent
@@ -39,9 +39,9 @@ import { AppRoutingModule } from './app.routing';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ChartsModule } from 'ng2-charts';
-// import { LoginComponent } from './views/auth/login/login.component';
+// import { LoginComponent } from './modules/auth/login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AuthModule } from './views/auth/auth.module';
+import { AuthModule } from './modules/auth/auth.module';
 
 @NgModule({
   imports: [
