@@ -7,7 +7,7 @@ import { LoginComponent } from './login/login/login.component';
 import { HttpClientModule } from '@angular/common/http';
 
 // In memory implementation -- remove later
-import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
+//import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 
 
 

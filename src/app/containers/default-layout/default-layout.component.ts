@@ -1,7 +1,7 @@
 import {Component, OnInit } from '@angular/core';
 import { navItems } from '../../_nav';
 import { Router } from '@angular/router';
-import { AuthenticationService } from '../../core/authentication/authentication.service';
+import { AuthenticationService } from '../../modules/auth/authentication.service';
 
 @Component({
   selector: 'app-dashboard',
