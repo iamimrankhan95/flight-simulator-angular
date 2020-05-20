@@ -10,7 +10,7 @@ export class DashboardComponent implements OnInit {
   radioModel: string = 'Month';
 
   // lineChart1
-  public lineChart1Data: Array<any> = [
+  public lineChart1Data: Array<any> = [ 
     {
       data: [65, 59, 84, 84, 51, 55, 40],
       label: 'Series A'
