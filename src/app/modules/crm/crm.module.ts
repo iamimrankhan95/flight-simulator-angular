@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { CRMRoutingModule } from './crm-routing.module';
 import { CRMFormComponent } from './crm-form/crm-form.component';
+import { SharedModule } from '../../shared/modules/shared/shared.module';
 
 
 @NgModule({
@@ -11,7 +12,8 @@ import { CRMFormComponent } from './crm-form/crm-form.component';
   ],
   imports: [
     CommonModule,
-    CRMRoutingModule
+    CRMRoutingModule,
+    SharedModule
   ]
 })
 export class CRMModule { }

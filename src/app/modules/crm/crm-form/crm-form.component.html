@@ -1,1 +1,225 @@
-<p>crm-form works!</p>
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div class="card">
+            <div class="card-header">
+                Create Customer Relation
+            </div>
+            <div class="card-body">
+                <form name="crmForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="crmForm">
+                    <h2 id="jhi-customer-relation-heading"></h2>
+        
+                    <div>
+                        <!-- <jhi-alert-error></jhi-alert-error> -->
+        
+                        <div class="form-group" hidden>
+                            <label for="id">ID</label>
+                            <input type="text" class="form-control" id="id" name="id" formControlName="id" />
+                        </div>
+        
+                        <div class="form-group">
+                            <label class="form-control-label" for="field_uniqueid">Uniqueid</label>
+                            <input type="text" class="form-control" name="uniqueid" id="field_uniqueid"
+                                   formControlName="uniqueid" readonly/>
+                        </div>
+        
+                        <div class="form-group" hidden>
+                            <label class="form-control-label" for="field_agentId">Agent Id</label>
+                            <input type="number" class="form-control" name="agentId" id="field_agentId"
+                                   formControlName="agentId"/>
+                        </div>
+        
+                        <div class="form-group">
+                            <label class="form-control-label" for="field_msisdn">Msisdn</label>
+                            <input type="text" class="form-control" name="msisdn" id="field_msisdn"
+                                   formControlName="msisdn"/>
+                            <div *ngIf="crmForm.get('msisdn')!.invalid && (crmForm.get('msisdn')!.dirty || crmForm.get('msisdn')!.touched)">
+                                <small class="form-text text-danger"
+                                       *ngIf="crmForm.get('msisdn')?.errors?.required">
+                                This field is required.
+                                </small>
+                            </div>
+                        </div>
+        
+                        <div class="form-group">
+                            <label class="form-control-label" for="field_contactNo">Contact No</label>
+                            <input type="text" class="form-control" name="contactNo" id="field_contactNo"
+                                   formControlName="contactNo"/>
+                            <div *ngIf="crmForm.get('contactNo')!.invalid && (crmForm.get('contactNo')!.dirty || crmForm.get('contactNo')!.touched)">
+                                <small class="form-text text-danger"
+                                       *ngIf="crmForm.get('contactNo')?.errors?.required">
+                                This field is required.
+                                </small>
+                            </div>
+                        </div>
+        
+                        <div class="form-group">
+                            <label class="form-control-label" for="field_nidNumber">Nid Number</label>
+                            <input type="text" class="form-control" name="nidNumber" id="field_nidNumber"
+                                   formControlName="nidNumber"/>
+                        </div>
+        
+                        <div class="form-group">
+                            <label class="form-control-label" for="field_compliantName">Compliant Name</label>
+                            <input type="text" class="form-control" name="compliantName" id="field_compliantName"
+                                   formControlName="compliantName"/>
+                            <div *ngIf="crmForm.get('compliantName')!.invalid && (crmForm.get('compliantName')!.dirty || crmForm.get('compliantName')!.touched)">
+                                <small class="form-text text-danger"
+                                       *ngIf="crmForm.get('compliantName')?.errors?.required">
+                                This field is required.
+                                </small>
+                            </div>
+                        </div>
+        
+                        <div class="form-group">
+                            <label class="form-control-label" for="field_email">Email</label>
+                            <input type="text" class="form-control" name="email" id="field_email"
+                                   formControlName="email"/>
+                        </div>
+        
+                        <div class="form-group" hidden>
+                            <label class="form-control-label" for="field_isHusbandName">Is Husband Name</label>
+                            <input type="checkbox" class="" name="isHusbandName" id="field_isHusbandName"
+                                   formControlName="isHusbandName"/>
+                            <div *ngIf="crmForm.get('isHusbandName')!.invalid && (crmForm.get('isHusbandName')!.dirty || crmForm.get('isHusbandName')!.touched)">
+                                <small class="form-text text-danger"
+                                       *ngIf="crmForm.get('isHusbandName')?.errors?.required">
+                                This field is required.
+                                </small>
+                            </div>
+                        </div>
+        
+                        <div class="form-group">
+                            <label class="form-control-label" for="field_fatherName">Father Name</label>
+                            <input type="text" class="form-control" name="fatherName" id="field_fatherName"
+                                   formControlName="fatherName"/>
+                            <div *ngIf="crmForm.get('fatherName')!.invalid && (crmForm.get('fatherName')!.dirty || crmForm.get('fatherName')!.touched)">
+                                <small class="form-text text-danger"
+                                       *ngIf="crmForm.get('fatherName')?.errors?.required">
+                                This field is required.
+                                </small>
+                            </div>
+                        </div>
+        
+                        <div class="form-group">
+                            <label class="form-control-label" for="field_motherName">Mother Name</label>
+                            <input type="text" class="form-control" name="motherName" id="field_motherName"
+                                   formControlName="motherName"/>
+                            <div *ngIf="crmForm.get('motherName')!.invalid && (crmForm.get('motherName')!.dirty || crmForm.get('motherName')!.touched)">
+                                <small class="form-text text-danger"
+                                       *ngIf="crmForm.get('motherName')?.errors?.required">
+                                This field is required.
+                                </small>
+                            </div>
+                        </div>
+        
+                        <!-- <div class="form-group">
+                            <label class="form-control-label" for="field_dob">Dob</label>
+                            <div class="input-group">
+                                <input id="field_dob" type="text" class="form-control" name="dob" ngbDatepicker #dobDp="ngbDatepicker" formControlName="dob"/>
+                                <span class="input-group-append">
+                                    <button type="button" class="btn btn-secondary" (click)="dobDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+                                </span>
+                            </div>
+                        </div> -->
+        
+                        <div class="form-group">
+                            <label class="form-control-label" for="field_occupation">Occupation</label>
+                            <input type="text" class="form-control" name="occupation" id="field_occupation"
+                                   formControlName="occupation"/>
+                            <div *ngIf="crmForm.get('occupation')!.invalid && (crmForm.get('occupation')!.dirty || crmForm.get('occupation')!.touched)">
+                                <small class="form-text text-danger"
+                                       *ngIf="crmForm.get('occupation')?.errors?.required">
+                                This field is required.
+                                </small>
+                            </div>
+                        </div>
+        
+                        <div class="form-group">
+                            <label class="form-control-label" for="field_problemDescription">Problem Description</label>
+                            <textarea type="text" rows="3" class="form-control" name="problemDescription" id="field_problemDescription"
+                                   formControlName="problemDescription"></textarea>
+                            <div *ngIf="crmForm.get('problemDescription')!.invalid && (crmForm.get('problemDescription')!.dirty || crmForm.get('problemDescription')!.touched)">
+                                <small class="form-text text-danger"
+                                       *ngIf="crmForm.get('problemDescription')?.errors?.required">
+                                This field is required.
+                                </small>
+                                <small class="form-text text-danger"
+                                       *ngIf="crmForm.get('problemDescription')?.errors?.maxlength">
+                                This field cannot be longer than 500 characters.
+                                </small>
+                            </div>
+                        </div>
+        
+                        <div class="form-group">
+                            <label class="form-control-label" for="field_accusedOrganizationName">Accused Organization Name</label>
+                            <input type="text" class="form-control" name="accusedOrganizationName" id="field_accusedOrganizationName"
+                                   formControlName="accusedOrganizationName"/>
+                            <div *ngIf="crmForm.get('accusedOrganizationName')!.invalid && (crmForm.get('accusedOrganizationName')!.dirty || crmForm.get('accusedOrganizationName')!.touched)">
+                                <small class="form-text text-danger"
+                                       *ngIf="crmForm.get('accusedOrganizationName')?.errors?.required">
+                                This field is required.
+                                </small>
+                            </div>
+                        </div>
+        
+                        <div class="form-group">
+                            <label class="form-control-label" for="field_accusedOrganizationAddress">Accused Organization Address</label>
+                            <input type="text" class="form-control" name="accusedOrganizationAddress" id="field_accusedOrganizationAddress"
+                                   formControlName="accusedOrganizationAddress"/>
+                            <div *ngIf="crmForm.get('accusedOrganizationAddress')!.invalid && (crmForm.get('accusedOrganizationAddress')!.dirty || crmForm.get('accusedOrganizationAddress')!.touched)">
+                                <small class="form-text text-danger"
+                                       *ngIf="crmForm.get('accusedOrganizationAddress')?.errors?.required">
+                                This field is required.
+                                </small>
+                                <small class="form-text text-danger"
+                                       *ngIf="crmForm.get('accusedOrganizationAddress')?.errors?.maxlength">
+                                This field cannot be longer than 300 characters.
+                                </small>
+                            </div>
+                        </div>
+        
+                        <div class="form-group" hidden>
+                            <label class="form-control-label" for="field_permanentAddress">Permanent Address</label>
+                            <select class="form-control" id="field_permanentAddress" name="permanentAddress" formControlName="permanentAddress">
+                                <option *ngIf="!crmForm.get('permanentAddress')!.value" [ngValue]="null" selected></option>
+                                <option [ngValue]="addressOption.id === crmForm.get('permanentAddress')!.value?.id ? crmForm.get('permanentAddress')!.value : addressOption" *ngFor="let addressOption of addresses; trackBy: trackById">{{ addressOption.id }}</option>
+                            </select>
+                        </div>
+                        <div *ngIf="crmForm.get('permanentAddress')!.invalid && (crmForm.get('permanentAddress')!.dirty || crmForm.get('permanentAddress')!.touched)">
+                            <small class="form-text text-danger"
+                                   *ngIf="crmForm.get('permanentAddress')?.errors?.required">
+                                This field is required.
+                            </small>
+                        </div>
+        
+                        <div class="form-group" hidden>
+                            <label class="form-control-label" for="field_presentAddress">Present Address</label>
+                            <select class="form-control" id="field_presentAddress" name="presentAddress" formControlName="presentAddress">
+                                <option *ngIf="!crmForm.get('presentAddress')!.value" [ngValue]="null" selected></option>
+                                <option [ngValue]="addressOption.id === crmForm.get('presentAddress')!.value?.id ? crmForm.get('presentAddress')!.value : addressOption" *ngFor="let addressOption of addresses; trackBy: trackById">{{ addressOption.id }}</option>
+                            </select>
+                        </div>
+                        <div *ngIf="crmForm.get('presentAddress')!.invalid && (crmForm.get('presentAddress')!.dirty || crmForm.get('presentAddress')!.touched)">
+                            <small class="form-text text-danger"
+                                   *ngIf="crmForm.get('presentAddress')?.errors?.required">
+                                This field is required.
+                            </small>
+                        </div>
+                    </div>
+        
+                    <!-- <jhi-address-update-cus></jhi-address-update-cus> -->
+        
+                    <div>
+                        <!-- <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                            <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+                        </button>
+        
+                        <button type="submit" id="save-entity" [disabled]="crmForm.invalid || isSaving" class="btn btn-primary">
+                            <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+                        </button> -->
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
