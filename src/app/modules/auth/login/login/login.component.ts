@@ -13,6 +13,7 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   submitted = false;
   returnUrl: string;
+  fieldTextType: boolean;
 
   // remove later
   data = [];
@@ -57,5 +58,9 @@ export class LoginComponent implements OnInit {
       this.router.navigate(['/']);
     }
 
+  }
+
+  toggleFieldTextType() {
+    this.fieldTextType = !this.fieldTextType;
   }
  }

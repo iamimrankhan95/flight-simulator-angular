@@ -1,6 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, ValidatorFn, ValidationErrors } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+
+export const confirmPasswordValidator: ValidatorFn = (
+  control: FormGroup
+): ValidationErrors | null => {
+  const password = control.get('new_password');
+  const confirm = control.get('re_password');
+  return password && confirm && password.value === confirm.value
+    ? null
+    : { passwordMismatch: true };
+};
 
 @Component({
   selector: 'app-change-password',
@@ -11,6 +21,8 @@ export class ChangePasswordComponent implements OnInit {
   public simpleForm: FormGroup;
   public submitted = false;
   public loginId: any; // change to number later
+  oldFieldTextType: boolean;
+  newFieldTextType: boolean;
 
   constructor(
     private formbuilder: FormBuilder,
@@ -27,10 +39,11 @@ export class ChangePasswordComponent implements OnInit {
   }
   createForm() {
     this.simpleForm = this.formbuilder.group({
-    old_password: [''],
+    old_password: ['', Validators.required],
     new_password: ['', [Validators.required, Validators.minLength(6)]],
-    re_password: ['', [Validators.required]]
-    });
+    re_password: ['', Validators.required]
+    },
+    { validator: confirmPasswordValidator });
   }
   onReset(){
     this.submitted = false;
@@ -39,13 +52,19 @@ export class ChangePasswordComponent implements OnInit {
   get f() {
     return this.simpleForm.controls;
   }
-  onSubmit(){
+  onSubmit() {
     this.submitted = true;
     if (this.simpleForm.invalid){
       return ;
     } else {
       // Put the call to the service here
     }
+  }
+  toggleoldFieldTextType() {
+    this.oldFieldTextType = !this.oldFieldTextType;
+  }
+  togglenewFieldTextType() {
+    this.newFieldTextType = !this.newFieldTextType;
   }
 
 }
