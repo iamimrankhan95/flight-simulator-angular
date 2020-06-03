@@ -75,4 +75,12 @@ export class CRMFormComponent implements OnInit {
       postOffice: [null]
     });
   }
+
+  previousState(): void {
+    window.location.reload();
+  }
+
+  save(): void {
+    console.log(this.crmForm.value)
+  }
 }

@@ -5,6 +5,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { DataFilterPipe } from './pipes/datafilterpipe';
 import { ReplaceNullWithText } from './pipes/replace-null-with-text.pipe';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
 // import { LoaderComponent } from '../../components/loader/loader.component';
 // import { P404Component } from '../../../modules/error/404.component';
 // import { NotPermittedComponent } from '../../../modules/error/not-permitted.component';
@@ -24,7 +26,8 @@ import { ReplaceNullWithText } from './pipes/replace-null-with-text.pipe';
   ],
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
+    FontAwesomeModule
   ],
   exports: [
     RouterModule,

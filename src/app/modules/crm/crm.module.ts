@@ -5,7 +5,12 @@ import { CRMRoutingModule } from './crm-routing.module';
 import { CRMFormComponent } from './crm-form/crm-form.component';
 import { SharedModule } from '../../shared/modules/shared/shared.module';
 import { AddressModule } from '../../shared/modules/address/address.module';
+// Datepicker
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
+// Ng2-select
+import { SelectModule } from 'ng-select';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -15,7 +20,11 @@ import { AddressModule } from '../../shared/modules/address/address.module';
     CommonModule,
     CRMRoutingModule,
     SharedModule,
-    AddressModule
+    AddressModule,
+    FontAwesomeModule,
+    BsDatepickerModule.forRoot(),
+    SelectModule,
+    
   ]
 })
 export class CRMModule { }
