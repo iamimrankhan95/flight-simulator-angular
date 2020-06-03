@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
-import { IDivision } from '../../../models/division.model';
-import { IDistrict } from '../../../models/district.model';
-import { IThana } from '../../../models/thana.model';
-import { IPostOffice } from '../../../models/post-office.model';
-import { IAddress, Address } from '../../../models/address.model';
 import { ActivatedRoute } from '@angular/router';
+import { IDivision } from '../../../../shared/models/division.model';
+import { IDistrict } from '../../../../shared/models/district.model';
+import { IThana } from '../../../../shared/models/thana.model';
+import { IPostOffice } from '../../../../shared/models/post-office.model';
+import { IAddress, Address } from '../../../../shared/models/address.model';
 
 @Component({
   selector: 'app-address-form',
@@ -13,8 +13,12 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./address-form.component.css']
 })
 export class AddressFormComponent implements OnInit {
+  @Input()
+  addressForm: FormGroup;
 
-  addressForm!: FormGroup;
+  @Input()
+  FormGrpName: string;
+
   isSaving = false;
 
   divisions: IDivision[] = [];

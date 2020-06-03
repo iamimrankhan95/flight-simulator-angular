@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-crm-form',
@@ -8,30 +8,71 @@ import { FormBuilder, Validators } from '@angular/forms';
 })
 export class CRMFormComponent implements OnInit {
 
+  addressFormPresent = this.fb.group({
+    houseNo: ['', [Validators.required]],
+    streetNo: [''],
+    division: ['', [Validators.required]],
+    district: [''],
+    thana: ['', [Validators.required]],
+    postOffice: ['']
+  });
+
+  addressFormPermanent = this.fb.group({
+    houseNo: ['', [Validators.required]],
+    streetNo: [''],
+    division: ['', [Validators.required]],
+    district: ['', [Validators.required]],
+    thana: ['', [Validators.required]],
+    postOffice: ['']
+  });
+
   crmForm = this.fb.group({
-    id: [],
-    uniqueid: [],
-    agentId: [],
-    msisdn: [null, [Validators.required]],
-    contactNo: [null, [Validators.required]],
-    nidNumber: [],
-    compliantName: [null, [Validators.required]],
-    email: [],
-    isHusbandName: [null, [Validators.required]],
-    fatherName: [null, [Validators.required]],
-    motherName: [null, [Validators.required]],
-    dob: [],
-    occupation: [null, [Validators.required]],
-    accusedOrganizationName: [null, [Validators.required]],
-    accusedOrganizationAddress: [null, [Validators.required, Validators.maxLength(300)]],
-    problemDescription: [null, [Validators.required, Validators.maxLength(500)]],
-    permanentAddress: [null],
-    presentAddress: [null]
+    id: [''],
+    uniqueid: [''],
+    agentId: [''],
+    msisdn: ['', [Validators.required]],
+    contactNo: ['', [Validators.required]],
+    nidNumber: [''],
+    compliantName: ['', [Validators.required]],
+    email: [''],
+    isHusbandName: ['', [Validators.required]],
+    fatherName: ['', [Validators.required]],
+    motherName: ['', [Validators.required]],
+    dob: [''],
+    occupation: ['', [Validators.required]],
+    accusedOrganizationName: ['', [Validators.required]],
+    accusedOrganizationAddress: ['', [Validators.required, Validators.maxLength(300)]],
+    problemDescription: ['', [Validators.required, Validators.maxLength(500)]],
+    permanentAddress: [''],
+    presentAddress: [''],
+    presentAddressForm: this.addressFormPresent,
+    permanentAddressForm: this.addressFormPermanent
   });
 
   constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
+    // this.initForms();
+    // let xss = <FormGroup>this.crmForm.get('presentAddressForm').t;
   }
 
+  initForms(): void {
+    this.addressFormPresent = this.fb.group({
+      houseNo: [null, [Validators.required]],
+      streetNo: [],
+      division: [null, [Validators.required]],
+      district: [],
+      thana: [null, [Validators.required]],
+      postOffice: [null]
+    });
+
+    this.addressFormPermanent = this.fb.group({
+      houseNo: [null, [Validators.required]],
+      streetNo: [],
+      division: [null, [Validators.required]],
+      district: [null, [Validators.required]],
+      thana: [null, [Validators.required]],
+      postOffice: [null]
+    });
+  }
 }

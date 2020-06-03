@@ -9,7 +9,7 @@ import { AddressModule } from '../../shared/modules/address/address.module';
 
 @NgModule({
   declarations: [
-    CRMFormComponent
+    CRMFormComponent,
   ],
   imports: [
     CommonModule,

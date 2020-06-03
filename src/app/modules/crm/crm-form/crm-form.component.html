@@ -205,24 +205,25 @@
                             </div>
                             <div class="form-row">
                                 <div class="col-md-6">
+                                    <app-address-form [addressForm]="crmForm" FormGrpName="presentAddressForm">
+                                    </app-address-form>
                                 </div>
                                 <div class="col-md-6">
+                                    <app-address-form [addressForm]="crmForm" [FormGrpName]="'permanentAddressForm'">
+                                    </app-address-form>
                                 </div>
                             </div>
                         </fieldset>
 
                     </div>
-
-                    <!-- <jhi-address-update-cus></jhi-address-update-cus> -->
-
                     <div>
-                        <!-- <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                        <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
                         <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
                     </button>
     
                     <button type="submit" id="save-entity" [disabled]="crmForm.invalid || isSaving" class="btn btn-primary">
                         <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
-                    </button> -->
+                    </button>
                     </div>
                 </form>
             </div>
