@@ -8,6 +8,11 @@ import { P404Component } from './modules/error/404.component';
 import { P500Component } from './modules/error/500.component';
 import { LoginComponent } from './modules/login/login.component';
 import { RegisterComponent } from './modules/register/register.component';
+// import { LoginComponent } from './modules/auth/login/login.component';
+import { RegisterComponent } from './modules/register/register.component';
+import { LoginComponent } from './modules/auth/login/login/login.component';
+import { ChangePasswordComponent } from './modules/auth/login/change-password/change-password.component';
+
 
 export const routes: Routes = [
   {
@@ -18,9 +23,34 @@ export const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
+  },
+  {
+    path: '500',
+    component: P500Component,
     data: {
-      title: 'Login Page'
+      title: 'Page 500'
     }
+  },
+  {
+    path: 'auth/login',
+    component: LoginComponent
+  },
+  {
+    path: '',
+    component: DefaultLayoutComponent,
+    data: {
+      title: 'Home'
+    },
+    children: [
+      {
+        path: 'auth',
+        loadChildren: './modules/auth/auth.module#AuthModule'
+      },
+      {
+        path: 'users',
+        loadChildren: './modules/user/user.module#UserModule'
+      }
+    ]
   },
   {
     path: 'register',
