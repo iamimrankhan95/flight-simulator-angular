@@ -31,7 +31,7 @@ export class CreateUserComponent implements OnInit {
       email: ['', Validators.required],
       username: ['', Validators.required],
       password: ['', Validators.required],
-      joiningDate: ['', Validators.required],
+      joiningdate: [''],
       isActive: ['']
     });
   }
