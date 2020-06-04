@@ -7,20 +7,19 @@ import { DefaultLayoutComponent } from './containers';
 import { P404Component } from './modules/error/404.component';
 import { P500Component } from './modules/error/500.component';
 import { RegisterComponent } from './modules/register/register.component';
+import { LoginComponent } from './modules/auth/login/login/login.component';
 
 
 export const routes: Routes = [
+  // {
+  //   path: 'auth',
+  //   loadChildren: () => import('./modules/auth/auth.module').then(m => m.AuthModule)
+  // },
   {
-    path: '',
-    loadChildren: () => import('./modules/auth/auth.module').then(m => m.AuthModule)
+    path: 'auth/login',
+    component: LoginComponent
   },
-  {
-    path: 'register',
-    component: RegisterComponent,
-    data: {
-      title: 'Register Page'
-    }
-  },
+
   {
     path: '',
     component: DefaultLayoutComponent,
@@ -39,15 +38,12 @@ export const routes: Routes = [
       {
         path: 'users',
         loadChildren: () => import('./modules/user/user.module').then(m => m.UserModule)
+      },
+      {
+        path: 'auth',
+        loadChildren: () => import('./modules/auth/auth.module').then(m => m.AuthModule)
       }
     ]
-  },
-  {
-    path: 'register',
-    component: RegisterComponent,
-    data: {
-      title: 'Register Page'
-    }
   },
   {
     path: '404',
