@@ -19,19 +19,10 @@ import { HttpClientModule } from '@angular/common/http';
     ReactiveFormsModule,
     AuthRoutingModule,
     HttpClientModule
-    // HttpClientModule,
-    // ToasterModule
   ],
   providers: [
-    // ToasterService,
-    // ToasterHelperService,
-    // UserDataService,
-    // { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    // { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
   ],
   exports: [
-    // ChangePasswordFormComponent
   ],
-  // entryComponents: [DefaultLayoutComponent],
 })
 export class AuthModule { }

@@ -42,7 +42,6 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ChartsModule } from 'ng2-charts';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SharedModule } from './shared/modules/shared/shared.module';
-// import { LoginComponent } from './modules/auth/login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthModule } from './modules/auth/auth.module';
 import { UserModule } from './modules/user/user.module';
@@ -73,11 +72,7 @@ import { DataTablesModule } from 'angular-datatables';
     ...APP_CONTAINERS,
     P404Component,
     P500Component,
-    // LoginComponent,
     RegisterComponent,
-    // ListUserComponent,
-    // CreateUserComponent,
-    // UpdateUserComponent
   ],
   providers: [{
     provide: LocationStrategy,
