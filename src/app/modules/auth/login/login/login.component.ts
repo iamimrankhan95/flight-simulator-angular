@@ -57,7 +57,7 @@ export class LoginComponent implements OnInit {
 
       this.authenticationService.login(this.f.username.value, this.f.password.value);
       // console.log(localStorage.getItem('currentUser'));
-      this.router.navigate(['/']);
+      this.router.navigate(['/dashboard']);
     }
 
   }
