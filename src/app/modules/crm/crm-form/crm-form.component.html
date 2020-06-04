@@ -1,11 +1,11 @@
 <div class="row justify-content-center">
-    <div class="col-sm-8 col-md-8">
+    <div class="col-sm-12 col-md-12">
         <div class="card">
             <div class="card-header">
                 <i class="fa fa-check"></i>Create Customer Relation
             </div>
             <div class="card-body">
-                <form name="crmForm" role="form" (ngSubmit)="save()" [formGroup]="crmForm">
+                <form name="crmForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="crmForm">
                     <div>
                         <fieldset>
                             <legend>Customer Information</legend>

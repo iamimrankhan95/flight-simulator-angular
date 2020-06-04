@@ -5,7 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { DataFilterPipe } from './pipes/datafilterpipe';
 import { ReplaceNullWithText } from './pipes/replace-null-with-text.pipe';
-import { NgbModule, NgbInputDatepicker } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 // import { LoaderComponent } from '../../components/loader/loader.component';
 // import { P404Component } from '../../../modules/error/404.component';
@@ -37,8 +37,7 @@ import { NgbModule, NgbInputDatepicker } from '@ng-bootstrap/ng-bootstrap';
     ReactiveFormsModule,
     NgbModule,
     DataFilterPipe,
-    ReplaceNullWithText,
-    NgbInputDatepicker
+    ReplaceNullWithText
     // LoaderComponent,
     // P404Component,
     // P500Component,
