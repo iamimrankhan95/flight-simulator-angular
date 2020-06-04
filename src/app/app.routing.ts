@@ -12,8 +12,14 @@ import { RegisterComponent } from './modules/register/register.component';
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'auth',
-    pathMatch: 'full',
+    loadChildren: () => import('./modules/auth/auth.module').then(m => m.AuthModule)
+  },
+  {
+    path: 'register',
+    component: RegisterComponent,
+    data: {
+      title: 'Register Page'
+    }
   },
   {
     path: '',
@@ -31,11 +37,7 @@ export const routes: Routes = [
         loadChildren: () => import('./modules/crm/crm.module').then(m => m.CRMModule)
       },
       {
-        path: 'auth',
-        loadChildren: () => import('./modules/auth/auth.module').then(m => m.AuthModule)
-      },
-      {
-        path: 'auth',
+        path: 'users',
         loadChildren: () => import('./modules/user/user.module').then(m => m.UserModule)
       }
     ]

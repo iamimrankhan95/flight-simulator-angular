@@ -6,6 +6,7 @@ import { ChangePasswordComponent } from './login/change-password/change-password
 
 
 const routes: Routes = [
+  { path: '', component: LoginComponent, data: { title: 'User Login' } },
   { path: 'login', component: LoginComponent, data: { title: 'User Login' } },
   // use id here
   { path: 'change-password', component: ChangePasswordComponent, data: { title: 'Change Password'} },
