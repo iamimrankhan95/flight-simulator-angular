@@ -5,7 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { DataFilterPipe } from './pipes/datafilterpipe';
 import { ReplaceNullWithText } from './pipes/replace-null-with-text.pipe';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { NgbModule, NgbInputDatepicker } from '@ng-bootstrap/ng-bootstrap';
 
 // import { LoaderComponent } from '../../components/loader/loader.component';
 // import { P404Component } from '../../../modules/error/404.component';
@@ -27,15 +27,18 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
   imports: [
     CommonModule,
     FormsModule,
-    FontAwesomeModule
+    ReactiveFormsModule,
+    NgbModule
   ],
   exports: [
     RouterModule,
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    NgbModule,
     DataFilterPipe,
     ReplaceNullWithText,
+    NgbInputDatepicker
     // LoaderComponent,
     // P404Component,
     // P500Component,

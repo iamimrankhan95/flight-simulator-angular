@@ -142,14 +142,12 @@
                                     <div class="form-group">
                                         <label class="form-control-label" for="field_dob">Date of Brith</label>
                                         <div class="input-group">
-                                            <input id="field_dob" type="text" class="form-control" name="dob"
-                                                ngbDatepicker #dobDp="ngbDatepicker" formControlName="dob"
-                                                placeholder="Enter Date of Birth" />
+                                            <input id="field_dob" type="text" class="form-control" name="dob" ngbDatepicker
+                                                formControlName="dob" placeholder="Enter Date of Birth" />
                                             <span class="input-group-append">
-                                                <button type="button" class="btn btn-secondary"
-                                                    (click)="dobDp.toggle()">
+                                                <!-- <button type="button" class="btn btn-secondary" (click)="dobDp.toggle()">
                                                     <fa-icon icon="calendar-alt"></fa-icon>
-                                                </button>
+                                                </button> -->
                                             </span>
                                         </div>
                                     </div>
@@ -230,11 +228,11 @@
                     </div>
                     <div>
                         <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
-                            <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+                            <span>Cancel</span>
                         </button>
 
                         <button type="submit" id="save-entity" class="btn btn-primary">
-                            <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+                            <span>Save</span>
                         </button>
                     </div>
                 </form>

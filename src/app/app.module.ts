@@ -41,6 +41,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ChartsModule } from 'ng2-charts';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { SharedModule } from './shared/modules/shared/shared.module';
 
 @NgModule({
   imports: [
@@ -56,7 +57,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
     ChartsModule,
-    NgbModule
+    SharedModule
   ],
   declarations: [
     AppComponent,

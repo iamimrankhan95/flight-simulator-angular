@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { NgbDateStruct, NgbCalendar, NgbDatepicker } from '@ng-bootstrap/ng-bootstrap';
+import { IOption } from 'ng-select';
 
 @Component({
   selector: 'app-crm-form',
   templateUrl: './crm-form.component.html',
-  styleUrls: ['./crm-form.component.css']
+  styleUrls: ['./crm-form.component.css'],
 })
 export class CRMFormComponent implements OnInit {
 
@@ -51,6 +53,17 @@ export class CRMFormComponent implements OnInit {
 
   constructor(private fb: FormBuilder) { }
 
+  // Datepicker
+
+  minDate = new Date(2017, 5, 10);
+  maxDate = new Date(2018, 9, 15);
+
+  bsValue: Date = new Date();
+  bsRangeValue: any = [new Date(2017, 7, 4), new Date(2017, 7, 20)];
+  dobDp: NgbDatepicker;
+
+  model: NgbDateStruct;
+  date: { year: number, month: number };
   ngOnInit(): void {
     // this.initForms();
     // let xss = <FormGroup>this.crmForm.get('presentAddressForm').t;
