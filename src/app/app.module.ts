@@ -18,10 +18,7 @@ import { DefaultLayoutComponent } from './containers';
 
 import { P404Component } from './modules/error/404.component';
 import { P500Component } from './modules/error/500.component';
-<<<<<<< HEAD
 import { LoginComponent } from './modules/login/login.component';
-=======
->>>>>>> 65a0e0359269a2700320e9d66e219da1c097e8d7
 import { RegisterComponent } from './modules/register/register.component';
 
 const APP_CONTAINERS = [
@@ -65,10 +62,7 @@ import { DataTablesModule } from 'angular-datatables';
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
     ChartsModule,
-    SharedModule
-    // CommonModule,
-    // FormsModule,
-    // ReactiveFormsModule,
+    SharedModule,
     AuthModule,
     UserModule,
     DataTablesModule

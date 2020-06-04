@@ -8,9 +8,6 @@ import { P404Component } from './modules/error/404.component';
 import { P500Component } from './modules/error/500.component';
 import { LoginComponent } from './modules/login/login.component';
 import { RegisterComponent } from './modules/register/register.component';
-// import { LoginComponent } from './modules/auth/login/login.component';
-import { RegisterComponent } from './modules/register/register.component';
-import { LoginComponent } from './modules/auth/login/login/login.component';
 import { ChangePasswordComponent } from './modules/auth/login/change-password/change-password.component';
 
 
