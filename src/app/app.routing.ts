@@ -6,55 +6,14 @@ import { DefaultLayoutComponent } from './containers';
 
 import { P404Component } from './modules/error/404.component';
 import { P500Component } from './modules/error/500.component';
-import { LoginComponent } from './modules/login/login.component';
 import { RegisterComponent } from './modules/register/register.component';
-import { ChangePasswordComponent } from './modules/auth/login/change-password/change-password.component';
 
 
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'dashboard',
+    redirectTo: 'auth',
     pathMatch: 'full',
-  },
-  {
-    path: 'login',
-    component: LoginComponent,
-  },
-  {
-    path: '500',
-    component: P500Component,
-    data: {
-      title: 'Page 500'
-    }
-  },
-  {
-    path: 'auth/login',
-    component: LoginComponent
-  },
-  {
-    path: '',
-    component: DefaultLayoutComponent,
-    data: {
-      title: 'Home'
-    },
-    children: [
-      {
-        path: 'auth',
-        loadChildren: './modules/auth/auth.module#AuthModule'
-      },
-      {
-        path: 'users',
-        loadChildren: './modules/user/user.module#UserModule'
-      }
-    ]
-  },
-  {
-    path: 'register',
-    component: RegisterComponent,
-    data: {
-      title: 'Register Page'
-    }
   },
   {
     path: '',
@@ -70,8 +29,23 @@ export const routes: Routes = [
       {
         path: 'crm',
         loadChildren: () => import('./modules/crm/crm.module').then(m => m.CRMModule)
+      },
+      {
+        path: 'auth',
+        loadChildren: () => import('./modules/auth/auth.module').then(m => m.AuthModule)
+      },
+      {
+        path: 'auth',
+        loadChildren: () => import('./modules/user/user.module').then(m => m.UserModule)
       }
     ]
+  },
+  {
+    path: 'register',
+    component: RegisterComponent,
+    data: {
+      title: 'Register Page'
+    }
   },
   {
     path: '404',
@@ -91,7 +65,7 @@ export const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [ RouterModule.forRoot(routes) ],
-  exports: [ RouterModule ]
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
