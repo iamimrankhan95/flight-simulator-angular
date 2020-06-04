@@ -16,7 +16,7 @@ export const navItems: INavData[] = [
     icon: 'icon-speedometer',
     children: [
       {
-        name: 'create',
+        name: 'Create',
         url: '/crm/create',
         icon: 'icon-speedometer',
       }
