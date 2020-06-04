@@ -7,7 +7,13 @@ export const navItems: INavData[] = [
     icon: 'icon-speedometer',
   },
   {
-    title: true,
-    name: 'Components'
+    name: 'Create User',
+    url: '/users/create',
+    icon: 'cui-user'
+  },
+  {
+    name: 'User List',
+    url: '/users/users',
+    icon: 'fa fa-address-book'
   }
 ];

@@ -10,6 +10,7 @@ export class AuthenticationService {
 
   private currentUserSubject: BehaviorSubject<any>;
   public currentUser: Observable<any>;
+  public url = 'http://192.168.101.41:9050/cms_login';
 
   constructor(private router: Router, private http: HttpClient) {
     // this.currentUserSubject =  new BehaviorSubject<any>(JSON.parse(localStorage.getItem('currentUser')));
@@ -21,9 +22,10 @@ export class AuthenticationService {
     return this.currentUserSubject.value;
   }
 
-  login(userName: string, password: string): void {
+  login(userName: string, password: string) {
     localStorage.setItem('currentUser', userName);
-    // return this.http.get<any>(this.url);
+    // return this.http.post<any>(this.url, {userName, password});
+    return ;
   }
   logout(): void {
     localStorage.removeItem('currentUser');

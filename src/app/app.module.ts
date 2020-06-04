@@ -42,6 +42,8 @@ import { ChartsModule } from 'ng2-charts';
 // import { LoginComponent } from './modules/auth/login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthModule } from './modules/auth/auth.module';
+import { UserModule } from './modules/user/user.module';
+import { DataTablesModule } from 'angular-datatables';
 
 @NgModule({
   imports: [
@@ -60,7 +62,9 @@ import { AuthModule } from './modules/auth/auth.module';
     // CommonModule,
     // FormsModule,
     // ReactiveFormsModule,
-    AuthModule
+    AuthModule,
+    UserModule,
+    DataTablesModule
 
   ],
   declarations: [
@@ -69,7 +73,10 @@ import { AuthModule } from './modules/auth/auth.module';
     P404Component,
     P500Component,
     // LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    // ListUserComponent,
+    // CreateUserComponent,
+    // UpdateUserComponent
   ],
   providers: [{
     provide: LocationStrategy,

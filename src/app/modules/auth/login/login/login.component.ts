@@ -50,10 +50,12 @@ export class LoginComponent implements OnInit {
       return ;
     } else {
       // remove the line below
-      this.authenticationService.login(this.f.username.value, this.f.password.value);
+      // this.authenticationService.login(this.f.username.value, this.f.password.value).subscribe( response => {
+      //   console.log(response);
+      // });
       // localStorage.setItem('currentUser', this.loginForm.get('username').value);
 
-      // this.authenticationService.login(this.f.username.value, this.f.password.value).subscribe( );
+      this.authenticationService.login(this.f.username.value, this.f.password.value);
       // console.log(localStorage.getItem('currentUser'));
       this.router.navigate(['/']);
     }

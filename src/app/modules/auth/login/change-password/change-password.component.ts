@@ -45,7 +45,7 @@ export class ChangePasswordComponent implements OnInit {
     },
     { validator: confirmPasswordValidator });
   }
-  onReset(){
+  onReset() {
     this.submitted = false;
     this.simpleForm.reset();
   }
@@ -54,7 +54,7 @@ export class ChangePasswordComponent implements OnInit {
   }
   onSubmit() {
     this.submitted = true;
-    if (this.simpleForm.invalid){
+    if (this.simpleForm.invalid) {
       return ;
     } else {
       // Put the call to the service here
