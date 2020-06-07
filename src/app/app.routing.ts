@@ -1,12 +1,11 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 
 // Import Containers
 import { DefaultLayoutComponent } from './containers';
 
 import { P404Component } from './modules/error/404.component';
 import { P500Component } from './modules/error/500.component';
-import { RegisterComponent } from './modules/register/register.component';
 import { LoginComponent } from './modules/auth/login/login/login.component';
 
 
@@ -19,7 +18,6 @@ export const routes: Routes = [
     path: 'auth/login',
     component: LoginComponent
   },
-
   {
     path: '',
     component: DefaultLayoutComponent,
@@ -63,7 +61,7 @@ export const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
