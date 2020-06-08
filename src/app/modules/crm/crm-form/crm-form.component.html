@@ -194,11 +194,11 @@
 						</div>
 						<div class="form-row">
 							<div class="col-md-6">
-								<app-address-form [addressForm]="crmForm" FormGrpName="presentAddressForm">
+								<app-address-form [crmForm]="crmForm" [crmFormSubmitted]="crmFormSubmitted" FormGrpName="presentAddressForm">
 								</app-address-form>
 							</div>
 							<div class="col-md-6">
-								<app-address-form [addressForm]="crmForm" [FormGrpName]="'permanentAddressForm'">
+								<app-address-form [crmForm]="crmForm" [crmFormSubmitted]="crmFormSubmitted" [FormGrpName]="'permanentAddressForm'">
 								</app-address-form>
 							</div>
 						</div>

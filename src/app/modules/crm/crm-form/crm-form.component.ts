@@ -15,7 +15,7 @@ export class CRMFormComponent implements OnInit {
     houseNo: ['', [Validators.required]],
     streetNo: [''],
     division: ['', [Validators.required]],
-    district: [''],
+    district: ['', [Validators.required]],
     thana: ['', [Validators.required]],
     postOffice: ['']
   });
@@ -96,6 +96,6 @@ export class CRMFormComponent implements OnInit {
 
   save(): void {
     this.crmFormSubmitted = true;
-    console.log(this.crmForm.value);
+    console.log(this.crmForm);
   }
 }
