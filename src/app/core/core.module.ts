@@ -14,6 +14,7 @@ import { RegisterComponent } from '../modules/register/register.component';
   ],
   imports: [
     SharedModule
-  ]
+  ],
+  providers: []
 })
 export class CoreModule { }

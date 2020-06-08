@@ -38,6 +38,7 @@ import { AuthModule } from './modules/auth/auth.module';
 import { UserModule } from './modules/user/user.module';
 import { DataTablesModule } from 'angular-datatables';
 import { CoreModule } from './core/core.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   imports: [
@@ -57,7 +58,8 @@ import { CoreModule } from './core/core.module';
     SharedModule,
     AuthModule,
     UserModule,
-    DataTablesModule
+    DataTablesModule,
+    HttpClientModule
   ],
   declarations: [
     AppComponent,
