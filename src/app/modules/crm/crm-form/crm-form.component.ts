@@ -10,6 +10,7 @@ import { IOption } from 'ng-select';
 })
 export class CRMFormComponent implements OnInit {
 
+  crmFormSubmitted = false;
   addressFormPresent = this.fb.group({
     houseNo: ['', [Validators.required]],
     streetNo: [''],
@@ -94,6 +95,7 @@ export class CRMFormComponent implements OnInit {
   }
 
   save(): void {
-    console.log(this.crmForm.value)
+    this.crmFormSubmitted = true;
+    console.log(this.crmForm.value);
   }
 }
