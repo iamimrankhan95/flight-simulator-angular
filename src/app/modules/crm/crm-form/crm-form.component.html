@@ -151,7 +151,6 @@
 								</div>
 							</div>
 						</div>
-
 						<div class="form-row">
 							<div class="col-md-12">
 								<div class="form-group">
@@ -171,8 +170,17 @@
 								</div>
 							</div>
 						</div>
+						<div class="form-row">
+							<div class="col-md-6">
+								<app-address-form [crmForm]="crmForm" [crmFormSubmitted]="crmFormSubmitted" FormGrpName="presentAddress">
+								</app-address-form>
+							</div>
+							<div class="col-md-6">
+								<app-address-form [crmForm]="crmForm" [crmFormSubmitted]="crmFormSubmitted" [FormGrpName]="'permanentAddress'">
+								</app-address-form>
+							</div>
+						</div>
 					</fieldset>
-
 					<fieldset>
 						<legend>Accused Organization Information</legend>
 						<div class="form-row">
@@ -186,20 +194,28 @@
 												 [ngClass]="{ 'is-invalid': crmFormSubmitted && crmForm.get('accusedOrganizationName').errors,'is-valid': crmForm.get('accusedOrganizationName').touched && !crmForm.get('accusedOrganizationName').errors }" />
 									<div *ngIf="crmFormSubmitted && crmForm.get('accusedOrganizationName').errors" class="invalid-feedback">
 										<div *ngIf="crmForm.get('accusedOrganizationName')?.errors?.required">
-											compliantName is required.
+											accusedOrganizationName is required.
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
 						<div class="form-row">
-							<div class="col-md-6">
-								<app-address-form [crmForm]="crmForm" [crmFormSubmitted]="crmFormSubmitted" FormGrpName="presentAddressForm">
-								</app-address-form>
-							</div>
-							<div class="col-md-6">
-								<app-address-form [crmForm]="crmForm" [crmFormSubmitted]="crmFormSubmitted" [FormGrpName]="'permanentAddressForm'">
-								</app-address-form>
+							<div class="col-md-12">
+								<div class="form-group">
+									<label class="form-control-label" for="field_accusedOrganizationAddress">Accused Organization Address<span class="text-danger">*</span></label>
+									<textarea type="text" rows="3" class="form-control" name="accusedOrganizationAddress" id="field_accusedOrganizationAddress" formControlName="accusedOrganizationAddress"
+														[ngClass]="{ 'is-invalid': crmFormSubmitted && crmForm.get('accusedOrganizationAddress').errors,'is-valid': crmForm.get('accusedOrganizationAddress').touched && !crmForm.get('accusedOrganizationAddress').errors }">
+																			</textarea>
+									<div *ngIf="crmFormSubmitted && crmForm.get('accusedOrganizationAddress').errors" class="invalid-feedback">
+										<div *ngIf="crmForm.get('accusedOrganizationAddress')?.errors?.required">
+											accusedOrganizationAddress is required.
+										</div>
+										<div *ngIf="crmForm.get('accusedOrganizationAddress')?.errors?.maxlength">
+											This field cannot be longer than 500 characters.
+										</div>
+									</div>
+								</div>
 							</div>
 						</div>
 					</fieldset>

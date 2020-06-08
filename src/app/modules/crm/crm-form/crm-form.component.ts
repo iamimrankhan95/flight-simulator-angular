@@ -46,10 +46,8 @@ export class CRMFormComponent implements OnInit {
     accusedOrganizationName: ['', [Validators.required]],
     accusedOrganizationAddress: ['', [Validators.required, Validators.maxLength(300)]],
     problemDescription: ['', [Validators.required, Validators.maxLength(500)]],
-    permanentAddress: [''],
-    presentAddress: [''],
-    presentAddressForm: this.addressFormPresent,
-    permanentAddressForm: this.addressFormPermanent
+    permanentAddress: this.addressFormPermanent,
+    presentAddress: this.addressFormPresent
   });
 
   constructor(private fb: FormBuilder) { }
