@@ -55,9 +55,6 @@ import { HttpClientModule } from '@angular/common/http';
     TabsModule.forRoot(),
     ChartsModule,
     CoreModule,
-    SharedModule,
-    AuthModule,
-    UserModule,
     DataTablesModule,
     HttpClientModule
   ],
