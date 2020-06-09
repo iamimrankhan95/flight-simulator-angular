@@ -219,6 +219,14 @@
 						</div>
 						<div class="form-row">
 							<div class="col-md-6">
+								<div class="form-group">
+									<label class="form-control-label" for="isSame">Is Same Permanent Address</label>
+									<input type="checkbox" class="" (change)="samePermanentAddress($event)" name="" id="isSame" />
+								</div>
+							</div>
+						</div>
+						<div class="form-row">
+							<div class="col-md-6">
 								<app-address-form [crmForm]="crmForm" [crmFormSubmitted]="crmFormSubmitted" FormGrpName="presentAddress">
 								</app-address-form>
 							</div>

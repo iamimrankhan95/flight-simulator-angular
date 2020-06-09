@@ -100,4 +100,23 @@ export class CRMFormComponent implements OnInit {
     this.crmFormSubmitted = true;
     console.log(this.crmForm);
   }
+
+  samePermanentAddress(event: any): void {
+    if (event.target.checked) {
+      const presentAddress = this.crmForm.get('presentAddress').value;
+
+      this.addressFormPermanent.patchValue({
+        houseNo: presentAddress.houseNo,
+        streetNo: presentAddress.streetNo,
+        thana: presentAddress.thana,
+        district: presentAddress.district,
+        division: presentAddress.division
+      });
+
+      this.addressFormPermanent.disable({ onlySelf: true });
+    } else {
+      console.log('unchecked');
+      this.addressFormPermanent.enable({ onlySelf: true });
+    }
+  }
 }
