@@ -7,11 +7,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { UserRoutingModule } from './user-routing.module';
 import { TextMaskModule } from 'angular2-text-mask';
 import { DataTablesModule } from 'angular-datatables';
+import { UpdateUserComponent } from './update-user/update-user.component';
+import { NgbModal, NgbActiveModal, NgbModalConfig, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 
 @NgModule({
-  declarations: [ CreateUserComponent, ListUserComponent],
+  declarations: [ CreateUserComponent, ListUserComponent, UpdateUserComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -19,7 +21,15 @@ import { DataTablesModule } from 'angular-datatables';
     UserRoutingModule,
     HttpClientModule,
     TextMaskModule,
-    DataTablesModule
+    DataTablesModule,
+    NgbModule
+  ],
+  providers: [
+    NgbModal,
+    NgbActiveModal
+  ],
+  entryComponents: [
+    UpdateUserComponent
   ]
 })
 export class UserModule { }

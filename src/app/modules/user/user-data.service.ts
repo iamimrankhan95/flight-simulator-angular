@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { User } from '../../shared/models/user';
+import { tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -22,5 +23,21 @@ export class UserDataService {
 
   getUsers() {
     return this.http.get<any>(this.url);
+  }
+
+  deleteUser(user: User) {
+    const id = user.id;
+    const tempUrl = this.url + '/' + id;
+   return this.http.delete<User>(tempUrl, this.httpOptions).pipe(
+     tap(_ => console.log(`deleted user id=${id}`))
+   );
+  }
+  getUser(userId: number) {
+    const tempUrl = this.url + '/' + userId;
+    return this.http.get<User>(tempUrl);
+  }
+  updateUser(user: User, id: number) {
+    const tempUrl = this.url + '/' + id;
+    return this.http.put<User>(tempUrl, user , this.httpOptions);
   }
 }
