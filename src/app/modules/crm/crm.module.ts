@@ -6,6 +6,8 @@ import { CRMFormComponent } from './crm-form/crm-form.component';
 import { SharedModule } from '../../shared/modules/shared/shared.module';
 import { AddressModule } from '../../shared/modules/address/address.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { CRMHttpService } from './crm-http.service';
+import { CRMService } from './crm.service';
 @NgModule({
   declarations: [
     CRMFormComponent,
@@ -15,6 +17,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     SharedModule,
     AddressModule,
     FontAwesomeModule,
-  ]
+  ],
+  providers: [CRMHttpService, CRMService]
 })
 export class CRMModule { }

@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { NgbDateStruct, NgbCalendar, NgbDatepicker } from '@ng-bootstrap/ng-bootstrap';
 import { IOption } from 'ng-select';
+import { CRMHttpService } from '../crm-http.service';
 
 @Component({
   selector: 'app-crm-form',
@@ -54,7 +55,8 @@ export class CRMFormComponent implements OnInit {
     applicationType: ['', [Validators.required]],
   });
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder,
+    private crmHttpService: CRMHttpService) { }
 
   // Datepicker
 
@@ -98,7 +100,11 @@ export class CRMFormComponent implements OnInit {
 
   save(): void {
     this.crmFormSubmitted = true;
-    console.log(this.crmForm);
+    this.crmHttpService.addCustomerRelation(this.crmForm.value)
+      .subscribe(
+        () => console.log('success'),
+        (error) => console.log(error)
+      );
   }
 
   samePermanentAddress(event: any): void {
