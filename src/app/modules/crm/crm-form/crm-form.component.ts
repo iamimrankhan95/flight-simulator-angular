@@ -37,8 +37,10 @@ export class CRMFormComponent implements OnInit {
     contactNo: ['', [Validators.required]],
     nidNumber: [''],
     compliantName: ['', [Validators.required]],
+    gender: ['', [Validators.required]],
     email: [''],
-    isHusbandName: ['', [Validators.required]],
+    maritalStatus: ['', [Validators.required]],
+    spouseName: ['', [Validators.required]],
     fatherName: ['', [Validators.required]],
     motherName: ['', [Validators.required]],
     dob: [''],
@@ -47,7 +49,9 @@ export class CRMFormComponent implements OnInit {
     accusedOrganizationAddress: ['', [Validators.required, Validators.maxLength(300)]],
     problemDescription: ['', [Validators.required, Validators.maxLength(500)]],
     permanentAddress: this.addressFormPermanent,
-    presentAddress: this.addressFormPresent
+    presentAddress: this.addressFormPresent,
+    ticketStatus: ['', [Validators.required]],
+    applicationType: ['', [Validators.required]],
   });
 
   constructor(private fb: FormBuilder) { }
