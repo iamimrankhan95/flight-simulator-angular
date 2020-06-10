@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
 import { CRMRoutingModule } from './crm-routing.module';
 import { CRMFormComponent } from './crm-form/crm-form.component';
@@ -9,16 +8,20 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CRMHttpService } from './crm-http.service';
 import { CRMService } from './crm.service';
 import { CrmDetailsComponent } from './crm-details/crm-details.component';
+import { CrmListComponent } from './crm-list/crm-list.component';
+import { DataTableModule } from 'angular2-datatable';
 @NgModule({
   declarations: [
     CRMFormComponent,
     CrmDetailsComponent,
+    CrmListComponent,
   ],
   imports: [
     CRMRoutingModule,
     SharedModule,
     AddressModule,
     FontAwesomeModule,
+    DataTableModule
   ],
   providers: [CRMHttpService, CRMService]
 })

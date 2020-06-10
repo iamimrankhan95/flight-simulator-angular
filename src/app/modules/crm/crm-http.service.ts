@@ -28,12 +28,12 @@ export class CRMHttpService {
   }
 
   /** GET heroes from the server */
-  // getHeroes(): Observable<CustomerRelation[]> {
-  //   return this.http.get<CustomerRelation[]>(this.heroesUrl)
-  //     .pipe(
-  //       catchError(this.handleError('getHeroes', []))
-  //     );
-  // }
+  getCustomerRelations(): Observable<CustomerRelation[]> {
+    return this.http.get<CustomerRelation[]>(this.customerRelationUrl)
+      .pipe(
+        catchError(this.handleError('getCustomerRelations', []))
+      );
+  }
 
   /* GET heroes whose name contains search term */
   // searchHeroes(term: string): Observable<CustomerRelation[]> {
