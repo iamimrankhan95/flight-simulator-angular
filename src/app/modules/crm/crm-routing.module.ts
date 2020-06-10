@@ -4,14 +4,8 @@ import { CRMFormComponent } from './crm-form/crm-form.component';
 
 
 const routes: Routes = [
-  {
-    path: '',
-    component: CRMFormComponent,
-  },
-  {
-    path: 'create',
-    redirectTo: '',
-  }
+  { path: '', component: CRMFormComponent, },
+  { path: 'create', redirectTo: '', }
 ];
 
 @NgModule({

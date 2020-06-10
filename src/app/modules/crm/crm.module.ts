@@ -8,9 +8,11 @@ import { AddressModule } from '../../shared/modules/address/address.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CRMHttpService } from './crm-http.service';
 import { CRMService } from './crm.service';
+import { CrmDetailsComponent } from './crm-details/crm-details.component';
 @NgModule({
   declarations: [
     CRMFormComponent,
+    CrmDetailsComponent,
   ],
   imports: [
     CRMRoutingModule,
