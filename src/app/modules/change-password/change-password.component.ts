@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, ValidatorFn, ValidationErrors } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+  ValidatorFn,
+  ValidationErrors,
+} from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 
 export const confirmPasswordValidator: ValidatorFn = (
@@ -15,7 +21,7 @@ export const confirmPasswordValidator: ValidatorFn = (
 @Component({
   selector: 'app-change-password',
   templateUrl: './change-password.component.html',
-  styleUrls: ['./change-password.component.css']
+  styleUrls: ['./change-password.component.css'],
 })
 export class ChangePasswordComponent implements OnInit {
   public simpleForm: FormGroup;
@@ -24,26 +30,25 @@ export class ChangePasswordComponent implements OnInit {
   oldFieldTextType: boolean;
   newFieldTextType: boolean;
 
-  constructor(
-    private formbuilder: FormBuilder,
-    private route: ActivatedRoute
-    ) {
-      // const userData = JSON.parse(localStorage.getItem('currentUser')).data;
-      // comment out the line above and remove the line below when api sends json response
-      const userData = localStorage.getItem('currentUser');
-      this.loginId = this.route.snapshot.paramMap.get('id');
-     }
+  constructor(private formbuilder: FormBuilder, private route: ActivatedRoute) {
+    // const userData = JSON.parse(localStorage.getItem('currentUser')).data;
+    // comment out the line above and remove the line below when api sends json response
+    const userData = localStorage.getItem('currentUser');
+    this.loginId = this.route.snapshot.paramMap.get('id');
+  }
 
   ngOnInit(): void {
     this.createForm();
   }
   createForm() {
-    this.simpleForm = this.formbuilder.group({
-    old_password: ['', Validators.required],
-    new_password: ['', [Validators.required, Validators.minLength(6)]],
-    re_password: ['', Validators.required]
-    },
-    { validator: confirmPasswordValidator });
+    this.simpleForm = this.formbuilder.group(
+      {
+        old_password: ['', Validators.required],
+        new_password: ['', [Validators.required, Validators.minLength(6)]],
+        re_password: ['', Validators.required],
+      },
+      { validator: confirmPasswordValidator }
+    );
   }
   onReset() {
     this.submitted = false;
@@ -55,7 +60,7 @@ export class ChangePasswordComponent implements OnInit {
   onSubmit() {
     this.submitted = true;
     if (this.simpleForm.invalid) {
-      return ;
+      return;
     } else {
       // Put the call to the service here
     }
@@ -66,5 +71,4 @@ export class ChangePasswordComponent implements OnInit {
   togglenewFieldTextType() {
     this.newFieldTextType = !this.newFieldTextType;
   }
-
 }

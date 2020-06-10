@@ -4,10 +4,9 @@ import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthenticationService {
-
   private currentUserSubject: BehaviorSubject<any>;
   public currentUser: Observable<any>;
   public url = 'http://192.168.101.41:9050/cms_login';
@@ -15,7 +14,9 @@ export class AuthenticationService {
   constructor(private router: Router, private http: HttpClient) {
     // this.currentUserSubject =  new BehaviorSubject<any>(JSON.parse(localStorage.getItem('currentUser')));
     // comment out the line above and remove the one below when api sends response
-    this.currentUserSubject =  new BehaviorSubject<any>(localStorage.getItem('currentUser'));
+    this.currentUserSubject = new BehaviorSubject<any>(
+      localStorage.getItem('currentUser')
+    );
   }
 
   public get currentUserValue(): any {
@@ -25,7 +26,7 @@ export class AuthenticationService {
   login(userName: string, password: string) {
     localStorage.setItem('currentUser', userName);
     // return this.http.post<any>(this.url, {userName, password});
-    return ;
+    return;
   }
   logout(): void {
     localStorage.removeItem('currentUser');

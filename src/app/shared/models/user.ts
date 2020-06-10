@@ -7,7 +7,7 @@ export class User {
     public email?: string,
     public username?: string,
     public password?: string,
-    public joiningdate?: string,
+    public joiningdate?: Date,
     public isActive?: boolean) {
       this.id = id;
       this.name = name;

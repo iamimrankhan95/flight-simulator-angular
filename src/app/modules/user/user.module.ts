@@ -8,12 +8,15 @@ import { UserRoutingModule } from './user-routing.module';
 import { TextMaskModule } from 'angular2-text-mask';
 import { DataTablesModule } from 'angular-datatables';
 import { UpdateUserComponent } from './update-user/update-user.component';
-import { NgbModal, NgbActiveModal, NgbModalConfig, NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
-
+import {
+  NgbModal,
+  NgbActiveModal,
+  NgbModule,
+} from '@ng-bootstrap/ng-bootstrap';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 @NgModule({
-  declarations: [ CreateUserComponent, ListUserComponent, UpdateUserComponent],
+  declarations: [CreateUserComponent, ListUserComponent, UpdateUserComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -22,14 +25,10 @@ import { NgbModal, NgbActiveModal, NgbModalConfig, NgbModule } from '@ng-bootstr
     HttpClientModule,
     TextMaskModule,
     DataTablesModule,
-    NgbModule
+    NgbModule,
+    BsDatepickerModule.forRoot()
   ],
-  providers: [
-    NgbModal,
-    NgbActiveModal
-  ],
-  entryComponents: [
-    UpdateUserComponent
-  ]
+  providers: [NgbModal, NgbActiveModal],
+  entryComponents: [UpdateUserComponent],
 })
-export class UserModule { }
+export class UserModule {}

@@ -4,61 +4,78 @@ import { User } from '../../../shared/models/user';
 import { UserDataService } from '../user-data.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-update-user',
   templateUrl: './update-user.component.html',
-  styleUrls: ['./update-user.component.css']
+  styleUrls: ['./update-user.component.css'],
 })
 export class UpdateUserComponent implements OnInit {
-
-  @Input() selectedUserId: number;
+  // @Input() selectedUserId: number;
 
   public simpleForm: FormGroup;
   public submitted = false;
   public fieldTextType: boolean;
-  public phoneMask = [/[0]/, /[1-2]/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/];
+  public phoneMask = [
+    /[0]/,
+    /[1-2]/,
+    /\d/,
+    /\d/,
+    /\d/,
+    /\d/,
+    /\d/,
+    /\d/,
+    /\d/,
+    /\d/,
+    /\d/,
+  ];
   public phoneNumber = /^[0-9]\d{10}$/;
+  public emailRegex = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/;
   public updateUserId: number;
   public user: User;
+  public maxDate: Date = new Date();
 
   constructor(
     private route: ActivatedRoute,
     private formbuilder: FormBuilder,
     private userDataService: UserDataService,
-    private router: Router,
-    private modalService: NgbModal,
-    public activeModal: NgbActiveModal
+    private router: Router
   ) {
-
+    this.maxDate.setDate(this.maxDate.getDate() + 0);
   }
 
   ngOnInit(): void {
     this.createForm();
-    console.log(this.selectedUserId);
-    this.updateUserId = this.selectedUserId;
+    this.updateUserId = +this.route.snapshot.paramMap.get('id');
     this.getUserInfo();
   }
 
   getUserInfo() {
-    this.userDataService.getUser(this.updateUserId).subscribe( response => {
-      console.log(response);
-      this.user = response;
-      this.setFormValues(this.user);
-    }, error => {
-      console.log(error);
-    });
+    this.userDataService.getUser(this.updateUserId).subscribe(
+      (response) => {
+        console.log(response);
+        this.user = response;
+        this.setFormValues(this.user);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 
   createForm() {
     this.simpleForm = this.formbuilder.group({
-      name : ['', Validators.required],
-      contactNo: ['', [Validators.required, Validators.pattern(this.phoneNumber)]],
-      email: ['', Validators.required],
+      name: ['', Validators.required],
+      contactNo: [
+        '',
+        [Validators.required, Validators.pattern(this.phoneNumber)],
+      ],
+      email: ['', [Validators.required, Validators.pattern(this.emailRegex)]],
       username: ['', Validators.required],
       password: ['', Validators.required],
-      joiningdate: [''],
-      isActive: ['']
+      joiningdate: ['', Validators.required],
+      isActive: [''],
     });
   }
 
@@ -79,7 +96,6 @@ export class UpdateUserComponent implements OnInit {
   onReset() {
     this.submitted = false;
     this.simpleForm.reset();
-    console.log(this.selectedUserId);
   }
   toggleFieldTextType() {
     this.fieldTextType = !this.fieldTextType;
@@ -87,14 +103,26 @@ export class UpdateUserComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
-    this.userDataService.updateUser(this.simpleForm.value, this.updateUserId).subscribe( response => {
-      console.log('success');
-      window.location.reload();
-    }, error => {
-      console.log('failed');
-      this.onReset();
-    });
-    this.modalService.dismissAll();
+    this.f.joiningdate.setValue(
+      formatDate(
+        this.simpleForm.get('joiningdate').value,
+        'dd/MM/yyyy',
+        'en-UK'
+      )
+    );
+    if (this.simpleForm.valid) {
+      this.userDataService
+        .updateUser(this.simpleForm.value, this.updateUserId)
+        .subscribe(
+          (response) => {
+            console.log('success');
+            this.router.navigate(['/users/users']);
+          },
+          (error) => {
+            console.log('failed');
+            this.onReset();
+          }
+        );
+    }
   }
-
 }
