@@ -7,8 +7,15 @@ import { CrmDetailsComponent } from './crm-details/crm-details.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'list' },
-  { path: 'list', component: CrmListComponent },
-  { path: 'create', component: CRMFormComponent, },
+  {
+    path: 'list', component: CrmListComponent, data: {
+      title: 'Customer Relation List'
+    }
+  },
+  {
+    path: 'create', component: CRMFormComponent, data: {
+      title: 'Create Customer Relation'
+    } },
   { path: 'details/:id', component: CrmDetailsComponent },
 ];
 

@@ -18,6 +18,7 @@ const httpOptions = {
 @Injectable()
 export class CRMHttpService {
   customerRelationUrl = 'http://192.168.101.41:9050/cms_crm_record';  // URL to web api
+  dataUrl = 'assets/data.json';
   private handleError: HandleError;
 
   constructor(
@@ -29,7 +30,7 @@ export class CRMHttpService {
 
   /** GET heroes from the server */
   getCustomerRelations(): Observable<CustomerRelation[]> {
-    return this.http.get<CustomerRelation[]>(this.customerRelationUrl)
+    return this.http.get<CustomerRelation[]>(this.dataUrl)
       .pipe(
         catchError(this.handleError('getCustomerRelations', []))
       );
