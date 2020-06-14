@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from '../../../shared/models/user';
 import { UserDataService } from '../user-data.service';
@@ -8,7 +8,10 @@ import { formatDate } from '@angular/common';
 @Component({
   selector: 'app-update-user',
   templateUrl: './update-user.component.html',
-  styleUrls: ['./update-user.component.css'],
+  styleUrls: ['./update-user.component.css',
+  '../../../../../node_modules/ngx-bootstrap/datepicker/bs-datepicker.scss',
+  '../../../../scss/vendors/ng-select/ng-select.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class UpdateUserComponent implements OnInit {
 

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserDataService } from '../user-data.service';
 import { formatDate } from '@angular/common';
@@ -6,7 +6,12 @@ import { formatDate } from '@angular/common';
 @Component({
   selector: 'app-create-user',
   templateUrl: './create-user.component.html',
-  styleUrls: ['./create-user.component.css'],
+  styleUrls: [
+    './create-user.component.css',
+    '../../../../../node_modules/ngx-bootstrap/datepicker/bs-datepicker.scss',
+    '../../../../scss/vendors/ng-select/ng-select.scss'
+  ],
+  encapsulation: ViewEncapsulation.None
 })
 export class CreateUserComponent implements OnInit {
   public simpleForm: FormGroup;
