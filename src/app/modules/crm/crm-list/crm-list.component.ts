@@ -45,11 +45,19 @@ export class CrmListComponent implements OnInit {
       searchKey: null,
       searchBy: ''
     };
+  }
+
+  ngOnInit(): void {
+    this.dtOptions = {
+      pagingType: 'full_numbers',
+      pageLength: 10,
+    };
+
     this.crmHttpService.getCustomerRelations(this.pageConfig)
       .subscribe(
         (customerRelations: any) => {
           setTimeout(() => {
-            this.customerRelations = [...customerRelations];
+            this.customerRelations = [...customerRelations]; this.dtTrigger.next();
           }, 1000);
         }, // success path
         error => this.error = error // error path
@@ -89,13 +97,6 @@ export class CrmListComponent implements OnInit {
     //   this.pageConfig.currentPage = this.startPage;
     //   // this.navigationForAdmin();
     // }
-  }
-
-  ngOnInit(): void {
-    this.dtOptions = {
-      pagingType: 'full_numbers',
-      pageLength: 10
-    };
   }
 
   onChangeSearchBy() {
