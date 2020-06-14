@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { NgbDateStruct, NgbCalendar, NgbDatepicker } from '@ng-bootstrap/ng-bootstrap';
 import { IOption } from 'ng-select';
+import { CRMHttpService } from '../crm-http.service';
 
 @Component({
   selector: 'app-crm-form',
@@ -10,11 +11,12 @@ import { IOption } from 'ng-select';
 })
 export class CRMFormComponent implements OnInit {
 
+  crmFormSubmitted = false;
   addressFormPresent = this.fb.group({
     houseNo: ['', [Validators.required]],
     streetNo: [''],
     division: ['', [Validators.required]],
-    district: [''],
+    district: ['', [Validators.required]],
     thana: ['', [Validators.required]],
     postOffice: ['']
   });
@@ -36,8 +38,10 @@ export class CRMFormComponent implements OnInit {
     contactNo: ['', [Validators.required]],
     nidNumber: [''],
     compliantName: ['', [Validators.required]],
+    gender: ['', [Validators.required]],
     email: [''],
-    isHusbandName: ['', [Validators.required]],
+    maritalStatus: ['', [Validators.required]],
+    spouseName: ['', [Validators.required]],
     fatherName: ['', [Validators.required]],
     motherName: ['', [Validators.required]],
     dob: [''],
@@ -45,13 +49,14 @@ export class CRMFormComponent implements OnInit {
     accusedOrganizationName: ['', [Validators.required]],
     accusedOrganizationAddress: ['', [Validators.required, Validators.maxLength(300)]],
     problemDescription: ['', [Validators.required, Validators.maxLength(500)]],
-    permanentAddress: [''],
-    presentAddress: [''],
-    presentAddressForm: this.addressFormPresent,
-    permanentAddressForm: this.addressFormPermanent
+    permanentAddress: this.addressFormPermanent,
+    presentAddress: this.addressFormPresent,
+    ticketStatus: ['', [Validators.required]],
+    applicationType: ['', [Validators.required]],
   });
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder,
+    private crmHttpService: CRMHttpService) { }
 
   // Datepicker
 
@@ -94,6 +99,30 @@ export class CRMFormComponent implements OnInit {
   }
 
   save(): void {
-    console.log(this.crmForm.value)
+    this.crmFormSubmitted = true;
+    this.crmHttpService.addCustomerRelation(this.crmForm.value)
+      .subscribe(
+        () => console.log('success'),
+        (error) => console.log(error)
+      );
+  }
+
+  samePermanentAddress(event: any): void {
+    if (event.target.checked) {
+      const presentAddress = this.crmForm.get('presentAddress').value;
+
+      this.addressFormPermanent.patchValue({
+        houseNo: presentAddress.houseNo,
+        streetNo: presentAddress.streetNo,
+        thana: presentAddress.thana,
+        district: presentAddress.district,
+        division: presentAddress.division
+      });
+
+      this.addressFormPermanent.disable({ onlySelf: true });
+    } else {
+      console.log('unchecked');
+      this.addressFormPermanent.enable({ onlySelf: true });
+    }
   }
 }

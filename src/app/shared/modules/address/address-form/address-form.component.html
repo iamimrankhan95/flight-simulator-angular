@@ -1,68 +1,78 @@
-<div [formGroup]="addressForm">
-    <div [formGroupName]="FormGrpName">
-        <label for=""><b>{{FormGrpName === 'presentAddressForm' ? 'Present Address' :'Permanent Address'}}</b></label>
-        <div class="form-group">
-            <label class="form-control-label" for="field_houseNo">House No<span class="text-danger">*</span></label>
-            <input type="text" class="form-control" name="houseNo" id="field_houseNo" formControlName="houseNo"
-                placeholder="Enter House No" />
-            <div
-                *ngIf="fPresent.get('houseNo')!.invalid && (fPresent.get('houseNo')!.dirty || fPresent.get('houseNo')!.touched)">
-                <small class="form-text text-danger" *ngIf="fPresent.get('houseNo')?.errors?.required">
-                    This field is required.
-                </small>
-            </div>
-        </div>
+<div [formGroup]="crmForm">
+	<div [formGroupName]="FormGrpName">
+		<label for=""><b>{{FormGrpName === 'presentAddress' ? 'Present Address' :'Permanent Address'}}</b></label>
+		<div class="form-group">
+			<label class="form-control-label" for="field_houseNo">House No<span class="text-danger">*</span></label>
+			<input type="text" class="form-control" name="houseNo" id="field_houseNo" formControlName="houseNo" placeholder="Enter House No"
+						 [ngClass]="{ 'is-invalid': crmFormSubmitted && crmForm.get(FormGrpName).get('houseNo').errors,'is-valid': crmForm.get(FormGrpName).get('houseNo').touched && !crmForm.get(FormGrpName).get('houseNo').errors }" />
+			<div *ngIf="crmFormSubmitted && crmForm.get(FormGrpName).get('houseNo').errors" class="invalid-feedback">
+				<div *ngIf="crmForm.get(FormGrpName).get('houseNo')?.errors?.required">
+					houseNo is required.
+				</div>
+			</div>
+		</div>
 
-        <div class="form-group">
-            <label class="form-control-label" for="field_streetNo">Street No</label>
-            <input type="text" class="form-control" name="streetNo" id="field_streetNo" formControlName="streetNo"
-                placeholder="Enter Street No" />
-        </div>
+		<div class="form-group">
+			<label class="form-control-label" for="field_streetNo">Street No</label>
+			<input type="text" class="form-control" name="streetNo" id="field_streetNo" formControlName="streetNo" placeholder="Enter Street No"
+						 [ngClass]="{ 'is-invalid': crmFormSubmitted && crmForm.get(FormGrpName).get('streetNo').errors,'is-valid': crmForm.get(FormGrpName).get('streetNo').touched && !crmForm.get(FormGrpName).get('streetNo').errors }" />
+			<div *ngIf="crmFormSubmitted && crmForm.get(FormGrpName).get('streetNo').errors" class="invalid-feedback">
+				<div *ngIf="crmForm.get(FormGrpName).get('streetNo')?.errors?.required">
+					streetNo is required.
+				</div>
+			</div>
+		</div>
 
-        <div class="form-group">
-            <label class="form-control-label" for="field_division">Division<span class="text-danger">*</span></label>
-            <select class="form-control" id="field_division" name="division" formControlName="division"
-                placeholder="Enter Division">
-                <option [ngValue]="null">Select One</option>
-                <option
-                    [ngValue]="divisionOption.id === fPresent.get('division')!.value?.id ? fPresent.get('division')!.value : divisionOption"
-                    *ngFor="let divisionOption of divisions; trackBy: trackById">{{ divisionOption.name }}</option>
-            </select>
-        </div>
+		<div class="form-group">
+			<label class="form-control-label" for="field_division">Division<span class="text-danger">*</span></label>
+			<select class="form-control" id="field_division" name="division" formControlName="division" placeholder="Enter Division"
+							[ngClass]="{ 'is-invalid': crmFormSubmitted && crmForm.get(FormGrpName).get('division').errors,'is-valid': crmForm.get(FormGrpName).get('division').touched && !crmForm.get(FormGrpName).get('division').errors }">
+				<option value="">Select One</option>
+			</select>
+			<div *ngIf="crmFormSubmitted && crmForm.get(FormGrpName).get('division').errors" class="invalid-feedback">
+				<div *ngIf="crmForm.get(FormGrpName).get('division')?.errors?.required">
+					division is required.
+				</div>
+			</div>
+		</div>
 
-        <div class="form-group">
-            <label class="form-control-label" for="field_district">District<span class="text-danger">*</span></label>
-            <select class="form-control" id="field_district" name="district" formControlName="district"
-                placeholder="Enter District">
-                <option [ngValue]="null">Select One</option>
-                <option
-                    [ngValue]="districtOption.id === fPresent.get('district')!.value?.id ? fPresent.get('district')!.value : districtOption"
-                    *ngFor="let districtOption of districts; trackBy: trackById">{{ districtOption.name }}</option>
-            </select>
-        </div>
+		<div class="form-group">
+			<label class="form-control-label" for="field_district">District<span class="text-danger">*</span></label>
+			<select class="form-control" id="field_district" name="district" formControlName="district" placeholder="Enter District"
+							[ngClass]="{ 'is-invalid': crmFormSubmitted && crmForm.get(FormGrpName).get('district').errors,'is-valid': crmForm.get(FormGrpName).get('district').touched && !crmForm.get(FormGrpName).get('district').errors }">
+				<option value="">Select One</option>
+			</select>
+			<div *ngIf="crmFormSubmitted && crmForm.get(FormGrpName).get('district').errors" class="invalid-feedback">
+				<div *ngIf="crmForm.get(FormGrpName).get('district')?.errors?.required">
+					district is required.
+				</div>
+			</div>
+		</div>
 
-        <div class="form-group">
-            <label class="form-control-label" for="field_thana">Thana<span class="text-danger">*</span></label>
-            <select class="form-control" id="field_thana" name="thana" formControlName="thana"
-                placeholder="Enter Thana">
-                <option [ngValue]="null">Select One</option>
-                <option
-                    [ngValue]="thanaOption.id === fPresent.get('thana')!.value?.id ? fPresent.get('thana')!.value : thanaOption"
-                    *ngFor="let thanaOption of thanas; trackBy: trackById">{{ thanaOption.name }}</option>
-            </select>
-        </div>
+		<div class="form-group">
+			<label class="form-control-label" for="field_thana">Thana<span class="text-danger">*</span></label>
+			<select class="form-control" id="field_thana" name="thana" formControlName="thana" placeholder="Enter Thana"
+							[ngClass]="{ 'is-invalid': crmFormSubmitted && crmForm.get(FormGrpName).get('thana').errors,'is-valid': crmForm.get(FormGrpName).get('thana').touched && !crmForm.get(FormGrpName).get('thana').errors }">
+				<option value="">Select One</option>
+			</select>
+			<div *ngIf="crmFormSubmitted && crmForm.get(FormGrpName).get('thana').errors" class="invalid-feedback">
+				<div *ngIf="crmForm.get(FormGrpName).get('thana')?.errors?.required">
+					thana is required.
+				</div>
+			</div>
+		</div>
 
-        <div class="form-group" hidden>
-            <label class="form-control-label" for="field_postOffice">Post Office<span
-                    class="text-danger">*</span></label>
-            <select class="form-control" id="field_postOffice" name="postOffice" formControlName="postOffice"
-                placeholder="Enter Postoffice">
-                <option [ngValue]="null">Select One</option>
-                <option
-                    [ngValue]="postOfficeOption.id === fPresent.get('postOffice')!.value?.id ? fPresent.get('postOffice')!.value : postOfficeOption"
-                    *ngFor="let postOfficeOption of postoffices; trackBy: trackById">{{ postOfficeOption.name }}
-                </option>
-            </select>
-        </div>
-    </div>
+		<div class="form-group" hidden>
+			<label class="form-control-label" for="field_postOffice">Post Office<span class="text-danger">*</span></label>
+			<select class="form-control" id="field_postOffice" name="postOffice" formControlName="postOffice" placeholder="Enter Postoffice"
+							[ngClass]="{ 'is-invalid': crmFormSubmitted && crmForm.get(FormGrpName).get('postOffice').errors,'is-valid': crmForm.get(FormGrpName).get('postOffice').touched && !crmForm.get(FormGrpName).get('postOffice').errors }">
+				<option value="">Select One</option>
+			</select>
+			<div *ngIf="crmFormSubmitted && crmForm.get(FormGrpName).get('postOffice').errors" class="invalid-feedback">
+				<div *ngIf="crmForm.get(FormGrpName).get('postOffice')?.errors?.required">
+					streetNo is required.
+				</div>
+			</div>
+		</div>
+	</div>
 </div>

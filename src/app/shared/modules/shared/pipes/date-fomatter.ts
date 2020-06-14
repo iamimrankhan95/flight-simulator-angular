@@ -1,6 +1,6 @@
 import { NgbDateParserFormatter, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { Injectable } from '@angular/core';
-import { isNumber, toInteger, padNumber } from '../shared-services/utility-method.service';
+import { isNumber, toInteger, padNumber } from '../../../services/utility-method.service';
 
 @Injectable()
 

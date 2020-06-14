@@ -14,10 +14,13 @@ import { IAddress, Address } from '../../../../shared/models/address.model';
 })
 export class AddressFormComponent implements OnInit {
   @Input()
-  addressForm: FormGroup;
+  crmForm: FormGroup;
 
   @Input()
   FormGrpName: string;
+
+  @Input()
+  crmFormSubmitted: boolean;
 
   isSaving = false;
 
@@ -57,7 +60,7 @@ export class AddressFormComponent implements OnInit {
   }
 
   get fPresent(): any {
-    return this.addressForm.controls.presentAddressForm;
+    return this.crmForm.get(this.FormGrpName);
   }
 
   updateForm(address: IAddress): void {

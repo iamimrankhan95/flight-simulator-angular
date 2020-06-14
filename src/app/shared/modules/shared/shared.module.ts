@@ -6,21 +6,11 @@ import { RouterModule } from '@angular/router';
 import { DataFilterPipe } from './pipes/datafilterpipe';
 import { ReplaceNullWithText } from './pipes/replace-null-with-text.pipe';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
-// import { LoaderComponent } from '../../components/loader/loader.component';
-// import { P404Component } from '../../../modules/error/404.component';
-// import { NotPermittedComponent } from '../../../modules/error/not-permitted.component';
-// import { P500Component } from '../../../modules/error/500.component';
-// import { ShowOnPermissionDirective } from './show-on-permission.directive';
-
-
 @NgModule({
   declarations: [
     DataFilterPipe,
     ReplaceNullWithText,
     // LoaderComponent,
-    // P404Component,
-    // P500Component,
     // NotPermittedComponent,
     // ShowOnPermissionDirective
   ],
@@ -39,8 +29,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     DataFilterPipe,
     ReplaceNullWithText
     // LoaderComponent,
-    // P404Component,
-    // P500Component,
     // NotPermittedComponent,
     // ShowOnPermissionDirective
   ]
