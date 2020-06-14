@@ -4,6 +4,7 @@ import { CRMHttpService } from '../crm-http.service';
 import { ICRMListPageConfig } from './icrm-list-page-config';
 import { NgbCalendar, NgbDate, NgbDateParserFormatter, NgbInputDatepicker } from '@ng-bootstrap/ng-bootstrap';
 import { NgbDateCustomParserFormatter } from '../../../shared/modules/shared/pipes/date-fomatter';
+import { Subject } from 'rxjs';
 @Component({
   selector: 'app-crm-list',
   templateUrl: './crm-list.component.html',
@@ -15,6 +16,8 @@ import { NgbDateCustomParserFormatter } from '../../../shared/modules/shared/pip
 export class CrmListComponent implements OnInit {
 
   pageConfig: ICRMListPageConfig;
+  dtTrigger = new Subject();
+  dtOptions: DataTables.Settings = {};
   error: any;
   placeHolderForSearchKey = '';
   minDate = { year: new Date().getFullYear() - 100, month: 1, day: 1 };
@@ -44,7 +47,7 @@ export class CrmListComponent implements OnInit {
     };
     this.crmHttpService.getCustomerRelations(this.pageConfig)
       .subscribe(
-        (customerRelations: CustomerRelation[]) => {
+        (customerRelations: any) => {
           setTimeout(() => {
             this.customerRelations = [...customerRelations];
           }, 1000);
@@ -89,6 +92,10 @@ export class CrmListComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.dtOptions = {
+      pagingType: 'full_numbers',
+      pageLength: 10
+    };
   }
 
   onChangeSearchBy() {

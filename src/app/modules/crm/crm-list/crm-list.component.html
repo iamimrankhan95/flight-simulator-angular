@@ -8,8 +8,8 @@
         <div class="col-md-2">
           <label class="col-form-label" for="fromDate">From date</label>
           <div class="input-group">
-            <input id="fromDate" class="form-control" placeholder="dd/mm/yyyy" (input)="onFormDateChange($event.target.value)" (dateSelect)="onFromDateSelect($event)" [minDate]="minDate"
-                   [maxDate]="maxDate" name="dp" ngbDatepicker #f="ngbDatepicker">
+            <input id="fromDate" class="form-control" placeholder="dd/mm/yyyy" (input)="onFormDateChange($event.target.value)"
+                   (dateSelect)="onFromDateSelect($event)" [minDate]="minDate" [maxDate]="maxDate" name="dp" ngbDatepicker #f="ngbDatepicker">
             <div class="input-group-append">
               <button class="btn btn-outline-secondary fa fa-calendar fa-lg" (click)="f.toggle()" type="button"></button>
             </div>
@@ -18,8 +18,9 @@
         <div class="col-md-2">
           <label class="col-form-label" for="toDate">To date</label>
           <div class="input-group">
-            <input id="toDate" [disabled]="pageConfig.fromDate===null" class="form-control" [(ngModel)]="pageConfig.toDate" (dateSelect)="onToDateSelect($event)"
-                   placeholder="dd/mm/yyyy" [minDate]="minDate" [maxDate]="maxDate" name="dp" ngbDatepicker #t="ngbDatepicker">
+            <input id="toDate" [disabled]="pageConfig.fromDate===null" class="form-control" [(ngModel)]="pageConfig.toDate"
+                   (dateSelect)="onToDateSelect($event)" placeholder="dd/mm/yyyy" [minDate]="minDate" [maxDate]="maxDate" name="dp" ngbDatepicker
+                   #t="ngbDatepicker">
             <div class="input-group-append">
               <button class="btn btn-outline-secondary fa fa-calendar fa-lg" (click)="t.toggle()" type="button"></button>
             </div>
@@ -44,29 +45,28 @@
           </div>
         </div>
       </div>
-      <table class="table table-striped table-hover table-responsive-lg" [mfData]="customerRelations | dataFilter : filterQuery" #mf="mfDataTable"
-             [mfRowsOnPage]="10">
+      <table datatable class="table table-striped table-hover table-responsive-lg" [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
         <thead>
           <tr>
             <th style="width: 20%">
-              <mfDefaultSorter by="name">Name</mfDefaultSorter>
+              Name
             </th>
             <th style="width: 35%">
-              <mfDefaultSorter by="email">Email</mfDefaultSorter>
+              Email
             </th>
             <th style="width: 10%">
-              <mfDefaultSorter by="age">Age</mfDefaultSorter>
+              Age
             </th>
             <th style="width: 20%">
-              <mfDefaultSorter by="city">City</mfDefaultSorter>
+              City
             </th>
             <th style="width: 10%">
-              <mfDefaultSorter by="city">Registered</mfDefaultSorter>
+              Registered
             </th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let item of mf.data">
+          <tr *ngFor="let item of customerRelations">
             <td>{{item.name}}</td>
             <td>{{item.email}}</td>
             <td class="text-left">{{item.age}}</td>
@@ -77,7 +77,7 @@
         <tfoot>
           <tr>
             <td colspan="5">
-              <mfBootstrapPaginator [rowsOnPageSet]="[5,10,15]"></mfBootstrapPaginator>
+              <!-- <mfBootstrapPaginator [rowsOnPageSet]="[5,10,15]"></mfBootstrapPaginator> -->
             </td>
           </tr>
         </tfoot>
