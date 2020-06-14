@@ -1,15 +1,129 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { User } from '../../../shared/models/user';
+import { UserDataService } from '../user-data.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-update-user',
   templateUrl: './update-user.component.html',
-  styleUrls: ['./update-user.component.css']
+  styleUrls: ['./update-user.component.css',
+  '../../../../../node_modules/ngx-bootstrap/datepicker/bs-datepicker.scss',
+  '../../../../scss/vendors/ng-select/ng-select.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class UpdateUserComponent implements OnInit {
 
-  constructor() { }
+  public simpleForm: FormGroup;
+  public submitted = false;
+  public fieldTextType: boolean;
+  public phoneMask = [
+    /[0]/,
+    /[1-2]/,
+    /\d/,
+    /\d/,
+    /\d/,
+    /\d/,
+    /\d/,
+    /\d/,
+    /\d/,
+    /\d/,
+    /\d/,
+  ];
+  public phoneNumber = /^[0-9]\d{10}$/;
+  public emailRegex = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/;
+  public updateUserId: number;
+  public user: User;
+  public maxDate: Date = new Date();
 
-  ngOnInit(): void {
+  constructor(
+    private route: ActivatedRoute,
+    private formbuilder: FormBuilder,
+    private userDataService: UserDataService,
+    private router: Router
+  ) {
+    this.maxDate.setDate(this.maxDate.getDate() + 0);
   }
 
+  ngOnInit(): void {
+    this.createForm();
+    this.updateUserId = +this.route.snapshot.paramMap.get('id');
+    this.getUserInfo();
+  }
+
+  getUserInfo() {
+    this.userDataService.getUser(this.updateUserId).subscribe(
+      (response) => {
+        console.log(response);
+        this.user = response;
+        this.setFormValues(this.user);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
+  createForm() {
+    this.simpleForm = this.formbuilder.group({
+      name: ['', Validators.required],
+      contactNo: [
+        '',
+        [Validators.required, Validators.pattern(this.phoneNumber)],
+      ],
+      email: ['', [Validators.required, Validators.pattern(this.emailRegex)]],
+      username: ['', Validators.required],
+      password: ['', Validators.required],
+      joiningdate: [new Date(), [Validators.required]],
+      isActive: [''],
+    });
+  }
+
+  setFormValues(info: User) {
+    this.f.name.setValue(info.name);
+    this.f.contactNo.setValue(info.contactNo);
+    this.f.email.setValue(info.email);
+    this.f.joiningdate.setValue(info.joiningdate);
+    this.f.username.setValue(info.username);
+    this.f.password.setValue(info.password);
+    this.f.isActive.setValue(info.isActive);
+  }
+
+  get f() {
+    return this.simpleForm.controls;
+  }
+
+  onReset() {
+    this.submitted = false;
+    this.simpleForm.reset();
+  }
+  toggleFieldTextType() {
+    this.fieldTextType = !this.fieldTextType;
+  }
+
+  onSubmit() {
+    this.submitted = true;
+    this.f.joiningdate.setValue(
+      formatDate(
+        this.simpleForm.get('joiningdate').value,
+        'dd/MM/yyyy',
+        'en-UK'
+      )
+    );
+    if (this.simpleForm.valid) {
+      this.userDataService
+        .updateUser(this.simpleForm.value, this.updateUserId)
+        .subscribe(
+          (response) => {
+            console.log('success');
+            this.router.navigate(['/users/users']);
+          },
+          (error) => {
+            console.log('failed');
+            this.onReset();
+          }
+        );
+    }
+  }
 }

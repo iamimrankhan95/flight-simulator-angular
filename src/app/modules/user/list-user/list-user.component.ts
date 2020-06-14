@@ -6,23 +6,21 @@ import { UserDataService } from '../user-data.service';
 @Component({
   selector: 'app-list-user',
   templateUrl: './list-user.component.html',
-  styleUrls: ['./list-user.component.css']
+  styleUrls: ['./list-user.component.css'],
 })
 export class ListUserComponent implements OnInit, OnDestroy {
-
-  userList: User [];
+  userList: User[];
   dtTrigger = new Subject();
   dtOptions: DataTables.Settings = {};
 
-
   constructor(
-    private userDataService: UserDataService
-  ) { }
+    private userDataService: UserDataService,
+  ) {}
 
   ngOnInit(): void {
     this.dtOptions = {
       pagingType: 'full_numbers',
-      pageLength: 10
+      pageLength: 10,
     };
     this.getUsers();
   }
@@ -30,14 +28,34 @@ export class ListUserComponent implements OnInit, OnDestroy {
     this.dtTrigger.unsubscribe();
   }
   getUsers() {
-    this.userDataService.getUsers().subscribe( response => {
-      console.log(response);
+    this.userDataService.getUsers().subscribe(
+      (response) => {
+        console.log(response);
+        this.userList = response;
+        this.dtTrigger.next();
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
+  rerender() {
+    this.userDataService.getUsers().subscribe((response) => {
       this.userList = response;
-      this.dtTrigger.next();
-    },
-    error => {
-      console.log(error);
     });
   }
 
+  delete(user: User) {
+    this.userDataService.deleteUser(user).subscribe(
+      (response) => {
+        console.log(response);
+        this.rerender();
+      },
+      // tslint:disable-next-line: no-shadowed-variable
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
 }

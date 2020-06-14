@@ -7,19 +7,27 @@ import { HttpClientModule } from '@angular/common/http';
 import { UserRoutingModule } from './user-routing.module';
 import { TextMaskModule } from 'angular2-text-mask';
 import { DataTablesModule } from 'angular-datatables';
-
-
+import { UpdateUserComponent } from './update-user/update-user.component';
+import {
+  NgbModal,
+  NgbActiveModal,
+  NgbModule,
+} from '@ng-bootstrap/ng-bootstrap';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { SharedModule } from '../../shared/modules/shared/shared.module';
 
 @NgModule({
-  declarations: [ CreateUserComponent, ListUserComponent],
+  declarations: [CreateUserComponent, ListUserComponent, UpdateUserComponent],
   imports: [
     CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
     UserRoutingModule,
     HttpClientModule,
     TextMaskModule,
-    DataTablesModule
-  ]
+    DataTablesModule,
+    SharedModule,
+    BsDatepickerModule.forRoot(),
+  ],
+  providers: [],
+  entryComponents: [],
 })
-export class UserModule { }
+export class UserModule {}
