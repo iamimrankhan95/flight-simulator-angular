@@ -21,7 +21,7 @@ import { DataTableModule } from 'angular2-datatable';
     SharedModule,
     AddressModule,
     FontAwesomeModule,
-    DataTableModule
+    DataTableModule,
   ],
   providers: [CRMHttpService, CRMService]
 })

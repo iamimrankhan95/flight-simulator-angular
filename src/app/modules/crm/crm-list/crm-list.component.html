@@ -4,13 +4,43 @@
       Customer Relation List
     </div>
     <div class="card-body">
-      <div class="row mb-3">
-        <div class="col-md-4 offset-md-8">
+      <div class="row">
+        <div class="col-md-2">
+          <label class="col-form-label" for="fromDate">From date</label>
           <div class="input-group">
-            <div class="input-group-prepend">
-              <span class="input-group-text"><i class="fa fa-search"></i></span>
+            <input id="fromDate" class="form-control" placeholder="dd/mm/yyyy" (input)="onFormDateChange($event.target.value)" (dateSelect)="onFromDateSelect($event)" [minDate]="minDate"
+                   [maxDate]="maxDate" name="dp" ngbDatepicker #f="ngbDatepicker">
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary fa fa-calendar fa-lg" (click)="f.toggle()" type="button"></button>
             </div>
-            <input type="text" class="form-control" [(ngModel)]="filterQuery" placeholder="Search by name" />
+          </div>
+        </div>
+        <div class="col-md-2">
+          <label class="col-form-label" for="toDate">To date</label>
+          <div class="input-group">
+            <input id="toDate" [disabled]="pageConfig.fromDate===null" class="form-control" [(ngModel)]="pageConfig.toDate" (dateSelect)="onToDateSelect($event)"
+                   placeholder="dd/mm/yyyy" [minDate]="minDate" [maxDate]="maxDate" name="dp" ngbDatepicker #t="ngbDatepicker">
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary fa fa-calendar fa-lg" (click)="t.toggle()" type="button"></button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-md-2 offset-md-6" style="padding-right: 0px;">
+          <label class="pull-right" style="padding-top: 6px;">Search By:</label>
+        </div>
+        <div class="col-md-4" style="padding-left: 5px;">
+          <div class="input-group">
+            <div class="input-group-prepends">
+              <select id="searchBy" name="searchBy" class="form-control" (change)="onChangeSearchBy()" [(ngModel)]="pageConfig.searchBy">
+                <option selected value="" disabled>Select One</option>
+                <option value="mobileNo">Mobile No.</option>
+                <option value="ticketNo">Ticket No.</option>
+              </select>
+            </div>
+            <input type="text" class="form-control" [disabled]="placeHolderForSearchKey === ''" [(ngModel)]="filterQuery"
+                   placeholder="{{placeHolderForSearchKey}}" />
           </div>
         </div>
       </div>

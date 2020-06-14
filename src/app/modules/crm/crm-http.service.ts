@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { HttpErrorHandler, HandleError } from '../../core/http-error-handler.service';
 import { CustomerRelation } from '../../shared/models/customer-relation.model';
+import { ICRMListPageConfig } from './crm-list/icrm-list-page-config';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -29,11 +30,23 @@ export class CRMHttpService {
   }
 
   /** GET heroes from the server */
-  getCustomerRelations(): Observable<CustomerRelation[]> {
-    return this.http.get<CustomerRelation[]>(this.dataUrl)
+  getCustomerRelations(pageConfig: ICRMListPageConfig): Observable<CustomerRelation[]> {
+    const params = this.constructParam(pageConfig);
+    return this.http.get<CustomerRelation[]>(this.dataUrl, { params })
       .pipe(
         catchError(this.handleError('getCustomerRelations', []))
       );
+  }
+
+  constructParam(pageConfig: ICRMListPageConfig): HttpParams {
+    let params = new HttpParams()
+      .set('pageNo', (pageConfig.pageNo - 1).toString())
+      .set('pageSize', pageConfig.pageSize.toString())
+      .set('mobileNo', pageConfig.mobileNo ? pageConfig.mobileNo : '')
+      .set('fromDate', pageConfig.fromDate ? pageConfig.fromDate : '')
+      .set('toDate', pageConfig.toDate ? pageConfig.toDate : '')
+      .set('status', pageConfig.status);
+    return params;
   }
 
   /* GET heroes whose name contains search term */

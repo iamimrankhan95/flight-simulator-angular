@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 
-import * as numberToWordsConverter from 'number-to-words';
+// import * as numberToWordsConverter from 'number-to-words';
 
 @Injectable({
   providedIn: 'root'
@@ -11,18 +11,18 @@ export class UtilityMethodService {
   constructor() { }
 
   // capitalize first letter of every word in a string
-  titleCase (title: string) {
+  titleCase(title: string) {
     const str = title.split(' ');
-    return str.map( word => word[0].toUpperCase() + word.substr(1)).join(' ');
+    return str.map(word => word[0].toUpperCase() + word.substr(1)).join(' ');
   }
 
-  convertAnnualIncomeInWords(guardianAnnualIncome: string) {
-    const annualIncome = parseInt(guardianAnnualIncome, 10);
-    let annualIncomeInWords = numberToWordsConverter.toWords(annualIncome);
-    annualIncomeInWords = this.titleCase(annualIncomeInWords) + ' Taka Only';
+  // convertAnnualIncomeInWords(guardianAnnualIncome: string) {
+  //   const annualIncome = parseInt(guardianAnnualIncome, 10);
+  //   let annualIncomeInWords = numberToWordsConverter.toWords(annualIncome);
+  //   annualIncomeInWords = this.titleCase(annualIncomeInWords) + ' Taka Only';
 
-    return annualIncomeInWords;
-  }
+  //   return annualIncomeInWords;
+  // }
 
   getAcamedicSessions() {
     const academicSessions = [];
@@ -63,9 +63,9 @@ export class UtilityMethodService {
   }
   getAcademicYears() {
     const years = [
-      {name: '1st', value: 'First Year'},
-      {name: '2nd', value: 'Second Year'},
-      {name: '3rd', value: 'Third Year'},
+      { name: '1st', value: 'First Year' },
+      { name: '2nd', value: 'Second Year' },
+      { name: '3rd', value: 'Third Year' },
     ];
 
     return years;
@@ -123,7 +123,7 @@ export function regExpEscape(text) {
 
 export function hasClassName(element: any, className: string): boolean {
   return element && element.className && element.className.split &&
-      element.className.split(/\s+/).indexOf(className) >= 0;
+    element.className.split(/\s+/).indexOf(className) >= 0;
 }
 
 if (typeof Element !== 'undefined' && !Element.prototype.closest) {
@@ -134,7 +134,7 @@ if (typeof Element !== 'undefined' && !Element.prototype.closest) {
     Element.prototype.matches = (Element.prototype as any).msMatchesSelector || Element.prototype.webkitMatchesSelector;
   }
 
-  Element.prototype.closest = function(s: string) {
+  Element.prototype.closest = function (s: string) {
     let el = this;
     if (!document.documentElement.contains(el)) {
       return null;
