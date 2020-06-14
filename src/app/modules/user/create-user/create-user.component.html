@@ -106,29 +106,6 @@
                   </div>
 
                   <div class="col-md-6">
-                    <!-- <div class="form-group">
-                      <label class="col-form-label" for="joiningdate"
-                        >Joining Date</label
-                      >
-                      <input
-                        class="form-control"
-                        type="date"
-                        id="joiningdate"
-                        formControlName="joiningdate"
-                        placeholder="Joining Date"
-                        autocomplete="given-name"
-                      />
-                      <div
-                        *ngIf="submitted && f['joiningDate'].errors"
-                        class="invalid-feedback"
-                      >
-                        <div *ngIf="f['joiningDate'].errors.required">
-                          Joining Date is required
-                        </div>
-                      </div>
-                    </div>
-                  </div> -->
-
                     <div class="form-group">
                       <label class="col-form-label" for="joiningdate"
                         >Joining Date</label
@@ -142,7 +119,7 @@
                         bsDatepicker
                         [bsConfig]="{
                           isAnimated: true,
-                          dateInputFormat: 'DD-MM-YYYY',
+                          dateInputFormat: 'DD/MM/YYYY',
                           containerClass: 'theme-dark-blue'
                         }"
                         [maxDate]="maxDate"
@@ -152,14 +129,6 @@
                             f.joiningdate.touched && !f.joiningdate.errors
                         }"
                       />
-                      <!-- <div
-                      *ngIf="submitted && f['joiningDate'].errors"
-                      class="invalid-feedback"
-                    >
-                      <div *ngIf="f['joiningDate'].errors.required">
-                        Joining Date is required
-                      </div>
-                    </div> -->
                     </div>
                   </div>
                 </div>

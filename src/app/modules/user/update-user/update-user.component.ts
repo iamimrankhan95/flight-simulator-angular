@@ -1,9 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from '../../../shared/models/user';
 import { UserDataService } from '../user-data.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { formatDate } from '@angular/common';
 
 @Component({
@@ -12,7 +11,6 @@ import { formatDate } from '@angular/common';
   styleUrls: ['./update-user.component.css'],
 })
 export class UpdateUserComponent implements OnInit {
-  // @Input() selectedUserId: number;
 
   public simpleForm: FormGroup;
   public submitted = false;
@@ -74,7 +72,7 @@ export class UpdateUserComponent implements OnInit {
       email: ['', [Validators.required, Validators.pattern(this.emailRegex)]],
       username: ['', Validators.required],
       password: ['', Validators.required],
-      joiningdate: ['', Validators.required],
+      joiningdate: [new Date(), [Validators.required]],
       isActive: [''],
     });
   }

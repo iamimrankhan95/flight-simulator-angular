@@ -2,9 +2,6 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { User } from '../../../shared/models/user';
 import { Subject } from 'rxjs';
 import { UserDataService } from '../user-data.service';
-import { error } from 'protractor';
-import { Router } from '@angular/router';
-import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-list-user',
@@ -15,13 +12,9 @@ export class ListUserComponent implements OnInit, OnDestroy {
   userList: User[];
   dtTrigger = new Subject();
   dtOptions: DataTables.Settings = {};
-  // public selectedUserId: number;
 
   constructor(
     private userDataService: UserDataService,
-    private router: Router,
-    // private modalService: NgbModal,
-    // public activeModal: NgbActiveModal
   ) {}
 
   ngOnInit(): void {
@@ -48,10 +41,9 @@ export class ListUserComponent implements OnInit, OnDestroy {
   }
 
   rerender() {
-    this.userDataService.getUsers().subscribe(
-      (response) => {
-        this.userList = response;
-      });
+    this.userDataService.getUsers().subscribe((response) => {
+      this.userList = response;
+    });
   }
 
   delete(user: User) {
@@ -60,23 +52,10 @@ export class ListUserComponent implements OnInit, OnDestroy {
         console.log(response);
         this.rerender();
       },
+      // tslint:disable-next-line: no-shadowed-variable
       (error) => {
         console.log(error);
       }
     );
   }
-
-  // update(item, content) {
-  //   if (this.modalService.hasOpenModals()) {
-  //     this.modalService.dismissAll();
-  //   }
-  //   console.log(item.id);
-
-  //   this.selectedUserId = item.id;
-  //   const modalRef = this.modalService.open(content, {
-  //     size: 'lg',
-  //     backdrop: 'static',
-  //   });
-  // }
-
 }

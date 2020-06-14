@@ -7,19 +7,20 @@ import { UpdateUserComponent } from './update-user/update-user.component';
 
 const routes: Routes = [
   {
-    path: 'create',
+    path: '',
     component: CreateUserComponent,
     data: { title: 'Create User' },
   },
-  { path: 'users',
-    component: ListUserComponent,
-    data: { title: 'User List' }
+  {
+    path: 'create',
+    redirectTo: '',
   },
+  { path: 'users', component: ListUserComponent, data: { title: 'User List' } },
   {
     path: 'update/:id',
     component: UpdateUserComponent,
-    data: { title: 'Update User'}
-  }
+    data: { title: 'Update User' },
+  },
 ];
 
 @NgModule({

@@ -11,15 +11,10 @@ import { LoginComponent } from './modules/auth/login/login/login.component';
 
 
 export const routes: Routes = [
-  // {
-  //   path: 'auth',
-  //   loadChildren: () => import('./modules/auth/auth.module').then(m => m.AuthModule)
-  // },
   {
-    path: 'auth/login',
-    component: LoginComponent
+    path: 'auth',
+    loadChildren: () => import('./modules/auth/auth.module').then(m => m.AuthModule)
   },
-
   {
     path: '',
     component: DefaultLayoutComponent,

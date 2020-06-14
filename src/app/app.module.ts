@@ -62,17 +62,14 @@ import { DataTablesModule } from 'angular-datatables';
     TabsModule.forRoot(),
     ChartsModule,
     SharedModule,
-    AuthModule,
-    UserModule,
-    DataTablesModule
+    AuthModule
 
   ],
   declarations: [
     AppComponent,
     ...APP_CONTAINERS,
     P404Component,
-    P500Component,
-    RegisterComponent,
+    P500Component
   ],
   providers: [{
     provide: LocationStrategy,

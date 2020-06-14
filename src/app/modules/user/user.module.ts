@@ -14,21 +14,20 @@ import {
   NgbModule,
 } from '@ng-bootstrap/ng-bootstrap';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { SharedModule } from '../../shared/modules/shared/shared.module';
 
 @NgModule({
   declarations: [CreateUserComponent, ListUserComponent, UpdateUserComponent],
   imports: [
     CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
     UserRoutingModule,
     HttpClientModule,
     TextMaskModule,
     DataTablesModule,
-    NgbModule,
-    BsDatepickerModule.forRoot()
+    SharedModule,
+    BsDatepickerModule.forRoot(),
   ],
-  providers: [NgbModal, NgbActiveModal],
-  entryComponents: [UpdateUserComponent],
+  providers: [],
+  entryComponents: [],
 })
 export class UserModule {}
