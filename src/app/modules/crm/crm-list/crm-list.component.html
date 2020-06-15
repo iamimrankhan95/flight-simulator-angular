@@ -8,44 +8,54 @@
         <div class="col-md-2">
           <label class="col-form-label" for="fromDate">From date</label>
           <div class="input-group">
-            <input id="fromDate" class="form-control" placeholder="dd/mm/yyyy" (input)="onFormDateChange($event.target.value)"
-                   (dateSelect)="onFromDateSelect($event)" [minDate]="minDate" [maxDate]="maxDate" name="dp" ngbDatepicker #f="ngbDatepicker">
+            <input id="fromDate" class="form-control" placeholder="dd/mm/yyyy"
+              (input)="onFormDateChange($event.target.value)" [(ngModel)]="pageConfig.fromDate"
+              (dateSelect)="onFromDateSelect($event)" [minDate]="fromMinDate" [maxDate]="fromMaxDate" name="dp"
+              ngbDatepicker #f="ngbDatepicker">
             <div class="input-group-append">
-              <button class="btn btn-outline-secondary fa fa-calendar fa-lg" (click)="f.toggle()" type="button"></button>
+              <button class="btn btn-outline-secondary fa fa-calendar fa-lg" (click)="f.toggle()"
+                type="button"></button>
             </div>
           </div>
         </div>
         <div class="col-md-2">
           <label class="col-form-label" for="toDate">To date</label>
           <div class="input-group">
-            <input id="toDate" [disabled]="pageConfig.fromDate===null" class="form-control" [(ngModel)]="pageConfig.toDate"
-                   (dateSelect)="onToDateSelect($event)" placeholder="dd/mm/yyyy" [minDate]="minDate" [maxDate]="maxDate" name="dp" ngbDatepicker
-                   #t="ngbDatepicker">
+            <input id="toDate" [disabled]="pageConfig.fromDate===null" class="form-control"
+              [(ngModel)]="pageConfig.toDate" (dateSelect)="onToDateSelect($event)" placeholder="dd/mm/yyyy"
+              [minDate]="pageConfig.fromDate" [maxDate]="toMaxDate" name="dp" ngbDatepicker #t="ngbDatepicker">
             <div class="input-group-append">
-              <button class="btn btn-outline-secondary fa fa-calendar fa-lg" (click)="t.toggle()" type="button"></button>
+              <button class="btn btn-outline-secondary fa fa-calendar fa-lg" (click)="t.toggle()"
+                type="button"></button>
             </div>
           </div>
         </div>
       </div>
-      <div class="row mb-3">
-        <div class="col-md-2 offset-md-6" style="padding-right: 0px;">
+      <div class="row">
+        <div class="col-md-2 offset-md-5" style="padding-right: 0px;">
           <label class="pull-right" style="padding-top: 6px;">Search By:</label>
         </div>
-        <div class="col-md-4" style="padding-left: 5px;">
+        <div class="col-md-5" style="padding-left: 5px;">
           <div class="input-group">
             <div class="input-group-prepends">
-              <select id="searchBy" name="searchBy" class="form-control" (change)="onChangeSearchBy()" [(ngModel)]="pageConfig.searchBy">
+              <select id="searchBy" name="searchBy" class="form-control" (change)="onChangeSearchBy()"
+                [(ngModel)]="pageConfig.searchBy">
                 <option selected value="" disabled>Select One</option>
                 <option value="mobileNo">Mobile No.</option>
                 <option value="ticketNo">Ticket No.</option>
               </select>
             </div>
-            <input type="text" class="form-control" [disabled]="placeHolderForSearchKey === ''" [(ngModel)]="filterQuery"
-                   placeholder="{{placeHolderForSearchKey}}" />
+            <input type="text" class="form-control" [disabled]="placeHolderForSearchKey === ''"
+              [(ngModel)]="filterQuery" placeholder="{{placeHolderForSearchKey}}" />
+            <div class="input-group-prepends">
+              <button type="button" (click)="onEnter()" class="btn btn-success"><span><i
+                    class="fa fa-search"></i></span> Search</button>
+            </div>
           </div>
         </div>
       </div>
-      <table datatable class="table table-striped table-hover table-responsive-lg" [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+      <table datatable class="table table-striped table-hover table-responsive-lg" [dtOptions]="dtOptions"
+        [dtTrigger]="dtTrigger">
         <thead>
           <tr>
             <th style="width: 20%">
@@ -57,11 +67,11 @@
             <th style="width: 10%">
               Age
             </th>
-            <th style="width: 20%">
+            <th style="width: 10%">
               City
             </th>
-            <th style="width: 10%">
-              Registered
+            <th style="width: 20%">
+              Options
             </th>
           </tr>
         </thead>
@@ -71,7 +81,12 @@
             <td>{{item.email}}</td>
             <td class="text-left">{{item.age}}</td>
             <td>{{item.city | uppercase}}</td>
-            <td>{{getDate(item.regDate)}}</td>
+            <td>
+              <h5><span style="cursor: pointer" class="badge badge-success" (click)="editMenu(item)">{{'Update'}}</span>
+                <span style="cursor: pointer" class="badge badge-danger" (click)="editMenu(item)">{{'Delete'}}</span>
+                <span style="cursor: pointer" class="badge badge-primary" (click)="assign(item)">{{'Assign'}}</span>
+              </h5>
+            </td>
           </tr>
         </tbody>
         <tfoot>

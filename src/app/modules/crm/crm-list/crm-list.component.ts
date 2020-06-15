@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { CustomerRelation } from '../../../shared/models/customer-relation.model';
 import { CRMHttpService } from '../crm-http.service';
 import { ICRMListPageConfig } from './icrm-list-page-config';
@@ -13,51 +13,51 @@ import { Subject } from 'rxjs';
     { provide: NgbDateParserFormatter, useClass: NgbDateCustomParserFormatter }
   ]
 })
-export class CrmListComponent implements OnInit {
+export class CrmListComponent implements OnInit, OnDestroy {
 
-  pageConfig: ICRMListPageConfig;
+  pageConfig: ICRMListPageConfig = {
+    pageNo: 1,
+    pageSize: 10,
+    fromDate: null,
+    toDate: null,
+    mobileNo: null,
+    ticketNo: '',
+    status: null,
+    divisionId: null,
+    districtId: null,
+    upazilaId: null,
+    searchKey: null,
+    searchBy: ''
+  };
   dtTrigger = new Subject();
   dtOptions: DataTables.Settings = {};
   error: any;
   placeHolderForSearchKey = '';
-  minDate = { year: new Date().getFullYear() - 100, month: 1, day: 1 };
-  maxDate = { year: new Date().getFullYear() + 100, month: 1, day: 1 };
-  fromDatePlaceHolder = 'dd/mm/yyyy';
-  toDatePlaceHolder = 'dd/mm/yyyy';
+  today = new Date();
+  fromMinDate = { year: this.today.getFullYear() - 100, month: 1, day: 1 };
+  fromMaxDate = { year: this.today.getFullYear(), month: this.today.getMonth() + 1, day: this.today.getDate() };
+  // toMinDate = { year: this.today.getFullYear() - 100, month: 1, day: 1 };
+  toMaxDate = { year: this.today.getFullYear(), month: this.today.getMonth() + 1, day: this.today.getDate() };
   @ViewChild('f') f: NgbInputDatepicker;
   @ViewChild('t') t: NgbInputDatepicker;
-  itemsPerPage = 5;
-  startPage = 1;
   customerRelations: CustomerRelation[];
-  filterQuery = '';
   constructor(private crmHttpService: CRMHttpService) {
-    this.pageConfig = {
-      pageNo: this.startPage,
-      pageSize: this.itemsPerPage,
-      fromDate: '',
-      toDate: '',
-      mobileNo: null,
-      ticketNo: '',
-      status: null,
-      divisionId: null,
-      districtId: null,
-      upazilaId: null,
-      searchKey: null,
-      searchBy: ''
-    };
+    console.log(this.today.getMonth())
   }
 
   ngOnInit(): void {
     this.dtOptions = {
       pagingType: 'full_numbers',
-      pageLength: 10,
+      pageLength: this.pageConfig.pageSize,
+      searching: false
     };
 
     this.crmHttpService.getCustomerRelations(this.pageConfig)
       .subscribe(
         (customerRelations: any) => {
           setTimeout(() => {
-            this.customerRelations = [...customerRelations]; this.dtTrigger.next();
+            this.customerRelations = [...customerRelations];
+            this.dtTrigger.next();
           }, 1000);
         }, // success path
         error => this.error = error // error path
@@ -78,9 +78,7 @@ export class CrmListComponent implements OnInit {
   }
 
   onFromDateSelect(event: NgbDate, f: any) {
-    // this.pageConfig.currentPage = this.startPage;
-    // this.pageConfig.fromDate = event.day + '/' + event.month + '/' + event.year;
-    // this.navigationForAdmin();
+    this.pageConfig.toDate = null;
   }
 
   onToDateSelect(event: any) {
@@ -114,5 +112,10 @@ export class CrmListComponent implements OnInit {
       this.pageConfig.fromDate = null;
       this.pageConfig.toDate = null;
     }
+    this.pageConfig.toDate = null;
+  }
+  ngOnDestroy(): void {
+    // Do not forget to unsubscribe the event
+    this.dtTrigger.unsubscribe();
   }
 }
