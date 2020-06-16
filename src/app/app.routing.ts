@@ -6,7 +6,6 @@ import { DefaultLayoutComponent } from './containers';
 
 import { P404Component } from './modules/error/404.component';
 import { P500Component } from './modules/error/500.component';
-import { LoginComponent } from './modules/auth/login/login/login.component';
 
 
 export const routes: Routes = [
@@ -32,6 +31,10 @@ export const routes: Routes = [
       {
         path: 'users',
         loadChildren: () => import('./modules/user/user.module').then(m => m.UserModule)
+      },
+      {
+        path: 'profile',
+        loadChildren: () => import('./modules/profile/profile.module').then(m => m.ProfileModule)
       }
     ]
   },

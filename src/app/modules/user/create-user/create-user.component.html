@@ -1,3 +1,18 @@
+<ng-template #content let-modal>
+  <div class="modal-header">
+      <h4 class="modal-title">OTP Verification</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  </div>
+  <div class="modal-body">
+      <app-otp-modal [contactNo] = "userContactNo"></app-otp-modal>
+  </div>
+  <div class="modal-footer">
+      <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+  </div>
+</ng-template>
+
 <div class="animated fadeIn">
   <div class="row">
     <div class="col-md-12">
@@ -8,7 +23,7 @@
         <div class="card-body">
           <div class="row">
             <div class="col-md-12">
-              <form [formGroup]="simpleForm" (ngSubmit)="onSubmit()">
+              <form [formGroup]="simpleForm" (ngSubmit)="onSubmit(content)">
                 <div class="row">
                   <div class="col-md-6">
                     <div class="form-group">
@@ -245,8 +260,7 @@
                 </div>
                 <div class="form-group">
                   <button
-                    class="btn btn-primary btn-ladda-progress"
-                    data-style="expand-right"
+                    class="btn btn-primary"
                     [disabled]="simpleForm.invalid && submitted"
                     type="submit"
                   >
@@ -269,4 +283,4 @@
     </div>
   </div>
 </div>
-<!-- <link rel="stylesheet" href="https://unpkg.com/ngx-bootstrap/datepicker/bs-datepicker.css"> -->
+

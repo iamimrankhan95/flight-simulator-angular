@@ -1,7 +1,9 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserDataService } from '../user-data.service';
-import { formatDate } from '@angular/common';
+import { formatDate } from '@angular/common';;
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
 
 @Component({
   selector: 'app-create-user',
@@ -14,8 +16,11 @@ import { formatDate } from '@angular/common';
   encapsulation: ViewEncapsulation.None
 })
 export class CreateUserComponent implements OnInit {
+
+
   public simpleForm: FormGroup;
   public submitted = false;
+  public message: boolean = false ;
   public fieldTextType: boolean;
   public phoneMask = [
     /[0]/,
@@ -33,10 +38,13 @@ export class CreateUserComponent implements OnInit {
   public phoneNumber = /^[0-9]\d{10}$/;
   public emailRegex = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/;
   public maxDate: Date = new Date();
+  public userContactNo: number;
 
   constructor(
     private formbuilder: FormBuilder,
-    private userDataService: UserDataService
+    private userDataService: UserDataService,
+    private modalService: NgbModal,
+    private activeModal: NgbActiveModal
   ) {
     this.maxDate.setDate(this.maxDate.getDate() + 0);
   }
@@ -55,11 +63,11 @@ export class CreateUserComponent implements OnInit {
       email: ['', [Validators.required, Validators.pattern(this.emailRegex)]],
       username: ['', [Validators.required]],
       password: ['', [Validators.required]],
-      joiningdate: [new Date(), [Validators.required]],
+      joiningdate: [this.maxDate, [Validators.required]],
       isActive: [''],
     });
   }
-  onSubmit() {
+  async onSubmit(content) {
     this.submitted = true;
     this.f.joiningdate.setValue(
       formatDate(
@@ -68,19 +76,29 @@ export class CreateUserComponent implements OnInit {
         'en-UK'
       )
     );
-    console.log(this.simpleForm.value);
     if (this.simpleForm.valid) {
-      this.userDataService.register(this.simpleForm.value).subscribe(
-        (response) => {
-          console.log(response);
-          this.onReset();
-        },
-        (error) => {
-          console.log(error);
-          this.onReset();
-        }
-      );
-    }
+      if (this.modalService.hasOpenModals()) {
+        this.modalService.dismissAll();
+      }
+      this.userContactNo = this.simpleForm.get('contactNo').value;
+      const modalRef = this.modalService.open(content , {size: 'md', backdrop: 'static'});
+      // this.otpValidation();
+      // console.log(this.message);
+      // if (this.message) {
+        this.userDataService.register(this.simpleForm.value).subscribe(
+          (response) => {
+            console.log(response);
+            this.onReset();
+          },
+          (error) => {
+            console.log(error);
+            this.onReset();
+          }
+        );
+      // }
+      }
+  }
+  submit() {
   }
 
   get f() {
@@ -94,4 +112,9 @@ export class CreateUserComponent implements OnInit {
   toggleFieldTextType() {
     this.fieldTextType = !this.fieldTextType;
   }
+  // otpValidation() {
+  //     this.userDataService.currentMessage.subscribe(response => {
+  //       this.message = response;
+  //       });
+  //   }
 }

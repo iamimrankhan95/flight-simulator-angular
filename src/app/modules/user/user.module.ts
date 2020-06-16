@@ -15,9 +15,11 @@ import {
 } from '@ng-bootstrap/ng-bootstrap';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { SharedModule } from '../../shared/modules/shared/shared.module';
+import { OtpModule } from '../../shared/modules/otp/otp.module';
+import { OtpModalComponent } from '../../shared/modules/otp/otp-modal.component';
 
 @NgModule({
-  declarations: [CreateUserComponent, ListUserComponent, UpdateUserComponent],
+  declarations: [CreateUserComponent, ListUserComponent, UpdateUserComponent, OtpModalComponent],
   imports: [
     CommonModule,
     UserRoutingModule,
@@ -25,9 +27,9 @@ import { SharedModule } from '../../shared/modules/shared/shared.module';
     TextMaskModule,
     DataTablesModule,
     SharedModule,
-    BsDatepickerModule.forRoot(),
+    BsDatepickerModule.forRoot()
   ],
-  providers: [],
-  entryComponents: [],
+  providers: [NgbModal, NgbActiveModal],
+  entryComponents: [CreateUserComponent],
 })
 export class UserModule {}

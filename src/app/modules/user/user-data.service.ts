@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { User } from '../../shared/models/user';
 import { tap } from 'rxjs/operators';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -11,6 +12,9 @@ export class UserDataService {
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
   };
+
+  // private messageSource = new BehaviorSubject(false);
+  // currentMessage = this.messageSource.asObservable();
 
   public url = 'http://192.168.101.41:9050/cms_login';
 
@@ -39,4 +43,8 @@ export class UserDataService {
     const tempUrl = this.url + '/' + id;
     return this.http.put<User>(tempUrl, user, this.httpOptions);
   }
+
+  // changeMessage(message: boolean) {
+  //   this.messageSource.next(message);
+  // }
 }

@@ -41,7 +41,7 @@ export class DefaultLayoutComponent implements OnInit {
   }
 
   ChangePassword() {
-    this.router.navigate(['auth/change-password/']);
+    this.router.navigate(['profile/change-password/']);
   }
 
 }
