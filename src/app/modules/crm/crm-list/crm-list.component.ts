@@ -36,13 +36,13 @@ export class CrmListComponent implements OnInit, OnDestroy {
   today = new Date();
   fromMinDate = { year: this.today.getFullYear() - 100, month: 1, day: 1 };
   fromMaxDate = { year: this.today.getFullYear(), month: this.today.getMonth() + 1, day: this.today.getDate() };
-  // toMinDate = { year: this.today.getFullYear() - 100, month: 1, day: 1 };
   toMaxDate = { year: this.today.getFullYear(), month: this.today.getMonth() + 1, day: this.today.getDate() };
   @ViewChild('f') f: NgbInputDatepicker;
   @ViewChild('t') t: NgbInputDatepicker;
   customerRelations: CustomerRelation[];
+
   constructor(private crmHttpService: CRMHttpService) {
-    console.log(this.today.getMonth())
+    console.log(this.today.getMonth());
   }
 
   ngOnInit(): void {
@@ -82,7 +82,7 @@ export class CrmListComponent implements OnInit, OnDestroy {
   }
 
   onToDateSelect(event: any) {
-    this.crmHttpService.getCustomerRelations(this.pageConfig)
+    this.crmHttpService.getCustomerRelations(this.pageConfig);
   }
 
   onEnter() {
@@ -99,12 +99,24 @@ export class CrmListComponent implements OnInit, OnDestroy {
 
   onChangeSearchBy() {
     if (this.pageConfig.searchBy === 'mobileNo') {
-      this.placeHolderForSearchKey = 'Enter Mobile Number.'
+      this.placeHolderForSearchKey = 'Enter Mobile Number.';
     } else {
-      this.placeHolderForSearchKey = 'Enter Ticket Number.'
+      this.placeHolderForSearchKey = 'Enter Ticket Number.';
     }
   }
   public clearFilters(): void {
+    // this.mytime = void 0;
+  }
+
+  public updateCrm(): void {
+    // this.mytime = void 0;
+  }
+
+  public deleteCrm(): void {
+    // this.mytime = void 0;
+  }
+
+  public assignCrm(): void {
     // this.mytime = void 0;
   }
   onFormDateChange(value) {

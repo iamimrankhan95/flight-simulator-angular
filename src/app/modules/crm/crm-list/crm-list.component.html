@@ -2,6 +2,9 @@
   <div class="card">
     <div class="card-header">
       Customer Relation List
+      <div class="card-header-actions">
+        <a class="btn btn-primary btn-sm" routerLink="/crm/create">Create CRM</a>
+      </div>
     </div>
     <div class="card-body">
       <div class="row">
@@ -82,9 +85,10 @@
             <td class="text-left">{{item.age}}</td>
             <td>{{item.city | uppercase}}</td>
             <td>
-              <h5><span style="cursor: pointer" class="badge badge-success" (click)="editMenu(item)">{{'Update'}}</span>
-                <span style="cursor: pointer" class="badge badge-danger" (click)="editMenu(item)">{{'Delete'}}</span>
-                <span style="cursor: pointer" class="badge badge-primary" (click)="assign(item)">{{'Assign'}}</span>
+              <h5><span style="cursor: pointer" class="badge badge-success"
+                  (click)="updateCrm(item)">{{'Update'}}</span>
+                <span style="cursor: pointer" class="badge badge-danger" (click)="deleteCrm(item)">{{'Delete'}}</span>
+                <span style="cursor: pointer" class="badge badge-primary" (click)="assignCrm(item)">{{'Assign'}}</span>
               </h5>
             </td>
           </tr>
