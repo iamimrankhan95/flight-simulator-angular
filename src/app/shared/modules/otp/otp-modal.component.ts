@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbActiveModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { UserDataService } from '../../../modules/user/user-data.service';
 
 @Component({
@@ -21,9 +21,14 @@ export class OtpModalComponent implements OnInit {
   constructor(private formbuilder: FormBuilder,
     private modalService: NgbModal,
     private activeModal: NgbActiveModal,
-    public userDataService: UserDataService) {}
+    public userDataService: UserDataService,
+    config: NgbModalConfig) {
+      config.backdrop = 'static';
+      config.size = 'md';
+    }
 
   ngOnInit(): void {
+    document.getElementById('openModal').click();
     this.startTimer();
     this.createForm();
   }
@@ -64,5 +69,9 @@ export class OtpModalComponent implements OnInit {
         return ;
       }
     }, 1000);
+  }
+
+  open(content) {
+    this.modalService.open(content);
   }
 }

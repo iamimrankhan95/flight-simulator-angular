@@ -10,6 +10,7 @@ import { OtpModalComponent } from './otp-modal.component';
   imports: [
     CommonModule,
     SharedModule
-  ]
+  ],
+  exports: [OtpModalComponent]
 })
 export class OtpModule { }

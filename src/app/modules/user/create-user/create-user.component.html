@@ -1,4 +1,4 @@
-<ng-template #content let-modal>
+<!-- <ng-template #content let-modal>
   <div class="modal-header">
       <h4 class="modal-title">OTP Verification</h4>
       <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
@@ -11,7 +11,7 @@
   <div class="modal-footer">
       <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
   </div>
-</ng-template>
+</ng-template> -->
 
 <div class="animated fadeIn">
   <div class="row">
@@ -23,7 +23,7 @@
         <div class="card-body">
           <div class="row">
             <div class="col-md-12">
-              <form [formGroup]="simpleForm" (ngSubmit)="onSubmit(content)">
+              <form [formGroup]="simpleForm" (ngSubmit)="onSubmit()">
                 <div class="row">
                   <div class="col-md-6">
                     <div class="form-group">
@@ -265,12 +265,14 @@
                     type="submit"
                   >
                     Register
+                    <div *ngIf="simpleForm.valid && submitted && !submissionError">
+                      <app-otp-modal [contactNo] = "userContactNo"></app-otp-modal>
+                    </div>
                   </button>
                   <button
                     class="btn btn-danger"
-                    [disabled]="simpleForm.invalid && submitted"
                     type="button"
-                    (click)="onReset()"
+                    (click)="onReset();"
                   >
                     Reset
                   </button>

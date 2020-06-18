@@ -22,6 +22,7 @@ export class CreateUserComponent implements OnInit {
   public submitted = false;
   public message: boolean = false ;
   public fieldTextType: boolean;
+  public submissionError = true;
   public phoneMask = [
     /[0]/,
     /[1-2]/,
@@ -67,7 +68,7 @@ export class CreateUserComponent implements OnInit {
       isActive: [''],
     });
   }
-  async onSubmit(content) {
+ onSubmit() {
     this.submitted = true;
     this.f.joiningdate.setValue(
       formatDate(
@@ -77,14 +78,23 @@ export class CreateUserComponent implements OnInit {
       )
     );
     if (this.simpleForm.valid) {
-      if (this.modalService.hasOpenModals()) {
-        this.modalService.dismissAll();
-      }
-      this.userContactNo = this.simpleForm.get('contactNo').value;
-      const modalRef = this.modalService.open(content , {size: 'md', backdrop: 'static'});
+      this.submissionError = false;
+    } else {
+      this.submissionError = true;
+    }
+    // if (this.simpleForm.valid) {
+    //   if (this.modalService.hasOpenModals()) {
+    //     this.modalService.dismissAll();
+    //   }
+    //   this.userContactNo = this.simpleForm.get('contactNo').value;
+    //   const modalRef = this.modalService.open(content , {size: 'md', backdrop: 'static'});
       // this.otpValidation();
       // console.log(this.message);
-      // if (this.message) {
+
+      // }
+  }
+  submit() {
+          // if (this.message) {
         this.userDataService.register(this.simpleForm.value).subscribe(
           (response) => {
             console.log(response);
@@ -96,9 +106,6 @@ export class CreateUserComponent implements OnInit {
           }
         );
       // }
-      }
-  }
-  submit() {
   }
 
   get f() {
