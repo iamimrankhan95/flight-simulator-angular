@@ -1,7 +1,8 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserDataService } from '../user-data.service';
-import { formatDate } from '@angular/common';;
+import { formatDate } from '@angular/common';
+import { OtpService } from '../../../shared/modules/otp/otp.service';
 
 
 @Component({
@@ -41,7 +42,8 @@ export class CreateUserComponent implements OnInit {
 
   constructor(
     private formbuilder: FormBuilder,
-    private userDataService: UserDataService
+    private userDataService: UserDataService,
+    private otpService: OtpService
   ) {
     this.maxDate.setDate(this.maxDate.getDate() + 0);
   }
@@ -74,7 +76,8 @@ export class CreateUserComponent implements OnInit {
         'en-UK'
       )
     );
-
+    console.log('asdf')
+    this.otpService.openOtpModal();
     if (this.simpleForm.valid) {
       this.userDataService.register(this.simpleForm.value).subscribe(
         (response) => {

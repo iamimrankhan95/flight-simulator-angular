@@ -1,12 +1,15 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, TemplateRef, AfterViewInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs/internal/Subscription';
+import { OtpService } from './otp.service';
+import { ModalDirective } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-otp-modal',
   templateUrl: './otp-modal.component.html',
   styleUrls: ['./otp-modal.component.css'],
 })
-export class OtpModalComponent implements OnInit {
+export class OtpModalComponent implements OnInit, AfterViewInit {
   @Input() contactNo: number;
 
   public simpleForm: FormGroup;
@@ -14,19 +17,31 @@ export class OtpModalComponent implements OnInit {
   timeLeft: number = 120;
   interval;
   message: boolean;
-
-
-  constructor(private formbuilder: FormBuilder) { }
+  subscription: Subscription;
+  @ViewChild('otpModal') public otpModal: ModalDirective;
+  constructor(private formbuilder: FormBuilder,
+    private otpService: OtpService) { }
 
   ngOnInit(): void {
+    this.otpService.otpModalSubject.subscribe(() => {
+      this.otpModal.show();
+    });
     this.startTimer();
     this.createForm();
+  }
+
+  ngAfterViewInit() {
+    // this.otpService.otpModalSubject.subscribe(() => {
+    //   console.log('asdf2')
+    //   this.otpModal.show();
+    // });
   }
 
   createForm() {
     this.simpleForm = this.formbuilder.group({
       OTP_code: ['', Validators.required],
     });
+    // this.otpTemplate.open();
   }
 
   get f() {
