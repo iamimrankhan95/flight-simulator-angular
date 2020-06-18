@@ -73,6 +73,12 @@ export class CRMHttpService {
       );
   }
 
+  // Get information on specific crm
+  getCustomerRelation(crmID: number){
+    const tempUrl =  this.customerRelationUrl + '/' + crmID;
+    return this.http.get<any>(tempUrl, httpOptions);
+  }
+
   /** DELETE: delete the hero from the server */
   // deleteHero(id: number): Observable<{}> {
   //   const url = `${this.heroesUrl}/${id}`; // DELETE api/heroes/42

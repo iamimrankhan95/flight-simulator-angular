@@ -1,1 +1,257 @@
-<p>crm-details works!</p>
+<div class="animated fadeIn">
+  <div class="col-md-8">
+    <div class="card">
+      <div class="card-header">
+        <b>Details of Complain ID : {{ crmID }}</b>
+        <div class="card-header-actions">
+          <button class="btn btn-primary btn-md">Edit</button>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-12" style="text-align: center;">
+            <div class="btn-group">
+              <div *ngIf="customerInfo === true">
+                <span
+                  class="btn btn-light active"
+                  (click)="selectCustomerInfo()"
+                  >Compliant Information</span
+                >
+                <span
+                  class="btn btn-light"
+                  (click)="selectAccusedOranizationInfo()"
+                  >Accused Organization Information</span
+                >
+              </div>
+              <div *ngIf="customerInfo === false">
+                <span class="btn btn-light" (click)="selectCustomerInfo()"
+                  >Compliant Information</span
+                >
+                <span
+                  class="btn btn-light active"
+                  (click)="selectAccusedOranizationInfo()"
+                  >Accused Organization Information</span
+                >
+              </div>
+            </div>
+            <br /><br />
+            <form>
+              <div
+                class="form-group row ml-1"
+                *ngIf="customerInfo === true"
+                style="text-align: center;"
+              >
+                <div class="col-md-12">
+                  <div class="row">
+                    <div class="col-md-6" style="text-align: right;">
+                      <b>Unique ID: </b>
+                    </div>
+                    <div class="col-md-0" style="text-align: center;">
+                      :
+                    </div>
+                    <div class="col-md-5" style="text-align: left;">
+                      {{ crm.uniqueid }}
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6" style="text-align: right;">
+                      <b>Agent ID: </b>
+                    </div>
+                    <div class="col-md-0" style="text-align: center;">
+                      :
+                    </div>
+                    <div class="col-md-5" style="text-align: left;">
+                      {{ crm.agetntid }}
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6" style="text-align: right;">
+                      <b>MSISDN: </b>
+                    </div>
+                    <div class="col-md-0" style="text-align: center;">
+                      :
+                    </div>
+                    <div class="col-md-5" style="text-align: left;">
+                      {{ crm.msisdn }}
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6" style="text-align: right;">
+                      <b>Contact No: </b>
+                    </div>
+                    <div class="col-md-0" style="text-align: center;">
+                      :
+                    </div>
+                    <div class="col-md-5" style="text-align: left;">
+                      {{ crm.contactNo }}
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6" style="text-align: right;">
+                      <b>NID Number: </b>
+                    </div>
+                    <div class="col-md-0" style="text-align: center;">
+                      :
+                    </div>
+                    <div class="col-md-5" style="text-align: left;">
+                      {{ crm.nidno }}
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6" style="text-align: right;">
+                      <b>Compliant Name: </b>
+                    </div>
+                    <div class="col-md-0" style="text-align: center;">
+                      :
+                    </div>
+                    <div class="col-md-5" style="text-align: left;">
+                      {{ crm.copliantname }}
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6" style="text-align: right;">
+                      <b>Email Address: </b>
+                    </div>
+                    <div class="col-md-0" style="text-align: center;">
+                      :
+                    </div>
+                    <div class="col-md-5" style="text-align: left;">
+                      {{ crm.email }}
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6" style="text-align: right;">
+                      <b>Marital Status: </b>
+                    </div>
+                    <div class="col-md-0" style="text-align: center;">
+                      :
+                    </div>
+                    <div class="col-md-5" style="text-align: left;"></div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6" style="text-align: right;">
+                      <b>Spouse's Name: </b>
+                    </div>
+                    <div class="col-md-0" style="text-align: center;">
+                      :
+                    </div>
+                    <div class="col-md-5" style="text-align: left;">
+                      {{ crm.isHusbandName }}
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6" style="text-align: right;">
+                      <b>Father's Name: </b>
+                    </div>
+                    <div class="col-md-0" style="text-align: center;">
+                      :
+                    </div>
+                    <div class="col-md-5" style="text-align: left;">
+                      {{ crm.fathername }}
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6" style="text-align: right;">
+                      <b>Mother's Name: </b>
+                    </div>
+                    <div class="col-md-0" style="text-align: center;">
+                      :
+                    </div>
+                    <div class="col-md-5" style="text-align: left;">
+                      {{ crm.mothername }}
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6" style="text-align: right;">
+                      <b>Date of Birth: </b>
+                    </div>
+                    <div class="col-md-0" style="text-align: center;">
+                      :
+                    </div>
+                    <div class="col-md-5" style="text-align: left;">
+                      {{ crm.dob }}
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6" style="text-align: right;">
+                      <b>Occupation: </b>
+                    </div>
+                    <div class="col-md-0" style="text-align: center;">
+                      :
+                    </div>
+                    <div class="col-md-5" style="text-align: left;">
+                      {{ crm.ocupation }}
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6" style="text-align: right;">
+                      <b>Present Address Id: </b>
+                    </div>
+                    <div class="col-md-0" style="text-align: center;">
+                      :
+                    </div>
+                    <div class="col-md-5" style="text-align: left;">
+                      {{ crm.presentaddressid }}
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6" style="text-align: right;">
+                      <b>Permanent Address Id: </b>
+                    </div>
+                    <div class="col-md-0" style="text-align: center;">
+                      :
+                    </div>
+                    <div class="col-md-5" style="text-align: left;">
+                      {{ crm.permanantaddressid }}
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6" style="text-align: right;">
+                      <b>Problem description: </b>
+                    </div>
+                    <div class="col-md-0" style="text-align: center;">
+                      :
+                    </div>
+                    <div class="col-md-5" style="text-align: left;">
+                      {{ crm.problemdescription }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="form-group row ml-1"
+                *ngIf="accusedOrganizationInfo === true"
+                style="text-align: center;"
+              >
+                <div class="col-md-12">
+                  <div class="row">
+                    <div class="col-md-6" style="text-align: right;">
+                      <b>Accused Organization Name: </b>
+                    </div>
+                    <div class="col-md-0" style="text-align: center;">
+                      :
+                    </div>
+                    <div class="col-md-5" style="text-align: left;">
+                      {{ crm.accusedorganizationname }}
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6" style="text-align: right;">
+                      <b>Accused Organization Address Id: </b>
+                    </div>
+                    <div class="col-md-0" style="text-align: center;">
+                      :
+                    </div>
+                    <div class="col-md-5" style="text-align: left;">
+                      {{ crm.accusedorganizationaddressid }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
