@@ -1,7 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { UserDataService } from '../../../modules/user/user-data.service';
 
 @Component({
   selector: 'app-otp-modal',
@@ -18,10 +16,7 @@ export class OtpModalComponent implements OnInit {
   message: boolean;
 
 
-  constructor(private formbuilder: FormBuilder,
-    private modalService: NgbModal,
-    private activeModal: NgbActiveModal,
-    public userDataService: UserDataService) {}
+  constructor(private formbuilder: FormBuilder) { }
 
   ngOnInit(): void {
     this.startTimer();
@@ -33,21 +28,25 @@ export class OtpModalComponent implements OnInit {
       OTP_code: ['', Validators.required],
     });
   }
+
   get f() {
     return this.simpleForm.controls;
   }
+
   onSubmit() {
     this.submitted = true;
     if (this.simpleForm.valid) {
       console.log(this.simpleForm.get('OTP_code').value);
       // this.userDataService.changeMessage(true);
-      this.modalService.dismissAll();
+      // this.modalService.dismissAll();
     }
   }
+
   onReset() {
     this.submitted = false;
     this.simpleForm.reset();
   }
+
   resendOTP() {
     console.log('resend OTP request made!');
     this.timeLeft = 120;
@@ -55,13 +54,13 @@ export class OtpModalComponent implements OnInit {
   }
 
   startTimer() {
-    this.interval = setInterval( () => {
+    this.interval = setInterval(() => {
       if (this.timeLeft > 0) {
         this.timeLeft--;
       } else {
         console.log('Timer ran out! please try again');
         this.onReset();
-        return ;
+        return;
       }
     }, 1000);
   }

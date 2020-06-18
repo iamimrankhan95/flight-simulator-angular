@@ -2,7 +2,6 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserDataService } from '../user-data.service';
 import { formatDate } from '@angular/common';;
-import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 
 @Component({
@@ -20,7 +19,7 @@ export class CreateUserComponent implements OnInit {
 
   public simpleForm: FormGroup;
   public submitted = false;
-  public message: boolean = false ;
+  public message: boolean = false;
   public fieldTextType: boolean;
   public phoneMask = [
     /[0]/,
@@ -42,9 +41,7 @@ export class CreateUserComponent implements OnInit {
 
   constructor(
     private formbuilder: FormBuilder,
-    private userDataService: UserDataService,
-    private modalService: NgbModal,
-    private activeModal: NgbActiveModal
+    private userDataService: UserDataService
   ) {
     this.maxDate.setDate(this.maxDate.getDate() + 0);
   }
@@ -67,7 +64,8 @@ export class CreateUserComponent implements OnInit {
       isActive: [''],
     });
   }
-  async onSubmit(content) {
+
+  onSubmit() {
     this.submitted = true;
     this.f.joiningdate.setValue(
       formatDate(
@@ -76,28 +74,21 @@ export class CreateUserComponent implements OnInit {
         'en-UK'
       )
     );
+
     if (this.simpleForm.valid) {
-      if (this.modalService.hasOpenModals()) {
-        this.modalService.dismissAll();
-      }
-      this.userContactNo = this.simpleForm.get('contactNo').value;
-      const modalRef = this.modalService.open(content , {size: 'md', backdrop: 'static'});
-      // this.otpValidation();
-      // console.log(this.message);
-      // if (this.message) {
-        this.userDataService.register(this.simpleForm.value).subscribe(
-          (response) => {
-            console.log(response);
-            this.onReset();
-          },
-          (error) => {
-            console.log(error);
-            this.onReset();
-          }
-        );
-      // }
-      }
+      this.userDataService.register(this.simpleForm.value).subscribe(
+        (response) => {
+          console.log(response);
+          this.onReset();
+        },
+        (error) => {
+          console.log(error);
+          this.onReset();
+        }
+      );
+    }
   }
+
   submit() {
   }
 
@@ -109,6 +100,7 @@ export class CreateUserComponent implements OnInit {
     this.submitted = false;
     this.simpleForm.reset();
   }
+
   toggleFieldTextType() {
     this.fieldTextType = !this.fieldTextType;
   }
