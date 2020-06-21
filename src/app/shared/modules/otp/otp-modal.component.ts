@@ -29,7 +29,7 @@ export class OtpModalComponent implements OnInit, AfterViewInit, OnDestroy {
       this.timeLeft = 120;
       this.startTimer();
       this.otpModal.show();
-      // this.otpModal.config = this.config;
+      this.otpModal.config = this.config;
     });
   }
 
