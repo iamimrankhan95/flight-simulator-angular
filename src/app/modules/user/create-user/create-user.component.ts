@@ -1,8 +1,9 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserDataService } from '../user-data.service';
-import { formatDate } from '@angular/common';;
-import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { formatDate } from '@angular/common';
+import { OtpService } from '../../../shared/modules/otp/otp.service';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -15,12 +16,12 @@ import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
   ],
   encapsulation: ViewEncapsulation.None
 })
-export class CreateUserComponent implements OnInit {
+export class CreateUserComponent implements OnInit,OnDestroy {
 
 
   public simpleForm: FormGroup;
   public submitted = false;
-  public message: boolean = false ;
+  public message: boolean = false;
   public fieldTextType: boolean;
   public submissionError = true;
   public phoneMask = [
@@ -40,14 +41,16 @@ export class CreateUserComponent implements OnInit {
   public emailRegex = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/;
   public maxDate: Date = new Date();
   public userContactNo: number;
-
+  otpVerificationSubscription: Subscription;
   constructor(
     private formbuilder: FormBuilder,
     private userDataService: UserDataService,
-    private modalService: NgbModal,
-    private activeModal: NgbActiveModal
+    private otpService: OtpService
   ) {
     this.maxDate.setDate(this.maxDate.getDate() + 0);
+  }
+  ngOnDestroy(): void {
+    this.otpVerificationSubscription.unsubscribe();
   }
 
   ngOnInit(): void {
@@ -68,7 +71,8 @@ export class CreateUserComponent implements OnInit {
       isActive: [''],
     });
   }
- onSubmit() {
+
+  onSubmit() {
     if (!this.submitted) {
       this.f.joiningdate.setValue(
         formatDate(
@@ -78,21 +82,33 @@ export class CreateUserComponent implements OnInit {
         )
       );
     }
-    if (this.simpleForm.valid) {
-      this.submissionError = false;
-      this.submitted = true;
-      this.userDataService.register(this.simpleForm.value).subscribe(
-        (response) => {
-          console.log(response);
-        },
-        (error) => {
-          this.submitted = false;
-          console.log(error);
-        }
-      );
+    // console.log('asdf');
+    this.otpService.openOtpModal();
+    this.submitted = true;
+    this.otpVerificationSubscription = this.otpService.onOtpVerification().subscribe((isVerified) => {
+      if (isVerified) {
+        console.log('verified');
       } else {
-        this.submissionError = true;
+        console.log('not verified');
       }
+      this.otpVerificationSubscription.unsubscribe();
+    });
+    console.log('modal not touched');
+    // if (this.simpleForm.valid) {
+    //   this.userDataService.register(this.simpleForm.value).subscribe(
+    //     (response) => {
+    //       console.log(response);
+    //       this.onReset();
+    //     },
+    //     (error) => {
+    //       console.log(error);
+    //       this.onReset();
+    //     }
+    //   );
+    // }
+  }
+
+  submit() {
   }
 
   get f() {
@@ -103,6 +119,7 @@ export class CreateUserComponent implements OnInit {
     this.submitted = false;
     this.simpleForm.reset();
   }
+
   toggleFieldTextType() {
     this.fieldTextType = !this.fieldTextType;
   }

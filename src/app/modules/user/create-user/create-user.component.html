@@ -1,18 +1,3 @@
-<!-- <ng-template #content let-modal>
-  <div class="modal-header">
-      <h4 class="modal-title">OTP Verification</h4>
-      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-    <span aria-hidden="true">&times;</span>
-  </button>
-  </div>
-  <div class="modal-body">
-      <app-otp-modal [contactNo] = "userContactNo"></app-otp-modal>
-  </div>
-  <div class="modal-footer">
-      <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
-  </div>
-</ng-template> -->
-
 <div class="animated fadeIn">
   <div class="row">
     <div class="col-md-12">
@@ -261,7 +246,6 @@
                 <div class="form-group">
                   <button
                     class="btn btn-primary"
-                    [disabled]="simpleForm.invalid && submitted"
                     type="submit"
                   >
                     Register
@@ -285,4 +269,4 @@
     </div>
   </div>
 </div>
-
+<app-otp-modal></app-otp-modal>

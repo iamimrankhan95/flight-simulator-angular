@@ -35,6 +35,10 @@ export const routes: Routes = [
       {
         path: 'profile',
         loadChildren: () => import('./modules/profile/profile.module').then(m => m.ProfileModule)
+      },
+      {
+        path: 'escalation',
+        loadChildren: () => import('./modules/escalation/escalation.module').then(m => m.EscalationModule)
       }
     ]
   },

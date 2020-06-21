@@ -1,14 +1,15 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, TemplateRef, AfterViewInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { NgbModal, NgbActiveModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
-import { UserDataService } from '../../../modules/user/user-data.service';
+import { Subscription } from 'rxjs/internal/Subscription';
+import { OtpService } from './otp.service';
+import { ModalDirective } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-otp-modal',
   templateUrl: './otp-modal.component.html',
   styleUrls: ['./otp-modal.component.css'],
 })
-export class OtpModalComponent implements OnInit {
+export class OtpModalComponent implements OnInit, AfterViewInit, OnDestroy {
   @Input() contactNo: number;
 
   public simpleForm: FormGroup;
@@ -16,68 +17,91 @@ export class OtpModalComponent implements OnInit {
   timeLeft: number = 120;
   interval;
   message: boolean;
-
-
+  otpModalSubscription: Subscription;
+  config = {
+    backdrop: true,
+    ignoreBackdropClick: true
+  };
+  @ViewChild('otpModal') public otpModal: ModalDirective;
   constructor(private formbuilder: FormBuilder,
-    private modalService: NgbModal,
-    private activeModal: NgbActiveModal,
-    public userDataService: UserDataService,
-    config: NgbModalConfig) {
-      config.backdrop = 'static';
-      config.size = 'md';
-    }
+    private otpService: OtpService) {
+    this.otpModalSubscription = this.otpService.onOpenOtpModal().subscribe(() => {
+      this.timeLeft = 120;
+      this.startTimer()
+      this.otpModal.show();
+      // this.otpModal.config = this.config;
+    });
+  }
 
   ngOnInit(): void {
-    document.getElementById('openModal').click();
-    this.startTimer();
     this.createForm();
+  }
+
+  ngAfterViewInit() {
+    // this.otpService.otpModalSubject.subscribe(() => {
+    //   console.log('asdf2')
+    //   this.otpModal.show();
+    // });
   }
 
   createForm() {
     this.simpleForm = this.formbuilder.group({
       OTP_code: ['', Validators.required],
     });
+    // this.otpTemplate.open();
   }
+
   get f() {
     return this.simpleForm.controls;
   }
+
   onSubmit() {
     this.submitted = true;
     if (this.simpleForm.valid) {
-      console.log(this.simpleForm.get('OTP_code').value);
+      // console.log(this.simpleForm.get('OTP_code').value);
+      this.otpService.verifyOtp(true);
+      this.otpModal.hide();
       // this.userDataService.changeMessage(true);
-      this.modalService.dismissAll();
+      // this.modalService.dismissAll();
     }
   }
+
   onReset() {
     this.submitted = false;
     this.simpleForm.reset();
   }
+
   resendOTP() {
     console.log('resend OTP request made!');
-    this.stop();
-    // this.timeLeft = 120;
-    // this.startTimer();
+    this.timeLeft = 120;
+    this.startTimer();
   }
 
   startTimer() {
-    this.interval = setInterval( () => {
+    this.interval = setInterval(() => {
       if (this.timeLeft > 0) {
         this.timeLeft--;
       } else {
         console.log('Timer ran out! please try again');
         this.onReset();
-        clearInterval(this.interval);
+        return;
       }
     }, 1000);
   }
 
-  stop() {
+  closeOtpModal() {
+    this.otpModal.hide();
+    this.otpService.verifyOtp(false);
+    this.stopTimer();
+  }
+
+  stopTimer() {
     clearInterval(this.interval);
   }
 
-
-  open(content) {
-    this.modalService.open(content);
+  ngOnDestroy() {
+    console.log('destroy');
+    // unsubscribe to ensure no memory leaks
+    this.otpModalSubscription.unsubscribe();
   }
 }

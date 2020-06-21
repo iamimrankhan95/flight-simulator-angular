@@ -1,1 +1,67 @@
-<p>create-escalation works!</p>
+<div class="animated fadeIn">
+  <div class="card">
+    <div class="email-app">
+      <!-- <nav>
+          <a [routerLink]="['/apps/email/compose']" class="btn btn-danger btn-block">New Email</a>
+          <ul class="nav">
+            <li class="nav-item">
+              <a class="nav-link" [routerLink]="['/apps/email/inbox']"><i class="fa fa-inbox"></i> Inbox <span class="badge badge-danger">4</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#"><i class="fa fa-star"></i> Stared</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#"><i class="fa fa-rocket"></i> Sent</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#"><i class="fa fa-trash-o"></i> Trash</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#"><i class="fa fa-bookmark"></i> Important<span class="badge badge-info">5</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#"><i class="fa fa-inbox"></i> Inbox <span class="badge badge-danger">4</span></a>
+            </li>
+          </ul>
+        </nav> -->
+      <main>
+        <p class="text-center" style="font-weight: bold;">Complain Escalation</p>
+        <form>
+          <div class="form-row mb-3">
+            <label for="to" class="col-md-2 col-form-label">To Company:</label>
+            <div class="col-md-10">
+              <input type="email" class="form-control" id="to" placeholder="Type company name">
+            </div>
+          </div>
+          <div class="form-row mb-3">
+            <label for="cc" class="col-md-2 col-form-label">To Department:</label>
+            <div class="col-md-10">
+              <input type="email" class="form-control" id="cc" placeholder="Type department name">
+            </div>
+          </div>
+          <div class="form-row mb-3">
+            <label for="bcc" class="col-md-2 col-form-label">To User:</label>
+            <div class="col-md-10">
+              <input type="email" class="form-control" id="bcc" placeholder="Type username">
+            </div>
+          </div>
+          <div class="form-row mb-3">
+            <label for="bcc" class="col-md-2 col-form-label">Message:</label>
+            <div class="col-md-10">
+              <textarea class="form-control" id="message" name="body" rows="8"
+                placeholder="Type your message"></textarea>
+            </div>
+          </div>
+        </form>
+        <div class="row">
+          <div class="col-sm-11 ml-auto">
+            <div class="form-group">
+              <button type="submit" class="btn btn-success">Send</button>
+              <button type="submit" class="btn btn-light" routerLink="/dashboard">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+</div>
