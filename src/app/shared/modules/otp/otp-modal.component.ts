@@ -3,7 +3,6 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { OtpService } from './otp.service';
 import { ModalDirective } from 'ngx-bootstrap/modal';
-import { TranslationHelperService } from '../../services/translation-helper.service';
 
 @Component({
   selector: 'app-otp-modal',
@@ -27,8 +26,8 @@ export class OtpModalComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(private formbuilder: FormBuilder,
     private otpService: OtpService) {
     this.otpModalSubscription = this.otpService.onOpenOtpModal().subscribe(() => {
-      // this.timeLeft = 120;
-      // this.startTimer()
+      this.timeLeft = 120;
+      this.startTimer()
       this.otpModal.show();
       // this.otpModal.config = this.config;
     });
@@ -61,7 +60,7 @@ export class OtpModalComponent implements OnInit, AfterViewInit, OnDestroy {
     if (this.simpleForm.valid) {
       // console.log(this.simpleForm.get('OTP_code').value);
       this.otpService.verifyOtp(true);
-      // this.otpModal.hide();
+      this.otpModal.hide();
       // this.userDataService.changeMessage(true);
       // this.modalService.dismissAll();
     }
@@ -93,7 +92,11 @@ export class OtpModalComponent implements OnInit, AfterViewInit, OnDestroy {
   closeOtpModal() {
     this.otpModal.hide();
     this.otpService.verifyOtp(false);
-    // this.otpSubscription.unsubscribe();
+    this.stopTimer();
+  }
+
+  stopTimer() {
+    clearInterval(this.interval);
   }
 
   ngOnDestroy() {
