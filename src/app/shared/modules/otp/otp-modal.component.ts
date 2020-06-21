@@ -55,8 +55,9 @@ export class OtpModalComponent implements OnInit {
   }
   resendOTP() {
     console.log('resend OTP request made!');
-    this.timeLeft = 120;
-    this.startTimer();
+    this.stop();
+    // this.timeLeft = 120;
+    // this.startTimer();
   }
 
   startTimer() {
@@ -66,10 +67,15 @@ export class OtpModalComponent implements OnInit {
       } else {
         console.log('Timer ran out! please try again');
         this.onReset();
-        return ;
+        clearInterval(this.interval);
       }
     }, 1000);
   }
+
+  stop() {
+    clearInterval(this.interval);
+  }
+
 
   open(content) {
     this.modalService.open(content);
