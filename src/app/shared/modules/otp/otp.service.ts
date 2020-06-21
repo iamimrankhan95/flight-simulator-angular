@@ -10,7 +10,7 @@ export class OtpService {
   constructor(private modalService: BsModalService) { }
 
   openOtpModal() {
-    console.log('asdf');
+    // console.log('asdf');
     this.otpModalSubject.next();
   }
 
@@ -19,6 +19,7 @@ export class OtpService {
   }
 
   verifyOtp(isVerified: boolean) {
+    console.log('asdf');
     return this.otpVerificationSubject.next(isVerified);
   }
 

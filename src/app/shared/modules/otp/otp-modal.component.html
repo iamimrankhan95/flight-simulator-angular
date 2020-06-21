@@ -17,7 +17,7 @@
                 Please enter the OTP in the field below to verify within <span class="text-danger">{{timeLeft}}</span>
                 seconds.
               </div>
-              <form [formGroup]="simpleForm" (ngSubmit)="onSubmit()">
+              <form [formGroup]="simpleForm" >
                 <div class="form-group">
                   <input class="form-control" id="OTP_code" formControlName="OTP_code" required [ngClass]="{
                 'is-invalid': submitted && f.OTP_code.errors,

@@ -80,7 +80,7 @@ export class CreateUserComponent implements OnInit,OnDestroy {
     //     'en-UK'
     //   )
     // );
-    console.log('asdf');
+    // console.log('asdf');
     this.otpService.openOtpModal();
     this.otpVerificationSubscription = this.otpService.onOtpVerification().subscribe((isVerified) => {
       if (isVerified) {
