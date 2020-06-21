@@ -69,43 +69,30 @@ export class CreateUserComponent implements OnInit {
     });
   }
  onSubmit() {
-    this.submitted = true;
-    this.f.joiningdate.setValue(
-      formatDate(
-        this.simpleForm.get('joiningdate').value,
-        'dd/MM/yyyy',
-        'en-UK'
-      )
-    );
+    if (!this.submitted) {
+      this.f.joiningdate.setValue(
+        formatDate(
+          this.simpleForm.get('joiningdate').value,
+          'dd/MM/yyyy',
+          'en-UK'
+        )
+      );
+    }
     if (this.simpleForm.valid) {
       this.submissionError = false;
-    } else {
-      this.submissionError = true;
-    }
-    // if (this.simpleForm.valid) {
-    //   if (this.modalService.hasOpenModals()) {
-    //     this.modalService.dismissAll();
-    //   }
-    //   this.userContactNo = this.simpleForm.get('contactNo').value;
-    //   const modalRef = this.modalService.open(content , {size: 'md', backdrop: 'static'});
-      // this.otpValidation();
-      // console.log(this.message);
-
-      // }
-  }
-  submit() {
-          // if (this.message) {
-        this.userDataService.register(this.simpleForm.value).subscribe(
-          (response) => {
-            console.log(response);
-            this.onReset();
-          },
-          (error) => {
-            console.log(error);
-            this.onReset();
-          }
-        );
-      // }
+      this.submitted = true;
+      this.userDataService.register(this.simpleForm.value).subscribe(
+        (response) => {
+          console.log(response);
+        },
+        (error) => {
+          this.submitted = false;
+          console.log(error);
+        }
+      );
+      } else {
+        this.submissionError = true;
+      }
   }
 
   get f() {
@@ -119,9 +106,4 @@ export class CreateUserComponent implements OnInit {
   toggleFieldTextType() {
     this.fieldTextType = !this.fieldTextType;
   }
-  // otpValidation() {
-  //     this.userDataService.currentMessage.subscribe(response => {
-  //       this.message = response;
-  //       });
-  //   }
 }

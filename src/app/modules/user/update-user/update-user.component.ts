@@ -4,6 +4,7 @@ import { User } from '../../../shared/models/user';
 import { UserDataService } from '../user-data.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { formatDate } from '@angular/common';
+import { DateFormatter } from 'ngx-bootstrap/datepicker';
 
 @Component({
   selector: 'app-update-user',
@@ -104,13 +105,15 @@ export class UpdateUserComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
-    this.f.joiningdate.setValue(
-      formatDate(
-        this.simpleForm.get('joiningdate').value,
-        'dd/MM/yyyy',
-        'en-UK'
-      )
-    );
+    if (!this.f.joiningdate.pristine) {
+      this.f.joiningdate.setValue(
+        formatDate(
+          this.simpleForm.get('joiningdate').value,
+          'dd/MM/yyyy',
+          'en-UK'
+        )
+      );
+    }
     if (this.simpleForm.valid) {
       this.userDataService
         .updateUser(this.simpleForm.value, this.updateUserId)
