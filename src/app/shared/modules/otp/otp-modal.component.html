@@ -17,7 +17,7 @@
                 Please enter the OTP in the field below to verify within <span class="text-danger">{{timeLeft}}</span>
                 seconds.
               </div>
-              <form [formGroup]="simpleForm" >
+              <form [formGroup]="simpleForm">
                 <div class="form-group">
                   <input class="form-control" id="OTP_code" formControlName="OTP_code" required [ngClass]="{
                 'is-invalid': submitted && f.OTP_code.errors,
@@ -42,41 +42,6 @@
               </form>
             </div>
           </div>
-          <form [formGroup]="simpleForm" (ngSubmit)="onSubmit()">
-            <div class="form-group">
-              <input
-                class="form-control"
-                id="OTP_code"
-                formControlName="OTP_code"
-                required
-                [ngClass]="{
-                  'is-invalid': submitted && f.OTP_code.errors,
-                  'is-valid': f.OTP_code.touched && !f.OTP_code.errors
-                }"
-              />
-            </div>
-            <div *ngIf="submitted && f['OTP_code'].errors" class="invalid-feedback">
-              <div *ngIf="f['OTP_code'].errors.required">
-                Please enter the OTP sent to your Contact No. or press resend OTP to
-                retry
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-6">
-                <button
-                class="btn btn-primary"
-                [disabled]="simpleForm.invalid && submitted"
-                (click)="onSubmit()"
-              > Validate OTP </button>
-              </div>
-              <div class="col-md-6">
-                <button
-                class="btn btn-light  float-right"
-                (click)="resendOTP()"
-              > Resend OTP </button>
-              </div>
-            </div>
-          </form>
         </div>
       </div>
       <div class="modal-footer">

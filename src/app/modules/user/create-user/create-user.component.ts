@@ -16,7 +16,7 @@ import { Subscription } from 'rxjs';
   ],
   encapsulation: ViewEncapsulation.None
 })
-export class CreateUserComponent implements OnInit,OnDestroy {
+export class CreateUserComponent implements OnInit, OnDestroy {
 
 
   public simpleForm: FormGroup;

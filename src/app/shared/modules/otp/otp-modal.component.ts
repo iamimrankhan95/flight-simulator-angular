@@ -27,7 +27,7 @@ export class OtpModalComponent implements OnInit, AfterViewInit, OnDestroy {
     private otpService: OtpService) {
     this.otpModalSubscription = this.otpService.onOpenOtpModal().subscribe(() => {
       this.timeLeft = 120;
-      this.startTimer()
+      this.startTimer();
       this.otpModal.show();
       // this.otpModal.config = this.config;
     });
@@ -38,17 +38,13 @@ export class OtpModalComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit() {
-    // this.otpService.otpModalSubject.subscribe(() => {
-    //   console.log('asdf2')
-    //   this.otpModal.show();
-    // });
+
   }
 
   createForm() {
     this.simpleForm = this.formbuilder.group({
       OTP_code: ['', Validators.required],
     });
-    // this.otpTemplate.open();
   }
 
   get f() {
@@ -58,11 +54,8 @@ export class OtpModalComponent implements OnInit, AfterViewInit, OnDestroy {
   onSubmit() {
     this.submitted = true;
     if (this.simpleForm.valid) {
-      // console.log(this.simpleForm.get('OTP_code').value);
       this.otpService.verifyOtp(true);
       this.otpModal.hide();
-      // this.userDataService.changeMessage(true);
-      // this.modalService.dismissAll();
     }
   }
 
