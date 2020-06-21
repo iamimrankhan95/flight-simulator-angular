@@ -1,8 +1,9 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserDataService } from '../user-data.service';
 import { formatDate } from '@angular/common';
 import { OtpService } from '../../../shared/modules/otp/otp.service';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -15,7 +16,7 @@ import { OtpService } from '../../../shared/modules/otp/otp.service';
   ],
   encapsulation: ViewEncapsulation.None
 })
-export class CreateUserComponent implements OnInit {
+export class CreateUserComponent implements OnInit,OnDestroy {
 
 
   public simpleForm: FormGroup;
@@ -39,13 +40,16 @@ export class CreateUserComponent implements OnInit {
   public emailRegex = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/;
   public maxDate: Date = new Date();
   public userContactNo: number;
-
+  otpVerificationSubscription: Subscription;
   constructor(
     private formbuilder: FormBuilder,
     private userDataService: UserDataService,
     private otpService: OtpService
   ) {
     this.maxDate.setDate(this.maxDate.getDate() + 0);
+  }
+  ngOnDestroy(): void {
+    this.otpVerificationSubscription.unsubscribe();
   }
 
   ngOnInit(): void {
@@ -69,27 +73,36 @@ export class CreateUserComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
-    this.f.joiningdate.setValue(
-      formatDate(
-        this.simpleForm.get('joiningdate').value,
-        'dd/MM/yyyy',
-        'en-UK'
-      )
-    );
-    console.log('asdf')
+    // this.f.joiningdate.setValue(
+    //   formatDate(
+    //     this.simpleForm.get('joiningdate').value,
+    //     'dd/MM/yyyy',
+    //     'en-UK'
+    //   )
+    // );
+    console.log('asdf');
     this.otpService.openOtpModal();
-    if (this.simpleForm.valid) {
-      this.userDataService.register(this.simpleForm.value).subscribe(
-        (response) => {
-          console.log(response);
-          this.onReset();
-        },
-        (error) => {
-          console.log(error);
-          this.onReset();
-        }
-      );
-    }
+    this.otpVerificationSubscription = this.otpService.onOtpVerification().subscribe((isVerified) => {
+      if (isVerified) {
+        console.log('verified');
+      } else {
+        console.log('not verified');
+      }
+      this.otpVerificationSubscription.unsubscribe();
+    });
+    console.log('modal not touched');
+    // if (this.simpleForm.valid) {
+    //   this.userDataService.register(this.simpleForm.value).subscribe(
+    //     (response) => {
+    //       console.log(response);
+    //       this.onReset();
+    //     },
+    //     (error) => {
+    //       console.log(error);
+    //       this.onReset();
+    //     }
+    //   );
+    // }
   }
 
   submit() {

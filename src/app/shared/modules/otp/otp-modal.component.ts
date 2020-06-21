@@ -1,15 +1,16 @@
-import { Component, OnInit, Input, ViewChild, TemplateRef, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, TemplateRef, AfterViewInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { OtpService } from './otp.service';
 import { ModalDirective } from 'ngx-bootstrap/modal';
+import { TranslationHelperService } from '../../services/translation-helper.service';
 
 @Component({
   selector: 'app-otp-modal',
   templateUrl: './otp-modal.component.html',
   styleUrls: ['./otp-modal.component.css'],
 })
-export class OtpModalComponent implements OnInit, AfterViewInit {
+export class OtpModalComponent implements OnInit, AfterViewInit, OnDestroy {
   @Input() contactNo: number;
 
   public simpleForm: FormGroup;
@@ -17,16 +18,18 @@ export class OtpModalComponent implements OnInit, AfterViewInit {
   timeLeft: number = 120;
   interval;
   message: boolean;
-  subscription: Subscription;
+  otpModalSubscription: Subscription;
   @ViewChild('otpModal') public otpModal: ModalDirective;
   constructor(private formbuilder: FormBuilder,
-    private otpService: OtpService) { }
-
-  ngOnInit(): void {
-    this.otpService.otpModalSubject.subscribe(() => {
+    private otpService: OtpService) {
+    this.otpModalSubscription = this.otpService.onOpenOtpModal().subscribe(() => {
+      this.timeLeft = 120;
+      this.startTimer()
       this.otpModal.show();
     });
-    this.startTimer();
+  }
+
+  ngOnInit(): void {
     this.createForm();
   }
 
@@ -51,7 +54,9 @@ export class OtpModalComponent implements OnInit, AfterViewInit {
   onSubmit() {
     this.submitted = true;
     if (this.simpleForm.valid) {
-      console.log(this.simpleForm.get('OTP_code').value);
+      // console.log(this.simpleForm.get('OTP_code').value);
+      this.otpService.verifyOtp(true);
+      this.otpModal.hide();
       // this.userDataService.changeMessage(true);
       // this.modalService.dismissAll();
     }
@@ -78,5 +83,17 @@ export class OtpModalComponent implements OnInit, AfterViewInit {
         return;
       }
     }, 1000);
+  }
+
+  closeOtpModal() {
+    this.otpModal.hide();
+    this.otpService.verifyOtp(false);
+    // this.otpSubscription.unsubscribe();
+  }
+
+  ngOnDestroy() {
+    console.log('destroy')
+    // unsubscribe to ensure no memory leaks
+    this.otpModalSubscription.unsubscribe();
   }
 }
