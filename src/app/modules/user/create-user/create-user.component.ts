@@ -5,20 +5,17 @@ import { formatDate } from '@angular/common';
 import { OtpService } from '../../../shared/modules/otp/otp.service';
 import { Subscription } from 'rxjs';
 
-
 @Component({
   selector: 'app-create-user',
   templateUrl: './create-user.component.html',
   styleUrls: [
     './create-user.component.css',
     '../../../../../node_modules/ngx-bootstrap/datepicker/bs-datepicker.scss',
-    '../../../../scss/vendors/ng-select/ng-select.scss'
+    '../../../../scss/vendors/ng-select/ng-select.scss',
   ],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
 })
 export class CreateUserComponent implements OnInit, OnDestroy {
-
-
   public simpleForm: FormGroup;
   public submitted = false;
   public message: boolean = false;
@@ -82,33 +79,31 @@ export class CreateUserComponent implements OnInit, OnDestroy {
         )
       );
     }
-    // console.log('asdf');
-    this.otpService.openOtpModal();
     this.submitted = true;
-    this.otpVerificationSubscription = this.otpService.onOtpVerification().subscribe((isVerified) => {
-      if (isVerified) {
-        console.log('verified');
-      } else {
-        console.log('not verified');
-      }
-      this.otpVerificationSubscription.unsubscribe();
-    });
+    if (this.simpleForm.valid) {
+      this.otpService.openOtpModal();
+      this.otpVerificationSubscription = this.otpService
+        .onOtpVerification()
+        .subscribe((isVerified) => {
+          if (isVerified) {
+            console.log('verified');
+            this.userDataService.register(this.simpleForm.value).subscribe(
+              (response) => {
+                console.log(response);
+                this.onReset();
+              },
+              (error) => {
+                console.log(error);
+                this.submitted = false;
+              }
+            );
+          } else {
+            console.log('not verified');
+          }
+          this.otpVerificationSubscription.unsubscribe();
+        });
+    }
     console.log('modal not touched');
-    // if (this.simpleForm.valid) {
-    //   this.userDataService.register(this.simpleForm.value).subscribe(
-    //     (response) => {
-    //       console.log(response);
-    //       this.onReset();
-    //     },
-    //     (error) => {
-    //       console.log(error);
-    //       this.onReset();
-    //     }
-    //   );
-    // }
-  }
-
-  submit() {
   }
 
   get f() {
