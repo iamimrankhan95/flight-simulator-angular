@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-create-escalation',
@@ -7,9 +8,31 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CreateEscalationComponent implements OnInit {
 
-  constructor() { }
+  isEscalationFormSubmitted = false;
+  @ViewChild('escalationFormRef') escalationFormEl;
+  escalationForm = this.fb.group({
+    id: [''],
+    department: ['', [Validators.required]],
+    user: [''],
+    message: ['']
+  });
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
+
   }
 
+  submitEscalationForm() {
+    this.escalationFormEl.nativeElement.submit();
+    
+  }
+
+  onSubmitEscalationForm(){
+    console.log(this.escalationForm.value);
+    this.isEscalationFormSubmitted = true;
+    ;console.log(this.escalationForm.value);
+    if(!this.escalationForm.valid){
+      return;
+    }
+  }
 }
