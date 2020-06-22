@@ -39,7 +39,8 @@ export class CrmListComponent implements OnInit, OnDestroy {
   toMaxDate = { year: this.today.getFullYear(), month: this.today.getMonth() + 1, day: this.today.getDate() };
   @ViewChild('f') f: NgbInputDatepicker;
   @ViewChild('t') t: NgbInputDatepicker;
-  customerRelations: CustomerRelation[];
+  // customerRelations: CustomerRelation[];
+  customerRelations: any[];
 
   constructor(private crmHttpService: CRMHttpService) {
     console.log(this.today.getMonth());
@@ -57,6 +58,7 @@ export class CrmListComponent implements OnInit, OnDestroy {
         (customerRelations: any) => {
           setTimeout(() => {
             this.customerRelations = [...customerRelations];
+            console.log(customerRelations);
             this.dtTrigger.next();
           }, 1000);
         }, // success path
