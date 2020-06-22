@@ -47,7 +47,7 @@ export class CreateUserComponent implements OnInit, OnDestroy {
     this.maxDate.setDate(this.maxDate.getDate() + 0);
   }
   ngOnDestroy(): void {
-    this.otpVerificationSubscription.unsubscribe();
+    // this.otpVerificationSubscription.unsubscribe();
   }
 
   ngOnInit(): void {
