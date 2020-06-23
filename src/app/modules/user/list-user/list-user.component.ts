@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { User } from '../../../shared/models/user';
 import { Subject } from 'rxjs';
 import { UserDataService } from '../user-data.service';
+import { ConfirmationDialogService } from '../../../shared/modules/notification/confirmation-dialog/confirmation-dialog.service';
 
 @Component({
   selector: 'app-list-user',
@@ -15,6 +16,7 @@ export class ListUserComponent implements OnInit, OnDestroy {
 
   constructor(
     private userDataService: UserDataService,
+    private confirmationDialogService: ConfirmationDialogService
   ) {}
 
   ngOnInit(): void {
@@ -46,16 +48,25 @@ export class ListUserComponent implements OnInit, OnDestroy {
     });
   }
 
-  delete(user: User) {
-    this.userDataService.deleteUser(user).subscribe(
-      (response) => {
-        console.log(response);
-        this.rerender();
-      },
-      // tslint:disable-next-line: no-shadowed-variable
-      (error) => {
-        console.log(error);
-      }
+  async delete(user: User) {
+    const confirm = await this.confirmationDialogService.confirm(
+      'Confirm Delete Request',
+      'Please confirm Deletion of User: ' + user.name + ' !',
+      'Confirm',
+      'Cancel',
+      'md'
     );
+    if (confirm) {
+      this.userDataService.deleteUser(user).subscribe(
+        (response) => {
+          console.log(response);
+          this.rerender();
+        },
+        // tslint:disable-next-line: no-shadowed-variable
+        (error) => {
+          console.log(error);
+        }
+      );
+    }
   }
 }

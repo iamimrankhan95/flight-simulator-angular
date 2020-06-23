@@ -4,6 +4,7 @@ import { UserDataService } from '../user-data.service';
 import { formatDate } from '@angular/common';
 import { OtpService } from '../../../shared/modules/otp/otp.service';
 import { Subscription } from 'rxjs';
+import { ConfirmationDialogService } from '../../../shared/modules/notification/confirmation-dialog/confirmation-dialog.service';
 
 @Component({
   selector: 'app-create-user',
@@ -42,7 +43,8 @@ export class CreateUserComponent implements OnInit, OnDestroy {
   constructor(
     private formbuilder: FormBuilder,
     private userDataService: UserDataService,
-    private otpService: OtpService
+    private otpService: OtpService,
+    private confirmationDialogService: ConfirmationDialogService
   ) {
     this.maxDate.setDate(this.maxDate.getDate() + 0);
   }
@@ -69,41 +71,50 @@ export class CreateUserComponent implements OnInit, OnDestroy {
     });
   }
 
-  onSubmit() {
-    if (!this.submitted) {
-      this.f.joiningdate.setValue(
-        formatDate(
-          this.simpleForm.get('joiningdate').value,
-          'dd/MM/yyyy',
-          'en-UK'
-        )
-      );
+  async onSubmit() {
+    const confirm = await this.confirmationDialogService.confirm(
+      'Confirm Create User Request',
+      'Are you sure you want to create a New User?',
+      'Yes',
+      'No',
+      'md'
+    );
+    if (confirm) {
+      if (!this.submitted) {
+        this.f.joiningdate.setValue(
+          formatDate(
+            this.simpleForm.get('joiningdate').value,
+            'dd/MM/yyyy',
+            'en-UK'
+          )
+        );
+      }
+      this.submitted = true;
+      if (this.simpleForm.valid) {
+        this.otpService.openOtpModal();
+        this.otpVerificationSubscription = this.otpService
+          .onOtpVerification()
+          .subscribe((isVerified) => {
+            if (isVerified) {
+              console.log('verified');
+              this.userDataService.register(this.simpleForm.value).subscribe(
+                (response) => {
+                  console.log(response);
+                  this.onReset();
+                },
+                (error) => {
+                  console.log(error);
+                  this.submitted = false;
+                }
+              );
+            } else {
+              console.log('not verified');
+            }
+            this.otpVerificationSubscription.unsubscribe();
+          });
+      }
+      console.log('modal not touched');
     }
-    this.submitted = true;
-    if (this.simpleForm.valid) {
-      this.otpService.openOtpModal();
-      this.otpVerificationSubscription = this.otpService
-        .onOtpVerification()
-        .subscribe((isVerified) => {
-          if (isVerified) {
-            console.log('verified');
-            this.userDataService.register(this.simpleForm.value).subscribe(
-              (response) => {
-                console.log(response);
-                this.onReset();
-              },
-              (error) => {
-                console.log(error);
-                this.submitted = false;
-              }
-            );
-          } else {
-            console.log('not verified');
-          }
-          this.otpVerificationSubscription.unsubscribe();
-        });
-    }
-    console.log('modal not touched');
   }
 
   get f() {
