@@ -4,7 +4,7 @@ import { NgbDateStruct, NgbCalendar, NgbDatepicker } from '@ng-bootstrap/ng-boot
 import { IOption } from 'ng-select';
 import { CRMHttpService } from '../crm-http.service';
 import { ConfirmationDialogService } from '../../../shared/modules/notification/confirmation-dialog/confirmation-dialog.service';
-
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-crm-form',
   templateUrl: './crm-form.component.html',
@@ -58,7 +58,8 @@ export class CRMFormComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
     private crmHttpService: CRMHttpService,
-    private confirmationDialogService: ConfirmationDialogService) { }
+    private confirmationDialogService: ConfirmationDialogService,
+    private toastr: ToastrService) { }
 
   // Datepicker
 
@@ -101,10 +102,10 @@ export class CRMFormComponent implements OnInit {
   }
 
   async save() {
-    // this.crmFormSubmitted = true;
-    // if (!this.crmForm.valid) {
-    //   return;
-    // }
+    this.crmFormSubmitted = true;
+    if (!this.crmForm.valid) {
+      return;
+    }
     const confirm = await this.confirmationDialogService.confirm('Confirm Request',
       'Are you sure about creating this CRM',
       'Yes', 'No', 'sm'
@@ -113,7 +114,10 @@ export class CRMFormComponent implements OnInit {
     if (confirm) {
       this.crmHttpService.addCustomerRelation(this.crmForm.value)
         .subscribe(
-          () => console.log('success'),
+          () => {
+            console.log('success');
+            this.toastr.success('CRM saved successfully', 'Successful');
+          },
           (error) => console.log(error)
         );
     }
