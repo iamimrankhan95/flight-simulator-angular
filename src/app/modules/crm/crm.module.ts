@@ -10,6 +10,7 @@ import { CRMService } from './crm.service';
 import { CrmDetailsComponent } from './crm-details/crm-details.component';
 import { CrmListComponent } from './crm-list/crm-list.component';
 import { DataTablesModule } from 'angular-datatables';
+import { NotificationModule } from '../../shared/modules/notification/notification.module';
 @NgModule({
   declarations: [
     CRMFormComponent,
@@ -22,6 +23,7 @@ import { DataTablesModule } from 'angular-datatables';
     AddressModule,
     FontAwesomeModule,
     DataTablesModule,
+    NotificationModule
   ],
   providers: [CRMHttpService, CRMService]
 })
