@@ -5,6 +5,7 @@ import { formatDate } from '@angular/common';
 import { OtpService } from '../../../shared/modules/otp/otp.service';
 import { Subscription } from 'rxjs';
 import { ConfirmationDialogService } from '../../../shared/modules/notification/confirmation-dialog/confirmation-dialog.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-create-user',
@@ -44,7 +45,8 @@ export class CreateUserComponent implements OnInit, OnDestroy {
     private formbuilder: FormBuilder,
     private userDataService: UserDataService,
     private otpService: OtpService,
-    private confirmationDialogService: ConfirmationDialogService
+    private confirmationDialogService: ConfirmationDialogService,
+    private toastr: ToastrService
   ) {
     this.maxDate.setDate(this.maxDate.getDate() + 0);
   }
@@ -74,7 +76,7 @@ export class CreateUserComponent implements OnInit, OnDestroy {
   async onSubmit() {
     const confirm = await this.confirmationDialogService.confirm(
       'Confirm Create User Request',
-      'Are you sure you want to create a New User?',
+      'Are you sure you want to CREATE a New User?',
       'Yes',
       'No',
       'md'
@@ -100,10 +102,12 @@ export class CreateUserComponent implements OnInit, OnDestroy {
               this.userDataService.register(this.simpleForm.value).subscribe(
                 (response) => {
                   console.log(response);
+                  this.toastr.success('New User Created', 'Successful');
                   this.onReset();
                 },
                 (error) => {
                   console.log(error);
+                  this.toastr.error('User Creation Failed', 'Error');
                   this.submitted = false;
                 }
               );

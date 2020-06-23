@@ -7,6 +7,7 @@ import {
   ValidationErrors,
 } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 export const confirmPasswordValidator: ValidatorFn = (
   control: FormGroup
@@ -30,7 +31,11 @@ export class ChangePasswordComponent implements OnInit {
   oldFieldTextType: boolean;
   newFieldTextType: boolean;
 
-  constructor(private formbuilder: FormBuilder, private route: ActivatedRoute) {
+  constructor(
+    private formbuilder: FormBuilder,
+    private route: ActivatedRoute,
+    private toastr: ToastrService
+  ) {
     // const userData = JSON.parse(localStorage.getItem('currentUser')).data;
     // comment out the line above and remove the line below when api sends json response
     const userData = localStorage.getItem('currentUser');
@@ -62,6 +67,7 @@ export class ChangePasswordComponent implements OnInit {
     if (this.simpleForm.invalid) {
       return;
     } else {
+      this.toastr.success('Password Changed', 'Successful');
       // Put the call to the service here
     }
   }

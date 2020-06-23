@@ -5,6 +5,7 @@ import { UserDataService } from '../user-data.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { formatDate } from '@angular/common';
 import { DateFormatter } from 'ngx-bootstrap/datepicker';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-update-user',
@@ -42,7 +43,8 @@ export class UpdateUserComponent implements OnInit {
     private route: ActivatedRoute,
     private formbuilder: FormBuilder,
     private userDataService: UserDataService,
-    private router: Router
+    private router: Router,
+    private toastr: ToastrService
   ) {
     this.maxDate.setDate(this.maxDate.getDate() + 0);
   }
@@ -119,11 +121,11 @@ export class UpdateUserComponent implements OnInit {
         .updateUser(this.simpleForm.value, this.updateUserId)
         .subscribe(
           (response) => {
-            console.log('success');
+            this.toastr.success('User Information Updated', 'Successful');
             this.router.navigate(['/users/users']);
           },
           (error) => {
-            console.log('failed');
+            this.toastr.error('User Information Update failed', 'Error');
             this.onReset();
           }
         );
