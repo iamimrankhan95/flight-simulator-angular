@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ConfirmationDialogComponent } from '../shared-modules/notification/confirmation-dialog/confirmation-dialog.component';
+import { ConfirmationDialogComponent } from './confirmation-dialog.component';
 
 
 @Injectable()

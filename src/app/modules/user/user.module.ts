@@ -10,6 +10,7 @@ import { UpdateUserComponent } from './update-user/update-user.component';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { SharedModule } from '../../shared/modules/shared/shared.module';
 import { OtpModule } from '../../shared/modules/otp/otp.module';
+import { NotificationModule } from '../../shared/modules/notification/notification.module';
 
 @NgModule({
   declarations: [CreateUserComponent, ListUserComponent, UpdateUserComponent],
@@ -19,7 +20,8 @@ import { OtpModule } from '../../shared/modules/otp/otp.module';
     DataTablesModule,
     SharedModule,
     BsDatepickerModule.forRoot(),
-    OtpModule.forChild()
+    OtpModule.forChild(),
+    NotificationModule
   ]
 })
 export class UserModule { }

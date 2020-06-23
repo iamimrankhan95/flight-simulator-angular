@@ -3,6 +3,7 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { NgbDateStruct, NgbCalendar, NgbDatepicker } from '@ng-bootstrap/ng-bootstrap';
 import { IOption } from 'ng-select';
 import { CRMHttpService } from '../crm-http.service';
+import { ConfirmationDialogService } from '../../../shared/modules/notification/confirmation-dialog/confirmation-dialog.service';
 
 @Component({
   selector: 'app-crm-form',
@@ -56,7 +57,8 @@ export class CRMFormComponent implements OnInit {
   });
 
   constructor(private fb: FormBuilder,
-    private crmHttpService: CRMHttpService) { }
+    private crmHttpService: CRMHttpService,
+    private confirmationDialogService: ConfirmationDialogService) { }
 
   // Datepicker
 
@@ -98,13 +100,24 @@ export class CRMFormComponent implements OnInit {
     window.location.reload();
   }
 
-  save(): void {
-    this.crmFormSubmitted = true;
-    this.crmHttpService.addCustomerRelation(this.crmForm.value)
-      .subscribe(
-        () => console.log('success'),
-        (error) => console.log(error)
-      );
+  async save() {
+    // this.crmFormSubmitted = true;
+    // if (!this.crmForm.valid) {
+    //   return;
+    // }
+    const confirm = await this.confirmationDialogService.confirm('Confirm Request',
+      'Are you sure about creating this CRM',
+      'Yes', 'No', 'sm'
+    );
+
+    if (confirm) {
+      this.crmHttpService.addCustomerRelation(this.crmForm.value)
+        .subscribe(
+          () => console.log('success'),
+          (error) => console.log(error)
+        );
+    }
+
   }
 
   samePermanentAddress(event: any): void {
