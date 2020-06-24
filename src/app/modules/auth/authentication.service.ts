@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root',
 })
 export class AuthenticationService {
+  private authToken = 'some-auth-token';
   private currentUserSubject: BehaviorSubject<any>;
   public currentUser: Observable<any>;
   public url = 'http://192.168.101.41:9050/cms_login';
@@ -28,9 +29,14 @@ export class AuthenticationService {
     // return this.http.post<any>(this.url, {userName, password});
     return;
   }
+
   logout(): void {
     localStorage.removeItem('currentUser');
     this.currentUserSubject.next(null);
     this.router.navigate(['/login']);
+  }
+
+  getAuthorizationToken() {
+    return this.authToken;
   }
 }

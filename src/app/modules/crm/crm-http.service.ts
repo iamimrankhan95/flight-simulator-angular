@@ -5,7 +5,7 @@ import { HttpHeaders } from '@angular/common/http';
 import { applicationUrl } from '../../shared/enums/application-urls';
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { HttpErrorHandler, HandleError } from '../../core/http-error-handler.service';
+import { HttpErrorHandler, HandleError } from '../../shared/services/http-error-handler.service';
 import { CustomerRelation } from '../../shared/models/customer-relation.model';
 import { ICRMListPageConfig } from './crm-list/icrm-list-page-config';
 

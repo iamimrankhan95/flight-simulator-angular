@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { User } from '../../shared/models/user';
 import { tap, catchError } from 'rxjs/operators';
-import { HttpErrorHandler, HandleError } from '../../core/http-error-handler.service';
+import { HttpErrorHandler, HandleError } from '../../shared/services/http-error-handler.service';
 
 @Injectable({
   providedIn: 'root',

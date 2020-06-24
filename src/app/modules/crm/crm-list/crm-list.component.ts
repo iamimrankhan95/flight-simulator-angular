@@ -45,7 +45,6 @@ export class CrmListComponent implements OnInit, OnDestroy {
 
   constructor(private crmHttpService: CRMHttpService,
     private toastr: ToastrService) {
-    console.log(this.today.getMonth());
   }
 
   ngOnInit(): void {
@@ -59,12 +58,10 @@ export class CrmListComponent implements OnInit, OnDestroy {
       .subscribe(
         (customerRelations: any) => {
           this.customerRelations = [...customerRelations];
-          console.log(customerRelations);
           this.dtTrigger.next();
         }, // success path
         error => {
           this.toastr.error('Something went wrong', 'Error');
-          console.log(error);
         } // error path
       );
   }
