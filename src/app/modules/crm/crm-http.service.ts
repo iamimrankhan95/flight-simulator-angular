@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 
-import { ApplicationUrl } from '../../shared/enums/application-urls';
+import { applicationUrl } from '../../shared/enums/application-urls';
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { HttpErrorHandler, HandleError } from '../../core/http-error-handler.service';
@@ -30,9 +30,8 @@ export class CRMHttpService {
 
   /** GET heroes from the server */
   getCustomerRelations(pageConfig: ICRMListPageConfig): Observable<any[]> {
-    const params = this.constructParam(pageConfig);
-    // return this.http.get<any[]>(this.dataUrl, { params })
-    return this.http.get<any[]>(ApplicationUrl.CRM.customerRelationUrl, { params })
+    //const params = this.constructParam(pageConfig);
+    return this.http.get<any[]>(applicationUrl.crm.customerRelationUrl)
       .pipe(
         catchError(this.handleError('getCustomerRelations', []))
       );
@@ -67,7 +66,7 @@ export class CRMHttpService {
 
   /** POST: add a new hero to the database */
   addCustomerRelation(customerRelation: CustomerRelation): Observable<CustomerRelation> {
-    return this.http.post<CustomerRelation>(ApplicationUrl.CRM.customerRelationUrl, customerRelation, httpOptions)
+    return this.http.post<CustomerRelation>(applicationUrl.crm.customerRelationUrl, customerRelation, httpOptions)
       .pipe(
         catchError(this.handleError('addCustomerRelation', customerRelation))
       );
@@ -75,7 +74,7 @@ export class CRMHttpService {
 
   // Get information on specific crm
   getCustomerRelation(crmID: number) {
-    const tempUrl = ApplicationUrl.CRM.customerRelationUrl + '/' + crmID;
+    const tempUrl = applicationUrl.crm.customerRelationUrl + '/' + crmID;
     return this.http.get<any>(tempUrl, httpOptions);
   }
 

@@ -1,10 +1,16 @@
-export module ApplicationUrl {
-  export module User {
-    export const GOLD = 'Gold';
-    export const SILVER = 'Silver';
-  }
-  export module CRM {
-    export const GOLD = 'Gold';
-    export const customerRelationUrl = 'http://192.168.101.41:9050/cms_crm_record';
+import { environment } from '../../../environments/environment';
+
+export const applicationUrl = {
+  user: {
+    create: '',
+    read: '',
+    update: '',
+    delete: ''
+  },
+  crm: {
+    customerRelationUrl: environment.apiUrl + 'cms_crm_record'
+  },
+  auth: {
+
   }
 }

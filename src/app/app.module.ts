@@ -51,8 +51,8 @@ import { ToastrModule } from 'ngx-toastr';
     CoreModule,
     HttpClientModule,
     ToastrModule.forRoot({
-      timeOut: 10000,
-      positionClass: 'toast-bottom-right',
+      timeOut: 3000,
+      positionClass: 'toast-top-right',
       preventDuplicates: true,
     }) // ToastrModule added
   ],
