@@ -8,7 +8,6 @@ import { catchError } from 'rxjs/operators';
 import { HttpErrorHandler, HandleError } from '../../core/http-error-handler.service';
 import { CustomerRelation } from '../../shared/models/customer-relation.model';
 import { ICRMListPageConfig } from './crm-list/icrm-list-page-config';
-import { url } from 'inspector';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -26,8 +25,6 @@ export class CRMHttpService {
     private http: HttpClient,
     httpErrorHandler: HttpErrorHandler
   ) {
-    let x = Url.CRM.GOLD;
-    console.log(x);
     this.handleError = httpErrorHandler.createHandleError('CRMHttpService');
   }
 
