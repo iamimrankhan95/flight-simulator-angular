@@ -108,7 +108,7 @@ export class CRMFormComponent implements OnInit {
     }
     const confirm = await this.confirmationDialogService.confirm('Confirm Request',
       'Are you sure about creating this CRM',
-      'Yes', 'No', 'sm'
+      'Yes', 'No', 'md'
     );
 
     if (confirm) {
