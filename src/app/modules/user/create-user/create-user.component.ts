@@ -68,7 +68,7 @@ export class CreateUserComponent implements OnInit, OnDestroy {
       email: ['', [Validators.required, Validators.pattern(this.emailRegex)]],
       username: ['', [Validators.required]],
       password: ['', [Validators.required]],
-      joiningdate: [this.maxDate, [Validators.required]],
+      joiningDate: [this.maxDate, [Validators.required]],
       isActive: [''],
     });
   }
@@ -83,9 +83,9 @@ export class CreateUserComponent implements OnInit, OnDestroy {
     );
     if (confirm) {
       if (!this.submitted) {
-        this.f.joiningdate.setValue(
+        this.f.joiningDate.setValue(
           formatDate(
-            this.simpleForm.get('joiningdate').value,
+            this.simpleForm.get('joiningDate').value,
             'dd/MM/yyyy',
             'en-UK'
           )

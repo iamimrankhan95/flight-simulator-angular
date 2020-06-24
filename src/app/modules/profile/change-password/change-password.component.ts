@@ -8,12 +8,13 @@ import {
 } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { ProfileHttpService } from '../profile-http.service';
 
 export const confirmPasswordValidator: ValidatorFn = (
   control: FormGroup
 ): ValidationErrors | null => {
-  const password = control.get('new_password');
-  const confirm = control.get('re_password');
+  const password = control.get('newPassword');
+  const confirm = control.get('retypedNewPassword');
   return password && confirm && password.value === confirm.value
     ? null
     : { passwordMismatch: true };
@@ -34,7 +35,8 @@ export class ChangePasswordComponent implements OnInit {
   constructor(
     private formbuilder: FormBuilder,
     private route: ActivatedRoute,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private profileHttpService: ProfileHttpService
   ) {
     // const userData = JSON.parse(localStorage.getItem('currentUser')).data;
     // comment out the line above and remove the line below when api sends json response
@@ -48,9 +50,9 @@ export class ChangePasswordComponent implements OnInit {
   createForm() {
     this.simpleForm = this.formbuilder.group(
       {
-        old_password: ['', Validators.required],
-        new_password: ['', [Validators.required, Validators.minLength(6)]],
-        re_password: ['', Validators.required],
+        currentPassword: ['', Validators.required],
+        newPassword: ['', [Validators.required, Validators.minLength(8)]],
+        retypedNewPassword: ['', Validators.required]
       },
       { validator: confirmPasswordValidator }
     );
@@ -65,10 +67,14 @@ export class ChangePasswordComponent implements OnInit {
   onSubmit() {
     this.submitted = true;
     if (this.simpleForm.invalid) {
-      return;
+      return ;
     } else {
-      this.toastr.success('Password Changed', 'Successful');
-      // Put the call to the service here
+      this.profileHttpService.changePassword(this.f.currentPassword.value, this.f.newPassword.value, this.f.retypedNewPassword.value, localStorage.getItem('currentUser'))
+      .subscribe( response => {
+        this.toastr.success('Password Changed', 'Successful');
+      }, error => {
+        this.toastr.error('Password Change Failed', 'Error');
+      });
     }
   }
   toggleoldFieldTextType() {

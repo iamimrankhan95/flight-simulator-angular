@@ -39,6 +39,7 @@ export class ListUserComponent implements OnInit, OnDestroy {
         this.dtTrigger.next();
       },
       (error) => {
+        this.toastr.error('User List Fetch Failed', 'Error');
         console.log(error);
       }
     );

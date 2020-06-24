@@ -78,7 +78,7 @@ export class UpdateUserComponent implements OnInit {
       email: ['', [Validators.required, Validators.pattern(this.emailRegex)]],
       username: ['', Validators.required],
       password: ['', Validators.required],
-      joiningdate: [new Date(), [Validators.required]],
+      joiningDate: [new Date(), [Validators.required]],
       isActive: [''],
     });
   }
@@ -87,7 +87,7 @@ export class UpdateUserComponent implements OnInit {
     this.f.name.setValue(info.name);
     this.f.contactNo.setValue(info.contactNo);
     this.f.email.setValue(info.email);
-    this.f.joiningdate.setValue(info.joiningdate);
+    this.f.joiningDate.setValue(info.joiningDate);
     this.f.username.setValue(info.username);
     this.f.password.setValue(info.password);
     this.f.isActive.setValue(info.isActive);
@@ -107,10 +107,10 @@ export class UpdateUserComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
-    if (!this.f.joiningdate.pristine) {
-      this.f.joiningdate.setValue(
+    if (!this.f.joiningDate.pristine) {
+      this.f.joiningDate.setValue(
         formatDate(
-          this.simpleForm.get('joiningdate').value,
+          this.simpleForm.get('joiningDate').value,
           'dd/MM/yyyy',
           'en-UK'
         )
@@ -118,7 +118,7 @@ export class UpdateUserComponent implements OnInit {
     }
     if (this.simpleForm.valid) {
       this.userDataService
-        .updateUser(this.simpleForm.value, this.updateUserId)
+        .updateUser(this.simpleForm.value)
         .subscribe(
           (response) => {
             this.toastr.success('User Information Updated', 'Successful');

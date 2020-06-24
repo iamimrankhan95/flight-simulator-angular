@@ -106,14 +106,14 @@
                   </div>
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label class="col-form-label" for="joiningdate"
+                      <label class="col-form-label" for="joiningDate"
                         >Joining Date</label
                       >
                       <input
                         class="form-control"
                         type="text"
-                        id="joiningdate"
-                        formControlName="joiningdate"
+                        id="joiningDate"
+                        formControlName="joiningDate"
                         placeholder="DD/MM/YYYY"
                         bsDatepicker
                         [bsConfig]="{
@@ -123,9 +123,9 @@
                         }"
                         [maxDate]="maxDate"
                         [ngClass]="{
-                          'is-invalid': submitted && f.joiningdate.errors,
+                          'is-invalid': submitted && f.joiningDate.errors,
                           'is-valid':
-                            f.joiningdate.touched && !f.joiningdate.errors
+                            f.joiningDate.touched && !f.joiningDate.errors
                         }"
                       />
                     </div>
