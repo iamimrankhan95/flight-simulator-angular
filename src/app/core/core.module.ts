@@ -7,6 +7,7 @@ import { CRMHttpService } from '../modules/crm/crm-http.service';
 import { HttpErrorHandler } from '../shared/services/http-error-handler.service';
 import { httpInterceptorProviders } from '../shared/services/http-interceptors';
 import { MessageService } from '../shared/services/message.service';
+import { AuthenticationService } from '../modules/auth/authentication.service';
 
 
 
@@ -19,6 +20,6 @@ import { MessageService } from '../shared/services/message.service';
   imports: [
     SharedModule
   ],
-  providers: [HttpErrorHandler, httpInterceptorProviders, MessageService]
+  providers: [AuthenticationService, HttpErrorHandler, httpInterceptorProviders, MessageService]
 })
 export class CoreModule { }
