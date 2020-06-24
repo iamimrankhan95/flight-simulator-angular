@@ -3,6 +3,7 @@ import { User } from '../../../shared/models/user';
 import { Subject } from 'rxjs';
 import { UserDataService } from '../user-data.service';
 import { ConfirmationDialogService } from '../../../shared/modules/notification/confirmation-dialog/confirmation-dialog.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-list-user',
@@ -16,7 +17,8 @@ export class ListUserComponent implements OnInit, OnDestroy {
 
   constructor(
     private userDataService: UserDataService,
-    private confirmationDialogService: ConfirmationDialogService
+    private confirmationDialogService: ConfirmationDialogService,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -60,11 +62,12 @@ export class ListUserComponent implements OnInit, OnDestroy {
       this.userDataService.deleteUser(user).subscribe(
         (response) => {
           console.log(response);
+          this.toastr.warning('User Deleted', 'Warning');
           this.rerender();
         },
         // tslint:disable-next-line: no-shadowed-variable
         (error) => {
-          console.log(error);
+          this.toastr.error('User Deletion Failed', 'Error');
         }
       );
     }
