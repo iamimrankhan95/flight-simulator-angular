@@ -1,8 +1,14 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
-
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { applicationUrl } from '../../shared/enums/application-urls';
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type': 'application/json',
+    'Authorization': 'my-auth-token'
+  })
+};
 @Injectable({
   providedIn: 'root',
 })
@@ -10,7 +16,6 @@ export class AuthenticationService {
   private authToken = 'some-auth-token';
   private currentUserSubject: BehaviorSubject<any>;
   public currentUser: Observable<any>;
-  public url = 'http://192.168.101.41:9050/cms_login';
 
   constructor(private router: Router, private http: HttpClient) {
     // this.currentUserSubject =  new BehaviorSubject<any>(JSON.parse(localStorage.getItem('currentUser')));
@@ -24,10 +29,12 @@ export class AuthenticationService {
     return this.currentUserSubject.value;
   }
 
-  login(userName: string, password: string) {
-    localStorage.setItem('currentUser', userName);
-    // return this.http.post<any>(this.url, {userName, password});
-    return;
+  login(credential: any) {
+    // localStorage.setItem('currentUser', credential);
+    return this.http.post<any>(applicationUrl.auth.login, credential, {
+      observe: 'body',
+      responseType: 'json'
+    });
   }
 
   logout(): void {

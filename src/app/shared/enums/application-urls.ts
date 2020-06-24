@@ -12,7 +12,7 @@ export const applicationUrl = {
     customerRelationUrl: environment.apiUrl + 'cms_crm_record'
   },
   auth: {
-
+    login: environment.apiUrl + 'auth'
   },
   profile: {
     changePassword: environment.apiUrl + 'user/update-password'

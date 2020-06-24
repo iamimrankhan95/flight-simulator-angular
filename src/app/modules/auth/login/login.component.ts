@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { AuthenticationService } from '../../authentication.service';
+import { AuthenticationService } from '../authentication.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -49,18 +49,10 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.invalid) {
       return;
     } else {
-      // remove the line below
-      // this.authenticationService.login(this.f.username.value, this.f.password.value).subscribe( response => {
-      //   console.log(response);
-      // });
-      // localStorage.setItem('currentUser', this.loginForm.get('username').value);
-
-      this.authenticationService.login(
-        this.f.username.value,
-        this.f.password.value
+      this.authenticationService.login(this.loginForm.value).subscribe(
+        (res) => this.router.navigate(['/dashboard'])
       );
-      // console.log(localStorage.getItem('currentUser'));
-      this.router.navigate(['/dashboard']);
+
     }
   }
 

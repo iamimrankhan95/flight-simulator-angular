@@ -3,15 +3,20 @@ import {
   HttpEvent, HttpInterceptor, HttpHandler, HttpRequest
 } from '@angular/common/http';
 import { AuthenticationService } from '../../../modules/auth/authentication.service';
+import { environment } from '../../../../environments/environment';
+import { applicationUrl } from '../../enums/application-urls';
 
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
-  constructor(private auth: AuthenticationService) {}
+  constructor(private auth: AuthenticationService) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler) {
     // Get the auth token from the service.
+    if (req.url === applicationUrl.auth.login) {
+      return next.handle(req);
+    }
     const authToken = this.auth.getAuthorizationToken();
 
     /*
@@ -23,7 +28,7 @@ export class AuthInterceptor implements HttpInterceptor {
     });
     */
     // Clone the request and set the new header in one step.
-    const authReq = req.clone({ setHeaders: { Authorization: authToken } });
+    const authReq = req.clone({ setHeaders: { Authorization: 'Bearer ' + authToken } });
 
     // send cloned request with header to the next handler.
     return next.handle(authReq);
