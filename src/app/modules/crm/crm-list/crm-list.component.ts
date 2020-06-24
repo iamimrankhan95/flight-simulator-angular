@@ -5,6 +5,7 @@ import { ICRMListPageConfig } from './icrm-list-page-config';
 import { NgbCalendar, NgbDate, NgbDateParserFormatter, NgbInputDatepicker } from '@ng-bootstrap/ng-bootstrap';
 import { NgbDateCustomParserFormatter } from '../../../shared/modules/shared/pipes/date-fomatter';
 import { Subject } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-crm-list',
   templateUrl: './crm-list.component.html',
@@ -42,7 +43,8 @@ export class CrmListComponent implements OnInit, OnDestroy {
   // customerRelations: CustomerRelation[];
   customerRelations: any[];
 
-  constructor(private crmHttpService: CRMHttpService) {
+  constructor(private crmHttpService: CRMHttpService,
+    private toastr: ToastrService) {
     console.log(this.today.getMonth());
   }
 
@@ -56,13 +58,14 @@ export class CrmListComponent implements OnInit, OnDestroy {
     this.crmHttpService.getCustomerRelations(this.pageConfig)
       .subscribe(
         (customerRelations: any) => {
-          setTimeout(() => {
-            this.customerRelations = [...customerRelations];
-            console.log(customerRelations);
-            this.dtTrigger.next();
-          }, 1000);
+          this.customerRelations = [...customerRelations];
+          console.log(customerRelations);
+          this.dtTrigger.next();
         }, // success path
-        error => this.error = error // error path
+        error => {
+          this.toastr.error('Something went wrong', 'Error');
+          console.log(error);
+        } // error path
       );
   }
 
