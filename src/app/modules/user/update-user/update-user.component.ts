@@ -121,11 +121,11 @@ export class UpdateUserComponent implements OnInit {
         .updateUser(this.simpleForm.value)
         .subscribe(
           (response) => {
-            this.toastr.success('User Information Updated', 'Successful');
+            this.toastr.success('User Information Updated Successfully', 'Successful');
             this.router.navigate(['/users/users']);
           },
           (error) => {
-            this.toastr.error('User Information Update failed', 'Error');
+            this.toastr.error('Something went wrong', 'Error');
             this.onReset();
           }
         );
