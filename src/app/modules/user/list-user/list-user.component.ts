@@ -39,7 +39,7 @@ export class ListUserComponent implements OnInit, OnDestroy {
         this.dtTrigger.next();
       },
       (error) => {
-        this.toastr.error('User List Fetch Failed', 'Error');
+        this.toastr.error('Something went wrong', 'Error');
         console.log(error);
       }
     );
@@ -68,7 +68,7 @@ export class ListUserComponent implements OnInit, OnDestroy {
         },
         // tslint:disable-next-line: no-shadowed-variable
         (error) => {
-          this.toastr.error('User Deletion Failed', 'Error');
+          this.toastr.error('Something went wrong', 'Error');
         }
       );
     }

@@ -72,10 +72,10 @@ export class ChangePasswordComponent implements OnInit {
      if(this.simpleForm.valid) {
       this.profileHttpService.changePassword(this.f.currentPassword.value, this.f.newPassword.value, this.f.retypedNewPassword.value, localStorage.getItem('currentUser'))
       .subscribe( response => {
-        this.toastr.success('Password Changed', 'Successful');
+        this.toastr.success('Password Changed Successfully', 'Successful');
       }, error => {
         this.submitted = false;
-        this.toastr.error('Password Change Failed', 'Error');
+        this.toastr.error('Something went wrong', 'Error');
       });
     }
   }
