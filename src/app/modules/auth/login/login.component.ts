@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { AuthenticationService } from '../../authentication.service';
+import { AuthenticationService } from '../authentication.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-dashboard',
@@ -20,11 +21,9 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private authenticationService: AuthenticationService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute, private toastr: ToastrService
   ) {
-    // if (this.authenticationService.currentUserValue) {
-    //   this.router.navigate(['/']);
-    // }
+
   }
 
   ngOnInit() {
@@ -36,7 +35,6 @@ export class LoginComponent implements OnInit {
       username: ['', Validators.required],
       password: ['', Validators.required],
     });
-    // this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
 
   get f() {
@@ -49,18 +47,11 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.invalid) {
       return;
     } else {
-      // remove the line below
-      // this.authenticationService.login(this.f.username.value, this.f.password.value).subscribe( response => {
-      //   console.log(response);
-      // });
-      // localStorage.setItem('currentUser', this.loginForm.get('username').value);
-
-      this.authenticationService.login(
-        this.f.username.value,
-        this.f.password.value
+      this.authenticationService.login(this.loginForm.value).subscribe(
+        (res) => this.router.navigate(['/home']),
+        (error) => this.toastr.error('Please try with your correct username and password', 'Wrong credential!')
       );
-      // console.log(localStorage.getItem('currentUser'));
-      this.router.navigate(['/dashboard']);
+
     }
   }
 

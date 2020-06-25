@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { User } from '../../shared/models/user';
-// import { tap, catchError } from 'rxjs/operators';
-// import { HttpErrorHandler, HandleError } from '../../core/http-error-handler.service';
+import { tap, catchError } from 'rxjs/operators';
+import { HttpErrorHandler, HandleError } from '../../shared/services/http-error-handler.service';
 import { applicationUrl } from '../../shared/enums/application-urls';
 
 @Injectable({
@@ -33,11 +33,11 @@ export class UserDataService {
   }
 
   getUsers() {
-    return this.http.get<any>(applicationUrl.user.readAll);
-    // .pipe(
-    //   tap(_ => console.log('fetched Users')),
-    //   catchError(this.handleError('getUsers', []))
-    // );
+    return this.http.get<any>(applicationUrl.user.readAll)
+    .pipe(
+      tap(_ => console.log('fetched Users')),
+      // catchError(this.handleError('getUsers', []))
+    );
   }
 
   deleteUser(user: User) {

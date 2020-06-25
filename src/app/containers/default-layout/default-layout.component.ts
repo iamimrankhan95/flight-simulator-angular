@@ -21,14 +21,14 @@ export class DefaultLayoutComponent implements OnInit {
     // const user = JSON.parse(localStorage.getItem('currentUser'));
 
     // comment out the above line and remove the line below
-    const user = localStorage.getItem('currentUser');
-    if (user) {
-      console.log(user);
-      this.loginUsername = user;
-      // this.loginId = user.data.id;
-    } else {
-      this.router.navigate(['/auth/login']);
-    }
+    // const user = localStorage.getItem('currentUser');
+    // if (user) {
+    //   console.log(user);
+    //   this.loginUsername = user;
+    //   // this.loginId = user.data.id;
+    // } else {
+    //   this.router.navigate(['/auth/login']);
+    // }
   }
 
   toggleMinimize(e) {
@@ -37,11 +37,11 @@ export class DefaultLayoutComponent implements OnInit {
 
   logoutClick() {
     this.authenticationservice.logout();
-    this.router.navigate(['auth/login']);
+    this.router.navigate(['/auth/login']);
   }
 
   ChangePassword() {
-    this.router.navigate(['profile/change-password/']);
+    this.router.navigate(['/home/profile/change-password/']);
   }
 
 }

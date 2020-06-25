@@ -1,15 +1,22 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
-
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { applicationUrl } from '../../shared/enums/application-urls';
+import { tap, catchError } from 'rxjs/operators';
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type': 'application/json',
+    'Authorization': 'my-auth-token'
+  })
+};
 @Injectable({
   providedIn: 'root',
 })
 export class AuthenticationService {
+  private authToken;
   private currentUserSubject: BehaviorSubject<any>;
   public currentUser: Observable<any>;
-  public url = 'http://192.168.101.41:9050/cms_login';
 
   constructor(private router: Router, private http: HttpClient) {
     // this.currentUserSubject =  new BehaviorSubject<any>(JSON.parse(localStorage.getItem('currentUser')));
@@ -23,14 +30,39 @@ export class AuthenticationService {
     return this.currentUserSubject.value;
   }
 
-  login(userName: string, password: string) {
-    localStorage.setItem('currentUser', userName);
-    // return this.http.post<any>(this.url, {userName, password});
-    return;
+  login(credential: any) {
+    return this.http.post<any>(applicationUrl.auth.login, credential, {
+      observe: 'body',
+      responseType: 'json'
+    }).pipe(
+      tap((response) => {
+        localStorage.setItem('loggedInUser', JSON.stringify(response));
+        localStorage.setItem('loggedInUserToken', response.accessToken);
+        this.authToken = response.accessToken;
+      }), catchError(this.handleError)
+    );
   }
+
   logout(): void {
-    localStorage.removeItem('currentUser');
-    this.currentUserSubject.next(null);
-    this.router.navigate(['/login']);
+    localStorage.clear();
+    this.router.navigate(['/']);
   }
+
+  getAuthorizationToken() {
+    return this.authToken ?? this.logout();
+  }
+
+  handleError(error) {
+    let errorMessage = '';
+    console.log('full error msg: ', error);
+    if (error.error instanceof ErrorEvent) {
+      // client-side error
+      errorMessage = `${error.error.message}`;
+    } else {
+      // server-side error
+      errorMessage = 'Registration No. or Password is incorrect';
+    }
+    return throwError(errorMessage);
+  }
+
 }
