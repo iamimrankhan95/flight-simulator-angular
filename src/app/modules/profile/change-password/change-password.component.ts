@@ -5,6 +5,7 @@ import {
   Validators,
   ValidatorFn,
   ValidationErrors,
+  FormControl,
 } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -31,6 +32,8 @@ export class ChangePasswordComponent implements OnInit {
   public loginId: any; // change to number later
   oldFieldTextType: boolean;
   newFieldTextType: boolean;
+  retypedNewFieldTextType: boolean;
+  public passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
 
   constructor(
     private formbuilder: FormBuilder,
@@ -51,10 +54,10 @@ export class ChangePasswordComponent implements OnInit {
     this.simpleForm = this.formbuilder.group(
       {
         currentPassword: ['', Validators.required],
-        newPassword: ['', [Validators.required, Validators.minLength(8)]],
-        retypedNewPassword: ['', Validators.required]
+        newPassword: ['', Validators.compose([Validators.required, Validators.minLength(8), Validators.pattern(this.passwordRegex)])],
+        retypedNewPassword: ['', [Validators.required]]
       },
-      { validator: confirmPasswordValidator }
+      {validator: confirmPasswordValidator}
     );
   }
   onReset() {
@@ -66,13 +69,12 @@ export class ChangePasswordComponent implements OnInit {
   }
   onSubmit() {
     this.submitted = true;
-    if (this.simpleForm.invalid) {
-      return ;
-    } else {
+     if(this.simpleForm.valid) {
       this.profileHttpService.changePassword(this.f.currentPassword.value, this.f.newPassword.value, this.f.retypedNewPassword.value, localStorage.getItem('currentUser'))
       .subscribe( response => {
         this.toastr.success('Password Changed', 'Successful');
       }, error => {
+        this.submitted = false;
         this.toastr.error('Password Change Failed', 'Error');
       });
     }
@@ -82,5 +84,8 @@ export class ChangePasswordComponent implements OnInit {
   }
   togglenewFieldTextType() {
     this.newFieldTextType = !this.newFieldTextType;
+  }
+  toggleretypedNewFieldTextType() {
+    this.retypedNewFieldTextType = !this.retypedNewFieldTextType;
   }
 }

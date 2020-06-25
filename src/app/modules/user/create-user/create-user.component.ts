@@ -74,25 +74,25 @@ export class CreateUserComponent implements OnInit, OnDestroy {
   }
 
   async onSubmit() {
-    const confirm = await this.confirmationDialogService.confirm(
-      'Confirm Create User Request',
-      'Are you sure you want to CREATE a New User?',
-      'Yes',
-      'No',
-      'md'
-    );
-    if (confirm) {
-      if (!this.submitted) {
-        this.f.joiningDate.setValue(
-          formatDate(
-            this.simpleForm.get('joiningDate').value,
-            'dd/MM/yyyy',
-            'en-UK'
-          )
-        );
-      }
-      this.submitted = true;
+    this.submitted = true;
       if (this.simpleForm.valid) {
+        const confirm = await this.confirmationDialogService.confirm(
+          'Confirm Create User Request',
+          'Are you sure you want to CREATE a New User?',
+          'Yes',
+          'No',
+          'md'
+        );
+        if (confirm) {
+          if (!this.submitted) {
+            this.f.joiningDate.setValue(
+              formatDate(
+                this.simpleForm.get('joiningDate').value,
+                'dd/MM/yyyy',
+                'en-UK'
+              )
+            );
+          }
         this.otpService.openOtpModal();
         this.otpVerificationSubscription = this.otpService
           .onOtpVerification()
