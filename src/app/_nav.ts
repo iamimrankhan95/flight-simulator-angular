@@ -3,7 +3,7 @@ import { INavData } from '@coreui/angular';
 export const navItems: INavData[] = [
   {
     name: 'Dashboard',
-    url: '/dashboard',
+    url: '/home/dashboard',
     icon: 'icon-speedometer',
   },
   {
@@ -12,28 +12,28 @@ export const navItems: INavData[] = [
   },
   {
     name: 'CRM',
-    url: '/crm',
+    url: 'home/crm',
     icon: 'icon-speedometer',
     children: [
       {
         name: 'CRM-list',
-        url: '/crm/list',
+        url: '/home/crm/list',
         icon: 'icon-speedometer',
       }, {
         name: 'Create CRM',
-        url: '/crm/create',
+        url: '/home/crm/create',
         icon: 'icon-speedometer',
       }
     ]
   },
   {
     name: 'Create User',
-    url: '/users/create',
+    url: '/home/users/create',
     icon: 'cui-user'
   },
   {
     name: 'User List',
-    url: '/users/users',
+    url: '/home/users/users',
     icon: 'fa fa-address-book'
   }
 ];

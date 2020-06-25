@@ -40,7 +40,7 @@ export class AuthenticationService {
   logout(): void {
     localStorage.removeItem('currentUser');
     this.currentUserSubject.next(null);
-    this.router.navigate(['/login']);
+    // this.router.navigate(['/login']);
   }
 
   getAuthorizationToken() {
