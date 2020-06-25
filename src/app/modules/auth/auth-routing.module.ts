@@ -4,7 +4,7 @@ import { DefaultLayoutComponent } from '../../containers';
 import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
-  { path: '', component: LoginComponent, data: { title: 'User Login' } },
+  { path: '', redirectTo: 'login', data: { title: 'User Login' } },
   { path: 'login', component: LoginComponent, data: { title: 'User Login' } },
 ];
 
@@ -12,4 +12,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class AuthRoutingModule {}
+export class AuthRoutingModule { }

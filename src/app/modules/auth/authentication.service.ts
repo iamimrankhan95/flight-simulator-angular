@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { applicationUrl } from '../../shared/enums/application-urls';
+import { tap, catchError } from 'rxjs/operators';
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type': 'application/json',
@@ -30,11 +31,15 @@ export class AuthenticationService {
   }
 
   login(credential: any) {
-    // localStorage.setItem('currentUser', credential);
     return this.http.post<any>(applicationUrl.auth.login, credential, {
       observe: 'body',
       responseType: 'json'
-    });
+    }).pipe(
+      tap((response) => {
+        localStorage.setItem('loggedInUser', JSON.stringify(response))
+        localStorage.setItem('loggedInUserToken', response.accessToken)
+      }), catchError(this.handleError)
+    );
   }
 
   logout(): void {
@@ -46,4 +51,18 @@ export class AuthenticationService {
   getAuthorizationToken() {
     return this.authToken;
   }
+
+  handleError(error) {
+    let errorMessage = '';
+    console.log('full error msg: ', error);
+    if (error.error instanceof ErrorEvent) {
+      // client-side error
+      errorMessage = `${error.error.message}`;
+    } else {
+      // server-side error
+      errorMessage = 'Registration No. or Password is incorrect';
+    }
+    return throwError(errorMessage);
+  }
+
 }

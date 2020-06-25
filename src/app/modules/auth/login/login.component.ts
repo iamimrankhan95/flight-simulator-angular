@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthenticationService } from '../authentication.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-dashboard',
@@ -20,11 +21,9 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private authenticationService: AuthenticationService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute, private toastr: ToastrService
   ) {
-    // if (this.authenticationService.currentUserValue) {
-    //   this.router.navigate(['/']);
-    // }
+
   }
 
   ngOnInit() {
@@ -36,7 +35,6 @@ export class LoginComponent implements OnInit {
       username: ['', Validators.required],
       password: ['', Validators.required],
     });
-    // this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
 
   get f() {
@@ -50,7 +48,8 @@ export class LoginComponent implements OnInit {
       return;
     } else {
       this.authenticationService.login(this.loginForm.value).subscribe(
-        (res) => this.router.navigate(['/dashboard'])
+        (res) => this.router.navigate(['/home']),
+        (error) => this.toastr.error('Please try with your correct username and password', 'Wrong credential!')
       );
 
     }
