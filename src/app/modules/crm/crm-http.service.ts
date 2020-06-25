@@ -4,7 +4,7 @@ import { HttpHeaders } from '@angular/common/http';
 
 import { applicationUrl } from '../../shared/enums/application-urls';
 import { Observable } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, tap } from 'rxjs/operators';
 import { HttpErrorHandler, HandleError } from '../../shared/services/http-error-handler.service';
 import { CustomerRelation } from '../../shared/models/customer-relation.model';
 import { ICRMListPageConfig } from './crm-list/icrm-list-page-config';
@@ -33,6 +33,7 @@ export class CRMHttpService {
     //const params = this.constructParam(pageConfig);
     return this.http.get<any[]>(applicationUrl.crm.customerRelationUrl)
       .pipe(
+        tap((Response) => console.log(Response)),
         catchError(this.handleError('getCustomerRelations', []))
       );
   }

@@ -33,11 +33,11 @@ export class UserDataService {
   }
 
   getUsers() {
-    return this.http.get<any>(applicationUrl.user.readAll);
-    // .pipe(
-    //   tap(_ => console.log('fetched Users')),
-    //   catchError(this.handleError('getUsers', []))
-    // );
+    return this.http.get<any>(applicationUrl.user.readAll)
+    .pipe(
+      tap(_ => console.log('fetched Users')),
+      // catchError(this.handleError('getUsers', []))
+    );
   }
 
   deleteUser(user: User) {

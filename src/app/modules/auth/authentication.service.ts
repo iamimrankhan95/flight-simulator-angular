@@ -14,7 +14,7 @@ const httpOptions = {
   providedIn: 'root',
 })
 export class AuthenticationService {
-  private authToken = 'some-auth-token';
+  private authToken;
   private currentUserSubject: BehaviorSubject<any>;
   public currentUser: Observable<any>;
 
@@ -36,20 +36,20 @@ export class AuthenticationService {
       responseType: 'json'
     }).pipe(
       tap((response) => {
-        localStorage.setItem('loggedInUser', JSON.stringify(response))
-        localStorage.setItem('loggedInUserToken', response.accessToken)
+        localStorage.setItem('loggedInUser', JSON.stringify(response));
+        localStorage.setItem('loggedInUserToken', response.accessToken);
+        this.authToken = response.accessToken;
       }), catchError(this.handleError)
     );
   }
 
   logout(): void {
-    localStorage.removeItem('currentUser');
-    this.currentUserSubject.next(null);
-    // this.router.navigate(['/login']);
+    localStorage.clear();
+    this.router.navigate(['/']);
   }
 
   getAuthorizationToken() {
-    return this.authToken;
+    return this.authToken ?? this.logout();
   }
 
   handleError(error) {
