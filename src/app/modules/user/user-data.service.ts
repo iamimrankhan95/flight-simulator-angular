@@ -20,9 +20,9 @@ export class UserDataService {
   constructor(
     private http: HttpClient,
     // httpErrorHandler: HttpErrorHandler
-    ) {
-      // this.handleError = httpErrorHandler.createHandleError('UserDataService');
-    }
+  ) {
+    // this.handleError = httpErrorHandler.createHandleError('UserDataService');
+  }
 
   register(user: User) {
     return this.http.post<User>(applicationUrl.user.create, user, this.httpOptions);
@@ -33,11 +33,14 @@ export class UserDataService {
   }
 
   getUsers() {
-    return this.http.get<any>(applicationUrl.user.readAll)
-    .pipe(
-      tap(_ => console.log('fetched Users')),
-      // catchError(this.handleError('getUsers', []))
-    );
+    return this.http.get<any>(applicationUrl.user.readAll, {
+      observe: 'body',
+      responseType: 'json'
+    })
+      .pipe(
+        tap(_ => console.log(_)),
+        // catchError(this.handleError('getUsers', []))
+      );
   }
 
   deleteUser(user: User) {

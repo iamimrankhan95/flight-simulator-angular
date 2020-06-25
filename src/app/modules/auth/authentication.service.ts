@@ -49,7 +49,7 @@ export class AuthenticationService {
   }
 
   getAuthorizationToken() {
-    return this.authToken ?? this.logout();
+    return 'Bearer ' + localStorage.getItem('loggedInUserToken');
   }
 
   handleError(error) {
