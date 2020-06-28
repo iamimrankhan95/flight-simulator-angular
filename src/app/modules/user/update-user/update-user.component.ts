@@ -90,7 +90,11 @@ export class UpdateUserComponent implements OnInit {
     this.f.joiningDate.setValue(info.joiningDate);
     this.f.username.setValue(info.username);
     this.f.password.setValue(info.password);
-    this.f.isActive.setValue(info.isActive);
+    if (info.isActive === 0) {
+      this.f.isActive.setValue(false);
+    } else {
+      this.f.isActive.setValue(true);
+    }
   }
 
   get f() {
@@ -115,6 +119,11 @@ export class UpdateUserComponent implements OnInit {
           'en-UK'
         )
       );
+      if (this.simpleForm.get('isActive').value === true) {
+        this.f.isActive.setValue(1);
+      } else {
+        this.f.isActive.setValue(0);
+      }
     }
     if (this.simpleForm.valid) {
       this.userDataService

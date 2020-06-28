@@ -92,6 +92,11 @@ export class CreateUserComponent implements OnInit, OnDestroy {
                 'en-UK'
               )
             );
+            if (this.simpleForm.get('isActive').value === true) {
+              this.f.isActive.setValue(1);
+            } else {
+              this.f.isActive.setValue(0);
+            }
           }
         this.otpService.openOtpModal();
         this.otpVerificationSubscription = this.otpService
