@@ -4,6 +4,7 @@ import { Subject } from 'rxjs';
 import { UserDataService } from '../user-data.service';
 import { ConfirmationDialogService } from '../../../shared/modules/notification/confirmation-dialog/confirmation-dialog.service';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-list-user',
@@ -14,11 +15,13 @@ export class ListUserComponent implements OnInit, OnDestroy {
   userList: User[];
   dtTrigger = new Subject();
   dtOptions: DataTables.Settings = {};
+  loginUsername: string;
 
   constructor(
     private userDataService: UserDataService,
     private confirmationDialogService: ConfirmationDialogService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -62,9 +65,16 @@ export class ListUserComponent implements OnInit, OnDestroy {
     if (confirm) {
       this.userDataService.deleteUser(user).subscribe(
         (response) => {
-          console.log(response);
           this.toastr.warning('User Deleted', 'Warning');
-          this.rerender();
+          console.log(response);
+          const tempuser = JSON.parse(localStorage.getItem('loggedInUser'));
+          this.loginUsername = tempuser.username;
+          if (user.username === this.loginUsername) {
+            this.router.navigate(['/auth/login']);
+          } else {
+            this.rerender();
+          }
+
         },
         // tslint:disable-next-line: no-shadowed-variable
         (error) => {

@@ -7,7 +7,7 @@ import {
   ValidationErrors,
   FormControl,
 } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { ProfileHttpService } from '../profile-http.service';
 
@@ -33,18 +33,20 @@ export class ChangePasswordComponent implements OnInit {
   oldFieldTextType: boolean;
   newFieldTextType: boolean;
   retypedNewFieldTextType: boolean;
+  public loginUsername;
   public passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
 
   constructor(
     private formbuilder: FormBuilder,
     private route: ActivatedRoute,
     private toastr: ToastrService,
-    private profileHttpService: ProfileHttpService
+    private profileHttpService: ProfileHttpService,
+    private router: Router
   ) {
     // const userData = JSON.parse(localStorage.getItem('currentUser')).data;
     // comment out the line above and remove the line below when api sends json response
-    const userData = localStorage.getItem('currentUser');
-    this.loginId = this.route.snapshot.paramMap.get('id');
+    const user = JSON.parse(localStorage.getItem('loggedInUser'));
+    this.loginUsername = user.username;
   }
 
   ngOnInit(): void {
@@ -70,9 +72,10 @@ export class ChangePasswordComponent implements OnInit {
   onSubmit() {
     this.submitted = true;
      if(this.simpleForm.valid) {
-      this.profileHttpService.changePassword(this.f.currentPassword.value, this.f.newPassword.value, this.f.retypedNewPassword.value, localStorage.getItem('currentUser'))
+      this.profileHttpService.changePassword(this.f.currentPassword.value, this.f.newPassword.value, this.f.retypedNewPassword.value, this.loginUsername)
       .subscribe( response => {
         this.toastr.success('Password Changed Successfully', 'Successful');
+        this.router.navigate(['/auth/login']);
       }, error => {
         this.submitted = false;
         this.toastr.error('Something went wrong', 'Error');
