@@ -30,7 +30,7 @@ export class CRMHttpService {
 
   /** GET heroes from the server */
   getCustomerRelations(pageConfig: ICRMListPageConfig): Observable<any[]> {
-    //const params = this.constructParam(pageConfig);
+    // const params = this.constructParam(pageConfig);
     return this.http.get<any[]>(applicationUrl.crm.customerRelationUrl)
       .pipe(
         tap((Response) => console.log(Response)),
@@ -76,6 +76,7 @@ export class CRMHttpService {
   // Get information on specific crm
   getCustomerRelation(crmID: number) {
     const tempUrl = applicationUrl.crm.customerRelationUrl + '/' + crmID;
+    // const tempUrl = 'http://192.168.101.41:9050/cms_crm_record' + '/' + crmID;
     return this.http.get<any>(tempUrl, httpOptions);
   }
 

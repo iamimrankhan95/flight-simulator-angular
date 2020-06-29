@@ -41,6 +41,8 @@ export class CreateUserComponent implements OnInit, OnDestroy {
   public maxDate: Date = new Date();
   public userContactNo: number;
   otpVerificationSubscription: Subscription;
+  public passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
+
   constructor(
     private formbuilder: FormBuilder,
     private userDataService: UserDataService,
@@ -67,9 +69,9 @@ export class CreateUserComponent implements OnInit, OnDestroy {
       ],
       email: ['', [Validators.required, Validators.pattern(this.emailRegex)]],
       username: ['', [Validators.required]],
-      password: ['', [Validators.required]],
+      password: ['', [Validators.required, Validators.minLength(8), Validators.pattern(this.passwordRegex)]],
       joiningDate: [this.maxDate, [Validators.required]],
-      isActive: [''],
+      active: [''],
     });
   }
 
@@ -84,7 +86,6 @@ export class CreateUserComponent implements OnInit, OnDestroy {
           'md'
         );
         if (confirm) {
-          if (!this.submitted) {
             this.f.joiningDate.setValue(
               formatDate(
                 this.simpleForm.get('joiningDate').value,
@@ -92,7 +93,7 @@ export class CreateUserComponent implements OnInit, OnDestroy {
                 'en-UK'
               )
             );
-          }
+        console.log(this.simpleForm.value);
         this.otpService.openOtpModal();
         this.otpVerificationSubscription = this.otpService
           .onOtpVerification()

@@ -45,8 +45,9 @@ export class UserDataService {
 
   deleteUser(user: User) {
     const id = user.id;
-    const tempUrl = applicationUrl.user.readByID + '/' + id;
-    return this.http.delete<User>(tempUrl, this.httpOptions);
+    const tempUrl = applicationUrl.user.delete + '?id=' + id;
+
+    return this.http.delete<any>(tempUrl, this.httpOptions);
     // .pipe(
     //   tap((_) => console.log(`deleted user id=${id}`)),
     //   catchError(this.handleError<User>('deleteUser', user))
@@ -63,7 +64,7 @@ export class UserDataService {
   }
 
   updateUser(user: User) {
-    return this.http.put<User>(applicationUrl.user.update, user, this.httpOptions);
+    return this.http.put<any>(applicationUrl.user.update, user, this.httpOptions);
     // .pipe(
     //   tap((_) => console.log(`updated user id=${id}`)),
     //   catchError(this.handleError<any>('updateUser', user))

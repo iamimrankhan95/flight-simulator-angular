@@ -192,14 +192,26 @@
                             ></i>
                           </span>
                         </div>
-                      </div>
-                      <div
+                        <div
                         *ngIf="submitted && f['password'].errors"
                         class="invalid-feedback"
                       >
                         <div *ngIf="f['password'].errors.required">
                           Password is required
                         </div>
+                        <div *ngIf="f['password'].errors.minlength">
+                          Minimun Length 8 Characters
+                        </div>
+                        <div
+                          *ngIf="
+                            f['password'].errors.pattern &&
+                            !f['password'].errors.minlength
+                          "
+                        >
+                          Password must contain atleast one letter, one number and
+                          one special character.
+                        </div>
+                      </div>
                       </div>
                     </div>
                   </div>
@@ -207,7 +219,7 @@
                 <div class="row">
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label class="col-form-label" for="isActive"
+                      <label class="col-form-label" for="active"
                         >Active Status</label
                       >
                       <div class="form-check">
@@ -217,8 +229,8 @@
                           <input
                             type="checkbox"
                             class="switch-input"
-                            id="isActive"
-                            formControlName="isActive"
+                            id="active"
+                            formControlName="active"
                           />
                           <span class="switch-slider"></span>
                         </label>

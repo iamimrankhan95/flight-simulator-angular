@@ -38,6 +38,8 @@ export class UpdateUserComponent implements OnInit {
   public updateUserId: number;
   public user: User;
   public maxDate: Date = new Date();
+  public loginUsername: string;
+  public passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
 
   constructor(
     private route: ActivatedRoute,
@@ -70,6 +72,7 @@ export class UpdateUserComponent implements OnInit {
 
   createForm() {
     this.simpleForm = this.formbuilder.group({
+      id: [ '' ],
       name: ['', Validators.required],
       contactNo: [
         '',
@@ -77,20 +80,21 @@ export class UpdateUserComponent implements OnInit {
       ],
       email: ['', [Validators.required, Validators.pattern(this.emailRegex)]],
       username: ['', Validators.required],
-      password: ['', Validators.required],
+      password: ['', [Validators.required, Validators.minLength(8), Validators.pattern(this.passwordRegex)]],
       joiningDate: [new Date(), [Validators.required]],
-      isActive: [''],
+      active: [''],
     });
   }
 
   setFormValues(info: User) {
+    this.f.id.setValue(this.updateUserId);
     this.f.name.setValue(info.name);
     this.f.contactNo.setValue(info.contactNo);
     this.f.email.setValue(info.email);
     this.f.joiningDate.setValue(info.joiningDate);
     this.f.username.setValue(info.username);
-    this.f.password.setValue(info.password);
-    this.f.isActive.setValue(info.isActive);
+    this.f.password.setValue('');
+    this.f.active.setValue(info.active);
   }
 
   get f() {
@@ -107,7 +111,7 @@ export class UpdateUserComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
-    if (!this.f.joiningDate.pristine) {
+     if (!this.f.joiningDate.pristine) {
       this.f.joiningDate.setValue(
         formatDate(
           this.simpleForm.get('joiningDate').value,
@@ -115,18 +119,24 @@ export class UpdateUserComponent implements OnInit {
           'en-UK'
         )
       );
-    }
+     }
     if (this.simpleForm.valid) {
+      console.log(this.simpleForm.value);
       this.userDataService
         .updateUser(this.simpleForm.value)
         .subscribe(
           (response) => {
             this.toastr.success('User Information Updated Successfully', 'Successful');
-            this.router.navigate(['/users/users']);
+            const user = JSON.parse(localStorage.getItem('loggedInUser'));
+            this.loginUsername = user.username;
+            if (this.simpleForm.get('username').value === this.loginUsername) {
+              this.router.navigate(['/auth/login']);
+            } else {
+              this.router.navigate(['/home/users/users']);
+            }
           },
           (error) => {
             this.toastr.error('Something went wrong', 'Error');
-            this.onReset();
           }
         );
     }

@@ -7,8 +7,8 @@ export class User {
     public email?: string,
     public username?: string,
     public password?: string,
-    public joiningDate?: Date,
-    public isActive?: boolean) {
+    public joiningDate?: string,
+    public active?: boolean) {
       this.id = id;
       this.name = name;
       this.contactNo = contactNo;
@@ -16,6 +16,6 @@ export class User {
       this.username = username;
       this.password = password;
       this.joiningDate = joiningDate;
-      this.isActive = isActive;
+      this.active = active;
   }
 }
