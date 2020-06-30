@@ -3,7 +3,7 @@
     <div class="card-header">
       Customer Relation List
       <div class="card-header-actions">
-        <a class="btn btn-primary btn-sm" routerLink="/crm/create">Create CRM</a>
+        <a class="btn btn-primary btn-sm" routerLink="/home/crm/create">Create CRM</a>
       </div>
     </div>
     <div class="card-body">
@@ -71,10 +71,10 @@
               Phone No.
             </th>
             <th class="text-center" style="width: 20%">
-              Accused Organization Address
+              Accused Organization Name
             </th>
             <th class="text-center" style="width: 20%">
-              Accused Organization Name
+              Accused Organization Address
             </th>
             <th style="width: 20%">
               Options
@@ -83,11 +83,11 @@
         </thead>
         <tbody>
           <tr *ngFor="let item of customerRelations">
-            <td>{{item.complainedOn}}</td>
-            <td class="text-center">{{item.ticketstatusid}}</td>
+            <td>{{item.complainedOn | date}}</td>
+            <td class="text-center">{{item.uniqueid}}</td>
             <td class="text-center">{{item.contactNo}}</td>
-            <td class="text-center">{{item.accusedorganizationaddressid}}</td>
-            <td class="text-center">{{item.accusedorganizationname}}</td>
+            <td class="text-center">{{item.accusedOrganizationName}}</td>
+            <td class="text-center">{{item.accusedOrganizationAddress}}</td>
             <td>
               <h5><span style="cursor: pointer" class="badge badge-success"
                   (click)="updateCrm(item)">{{'Update'}}</span>
@@ -100,9 +100,9 @@
         </tbody>
         <tfoot>
           <!-- <tr> -->
-            <!-- <td colspan="5"> -->
-              <!-- <mfBootstrapPaginator [rowsOnPageSet]="[5,10,15]"></mfBootstrapPaginator> -->
-            <!-- </td> -->
+          <!-- <td colspan="5"> -->
+          <!-- <mfBootstrapPaginator [rowsOnPageSet]="[5,10,15]"></mfBootstrapPaginator> -->
+          <!-- </td> -->
           <!-- </tr> -->
         </tfoot>
       </table>
