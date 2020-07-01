@@ -12,7 +12,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class CRMFormComponent implements OnInit {
 
-  crmFormSubmitted = false;
+  isFormSubmitted = false;
   complainantPresentAddressForm = this.fb.group({
     houseNo: ['', [Validators.required]],
     streetNo: [''],
@@ -111,7 +111,7 @@ export class CRMFormComponent implements OnInit {
   }
 
   async save() {
-    this.crmFormSubmitted = true;
+    this.isFormSubmitted = true;
     if (!this.crmForm.valid) {
       return;
     }

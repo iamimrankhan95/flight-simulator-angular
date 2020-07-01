@@ -14,7 +14,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class CrmEditComponent implements OnInit {
 
-  crmFormSubmitted = false;
+  isFormSubmitted = false;
   addressFormPresent = this.fb.group({
     houseNo: ['', [Validators.required]],
     streetNo: [''],
@@ -108,7 +108,7 @@ export class CrmEditComponent implements OnInit {
   }
 
   async save() {
-    this.crmFormSubmitted = true;
+    this.isFormSubmitted = true;
     if (!this.crmForm.valid) {
       return;
     }

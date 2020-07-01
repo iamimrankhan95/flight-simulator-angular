@@ -29,8 +29,8 @@
 									<div class="form-group">
 										<label class="form-control-label" for="field_msisdn">Msisdn<span class="text-danger">*</span></label>
 										<input type="text" class="form-control" name="msisdn" id="field_msisdn" formControlName="msisdn"
-													 [ngClass]="{ 'is-invalid': crmFormSubmitted && crmForm.get('msisdn').errors,'is-valid': crmForm.get('msisdn').touched && !crmForm.get('msisdn').errors }" />
-										<div *ngIf="crmFormSubmitted && crmForm.get('msisdn').errors" class="invalid-feedback">
+													 [ngClass]="{ 'is-invalid': isFormSubmitted && crmForm.get('msisdn').errors,'is-valid': crmForm.get('msisdn').touched && !crmForm.get('msisdn').errors }" />
+										<div *ngIf="isFormSubmitted && crmForm.get('msisdn').errors" class="invalid-feedback">
 											<div *ngIf="crmForm.get('msisdn').errors.required">Msisdn is required</div>
 										</div>
 									</div>
@@ -41,8 +41,8 @@
 									<div class="form-group">
 										<label class="form-control-label" for="field_ticketStatus">Ticket Status<span class="text-danger">*</span></label>
 										<input type="text" class="form-control" name="ticketStatus" id="field_ticketStatus" formControlName="ticketStatus"
-													 [ngClass]="{ 'is-invalid': crmFormSubmitted && crmForm.get('ticketStatus').errors,'is-valid': crmForm.get('ticketStatus').touched && !crmForm.get('ticketStatus').errors }" />
-										<div *ngIf="crmFormSubmitted && crmForm.get('ticketStatus').errors" class="invalid-feedback">
+													 [ngClass]="{ 'is-invalid': isFormSubmitted && crmForm.get('ticketStatus').errors,'is-valid': crmForm.get('ticketStatus').touched && !crmForm.get('ticketStatus').errors }" />
+										<div *ngIf="isFormSubmitted && crmForm.get('ticketStatus').errors" class="invalid-feedback">
 											<div *ngIf="crmForm.get('ticketStatus').errors.required">Ticket Status is required</div>
 										</div>
 									</div>
@@ -51,8 +51,8 @@
 									<div class="form-group">
 										<label class="form-control-label" for="field_applicationType">Application Type<span class="text-danger">*</span></label>
 										<input type="text" class="form-control" name="applicationType" id="field_applicationType" formControlName="applicationType"
-													 [ngClass]="{ 'is-invalid': crmFormSubmitted && crmForm.get('applicationType').errors,'is-valid': crmForm.get('applicationType').touched && !crmForm.get('applicationType').errors }" />
-										<div *ngIf="crmFormSubmitted && crmForm.get('applicationType').errors" class="invalid-feedback">
+													 [ngClass]="{ 'is-invalid': isFormSubmitted && crmForm.get('applicationType').errors,'is-valid': crmForm.get('applicationType').touched && !crmForm.get('applicationType').errors }" />
+										<div *ngIf="isFormSubmitted && crmForm.get('applicationType').errors" class="invalid-feedback">
 											<div *ngIf="crmForm.get('applicationType').errors.required">Application Type is required</div>
 										</div>
 									</div>
@@ -63,8 +63,8 @@
 									<div class="form-group">
 										<label class="form-control-label" for="field_contactNo">Contact No<span class="text-danger">*</span></label>
 										<input type="text" class="form-control" name="contactNo" id="field_contactNo" formControlName="contactNo"
-													 [ngClass]="{ 'is-invalid': crmFormSubmitted && crmForm.get('contactNo').errors,'is-valid': crmForm.get('contactNo').touched && !crmForm.get('contactNo').errors }" />
-										<div *ngIf="crmFormSubmitted && crmForm.get('contactNo').errors" class="invalid-feedback">
+													 [ngClass]="{ 'is-invalid': isFormSubmitted && crmForm.get('contactNo').errors,'is-valid': crmForm.get('contactNo').touched && !crmForm.get('contactNo').errors }" />
+										<div *ngIf="isFormSubmitted && crmForm.get('contactNo').errors" class="invalid-feedback">
 											<div *ngIf="crmForm.get('contactNo')?.errors?.required">
 												Contact No is required.
 											</div>
@@ -75,8 +75,8 @@
 									<div class="form-group">
 										<label class="form-control-label" for="field_nidNumber">Nid Number<span class="text-danger">*</span></label>
 										<input type="text" class="form-control" name="nidNumber" id="field_nidNumber" formControlName="nidNumber"
-													 [ngClass]="{ 'is-invalid': crmFormSubmitted && crmForm.get('nidNumber').errors,'is-valid': crmForm.get('nidNumber').touched && !crmForm.get('nidNumber').errors }" />
-										<div *ngIf="crmFormSubmitted && crmForm.get('nidNumber').errors" class="invalid-feedback">
+													 [ngClass]="{ 'is-invalid': isFormSubmitted && crmForm.get('nidNumber').errors,'is-valid': crmForm.get('nidNumber').touched && !crmForm.get('nidNumber').errors }" />
+										<div *ngIf="isFormSubmitted && crmForm.get('nidNumber').errors" class="invalid-feedback">
 											<div *ngIf="crmForm.get('nidNumber')?.errors?.required">
 												Nid Number is required.
 											</div>
@@ -89,8 +89,8 @@
 									<div class="form-group">
 										<label class="form-control-label" for="field_compliantName">Compliant Name<span class="text-danger">*</span></label>
 										<input type="text" class="form-control" name="compliantName" id="field_compliantName" formControlName="compliantName"
-													 [ngClass]="{ 'is-invalid': crmFormSubmitted && crmForm.get('compliantName').errors,'is-valid': crmForm.get('compliantName').touched && !crmForm.get('compliantName').errors }" />
-										<div *ngIf="crmFormSubmitted && crmForm.get('compliantName').errors" class="invalid-feedback">
+													 [ngClass]="{ 'is-invalid': isFormSubmitted && crmForm.get('compliantName').errors,'is-valid': crmForm.get('compliantName').touched && !crmForm.get('compliantName').errors }" />
+										<div *ngIf="isFormSubmitted && crmForm.get('compliantName').errors" class="invalid-feedback">
 											<div *ngIf="crmForm.get('compliantName')?.errors?.required">
 												Compliant Name is required.
 											</div>
@@ -110,10 +110,10 @@
 										<label class="form-control-label" for="field_maritalStatus">Marital Status<span class="text-danger">*</span></label>
 										<select class="form-control" id="field_maritalStatus" name="maritalStatus" formControlName="maritalStatus"
 														placeholder="Marital Status"
-														[ngClass]="{ 'is-invalid': crmFormSubmitted && crmForm.get('maritalStatus').errors,'is-valid': crmForm.get('maritalStatus').touched && !crmForm.get('maritalStatus').errors }">
+														[ngClass]="{ 'is-invalid': isFormSubmitted && crmForm.get('maritalStatus').errors,'is-valid': crmForm.get('maritalStatus').touched && !crmForm.get('maritalStatus').errors }">
 											<option value="">Select One</option>
 										</select>
-										<div *ngIf="crmFormSubmitted && crmForm.get('maritalStatus').errors" class="invalid-feedback">
+										<div *ngIf="isFormSubmitted && crmForm.get('maritalStatus').errors" class="invalid-feedback">
 											<div *ngIf="crmForm.get('maritalStatus')?.errors?.required">
 												Marital Status is required.
 											</div>
@@ -124,8 +124,8 @@
 									<div class="form-group">
 										<label class="form-control-label" for="field_spouseName">Spouse Name<span class="text-danger">*</span></label>
 										<input type="text" class="form-control" name="spouseName" id="field_spouseName" formControlName="spouseName"
-													 [ngClass]="{ 'is-invalid': crmFormSubmitted && crmForm.get('spouseName').errors,'is-valid': crmForm.get('spouseName').touched && !crmForm.get('spouseName').errors }" />
-										<div *ngIf="crmFormSubmitted && crmForm.get('spouseName').errors" class="invalid-feedback">
+													 [ngClass]="{ 'is-invalid': isFormSubmitted && crmForm.get('spouseName').errors,'is-valid': crmForm.get('spouseName').touched && !crmForm.get('spouseName').errors }" />
+										<div *ngIf="isFormSubmitted && crmForm.get('spouseName').errors" class="invalid-feedback">
 											<div *ngIf="crmForm.get('spouseName')?.errors?.required">
 												Spouse Name is required.
 											</div>
@@ -138,8 +138,8 @@
 									<div class="form-group">
 										<label class="form-control-label" for="field_fatherName">Father Name<span class="text-danger">*</span></label>
 										<input type="text" class="form-control" name="fatherName" id="field_fatherName" formControlName="fatherName"
-													 [ngClass]="{ 'is-invalid': crmFormSubmitted && crmForm.get('fatherName').errors,'is-valid': crmForm.get('fatherName').touched && !crmForm.get('fatherName').errors }" />
-										<div *ngIf="crmFormSubmitted && crmForm.get('fatherName').errors" class="invalid-feedback">
+													 [ngClass]="{ 'is-invalid': isFormSubmitted && crmForm.get('fatherName').errors,'is-valid': crmForm.get('fatherName').touched && !crmForm.get('fatherName').errors }" />
+										<div *ngIf="isFormSubmitted && crmForm.get('fatherName').errors" class="invalid-feedback">
 											<div *ngIf="crmForm.get('fatherName')?.errors?.required">
 												Father Name is required.
 											</div>
@@ -150,8 +150,8 @@
 									<div class="form-group">
 										<label class="form-control-label" for="field_motherName">Mother Name<span class="text-danger">*</span></label>
 										<input type="text" class="form-control" name="motherName" id="field_motherName" formControlName="motherName"
-													 [ngClass]="{ 'is-invalid': crmFormSubmitted && crmForm.get('motherName').errors,'is-valid': crmForm.get('motherName').touched && !crmForm.get('motherName').errors }" />
-										<div *ngIf="crmFormSubmitted && crmForm.get('motherName').errors" class="invalid-feedback">
+													 [ngClass]="{ 'is-invalid': isFormSubmitted && crmForm.get('motherName').errors,'is-valid': crmForm.get('motherName').touched && !crmForm.get('motherName').errors }" />
+										<div *ngIf="isFormSubmitted && crmForm.get('motherName').errors" class="invalid-feedback">
 											<div *ngIf="crmForm.get('motherName')?.errors?.required">
 												Mother Name is required.
 											</div>
@@ -178,8 +178,8 @@
 									<div class="form-group">
 										<label class="form-control-label" for="field_gender">Gender<span class="text-danger">*</span></label>
 										<input type="text" class="form-control" name="gender" id="field_gender" formControlName="gender"
-													 [ngClass]="{ 'is-invalid': crmFormSubmitted && crmForm.get('gender').errors,'is-valid': crmForm.get('gender').touched && !crmForm.get('gender').errors }" />
-										<div *ngIf="crmFormSubmitted && crmForm.get('gender').errors" class="invalid-feedback">
+													 [ngClass]="{ 'is-invalid': isFormSubmitted && crmForm.get('gender').errors,'is-valid': crmForm.get('gender').touched && !crmForm.get('gender').errors }" />
+										<div *ngIf="isFormSubmitted && crmForm.get('gender').errors" class="invalid-feedback">
 											<div *ngIf="crmForm.get('gender')?.errors?.required">
 												Gender is required.
 											</div>
@@ -190,8 +190,8 @@
 									<div class="form-group">
 										<label class="form-control-label" for="field_occupation">Occupation<span class="text-danger">*</span></label>
 										<input type="text" class="form-control" name="occupation" id="field_occupation" formControlName="occupation"
-													 [ngClass]="{ 'is-invalid': crmFormSubmitted && crmForm.get('occupation').errors,'is-valid': crmForm.get('occupation').touched && !crmForm.get('occupation').errors }" />
-										<div *ngIf="crmFormSubmitted && crmForm.get('occupation').errors" class="invalid-feedback">
+													 [ngClass]="{ 'is-invalid': isFormSubmitted && crmForm.get('occupation').errors,'is-valid': crmForm.get('occupation').touched && !crmForm.get('occupation').errors }" />
+										<div *ngIf="isFormSubmitted && crmForm.get('occupation').errors" class="invalid-feedback">
 											<div *ngIf="crmForm.get('occupation')?.errors?.required">
 												Occupation is required.
 											</div>
@@ -205,9 +205,9 @@
 										<label class="form-control-label" for="field_problemDescription">Problem Description<span class="text-danger">*</span></label>
 										<textarea type="text" rows="3" class="form-control" name="problemDescription" id="field_problemDescription"
 															formControlName="problemDescription"
-															[ngClass]="{ 'is-invalid': crmFormSubmitted && crmForm.get('problemDescription').errors,'is-valid': crmForm.get('problemDescription').touched && !crmForm.get('problemDescription').errors }">
+															[ngClass]="{ 'is-invalid': isFormSubmitted && crmForm.get('problemDescription').errors,'is-valid': crmForm.get('problemDescription').touched && !crmForm.get('problemDescription').errors }">
 													</textarea>
-										<div *ngIf="crmFormSubmitted && crmForm.get('problemDescription').errors" class="invalid-feedback">
+										<div *ngIf="isFormSubmitted && crmForm.get('problemDescription').errors" class="invalid-feedback">
 											<div *ngIf="crmForm.get('problemDescription')?.errors?.required">
 												Problem Description is required.
 											</div>
@@ -228,11 +228,11 @@
 							</div>
 							<div class="form-row">
 								<div class="col-md-6">
-									<app-address-form [crmForm]="crmForm" [crmFormSubmitted]="crmFormSubmitted" FormGrpName="presentAddress">
+									<app-address-form [parentFormGroup]="crmForm" [isFormSubmitted]="isFormSubmitted" FormGrpName="presentAddress">
 									</app-address-form>
 								</div>
 								<div class="col-md-6">
-									<app-address-form [crmForm]="crmForm" [crmFormSubmitted]="crmFormSubmitted" [FormGrpName]="'permanentAddress'">
+									<app-address-form [parentFormGroup]="crmForm" [isFormSubmitted]="isFormSubmitted" [FormGrpName]="'permanentAddress'">
 									</app-address-form>
 								</div>
 							</div>
@@ -246,8 +246,8 @@
 														class="text-danger">*</span></label>
 										<input type="text" class="form-control" name="accusedOrganizationName" id="field_accusedOrganizationName"
 													 formControlName="accusedOrganizationName"
-													 [ngClass]="{ 'is-invalid': crmFormSubmitted && crmForm.get('accusedOrganizationName').errors,'is-valid': crmForm.get('accusedOrganizationName').touched && !crmForm.get('accusedOrganizationName').errors }" />
-										<div *ngIf="crmFormSubmitted && crmForm.get('accusedOrganizationName').errors" class="invalid-feedback">
+													 [ngClass]="{ 'is-invalid': isFormSubmitted && crmForm.get('accusedOrganizationName').errors,'is-valid': crmForm.get('accusedOrganizationName').touched && !crmForm.get('accusedOrganizationName').errors }" />
+										<div *ngIf="isFormSubmitted && crmForm.get('accusedOrganizationName').errors" class="invalid-feedback">
 											<div *ngIf="crmForm.get('accusedOrganizationName')?.errors?.required">
 												Accused Organization Name is required.
 											</div>
@@ -257,7 +257,7 @@
 							</div>
 							<div class="form-row">
 								<div class="col-md-6">
-									<app-address-form [crmForm]="crmForm" [crmFormSubmitted]="crmFormSubmitted" FormGrpName="accusedOrganizationAddress">
+									<app-address-form [parentFormGroup]="crmForm" [isFormSubmitted]="isFormSubmitted" FormGrpName="accusedOrganizationAddress">
 									</app-address-form>
 								</div>
 							</div>

@@ -13,9 +13,9 @@ import { IAddress, Address } from '../../../../shared/models/address.model';
   styleUrls: ['./address-form.component.css']
 })
 export class AddressFormComponent implements OnInit {
-  @Input() crmForm: FormGroup;
+  @Input() parentFormGroup: FormGroup;
   @Input() FormGrpName: string;
-  @Input() crmFormSubmitted: boolean;
+  @Input() isFormSubmitted: boolean;
   isSaving = false;
   divisions: IDivision[] = [];
   districts: IDistrict[] = [];
