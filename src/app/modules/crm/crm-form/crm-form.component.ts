@@ -13,32 +13,36 @@ import { ToastrService } from 'ngx-toastr';
 export class CRMFormComponent implements OnInit {
 
   isFormSubmitted = false;
-  complainantPresentAddressForm = this.fb.group({
-    houseNo: ['', [Validators.required]],
-    streetNo: [''],
-    division: ['', [Validators.required]],
-    district: ['', [Validators.required]],
-    thana: ['', [Validators.required]],
-    postOffice: ['']
+  complainantAddressForm = this.fb.group({
+    presentAddressForm: this.fb.group({
+      houseNo: ['', [Validators.required]],
+      streetNo: [''],
+      division: ['', [Validators.required]],
+      district: ['', [Validators.required]],
+      thana: ['', [Validators.required]],
+      postOffice: ['']
+    }),
+    permanentAddressForm: this.fb.group({
+      houseNo: ['', [Validators.required]],
+      streetNo: [''],
+      division: ['', [Validators.required]],
+      district: ['', [Validators.required]],
+      thana: ['', [Validators.required]],
+      postOffice: ['']
+    })
   });
 
-  complainantPermanentAddressForm = this.fb.group({
-    houseNo: ['', [Validators.required]],
-    streetNo: [''],
-    division: ['', [Validators.required]],
-    district: ['', [Validators.required]],
-    thana: ['', [Validators.required]],
-    postOffice: ['']
+  accusedOrganaizationAddressForm = this.fb.group({
+    presentAddressForm: this.fb.group({
+      houseNo: ['', [Validators.required]],
+      streetNo: [''],
+      division: ['', [Validators.required]],
+      district: ['', [Validators.required]],
+      thana: ['', [Validators.required]],
+      postOffice: ['']
+    })
   });
 
-  accusedOrganaizationPresentAddressForm = this.fb.group({
-    houseNo: ['', [Validators.required]],
-    streetNo: [''],
-    division: ['', [Validators.required]],
-    district: ['', [Validators.required]],
-    thana: ['', [Validators.required]],
-    postOffice: ['']
-  });
 
   crmForm = this.fb.group({
     id: [''],
@@ -57,10 +61,9 @@ export class CRMFormComponent implements OnInit {
     dob: [''],
     occupation: ['', [Validators.required]],
     accusedOrganizationName: ['', [Validators.required]],
-    accusedOrganizationAddress: this.accusedOrganaizationPresentAddressForm,
+    accusedOrganizationAddress: this.accusedOrganaizationAddressForm,
     problemDescription: ['', [Validators.required, Validators.maxLength(500)]],
-    permanentAddress: this.complainantPermanentAddressForm,
-    presentAddress: this.complainantPresentAddressForm,
+    complainantAddress: this.complainantAddressForm,
     ticketStatus: ['', [Validators.required]],
     applicationType: ['', [Validators.required]],
   });
@@ -82,28 +85,10 @@ export class CRMFormComponent implements OnInit {
   model: NgbDateStruct;
   date: { year: number, month: number };
   ngOnInit(): void {
-    // this.initForms();
-    // let xss = <FormGroup>this.crmForm.get('presentAddressForm').t;
   }
 
   initForms(): void {
-    // this.addressFormPresent = this.fb.group({
-    //   houseNo: [null, [Validators.required]],
-    //   streetNo: [],
-    //   division: [null, [Validators.required]],
-    //   district: [],
-    //   thana: [null, [Validators.required]],
-    //   postOffice: [null]
-    // });
 
-    // this.addressFormPermanent = this.fb.group({
-    //   houseNo: [null, [Validators.required]],
-    //   streetNo: [],
-    //   division: [null, [Validators.required]],
-    //   district: [null, [Validators.required]],
-    //   thana: [null, [Validators.required]],
-    //   postOffice: [null]
-    // });
   }
 
   previousState(): void {
@@ -112,6 +97,7 @@ export class CRMFormComponent implements OnInit {
 
   async save() {
     this.isFormSubmitted = true;
+    console.log(this.crmForm.value);
     if (!this.crmForm.valid) {
       return;
     }
@@ -137,7 +123,7 @@ export class CRMFormComponent implements OnInit {
     if (event.target.checked) {
       const presentAddress = this.crmForm.get('presentAddress').value;
 
-      this.complainantPresentAddressForm.patchValue({
+      this.complainantAddressForm.get('parmanentAddressForm').patchValue({
         houseNo: presentAddress.houseNo,
         streetNo: presentAddress.streetNo,
         thana: presentAddress.thana,
@@ -145,10 +131,10 @@ export class CRMFormComponent implements OnInit {
         division: presentAddress.division
       });
 
-      this.complainantPermanentAddressForm.disable({ onlySelf: true });
+      this.complainantAddressForm.get('parmanentAddressForm').disable({ onlySelf: true });
     } else {
       console.log('unchecked');
-      this.complainantPermanentAddressForm.enable({ onlySelf: true });
+      this.complainantAddressForm.get('parmanentAddressForm').enable({ onlySelf: true });
     }
   }
 }

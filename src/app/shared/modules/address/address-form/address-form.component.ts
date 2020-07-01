@@ -14,7 +14,8 @@ import { IAddress, Address } from '../../../../shared/models/address.model';
 })
 export class AddressFormComponent implements OnInit {
   @Input() parentFormGroup: FormGroup;
-  @Input() FormGrpName: string;
+  @Input() addressOf: string;
+  @Input() addressType: string;
   @Input() isFormSubmitted: boolean;
   isSaving = false;
   divisions: IDivision[] = [];
@@ -31,9 +32,9 @@ export class AddressFormComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  get fPresent(): any {
-    return this.crmForm.get(this.FormGrpName);
-  }
+  // get fPresent(): any {
+  //   return this.parentFormGroup.get(this.FormGrpName);
+  // }
 
   previousState(): void {
     window.history.back();
