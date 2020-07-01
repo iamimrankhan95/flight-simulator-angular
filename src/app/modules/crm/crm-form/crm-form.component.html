@@ -256,20 +256,9 @@
 								</div>
 							</div>
 							<div class="form-row">
-								<div class="col-md-12">
-									<div class="form-group">
-										<label class="form-control-label" for="field_accusedOrganizationAddress">Accused Organization Address<span
-														class="text-danger">*</span></label>
-										<textarea type="text" rows="3" class="form-control" name="accusedOrganizationAddress" id="field_accusedOrganizationAddress"
-															formControlName="accusedOrganizationAddress"
-															[ngClass]="{ 'is-invalid': crmFormSubmitted && crmForm.get('accusedOrganizationAddress').errors,'is-valid': crmForm.get('accusedOrganizationAddress').touched && !crmForm.get('accusedOrganizationAddress').errors }">
-																			</textarea>
-										<div *ngIf="crmFormSubmitted && crmForm.get('accusedOrganizationAddress').errors" class="invalid-feedback">
-											<div *ngIf="crmForm.get('accusedOrganizationAddress')?.errors?.required">
-												Accused Organization Address is required.
-											</div>
-										</div>
-									</div>
+								<div class="col-md-6">
+									<app-address-form [crmForm]="crmForm" [crmFormSubmitted]="crmFormSubmitted" FormGrpName="accusedOrganizationAddress">
+									</app-address-form>
 								</div>
 							</div>
 						</fieldset>
