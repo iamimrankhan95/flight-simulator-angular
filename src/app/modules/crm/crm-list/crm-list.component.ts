@@ -79,7 +79,7 @@ export class CrmListComponent implements OnInit, OnDestroy {
     return date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: '2-digit' });
   }
 
-  onFromDateSelect(event: NgbDate, f: any) {
+  onFromDateSelect(event: NgbDate) {
     this.pageConfig.toDate = null;
   }
 
