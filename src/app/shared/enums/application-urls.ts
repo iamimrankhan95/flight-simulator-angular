@@ -9,7 +9,11 @@ export const applicationUrl = {
     delete: environment.apiUrl + 'user/delete'
   },
   crm: {
-    customerRelationUrl: environment.apiUrl + 'cms_crm_record'
+    create: environment.apiUrl + 'crm/create/',
+    read: environment.apiUrl + 'crm/all/',
+    update: environment.apiUrl + 'crm/update/',
+    delete: environment.apiUrl + 'crm/delete/',
+    find: environment.apiUrl + 'crm/find/',
   },
   auth: {
     login: environment.apiUrl + 'auth'

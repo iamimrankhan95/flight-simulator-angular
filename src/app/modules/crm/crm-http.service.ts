@@ -31,7 +31,7 @@ export class CRMHttpService {
   /** GET heroes from the server */
   getCustomerRelations(pageConfig: ICRMListPageConfig): Observable<any[]> {
     // const params = this.constructParam(pageConfig);
-    return this.http.get<any[]>(this.dataUrl)
+    return this.http.get<any[]>(applicationUrl.crm.read)
       .pipe(
         tap((Response) => console.log(Response)),
         catchError(this.handleError('getCustomerRelations', []))
@@ -50,24 +50,24 @@ export class CRMHttpService {
   }
 
   /* GET heroes whose name contains search term */
-  // searchHeroes(term: string): Observable<CustomerRelation[]> {
-  //   term = term.trim();
+  searchHeroes(term: string): Observable<CustomerRelation[]> {
+    term = term.trim();
 
-  //   // Add safe, URL encoded search parameter if there is a search term
-  //   const options = term ?
-  //     { params: new HttpParams().set('name', term) } : {};
+    // Add safe, URL encoded search parameter if there is a search term
+    const options = term ?
+      { params: new HttpParams().set('name', term) } : {};
 
-  //   return this.http.get<CustomerRelation[]>(this.heroesUrl, options)
-  //     .pipe(
-  //       catchError(this.handleError<CustomerRelation[]>('searchHeroes', []))
-  //     );
-  // }
+    return this.http.get<CustomerRelation[]>(applicationUrl.crm.find, options)
+      .pipe(
+        catchError(this.handleError<CustomerRelation[]>('searchHeroes', []))
+      );
+  }
 
   //////// Save methods //////////
 
   /** POST: add a new hero to the database */
   addCustomerRelation(customerRelation: CustomerRelation): Observable<CustomerRelation> {
-    return this.http.post<CustomerRelation>(applicationUrl.crm.customerRelationUrl, customerRelation, httpOptions)
+    return this.http.post<CustomerRelation>(applicationUrl.crm.create, customerRelation, httpOptions)
       .pipe(
         catchError(this.handleError('addCustomerRelation', customerRelation))
       );
@@ -75,29 +75,29 @@ export class CRMHttpService {
 
   // Get information on specific crm
   getCustomerRelation(crmID: number) {
-    const tempUrl = applicationUrl.crm.customerRelationUrl + '/' + crmID;
+    const tempUrl = applicationUrl.crm.find + '/' + crmID;
     return this.http.get<any>(tempUrl, httpOptions);
   }
 
   /** DELETE: delete the hero from the server */
-  // deleteHero(id: number): Observable<{}> {
-  //   const url = `${this.heroesUrl}/${id}`; // DELETE api/heroes/42
-  //   return this.http.delete(url, httpOptions)
-  //     .pipe(
-  //       catchError(this.handleError('deleteHero'))
-  //     );
-  // }
+  deleteHero(id: number): Observable<{}> {
+    const url = `${applicationUrl.crm.delete}/${id}`; // DELETE api/heroes/42
+    return this.http.delete(url, httpOptions)
+      .pipe(
+        catchError(this.handleError('deleteHero'))
+      );
+  }
 
   /** PUT: update the hero on the server. Returns the updated hero upon success. */
-  // updateHero(hero: CustomerRelation): Observable<CustomerRelation> {
-  //   httpOptions.headers =
-  //     httpOptions.headers.set('Authorization', 'my-new-auth-token');
+  updateHero(hero: CustomerRelation): Observable<CustomerRelation> {
+    httpOptions.headers =
+      httpOptions.headers.set('Authorization', 'my-new-auth-token');
 
-  //   return this.http.put<CustomerRelation>(this.heroesUrl, hero, httpOptions)
-  //     .pipe(
-  //       catchError(this.handleError('updateHero', hero))
-  //     );
-  // }
+    return this.http.put<CustomerRelation>(applicationUrl.crm.update, hero, httpOptions)
+      .pipe(
+        catchError(this.handleError('updateHero', hero))
+      );
+  }
 }
 
 
