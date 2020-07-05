@@ -113,6 +113,7 @@
 											formControlName="maritalStatus" placeholder="Marital Status"
 											[ngClass]="{ 'is-invalid': isFormSubmitted && crmForm.get('maritalStatus').errors,'is-valid': crmForm.get('maritalStatus').touched && !crmForm.get('maritalStatus').errors }">
 											<option value="">Select One</option>
+											<option [value]="status.value" *ngFor="let status of maritalStatus">{{status.name}}</option>
 										</select>
 										<div *ngIf="isFormSubmitted && crmForm.get('maritalStatus').errors" class="invalid-feedback">
 											<div *ngIf="crmForm.get('maritalStatus')?.errors?.required">
@@ -171,7 +172,7 @@
 									<div class="form-group">
 										<label class="form-control-label" for="field_dob">Date of Brith</label>
 										<div class="input-group">
-											<input id="field_dob" type="text" class="form-control" name="dob" ngbDatepicker
+											<input id="field_dob" type="text" class="form-control" name="dob"
 												formControlName="dob" placeholder="Enter Date of Birth" />
 											<span class="input-group-append">
 												<!-- <button type="button" class="btn btn-secondary" (click)="dobDp.toggle()">

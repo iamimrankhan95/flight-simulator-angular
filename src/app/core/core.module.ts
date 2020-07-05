@@ -8,6 +8,7 @@ import { HttpErrorHandler } from '../shared/services/http-error-handler.service'
 import { httpInterceptorProviders } from '../shared/services/http-interceptors';
 import { MessageService } from '../shared/services/message.service';
 import { AuthenticationService } from '../modules/auth/authentication.service';
+import { AddressHttpService } from '../shared/modules/address/address-http.service';
 
 
 
@@ -20,6 +21,11 @@ import { AuthenticationService } from '../modules/auth/authentication.service';
   imports: [
     SharedModule
   ],
-  providers: [AuthenticationService, HttpErrorHandler, httpInterceptorProviders, MessageService]
+  providers: [AuthenticationService,
+    HttpErrorHandler,
+    httpInterceptorProviders,
+    MessageService,
+    AddressHttpService
+  ]
 })
 export class CoreModule { }

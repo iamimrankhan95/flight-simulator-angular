@@ -18,7 +18,6 @@ const httpOptions = {
 
 @Injectable()
 export class CRMHttpService {
-  dataUrl = 'assets/data.json';
   private handleError: HandleError;
 
   constructor(

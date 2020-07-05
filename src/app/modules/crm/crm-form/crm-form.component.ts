@@ -5,6 +5,7 @@ import { IOption } from 'ng-select';
 import { CRMHttpService } from '../crm-http.service';
 import { ConfirmationDialogService } from '../../../shared/modules/notification/confirmation-dialog/confirmation-dialog.service';
 import { ToastrService } from 'ngx-toastr';
+import { Constants } from '../../../shared/enums/Constants';
 @Component({
   selector: 'app-crm-form',
   templateUrl: './crm-form.component.html',
@@ -12,6 +13,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class CRMFormComponent implements OnInit {
 
+  maritalStatus = Constants.maritalStatus;
   isFormSubmitted = false;
   complainantAddressForm = this.fb.group({
     presentAddressForm: this.fb.group({
@@ -67,7 +69,7 @@ export class CRMFormComponent implements OnInit {
     ticketStatus: ['', [Validators.required]],
     applicationType: ['', [Validators.required]],
   });
-  isParmanentSame: any;
+  isParmanentSame: any = false;
 
   constructor(private fb: FormBuilder,
     private crmHttpService: CRMHttpService,
@@ -97,10 +99,11 @@ export class CRMFormComponent implements OnInit {
   }
 
   async save() {
-    this.samePermanentAddress(this.isParmanentSame);
+    // await this.samePermanentAddress(this.isParmanentSame);
     this.isFormSubmitted = true;
-    console.log(this.crmForm.value);
+    console.log(this.crmForm);
     if (!this.crmForm.valid) {
+      console.log('not valid');
       return;
     }
     const confirm = await this.confirmationDialogService.confirm('Confirm Request',
@@ -122,7 +125,7 @@ export class CRMFormComponent implements OnInit {
   }
 
   samePermanentAddress(event: any): void {
-    this.isParmanentSame = event.target ? event.target.checked : event;
+    this.isParmanentSame = typeof(event) === 'boolean' ? event : event.target.checked;
     console.log(this.isParmanentSame);
     if (this.isParmanentSame) {
       const presentAddress = this.crmForm.get('complainantAddress').get('presentAddressForm').value;

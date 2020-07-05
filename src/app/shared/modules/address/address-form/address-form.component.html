@@ -8,7 +8,8 @@
 					placeholder="Enter House No"
 					[ngClass]="{ 'is-invalid': isFormSubmitted && parentFormGroup.get(addressOf).get(addressType).get('houseNo').errors,
 					'is-valid': parentFormGroup.get(addressOf).get(addressType).get('houseNo').touched && !parentFormGroup.get(addressOf).get(addressType).get('houseNo').errors }" />
-				<div *ngIf="isFormSubmitted && parentFormGroup.get(addressOf).get(addressType).get('houseNo').errors" class="invalid-feedback">
+				<div *ngIf="isFormSubmitted && parentFormGroup.get(addressOf).get(addressType).get('houseNo').errors"
+					class="invalid-feedback">
 					<div *ngIf="parentFormGroup.get(addressOf).get(addressType).get('houseNo')?.errors?.required">
 						houseNo is required.
 					</div>
@@ -20,7 +21,8 @@
 				<input type="text" class="form-control" name="streetNo" id="field_streetNo" formControlName="streetNo"
 					placeholder="Enter Street No"
 					[ngClass]="{ 'is-invalid': isFormSubmitted && parentFormGroup.get(addressOf).get(addressType).get('streetNo').errors,'is-valid': parentFormGroup.get(addressOf).get(addressType).get('streetNo').touched && !parentFormGroup.get(addressOf).get(addressType).get('streetNo').errors }" />
-				<div *ngIf="isFormSubmitted && parentFormGroup.get(addressOf).get(addressType).get('streetNo').errors" class="invalid-feedback">
+				<div *ngIf="isFormSubmitted && parentFormGroup.get(addressOf).get(addressType).get('streetNo').errors"
+					class="invalid-feedback">
 					<div *ngIf="parentFormGroup.get(addressOf).get(addressType).get('streetNo')?.errors?.required">
 						streetNo is required.
 					</div>
@@ -33,8 +35,10 @@
 					placeholder="Enter Division"
 					[ngClass]="{ 'is-invalid': isFormSubmitted && parentFormGroup.get(addressOf).get(addressType).get('division').errors,'is-valid': parentFormGroup.get(addressOf).get(addressType).get('division').touched && !parentFormGroup.get(addressOf).get(addressType).get('division').errors }">
 					<option value="">Select One</option>
+					<option [value]="division.id" *ngFor="let division of divisions">{{division.name}}</option>
 				</select>
-				<div *ngIf="isFormSubmitted && parentFormGroup.get(addressOf).get(addressType).get('division').errors" class="invalid-feedback">
+				<div *ngIf="isFormSubmitted && parentFormGroup.get(addressOf).get(addressType).get('division').errors"
+					class="invalid-feedback">
 					<div *ngIf="parentFormGroup.get(addressOf).get(addressType).get('division')?.errors?.required">
 						division is required.
 					</div>
@@ -47,8 +51,10 @@
 					placeholder="Enter District"
 					[ngClass]="{ 'is-invalid': isFormSubmitted && parentFormGroup.get(addressOf).get(addressType).get('district').errors,'is-valid': parentFormGroup.get(addressOf).get(addressType).get('district').touched && !parentFormGroup.get(addressOf).get(addressType).get('district').errors }">
 					<option value="">Select One</option>
+					<option [value]="district.id" *ngFor="let district of districts">{{district.name}}</option>
 				</select>
-				<div *ngIf="isFormSubmitted && parentFormGroup.get(addressOf).get(addressType).get('district').errors" class="invalid-feedback">
+				<div *ngIf="isFormSubmitted && parentFormGroup.get(addressOf).get(addressType).get('district').errors"
+					class="invalid-feedback">
 					<div *ngIf="parentFormGroup.get(addressOf).get(addressType).get('district')?.errors?.required">
 						district is required.
 					</div>
@@ -60,8 +66,10 @@
 				<select class="form-control" id="field_thana" name="thana" formControlName="thana" placeholder="Enter Thana"
 					[ngClass]="{ 'is-invalid': isFormSubmitted && parentFormGroup.get(addressOf).get(addressType).get('thana').errors,'is-valid': parentFormGroup.get(addressOf).get(addressType).get('thana').touched && !parentFormGroup.get(addressOf).get(addressType).get('thana').errors }">
 					<option value="">Select One</option>
+					<option [value]="thana.id" *ngFor="let thana of thanas">{{thana.name}}</option>
 				</select>
-				<div *ngIf="isFormSubmitted && parentFormGroup.get(addressOf).get(addressType).get('thana').errors" class="invalid-feedback">
+				<div *ngIf="isFormSubmitted && parentFormGroup.get(addressOf).get(addressType).get('thana').errors"
+					class="invalid-feedback">
 					<div *ngIf="parentFormGroup.get(addressOf).get(addressType).get('thana')?.errors?.required">
 						thana is required.
 					</div>

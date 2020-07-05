@@ -1,17 +1,17 @@
-import { IDivision } from './division.model';
-import { IDistrict } from './district.model';
-import { IThana } from './thana.model';
-import { IPostOffice } from './post-office.model';
+import { Division } from './division.model';
+import { IDistrict, District } from './district.model';
+import { IThana, Thana } from './thana.model';
+import { IPostOffice, PostOffice } from './post-office.model';
 
 
 export interface IAddress {
   id?: number;
   houseNo?: string;
   streetNo?: string;
-  division?: IDivision;
-  district?: IDistrict;
-  thana?: IThana;
-  postOffice?: IPostOffice;
+  division?: Division;
+  district?: District;
+  thana?: Thana;
+  postOffice?: PostOffice;
   divisionId?: number;
   districtId?: number;
   thanaId?: number;
