@@ -67,6 +67,7 @@ export class CRMFormComponent implements OnInit {
     ticketStatus: ['', [Validators.required]],
     applicationType: ['', [Validators.required]],
   });
+  isParmanentSame: any;
 
   constructor(private fb: FormBuilder,
     private crmHttpService: CRMHttpService,
@@ -96,6 +97,7 @@ export class CRMFormComponent implements OnInit {
   }
 
   async save() {
+    this.samePermanentAddress(this.isParmanentSame);
     this.isFormSubmitted = true;
     console.log(this.crmForm.value);
     if (!this.crmForm.valid) {
@@ -120,10 +122,12 @@ export class CRMFormComponent implements OnInit {
   }
 
   samePermanentAddress(event: any): void {
-    if (event.target.checked) {
-      const presentAddress = this.crmForm.get('presentAddress').value;
+    this.isParmanentSame = event.target ? event.target.checked : event;
+    console.log(this.isParmanentSame);
+    if (this.isParmanentSame) {
+      const presentAddress = this.crmForm.get('complainantAddress').get('presentAddressForm').value;
 
-      this.complainantAddressForm.get('parmanentAddressForm').patchValue({
+      this.crmForm.get('complainantAddress').get('permanentAddressForm').patchValue({
         houseNo: presentAddress.houseNo,
         streetNo: presentAddress.streetNo,
         thana: presentAddress.thana,
@@ -131,10 +135,9 @@ export class CRMFormComponent implements OnInit {
         division: presentAddress.division
       });
 
-      this.complainantAddressForm.get('parmanentAddressForm').disable({ onlySelf: true });
+      this.crmForm.get('complainantAddress').get('permanentAddressForm').disable({ onlySelf: true });
     } else {
-      console.log('unchecked');
-      this.complainantAddressForm.get('parmanentAddressForm').enable({ onlySelf: true });
+      this.crmForm.get('complainantAddress').get('permanentAddressForm').enable({ onlySelf: true });
     }
   }
 }
