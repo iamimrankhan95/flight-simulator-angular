@@ -1,30 +1,18 @@
 <div [formGroup]="parentFormGroup">
 	<div [formGroupName]="addressOf">
 		<div [formGroupName]="addressType">
-			<label for=""><b>{{addressOf === 'presentAddress' ? 'Present Address' :'Permanent Address'}}</b></label>
+			<label for=""><b>{{addressType === 'presentAddressForm' ? 'Present Address' :'Permanent Address'}}</b></label>
 			<div class="form-group">
-				<label class="form-control-label" for="field_houseNo">House No<span class="text-danger">*</span></label>
-				<input type="text" class="form-control" name="houseNo" id="field_houseNo" formControlName="houseNo"
-					placeholder="Enter House No"
-					[ngClass]="{ 'is-invalid': isFormSubmitted && parentFormGroup.get(addressOf).get(addressType).get('houseNo').errors,
-					'is-valid': parentFormGroup.get(addressOf).get(addressType).get('houseNo').touched && !parentFormGroup.get(addressOf).get(addressType).get('houseNo').errors }" />
-				<div *ngIf="isFormSubmitted && parentFormGroup.get(addressOf).get(addressType).get('houseNo').errors"
+				<label class="form-control-label" for="field_address">Address<span class="text-danger">*</span></label>
+				<textarea rows="3" type="text" class="form-control" name="address" id="field_address" formControlName="address"
+					placeholder="Enter House No., Street No."
+					[ngClass]="{ 'is-invalid': isFormSubmitted && parentFormGroup.get(addressOf).get(addressType).get('address').errors,
+					'is-valid': parentFormGroup.get(addressOf).get(addressType).get('address').touched && !parentFormGroup.get(addressOf).get(addressType).get('address').errors }">
+				</textarea>
+				<div *ngIf="isFormSubmitted && parentFormGroup.get(addressOf).get(addressType).get('address').errors"
 					class="invalid-feedback">
-					<div *ngIf="parentFormGroup.get(addressOf).get(addressType).get('houseNo')?.errors?.required">
-						houseNo is required.
-					</div>
-				</div>
-			</div>
-
-			<div class="form-group">
-				<label class="form-control-label" for="field_streetNo">Street No</label>
-				<input type="text" class="form-control" name="streetNo" id="field_streetNo" formControlName="streetNo"
-					placeholder="Enter Street No"
-					[ngClass]="{ 'is-invalid': isFormSubmitted && parentFormGroup.get(addressOf).get(addressType).get('streetNo').errors,'is-valid': parentFormGroup.get(addressOf).get(addressType).get('streetNo').touched && !parentFormGroup.get(addressOf).get(addressType).get('streetNo').errors }" />
-				<div *ngIf="isFormSubmitted && parentFormGroup.get(addressOf).get(addressType).get('streetNo').errors"
-					class="invalid-feedback">
-					<div *ngIf="parentFormGroup.get(addressOf).get(addressType).get('streetNo')?.errors?.required">
-						streetNo is required.
+					<div *ngIf="parentFormGroup.get(addressOf).get(addressType).get('address')?.errors?.required">
+						address is required.
 					</div>
 				</div>
 			</div>

@@ -6,6 +6,7 @@ import { CRMHttpService } from '../crm-http.service';
 import { ConfirmationDialogService } from '../../../shared/modules/notification/confirmation-dialog/confirmation-dialog.service';
 import { ToastrService } from 'ngx-toastr';
 import { Constants } from '../../../shared/enums/Constants';
+import { CustomerRelation } from '../../../shared/models/customer-relation.model';
 @Component({
   selector: 'app-crm-form',
   templateUrl: './crm-form.component.html',
@@ -17,16 +18,14 @@ export class CRMFormComponent implements OnInit {
   isFormSubmitted = false;
   complainantAddressForm = this.fb.group({
     presentAddressForm: this.fb.group({
-      houseNo: ['', [Validators.required]],
-      streetNo: [''],
+      address: ['', [Validators.required]],
       division: ['', [Validators.required]],
       district: ['', [Validators.required]],
       thana: ['', [Validators.required]],
       postOffice: ['']
     }),
     permanentAddressForm: this.fb.group({
-      houseNo: ['', [Validators.required]],
-      streetNo: [''],
+      address: ['', [Validators.required]],
       division: ['', [Validators.required]],
       district: ['', [Validators.required]],
       thana: ['', [Validators.required]],
@@ -36,8 +35,7 @@ export class CRMFormComponent implements OnInit {
 
   accusedOrganaizationAddressForm = this.fb.group({
     presentAddressForm: this.fb.group({
-      houseNo: ['', [Validators.required]],
-      streetNo: [''],
+      address: ['', [Validators.required]],
       division: ['', [Validators.required]],
       district: ['', [Validators.required]],
       thana: ['', [Validators.required]],
@@ -99,9 +97,10 @@ export class CRMFormComponent implements OnInit {
   }
 
   async save() {
-    // await this.samePermanentAddress(this.isParmanentSame);
+    const crmFormValue = this.samePermanentAddress(this.isParmanentSame);
+    console.log(crmFormValue);
+
     this.isFormSubmitted = true;
-    console.log(this.crmForm);
     if (!this.crmForm.valid) {
       console.log('not valid');
       return;
@@ -112,10 +111,9 @@ export class CRMFormComponent implements OnInit {
     );
 
     if (confirm) {
-      this.crmHttpService.addCustomerRelation(this.crmForm.value)
+      this.crmHttpService.addCustomerRelation(crmFormValue)
         .subscribe(
           () => {
-            console.log('success');
             this.toastr.success('CRM saved successfully', 'Successful');
           },
           (error) => console.log(error)
@@ -124,23 +122,27 @@ export class CRMFormComponent implements OnInit {
 
   }
 
-  samePermanentAddress(event: any): void {
-    this.isParmanentSame = typeof(event) === 'boolean' ? event : event.target.checked;
-    console.log(this.isParmanentSame);
+  samePermanentAddress(event: any): CustomerRelation {
+    let crmFormValue;
+    this.isParmanentSame = typeof (event) === 'boolean' ? event : event.target.checked;
     if (this.isParmanentSame) {
+      this.crmForm.get('complainantAddress').get('permanentAddressForm').enable();
       const presentAddress = this.crmForm.get('complainantAddress').get('presentAddressForm').value;
 
       this.crmForm.get('complainantAddress').get('permanentAddressForm').patchValue({
-        houseNo: presentAddress.houseNo,
-        streetNo: presentAddress.streetNo,
+        address: presentAddress.houseNo,
         thana: presentAddress.thana,
         district: presentAddress.district,
         division: presentAddress.division
       });
-
-      this.crmForm.get('complainantAddress').get('permanentAddressForm').disable({ onlySelf: true });
+      crmFormValue = this.crmForm.value;
+      // console.log(crmFormValue);
+      this.crmForm.get('complainantAddress').get('permanentAddressForm').disable();
     } else {
-      this.crmForm.get('complainantAddress').get('permanentAddressForm').enable({ onlySelf: true });
+      this.crmForm.get('complainantAddress').get('permanentAddressForm').enable();
+      crmFormValue = this.crmForm.value;
+      // console.log(crmFormValue);
     }
+    return crmFormValue;
   }
 }

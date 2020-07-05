@@ -24,7 +24,7 @@ export const applicationUrl = {
   },
   division: {
     get: environment.apiUrl + 'user/update-password',
-    dummyData: 'assets/division.json'
+    dummyData: 'assets/divisions.json'
   },
   district: {
     get: environment.apiUrl + 'user/update-password',
