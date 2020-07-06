@@ -11,14 +11,14 @@
 						<fieldset>
 							<legend>Customer Information</legend>
 							<div class="form-row">
-								<div class="col-md-4">
+								<div class="col-md-3">
 									<div class="form-group">
 										<label class="form-control-label" for="field_uniqueid">Unique Id</label>
 										<input type="text" class="form-control" name="uniqueid" id="field_uniqueid"
 											formControlName="uniqueid" readonly />
 									</div>
 								</div>
-								<div class="col-md-4">
+								<div class="col-md-3">
 									<div class="form-group">
 										<label class="form-control-label" for="field_msisdn">Msisdn<span
 												class="text-danger">*</span></label>
@@ -29,7 +29,7 @@
 										</div>
 									</div>
 								</div>
-								<div class="col-md-4">
+								<div class="col-md-3">
 									<div class="form-group">
 										<label class="form-control-label" for="field_ticketStatus">Ticket Status<span
 												class="text-danger">*</span></label>
@@ -41,9 +41,7 @@
 										</div>
 									</div>
 								</div>
-							</div>
-							<div class="form-row">
-								<div class="col-md-4">
+								<div class="col-md-3">
 									<div class="form-group">
 										<label class="form-control-label" for="field_applicationType">Application Type<span
 												class="text-danger">*</span></label>
@@ -55,7 +53,9 @@
 										</div>
 									</div>
 								</div>
-								<div class="col-md-4">
+							</div>
+							<div class="form-row">
+								<div class="col-md-3">
 									<div class="form-group">
 										<label class="form-control-label" for="field_contactNo">Contact No<span
 												class="text-danger">*</span></label>
@@ -69,7 +69,7 @@
 										</div>
 									</div>
 								</div>
-								<div class="col-md-4">
+								<div class="col-md-3">
 									<div class="form-group">
 										<label class="form-control-label" for="field_nidNumber">Nid Number<span
 												class="text-danger">*</span></label>
@@ -83,9 +83,7 @@
 										</div>
 									</div>
 								</div>
-							</div>
-							<div class="form-row">
-								<div class="col-md-4">
+								<div class="col-md-3">
 									<div class="form-group">
 										<label class="form-control-label" for="field_compliantName">Compliant Name<span
 												class="text-danger">*</span></label>
@@ -99,13 +97,15 @@
 										</div>
 									</div>
 								</div>
-								<div class="col-md-4">
+								<div class="col-md-3">
 									<div class="form-group">
 										<label class="form-control-label" for="field_email">Email</label>
 										<input type="text" class="form-control" name="email" id="field_email" formControlName="email" />
 									</div>
 								</div>
-								<div class="col-md-4">
+							</div>
+							<div class="form-row">
+								<div class="col-md-3">
 									<div class="form-group">
 										<label class="form-control-label" for="field_maritalStatus">Marital Status<span
 												class="text-danger">*</span></label>
@@ -118,6 +118,54 @@
 										<div *ngIf="isFormSubmitted && crmForm.get('maritalStatus').errors" class="invalid-feedback">
 											<div *ngIf="crmForm.get('maritalStatus')?.errors?.required">
 												Marital Status is required.
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-3">
+									<div class="form-group">
+										<label class="form-control-label" for="field_dob">Date of Brith</label>
+										<div class="input-group">
+											<input id="field_dob" type="text" class="form-control" name="dob" formControlName="dob"
+												placeholder="dd/mm/yyyy" (click)="t.toggle()" ngbDatepicker #t="ngbDatepicker"
+												[minDate]="fromMinDate" [maxDate]="fromMaxDate" />
+											<div class="input-group-append">
+												<button class="btn btn-outline-secondary fa fa-calendar fa-lg" (click)="t.toggle()"
+													type="button">
+												</button>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-3">
+									<div class="form-group">
+										<label class="form-control-label" for="field_gender">Gender<span
+												class="text-danger">*</span></label>
+										<select type="text" class="form-control" name="gender" id="field_gender" formControlName="gender"
+											[ngClass]="{ 'is-invalid': isFormSubmitted && crmForm.get('gender').errors,
+											'is-valid': crmForm.get('gender').touched && !crmForm.get('gender').errors }">
+											<option selected value="" disabled>Select One</option>
+											<option value="male">Male</option>
+											<option value="female">Female</option>
+											<option value="other">Other</option>
+										</select>
+										<div *ngIf="isFormSubmitted && crmForm.get('gender').errors" class="invalid-feedback">
+											<div *ngIf="crmForm.get('gender')?.errors?.required">
+												Gender is required.
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-3">
+									<div class="form-group">
+										<label class="form-control-label" for="field_occupation">Occupation<span
+												class="text-danger">*</span></label>
+										<input type="text" class="form-control" name="occupation" id="field_occupation"
+											formControlName="occupation"
+											[ngClass]="{ 'is-invalid': isFormSubmitted && crmForm.get('occupation').errors,'is-valid': crmForm.get('occupation').touched && !crmForm.get('occupation').errors }" />
+										<div *ngIf="isFormSubmitted && crmForm.get('occupation').errors" class="invalid-feedback">
+											<div *ngIf="crmForm.get('occupation')?.errors?.required">
+												Occupation is required.
 											</div>
 										</div>
 									</div>
@@ -162,49 +210,6 @@
 										<div *ngIf="isFormSubmitted && crmForm.get('motherName').errors" class="invalid-feedback">
 											<div *ngIf="crmForm.get('motherName')?.errors?.required">
 												Mother Name is required.
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="form-row">
-								<div class="col-md-4">
-									<div class="form-group">
-										<label class="form-control-label" for="field_dob">Date of Brith</label>
-										<div class="input-group">
-											<input id="field_dob" type="text" class="form-control" name="dob"
-												formControlName="dob" placeholder="Enter Date of Birth" />
-											<span class="input-group-append">
-												<!-- <button type="button" class="btn btn-secondary" (click)="dobDp.toggle()">
-                                                    <fa-icon icon="calendar-alt"></fa-icon>
-                                                </button> -->
-											</span>
-										</div>
-									</div>
-								</div>
-								<div class="col-md-4">
-									<div class="form-group">
-										<label class="form-control-label" for="field_gender">Gender<span
-												class="text-danger">*</span></label>
-										<input type="text" class="form-control" name="gender" id="field_gender" formControlName="gender"
-											[ngClass]="{ 'is-invalid': isFormSubmitted && crmForm.get('gender').errors,'is-valid': crmForm.get('gender').touched && !crmForm.get('gender').errors }" />
-										<div *ngIf="isFormSubmitted && crmForm.get('gender').errors" class="invalid-feedback">
-											<div *ngIf="crmForm.get('gender')?.errors?.required">
-												Gender is required.
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-md-4">
-									<div class="form-group">
-										<label class="form-control-label" for="field_occupation">Occupation<span
-												class="text-danger">*</span></label>
-										<input type="text" class="form-control" name="occupation" id="field_occupation"
-											formControlName="occupation"
-											[ngClass]="{ 'is-invalid': isFormSubmitted && crmForm.get('occupation').errors,'is-valid': crmForm.get('occupation').touched && !crmForm.get('occupation').errors }" />
-										<div *ngIf="isFormSubmitted && crmForm.get('occupation').errors" class="invalid-feedback">
-											<div *ngIf="crmForm.get('occupation')?.errors?.required">
-												Occupation is required.
 											</div>
 										</div>
 									</div>

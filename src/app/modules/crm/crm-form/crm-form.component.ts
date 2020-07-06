@@ -1,19 +1,26 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
-import { NgbDateStruct, NgbCalendar, NgbDatepicker } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDateStruct, NgbCalendar, NgbDatepicker, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import { IOption } from 'ng-select';
 import { CRMHttpService } from '../crm-http.service';
 import { ConfirmationDialogService } from '../../../shared/modules/notification/confirmation-dialog/confirmation-dialog.service';
 import { ToastrService } from 'ngx-toastr';
 import { Constants } from '../../../shared/enums/Constants';
 import { CustomerRelation } from '../../../shared/models/customer-relation.model';
+import { NgbDateCustomParserFormatter } from '../../../shared/modules/shared/pipes/date-fomatter';
 @Component({
   selector: 'app-crm-form',
   templateUrl: './crm-form.component.html',
   styleUrls: ['./crm-form.component.css'],
+  providers: [
+    { provide: NgbDateParserFormatter, useClass: NgbDateCustomParserFormatter }
+  ]
 })
 export class CRMFormComponent implements OnInit {
 
+  today = new Date();
+  fromMinDate = { year: this.today.getFullYear() - 100, month: 1, day: 1 };
+  fromMaxDate = { year: this.today.getFullYear(), month: this.today.getMonth() + 1, day: this.today.getDate() };
   maritalStatus = Constants.maritalStatus;
   isFormSubmitted = false;
   complainantAddressForm = this.fb.group({
