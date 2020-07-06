@@ -30,7 +30,7 @@ export class CRMHttpService {
   /** GET heroes from the server */
   getCustomerRelations(pageConfig: ICRMListPageConfig): Observable<any[]> {
     // const params = this.constructParam(pageConfig);
-    return this.http.get<any[]>(applicationUrl.crm.read)
+    return this.http.get<any[]>(applicationUrl.crm.dummyData)
       .pipe(
         tap((Response) => console.log(Response)),
         catchError(this.handleError('getCustomerRelations', []))

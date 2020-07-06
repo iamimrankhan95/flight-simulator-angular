@@ -13,7 +13,7 @@ export class CreateEscalationComponent implements OnInit {
   escalationForm = this.fb.group({
     id: [''],
     department: ['', [Validators.required]],
-    user: [''],
+    user: ['', [Validators.required]],
     message: ['']
   });
   constructor(private fb: FormBuilder) { }
@@ -23,15 +23,13 @@ export class CreateEscalationComponent implements OnInit {
   }
 
   submitEscalationForm() {
-    this.escalationFormEl.nativeElement.submit();
-    
+    this.onSubmitEscalationForm();
   }
 
-  onSubmitEscalationForm(){
-    console.log(this.escalationForm.value);
+  onSubmitEscalationForm() {
     this.isEscalationFormSubmitted = true;
-    ;console.log(this.escalationForm.value);
-    if(!this.escalationForm.valid){
+    console.log(this.escalationForm.value);
+    if (!this.escalationForm.valid) {
       return;
     }
   }

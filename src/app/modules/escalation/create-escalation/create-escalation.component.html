@@ -26,18 +26,18 @@
         </nav> -->
       <main>
         <p class="text-center" style="font-weight: bold;">Complain Escalation</p>
-        <form class="needs-validation" (ngSubmit)="onSubmitEscalationForm()" name="escalationForm" role="form" novalidate [formGroup]="escalationForm"
-          #escalationFormRef>
+        <form class="needs-validation" (ngSubmit)="onSubmitEscalationForm()" name="escalationForm" role="form"
+          novalidate [formGroup]="escalationForm" #escalationFormRef>
           <div class="form-row mb-3">
             <label for="cc" class="col-md-2 col-form-label">To Department:</label>
             <div class="col-md-10">
               <input type="email" class="form-control" name="department" id="field_department"
-                formControlName="department" placeholder="Type department name"
-                [ngClass]="{ 'is-invalid': isEscalationFormSubmitted && escalationForm.get('department').errors,'is-valid': escalationForm.get('department').touched && !escalationForm.get('department').errors }">
+                formControlName="department" placeholder="Type department name" [ngClass]="{ 'is-invalid': isEscalationFormSubmitted && escalationForm.get('department').errors,
+                'is-valid': escalationForm.get('department').touched && !escalationForm.get('department').errors }">
               <div *ngIf="isEscalationFormSubmitted && escalationForm.get('department').errors"
                 class="invalid-feedback">
                 <div *ngIf="escalationForm.get('department')?.errors?.required">
-                  Compliant Name is required.
+                  Department Name is required.
                 </div>
               </div>
             </div>
@@ -50,7 +50,7 @@
                 [ngClass]="{ 'is-invalid': isEscalationFormSubmitted && escalationForm.get('user').errors,'is-valid': escalationForm.get('user').touched && !escalationForm.get('user').errors }">
               <div *ngIf="isEscalationFormSubmitted && escalationForm.get('user').errors" class="invalid-feedback">
                 <div *ngIf="escalationForm.get('user')?.errors?.required">
-                  Compliant Name is required.
+                  User Name is required.
                 </div>
               </div>
             </div>
