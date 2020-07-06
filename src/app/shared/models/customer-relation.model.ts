@@ -30,5 +30,5 @@ export class CustomerRelation {
 
 class AddressType {
   presentAddressForm: Address;
-  permanentAddress: Address;
+  permanentAddressForm: Address;
 }
