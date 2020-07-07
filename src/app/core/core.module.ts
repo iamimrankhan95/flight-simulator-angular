@@ -9,6 +9,7 @@ import { httpInterceptorProviders } from '../shared/services/http-interceptors';
 import { MessageService } from '../shared/services/message.service';
 import { AuthenticationService } from '../modules/auth/authentication.service';
 import { AddressHttpService } from '../shared/modules/address/address-http.service';
+import { AppService } from '../app.service';
 
 
 
@@ -21,7 +22,9 @@ import { AddressHttpService } from '../shared/modules/address/address-http.servi
   imports: [
     SharedModule
   ],
-  providers: [AuthenticationService,
+  providers: [
+    AuthenticationService,
+    AppService,
     HttpErrorHandler,
     httpInterceptorProviders,
     MessageService,

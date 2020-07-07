@@ -145,9 +145,7 @@
 											[ngClass]="{ 'is-invalid': isFormSubmitted && crmForm.get('gender').errors,
 											'is-valid': crmForm.get('gender').touched && !crmForm.get('gender').errors }">
 											<option selected value="" disabled>Select One</option>
-											<option value="male">Male</option>
-											<option value="female">Female</option>
-											<option value="other">Other</option>
+											<option [value]="genderItem.value" *ngFor="let genderItem of gender">{{genderItem.name}}</option>
 										</select>
 										<div *ngIf="isFormSubmitted && crmForm.get('gender').errors" class="invalid-feedback">
 											<div *ngIf="crmForm.get('gender')?.errors?.required">

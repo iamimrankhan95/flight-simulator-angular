@@ -13,7 +13,7 @@ export class CustomerRelation {
   email: string;
   fatherName: string;
   gender: string;
-  id: string;
+  id: number;
   maritalStatus: string;
   motherName: string;
   msisdn: string;
@@ -28,7 +28,7 @@ export class CustomerRelation {
   }
 }
 
-class AddressType {
+export class AddressType {
   presentAddressForm: Address;
   permanentAddressForm: Address;
 }

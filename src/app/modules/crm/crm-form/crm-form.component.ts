@@ -22,6 +22,7 @@ export class CRMFormComponent implements OnInit {
   fromMinDate = { year: this.today.getFullYear() - 100, month: 1, day: 1 };
   fromMaxDate = { year: this.today.getFullYear(), month: this.today.getMonth() + 1, day: this.today.getDate() };
   maritalStatus = Constants.maritalStatus;
+  gender = Constants.gender;
   isFormSubmitted = false;
   complainantAddressForm = this.fb.group({
     presentAddressForm: this.fb.group({
