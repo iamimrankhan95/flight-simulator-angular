@@ -9,7 +9,7 @@ export class CustomerRelation {
   complainantAddress: AddressType;
   compliantName: string;
   contactNo: string;
-  dob: string;
+  dob: any;
   email: string;
   fatherName: string;
   gender: string;

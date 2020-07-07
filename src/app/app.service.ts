@@ -6,4 +6,7 @@ import { Injectable } from '@angular/core';
 export class AppService {
 
   constructor() { }
+  getLoggedInUser(){
+    return 1;
+  }
 }

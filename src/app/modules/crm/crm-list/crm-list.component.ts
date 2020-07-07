@@ -54,7 +54,10 @@ export class CrmListComponent implements OnInit, OnDestroy {
       searching: false
     };
 
-    this.crmHttpService.getCustomerRelations(this.pageConfig)
+    this.getCustomerRelations(this.pageConfig);
+  }
+  getCustomerRelations(pageConfig) {
+    this.crmHttpService.getCustomerRelations(pageConfig)
       .subscribe(
         (customerRelations: any) => {
           this.customerRelations = [...customerRelations];
@@ -84,7 +87,7 @@ export class CrmListComponent implements OnInit, OnDestroy {
   }
 
   onToDateSelect(event: any) {
-    this.crmHttpService.getCustomerRelations(this.pageConfig);
+    this.getCustomerRelations(this.pageConfig);
   }
 
   onEnter() {

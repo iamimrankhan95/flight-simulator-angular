@@ -82,17 +82,6 @@ export class CRMFormComponent implements OnInit {
     private confirmationDialogService: ConfirmationDialogService,
     private toastr: ToastrService) { }
 
-  // Datepicker
-
-  minDate = new Date(2017, 5, 10);
-  maxDate = new Date(2018, 9, 15);
-
-  bsValue: Date = new Date();
-  bsRangeValue: any = [new Date(2017, 7, 4), new Date(2017, 7, 20)];
-  dobDp: NgbDatepicker;
-
-  model: NgbDateStruct;
-  date: { year: number, month: number };
   ngOnInit(): void {
   }
 

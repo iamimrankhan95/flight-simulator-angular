@@ -8,6 +8,7 @@ import { catchError, tap } from 'rxjs/operators';
 import { HttpErrorHandler, HandleError } from '../../shared/services/http-error-handler.service';
 import { CustomerRelation } from '../../shared/models/customer-relation.model';
 import { ICRMListPageConfig } from './crm-list/icrm-list-page-config';
+import { CRMService } from './crm.service';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -22,15 +23,16 @@ export class CRMHttpService {
 
   constructor(
     private http: HttpClient,
-    httpErrorHandler: HttpErrorHandler
+    httpErrorHandler: HttpErrorHandler,
+    private crmService: CRMService
   ) {
     this.handleError = httpErrorHandler.createHandleError('CRMHttpService');
   }
 
   /** GET heroes from the server */
   getCustomerRelations(pageConfig: ICRMListPageConfig): Observable<any[]> {
-    // const params = this.constructParam(pageConfig);
-    return this.http.get<any[]>(applicationUrl.crm.dummyData)
+    const params = this.constructParam(pageConfig);
+    return this.http.get<any[]>(applicationUrl.crm.read, { params })
       .pipe(
         tap((Response) => console.log(Response)),
         catchError(this.handleError('getCustomerRelations', []))
@@ -66,7 +68,7 @@ export class CRMHttpService {
 
   /** POST: add a new hero to the database */
   addCustomerRelation(customerRelation: CustomerRelation): Observable<CustomerRelation> {
-    return this.http.post<CustomerRelation>(applicationUrl.crm.create, customerRelation, httpOptions)
+    return this.http.post<CustomerRelation>(applicationUrl.crm.create, this.crmService.convertToCrmDto(customerRelation), httpOptions)
       .pipe(
         catchError(this.handleError('addCustomerRelation', customerRelation))
       );

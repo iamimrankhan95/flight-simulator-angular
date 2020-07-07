@@ -10,6 +10,7 @@ import { MessageService } from '../shared/services/message.service';
 import { AuthenticationService } from '../modules/auth/authentication.service';
 import { AddressHttpService } from '../shared/modules/address/address-http.service';
 import { AppService } from '../app.service';
+import { NgbDateCustomParserFormatter } from '../shared/modules/shared/pipes/date-fomatter';
 
 
 
@@ -28,7 +29,8 @@ import { AppService } from '../app.service';
     HttpErrorHandler,
     httpInterceptorProviders,
     MessageService,
-    AddressHttpService
+    AddressHttpService,
+    NgbDateCustomParserFormatter
   ]
 })
 export class CoreModule { }
