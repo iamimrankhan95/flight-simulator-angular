@@ -27,27 +27,27 @@ export class CRMFormComponent implements OnInit {
   complainantAddressForm = this.fb.group({
     presentAddressForm: this.fb.group({
       address: ['', [Validators.required]],
-      division: ['', [Validators.required]],
-      district: ['', [Validators.required]],
-      thana: ['', [Validators.required]],
-      postOffice: ['']
+      divisionId: ['', [Validators.required]],
+      districtId: ['', [Validators.required]],
+      thanaId: ['', [Validators.required]],
+      postCode: ['']
     }),
     permanentAddressForm: this.fb.group({
       address: ['', [Validators.required]],
-      division: ['', [Validators.required]],
-      district: ['', [Validators.required]],
-      thana: ['', [Validators.required]],
-      postOffice: ['']
+      divisionId: ['', [Validators.required]],
+      districtId: ['', [Validators.required]],
+      thanaId: ['', [Validators.required]],
+      postCode: ['']
     })
   });
 
   accusedOrganaizationAddressForm = this.fb.group({
     presentAddressForm: this.fb.group({
       address: ['', [Validators.required]],
-      division: ['', [Validators.required]],
-      district: ['', [Validators.required]],
-      thana: ['', [Validators.required]],
-      postOffice: ['']
+      divisionId: ['', [Validators.required]],
+      districtId: ['', [Validators.required]],
+      thanaId: ['', [Validators.required]],
+      postCode: ['']
     })
   });
 

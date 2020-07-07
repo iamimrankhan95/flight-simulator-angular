@@ -9,7 +9,7 @@ export class Address {
   divisionId?: number;
   districtId?: number;
   thanaId?: number;
-  postOfficeId?: number;
+  postCode?: number;
   constructor(
   ) { }
 }
