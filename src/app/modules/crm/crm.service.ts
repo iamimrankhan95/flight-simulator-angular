@@ -15,8 +15,8 @@ export class CRMService {
     let crmDto = new CrmDto();
     crmDto.accusedOrganizationAddress = crm.accusedOrganizationAddress;
     crmDto.accusedOrganizationName = crm.accusedOrganizationName;
-    crmDto.agentid = crm.agentId;
-    crmDto.applicationTypeId = crm.applicationType;
+    crmDto.agentid = 1;
+    crmDto.applicationTypeId = 1;
     crmDto.complainantAddress = crm.complainantAddress;
     crmDto.complaintName = crm.compliantName;
     crmDto.contactNo = crm.contactNo;
@@ -24,17 +24,17 @@ export class CRMService {
     crmDto.email = crm.email;
     crmDto.fatherOrHusbandName = crm.maritalStatus === 'married' ? crm.spouseName : crm.fatherName;
     crmDto.genderId = crm.gender === 'male' ? 1 : 2;
-    crmDto.id = crm.id;
-    crmDto.isHusband = crm.maritalStatus === 'married' ? true : false;
+    crmDto.complainDate = this.parserFormatter.format({ year: new Date().getFullYear(), month: new Date().getMonth() + 1, day: new Date().getDate() }),
+      crmDto.isHusband = crm.maritalStatus === 'married' ? 1 : 0;
     crmDto.motherName = crm.motherName;
     crmDto.msisdn = crm.msisdn;
     crmDto.nidNumber = crm.nidNumber;
     crmDto.occupation = crm.occupation;
     crmDto.problemDescription = crm.problemDescription;
     crmDto.ticketStatusId = 1;
-    crmDto.uniqueId = crm.uniqueid;
     crmDto.departmentId = 1;
     crmDto.usersId = 1;
+    crmDto.companyId = 1;
     return crmDto;
   }
 }

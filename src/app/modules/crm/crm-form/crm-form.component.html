@@ -128,7 +128,7 @@
 										<div class="input-group">
 											<input id="field_dob" type="text" class="form-control" name="dob" formControlName="dob"
 												placeholder="dd/mm/yyyy" (click)="t.toggle()" ngbDatepicker #t="ngbDatepicker"
-												[minDate]="fromMinDate" [maxDate]="fromMaxDate"/>
+												[minDate]="fromMinDate" [maxDate]="fromMaxDate" />
 											<div class="input-group-append">
 												<button class="btn btn-outline-secondary fa fa-calendar fa-lg" (click)="t.toggle()"
 													type="button">
@@ -172,8 +172,7 @@
 							<div class="form-row">
 								<div class="col-md-4">
 									<div class="form-group">
-										<label class="form-control-label" for="field_spouseName">Spouse Name<span
-												class="text-danger">*</span></label>
+										<label class="form-control-label" for="field_spouseName">Spouse Name</label>
 										<input type="text" class="form-control" name="spouseName" id="field_spouseName"
 											formControlName="spouseName"
 											[ngClass]="{ 'is-invalid': isFormSubmitted && crmForm.get('spouseName').errors,'is-valid': crmForm.get('spouseName').touched && !crmForm.get('spouseName').errors }" />

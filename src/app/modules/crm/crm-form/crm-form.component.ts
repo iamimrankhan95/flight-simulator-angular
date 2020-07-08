@@ -125,13 +125,15 @@ export class CRMFormComponent implements OnInit {
     if (this.isParmanentSame) {
       this.crmForm.get('complainantAddress').get('permanentAddressForm').enable();
       const presentAddress = this.crmForm.get('complainantAddress').get('presentAddressForm').value;
-
+      console.log(presentAddress);
       this.crmForm.get('complainantAddress').get('permanentAddressForm').patchValue({
-        address: presentAddress.houseNo,
-        thana: presentAddress.thana,
-        district: presentAddress.district,
-        division: presentAddress.division
+        address: presentAddress.address,
+        thanaId: presentAddress.thanaId,
+        districtId: presentAddress.districtId,
+        divisionId: presentAddress.divisionId,
+        postCode: presentAddress.postCode
       });
+      console.log(this.crmForm.get('complainantAddress').get('permanentAddressForm').value);
       crmFormValue = this.crmForm.value;
       // console.log(crmFormValue);
       this.crmForm.get('complainantAddress').get('permanentAddressForm').disable();

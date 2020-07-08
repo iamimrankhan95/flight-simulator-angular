@@ -17,13 +17,12 @@ export class CrmDto {
   'fatherOrHusbandName': string;
   'genderId': number;
   'id': number;
-  'isHusband': boolean;
+  'isHusband': number;
   'motherName': string;
   'msisdn': string;
   'nidNumber': string;
   'occupation': string;
   'problemDescription': string;
   'ticketStatusId': number;
-  'uniqueId': string;
   'usersId': number;
 }
