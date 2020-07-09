@@ -1,11 +1,11 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { Division } from '../../../models/division.model';
-import { District } from '../../../models/district.model';
-import { Thana } from '../../../models/thana.model';
-import { PostOffice } from '../../../models/post-office.model';
 import { AddressHttpService } from '../address-http.service';
+import { DivisionDto } from '../../../models/dto/division-dto.model';
+import { DistrictDto } from '../../../models/dto/district-dto.model';
+import { ThanaDto } from '../../../models/dto/thana-dto.model';
+import { PostCodeDto } from '../../../models/dto/post-code-dto.model';
 
 @Component({
   selector: 'app-address-form',
@@ -18,10 +18,10 @@ export class AddressFormComponent implements OnInit {
   @Input() addressType: string;
   @Input() isFormSubmitted: boolean;
   isSaving = false;
-  divisions: Division[] = [];
-  districts: District[] = [];
-  thanas: Thana[] = [];
-  postoffices: PostOffice[] = [];
+  divisions: DivisionDto[] = [];
+  districts: DistrictDto[] = [];
+  thanas: ThanaDto[] = [];
+  postoffices: PostCodeDto[] = [];
   sizeQuery = { size: 9999 };
 
   constructor(
