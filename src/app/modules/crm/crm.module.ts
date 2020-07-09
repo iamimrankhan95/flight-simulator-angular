@@ -11,13 +11,11 @@ import { CrmDetailsComponent } from './crm-details/crm-details.component';
 import { CrmListComponent } from './crm-list/crm-list.component';
 import { DataTablesModule } from 'angular-datatables';
 import { NotificationModule } from '../../shared/modules/notification/notification.module';
-import { CrmEditComponent } from './crm-edit/crm-edit.component';
 @NgModule({
   declarations: [
     CRMFormComponent,
     CrmDetailsComponent,
     CrmListComponent,
-    CrmEditComponent,
   ],
   imports: [
     CRMRoutingModule,

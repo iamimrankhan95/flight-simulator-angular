@@ -3,7 +3,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { CRMFormComponent } from './crm-form/crm-form.component';
 import { CrmListComponent } from './crm-list/crm-list.component';
 import { CrmDetailsComponent } from './crm-details/crm-details.component';
-import { CrmEditComponent } from './crm-edit/crm-edit.component';
 
 
 const routes: Routes = [
@@ -21,11 +20,11 @@ const routes: Routes = [
   {
     path: 'details/:id', component: CrmDetailsComponent
   },
-  {
-    path: 'edit',  component: CrmEditComponent, data: {
-      title: 'Edit Customer Relation'
-    }
-  }
+  // {
+  //   path: 'edit',  component: CrmEditComponent, data: {
+  //     title: 'Edit Customer Relation'
+  //   }
+  // }
 ];
 
 @NgModule({
