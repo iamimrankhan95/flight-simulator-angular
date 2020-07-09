@@ -11,6 +11,7 @@ import { AuthenticationService } from '../modules/auth/authentication.service';
 import { AddressHttpService } from '../shared/modules/address/address-http.service';
 import { AppService } from '../app.service';
 import { NgbDateCustomParserFormatter } from '../shared/modules/shared/pipes/date-fomatter';
+import { AppHttpService } from '../app-http.service';
 
 
 
@@ -26,6 +27,7 @@ import { NgbDateCustomParserFormatter } from '../shared/modules/shared/pipes/dat
   providers: [
     AuthenticationService,
     AppService,
+    AppHttpService,
     HttpErrorHandler,
     httpInterceptorProviders,
     MessageService,
