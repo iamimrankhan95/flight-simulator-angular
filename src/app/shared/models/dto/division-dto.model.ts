@@ -4,5 +4,6 @@ export class DivisionDto {
     public id?: number,
     public name?: string,
     public banglaName?: string,
-    public shortName?: string) { }
+    public shortName?: string
+  ) { }
 }
