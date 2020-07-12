@@ -40,10 +40,6 @@ export class ListUserComponent implements OnInit, OnDestroy {
         console.log(response);
         this.userList = response;
         this.dtTrigger.next();
-      },
-      (error) => {
-        this.toastr.error('Something went wrong', 'Error');
-        console.log(error);
       }
     );
   }

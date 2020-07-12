@@ -111,9 +111,8 @@ export class CRMFormComponent implements OnInit {
       this.crmHttpService.addCustomerRelation(crmFormValue)
         .subscribe(
           () => {
-            this.toastr.success('CRM saved successfully', 'Successful');
-          },
-          (error) => console.log(error)
+            // this.toastr.success('CRM saved successfully', 'Successful');
+          }
         );
     }
 

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 
 import { Observable, of, throwError } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
 
 /** Type of the handleError function returned by HttpErrorHandler.createHandleError */
 export type HandleError =
@@ -10,7 +11,7 @@ export type HandleError =
 /** Handles HttpClient errors */
 @Injectable()
 export class HttpErrorHandler {
-  constructor() { }
+  constructor(private toastr: ToastrService) { }
 
   /** Create curried handleError function that already knows the service name */
   createHandleError = (serviceName = '') => <T>
@@ -28,16 +29,20 @@ export class HttpErrorHandler {
     return (error: HttpErrorResponse): Observable<T> => {
       // TODO: send the error to remote logging infrastructure
       console.error(error); // log to console instead
+      let message = '';
+      if (error.error instanceof ErrorEvent) {
+        // client-side error
+        message = error.error.message;
+      } else {
+        // server-side error
+        message = `server returned code ${error.status}`;
+      }
 
-      const message = (error.error instanceof ErrorEvent) ?
-        error.error.message :
-        `server returned code ${error.status} with body "${error.error}"`;
-
+      this.toastr.error('Something went wrong', 'Error');
       // TODO: better job of transforming error for user consumption
       console.log(`${serviceName}: ${operation} failed: ${message}`);
-
       // Let the app keep running by returning a safe result.
-      return throwError(result);
+      return of(result);
     };
 
   }

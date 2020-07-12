@@ -7,6 +7,7 @@ import { DistrictDto } from '../../../models/dto/district-dto.model';
 import { ThanaDto } from '../../../models/dto/thana-dto.model';
 import { PostCodeDto } from '../../../models/dto/post-code-dto.model';
 import { AppService } from '../../../../app.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-address-form',
@@ -29,15 +30,12 @@ export class AddressFormComponent implements OnInit {
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder,
     private addressHttpService: AddressHttpService,
-    private appService: AppService
+    private appService: AppService, private toastr: ToastrService
   ) { }
 
   ngOnInit(): void {
     this.appService.getDivisions().subscribe(
-      divisions => this.divisions = divisions,
-      (error) => {
-
-      }
+      divisions => this.divisions = divisions
     );
 
     this.addressHttpService.getDistricts().subscribe(

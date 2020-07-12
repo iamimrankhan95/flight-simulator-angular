@@ -15,13 +15,13 @@ export class UserDataService {
   };
 
   // Error Handling portions are commented out
-  // private handleError: HandleError;
+  private handleError: HandleError;
 
   constructor(
     private http: HttpClient,
-    // httpErrorHandler: HttpErrorHandler
+    httpErrorHandler: HttpErrorHandler
   ) {
-    // this.handleError = httpErrorHandler.createHandleError('UserDataService');
+    this.handleError = httpErrorHandler.createHandleError('UserDataService');
   }
 
   register(user: User) {
@@ -39,7 +39,7 @@ export class UserDataService {
     })
       .pipe(
         tap(_ => console.log(_)),
-        // catchError(this.handleError('getUsers', []))
+        catchError(this.handleError('getUsers', []))
       );
   }
 
