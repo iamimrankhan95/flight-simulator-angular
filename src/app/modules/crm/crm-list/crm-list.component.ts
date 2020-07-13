@@ -56,16 +56,14 @@ export class CrmListComponent implements OnInit, OnDestroy {
 
     this.getCustomerRelations(this.pageConfig);
   }
+
   getCustomerRelations(pageConfig) {
     this.crmHttpService.getCustomerRelations(pageConfig)
       .subscribe(
         (customerRelations: any) => {
           this.customerRelations = [...customerRelations];
           this.dtTrigger.next();
-        }, // success path
-        error => {
-          this.toastr.error('Something went wrong', 'Error');
-        } // error path
+        }
       );
   }
 
@@ -109,6 +107,7 @@ export class CrmListComponent implements OnInit, OnDestroy {
       this.placeHolderForSearchKey = 'Enter Ticket Number.';
     }
   }
+
   public clearFilters(): void {
     // this.mytime = void 0;
   }
@@ -124,6 +123,7 @@ export class CrmListComponent implements OnInit, OnDestroy {
   public assignCrm(): void {
     // this.mytime = void 0;
   }
+
   onFormDateChange(value) {
     if (value instanceof NgbDate === false) {
       this.pageConfig.fromDate = null;
@@ -131,6 +131,7 @@ export class CrmListComponent implements OnInit, OnDestroy {
     }
     this.pageConfig.toDate = null;
   }
+
   ngOnDestroy(): void {
     // Do not forget to unsubscribe the event
     this.dtTrigger.unsubscribe();

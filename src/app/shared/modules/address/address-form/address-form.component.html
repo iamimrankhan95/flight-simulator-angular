@@ -21,7 +21,7 @@
 					<div class="form-group">
 						<label class="form-control-label" for="field_division">Division<span class="text-danger">*</span></label>
 						<select class="form-control" id="field_division" name="division" formControlName="divisionId"
-							placeholder="Enter Division" [ngClass]="{ 'is-invalid': isFormSubmitted && parentFormGroup.get(addressOf).get(addressType).get('divisionId').errors,
+							(change)="onDivisionSelect($event.target.value)" placeholder="Enter Division" [ngClass]="{ 'is-invalid': isFormSubmitted && parentFormGroup.get(addressOf).get(addressType).get('divisionId').errors,
 							'is-valid': parentFormGroup.get(addressOf).get(addressType).get('divisionId').touched && 
 							!parentFormGroup.get(addressOf).get(addressType).get('divisionId').errors }">
 							<option value="">Select One</option>
@@ -39,7 +39,7 @@
 					<div class="form-group">
 						<label class="form-control-label" for="field_district">District<span class="text-danger">*</span></label>
 						<select class="form-control" id="field_district" name="district" formControlName="districtId"
-							placeholder="Enter District" [ngClass]="{ 'is-invalid': isFormSubmitted && parentFormGroup.get(addressOf).get(addressType).get('districtId').errors,
+							(change)="onDistrictSelect($event.target.value)" placeholder="Enter District" [ngClass]="{ 'is-invalid': isFormSubmitted && parentFormGroup.get(addressOf).get(addressType).get('districtId').errors,
 							'is-valid': parentFormGroup.get(addressOf).get(addressType).get('districtId').touched && 
 							!parentFormGroup.get(addressOf).get(addressType).get('districtId').errors }">
 							<option value="">Select One</option>
@@ -57,7 +57,7 @@
 					<div class="form-group">
 						<label class="form-control-label" for="field_thana">Thana<span class="text-danger">*</span></label>
 						<select class="form-control" id="field_thana" name="thana" formControlName="thanaId"
-							placeholder="Enter Thana"
+							placeholder="Enter Thana" (change)="onThanaSelect($event.target.value)"
 							[ngClass]="{ 'is-invalid': isFormSubmitted && parentFormGroup.get(addressOf).get(addressType).get('thanaId').errors,'is-valid': parentFormGroup.get(addressOf).get(addressType).get('thanaId').touched && !parentFormGroup.get(addressOf).get(addressType).get('thanaId').errors }">
 							<option value="">Select One</option>
 							<option [value]="thana.id" *ngFor="let thana of thanas">{{thana.thana}}</option>

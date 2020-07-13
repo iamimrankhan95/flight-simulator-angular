@@ -4,12 +4,13 @@ import { HttpHeaders } from '@angular/common/http';
 
 import { applicationUrl } from '../../shared/enums/application-urls';
 import { Observable } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
+import { catchError, tap, map } from 'rxjs/operators';
 import { HttpErrorHandler, HandleError } from '../../shared/services/http-error-handler.service';
 import { CustomerRelation } from '../../shared/models/customer-relation.model';
 import { ICRMListPageConfig } from './crm-list/icrm-list-page-config';
 import { CRMService } from './crm.service';
 import { ToastrService } from 'ngx-toastr';
+import { CrmDetailsDto } from '../../shared/models/dto/crm-details-dto';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -32,11 +33,20 @@ export class CRMHttpService {
   }
 
   /** GET heroes from the server */
-  getCustomerRelations(pageConfig: ICRMListPageConfig): Observable<any[]> {
-    const params = this.constructParam(pageConfig);
-    return this.http.get<any[]>(applicationUrl.crm.dummyData, { params })
+  getCustomerRelations(pageConfig: ICRMListPageConfig): Observable<CrmDetailsDto[]> {
+    // const params = this.constructParam(pageConfig);
+    return this.http.get<any[]>(applicationUrl.crm.read)
       .pipe(
-        tap((Response) => console.log(Response)),
+        map((response: any) => {
+          console.log(response);
+          return response;
+        }),
+        // tap((response: any) => {
+        //   if (response.status === 'SUCCESS') {
+        //     this.toastr.success('CRM loaded successfully!', 'Success')
+        //   }
+        //   console.log(response);
+        // }),
         catchError(this.handleError('getCustomerRelations', []))
       );
   }

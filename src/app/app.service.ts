@@ -13,7 +13,8 @@ export class AppService {
   divisions: DivisionDto[] = [];
   districts: DistrictDto[] = [];
   thanas: ThanaDto[] = [];
-
+  filteredDistrictListByDivisionId: DistrictDto[];
+  filteredThanaListByDistrictId: ThanaDto[];
   constructor(
     private appHttpService: AppHttpService
   ) { }
@@ -63,6 +64,36 @@ export class AppService {
           }
         );
       }
+    });
+  }
+
+  getDistrictsByDivisionId(divisionId): Observable<DistrictDto[]> {
+    return new Observable((observer: Observer<DistrictDto[]>) => {
+      // if (this.districts.length > 0) {
+      //   observer.next(this.districts);
+      // } else {
+      this.appHttpService.getDistrictsByDivisionId(divisionId).subscribe(
+        (districts: DistrictDto[]) => {
+          this.filteredDistrictListByDivisionId = districts;
+          observer.next(this.filteredDistrictListByDivisionId);
+        }
+      );
+      // }
+    });
+  }
+
+  getThanasByDistrictsId(districtId): Observable<ThanaDto[]> {
+    return new Observable((observer: Observer<ThanaDto[]>) => {
+      // if (this.thanas.length > 0) {
+      //   observer.next(this.thanas);
+      // } else {
+      this.appHttpService.getThanasByDistrictsId(districtId).subscribe(
+        (thanas: ThanaDto[]) => {
+          this.filteredThanaListByDistrictId = thanas;
+          observer.next(this.filteredThanaListByDistrictId);
+        }
+      );
+      // }
     });
   }
 }

@@ -25,6 +25,10 @@ export class AddressFormComponent implements OnInit {
   thanas: ThanaDto[] = [];
   postoffices: PostCodeDto[] = [];
   sizeQuery = { size: 9999 };
+  filteredDistrictListByDivisionId: DistrictDto[];
+  filteredThanaListByDistrictId: ThanaDto[];
+  selectedDivisionId: string;
+  selectedUpazilaId: string;
 
   constructor(
     protected activatedRoute: ActivatedRoute,
@@ -58,6 +62,28 @@ export class AddressFormComponent implements OnInit {
 
   protected onSaveError(): void {
     this.isSaving = false;
+  }
+
+  onDivisionSelect(divisionId: string) {
+    // this.filteredDistrictListByDivisionId = this.districts
+    //   .filter((district: DistrictDto) => district.id.toString() === divisionId);
+    // this.filteredUpazilaListByDistrictId = [];
+    // this.selectedDivisionId = divisionId;
+    this.appService.getDistrictsByDivisionId(divisionId).subscribe(
+      districts => this.districts = districts
+    );
+  }
+
+  onDistrictSelect(districtId: string) {
+    // this.filteredUpazilaListByDistrictId = this.thanas
+    //   .filter((upazila) => upazila.districtId.toString() === districtId);
+    this.appService.getThanasByDistrictsId(districtId).subscribe(
+      thanas => this.thanas = thanas
+    );
+  }
+
+  onThanaSelect(thanaId: string) {
+    // this.selectedUpazilaId = upazilaId;
   }
 
 }

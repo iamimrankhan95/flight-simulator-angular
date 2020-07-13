@@ -24,14 +24,17 @@ export const applicationUrl = {
   },
   division: {
     read: environment.apiUrl + 'data/division-list',
+    readById: environment.apiUrl + 'data/division-list',
     dummyData: 'assets/divisions.json'
   },
   district: {
     read: environment.apiUrl + 'data/district-list',
+    readByDivisionId: environment.apiUrl + 'data/division-wise-district-list/',
     dummyData: 'assets/districts.json'
   },
   thana: {
     read: environment.apiUrl + 'data/thana-list',
+    readByDistrictId: environment.apiUrl + 'data/district-wise-thana-list/',
     dummyData: 'assets/thanas.json'
   }
 }
