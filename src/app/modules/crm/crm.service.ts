@@ -22,10 +22,10 @@ export class CRMService {
     crmDto.contactNo = crm.contactNo;
     crmDto.dob = this.parserFormatter.format(crm.dob);
     crmDto.email = crm.email;
-    crmDto.fatherOrHusbandName = crm.maritalStatus === 'married' ? crm.spouseName : crm.fatherName;
+    crmDto.fatherOrHusbandName = crm.fatherOrHusbandName;
     crmDto.genderId = crm.gender === 'male' ? 1 : 2;
     crmDto.complainDate = this.parserFormatter.format({ year: new Date().getFullYear(), month: new Date().getMonth() + 1, day: new Date().getDate() }),
-      crmDto.isHusband = crm.maritalStatus === 'married' ? 1 : 0;
+    crmDto.isHusband = crm.isHusband ? 1 : 0;
     crmDto.motherName = crm.motherName;
     crmDto.msisdn = crm.msisdn;
     crmDto.nidNumber = crm.nidNumber;

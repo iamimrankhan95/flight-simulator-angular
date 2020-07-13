@@ -172,27 +172,24 @@
 							<div class="form-row">
 								<div class="col-md-4">
 									<div class="form-group">
-										<label class="form-control-label" for="field_spouseName">Spouse Name</label>
-										<input type="text" class="form-control" name="spouseName" id="field_spouseName"
-											formControlName="spouseName"
-											[ngClass]="{ 'is-invalid': isFormSubmitted && crmForm.get('spouseName').errors,'is-valid': crmForm.get('spouseName').touched && !crmForm.get('spouseName').errors }" />
-										<div *ngIf="isFormSubmitted && crmForm.get('spouseName').errors" class="invalid-feedback">
-											<div *ngIf="crmForm.get('spouseName')?.errors?.required">
-												Spouse Name is required.
+										<label class="form-control-label" for="field_fatherOrHusbandName">
+											<select class="" id="isHusband" name="isHusband" formControlName="isHusband" placeholder="" 
+											[ngStyle]="{'border-color':isFormSubmitted && crmForm.get('isHusband').errors ? 'red' : 'black'}">
+												<option value=true>Spouse</option>
+												<option value=false>Father</option>
+											</select> 
+											<div *ngIf="isFormSubmitted && crmForm.get('isHusband').errors">
+												<div *ngIf="crmForm.get('isHusband')?.errors?.required">
+													This field is required.
+												</div>
 											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-md-4">
-									<div class="form-group">
-										<label class="form-control-label" for="field_fatherName">Father Name<span
-												class="text-danger">*</span></label>
-										<input type="text" class="form-control" name="fatherName" id="field_fatherName"
-											formControlName="fatherName"
-											[ngClass]="{ 'is-invalid': isFormSubmitted && crmForm.get('fatherName').errors,'is-valid': crmForm.get('fatherName').touched && !crmForm.get('fatherName').errors }" />
-										<div *ngIf="isFormSubmitted && crmForm.get('fatherName').errors" class="invalid-feedback">
-											<div *ngIf="crmForm.get('fatherName')?.errors?.required">
-												Father Name is required.
+											Name<span class="text-danger">*</span></label>
+										<input type="text" class="form-control" name="fatherOrHusbandName" id="field_fatherOrHusbandName"
+											formControlName="fatherOrHusbandName" [ngClass]="{ 'is-invalid': isFormSubmitted && crmForm.get('fatherOrHusbandName').errors,
+											'is-valid': crmForm.get('fatherOrHusbandName').touched && !crmForm.get('fatherOrHusbandName').errors }" />
+										<div *ngIf="isFormSubmitted && crmForm.get('fatherOrHusbandName').errors" class="invalid-feedback">
+											<div *ngIf="crmForm.get('fatherOrHusbandName')?.errors?.required">
+												Father/Spouse name is required.
 											</div>
 										</div>
 									</div>
@@ -256,7 +253,7 @@
 						<fieldset>
 							<legend>Accused Organization Information</legend>
 							<div class="form-row">
-								<div class="col-md-12">
+								<div class="col-md-6">
 									<div class="form-group">
 										<label class="form-control-label" for="field_accusedOrganizationName">Accused Organization Name<span
 												class="text-danger">*</span></label>

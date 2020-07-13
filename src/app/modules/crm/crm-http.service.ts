@@ -9,6 +9,7 @@ import { HttpErrorHandler, HandleError } from '../../shared/services/http-error-
 import { CustomerRelation } from '../../shared/models/customer-relation.model';
 import { ICRMListPageConfig } from './crm-list/icrm-list-page-config';
 import { CRMService } from './crm.service';
+import { ToastrService } from 'ngx-toastr';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -24,7 +25,8 @@ export class CRMHttpService {
   constructor(
     private http: HttpClient,
     httpErrorHandler: HttpErrorHandler,
-    private crmService: CRMService
+    private crmService: CRMService,
+    private toastr: ToastrService
   ) {
     this.handleError = httpErrorHandler.createHandleError('CRMHttpService');
   }
@@ -68,8 +70,13 @@ export class CRMHttpService {
 
   /** POST: add a new hero to the database */
   addCustomerRelation(customerRelation: CustomerRelation): Observable<CustomerRelation> {
-    return this.http.post<CustomerRelation>(applicationUrl.crm.create, this.crmService.convertToCrmDto(customerRelation), httpOptions)
+    return this.http.post<any>(applicationUrl.crm.create, this.crmService.convertToCrmDto(customerRelation), httpOptions)
       .pipe(
+        tap((response) => {
+          if (response.status === 'SUCCESS') {
+            this.toastr.success('CRM saved successfully!', 'Success')
+          }
+        }),
         catchError(this.handleError('addCustomerRelation', customerRelation))
       );
   }
@@ -100,10 +107,3 @@ export class CRMHttpService {
       );
   }
 }
-
-
-/*
-Copyright Google LLC. All Rights Reserved.
-Use of this source code is governed by an MIT-style license that
-can be found in the LICENSE file at http://angular.io/license
-*/

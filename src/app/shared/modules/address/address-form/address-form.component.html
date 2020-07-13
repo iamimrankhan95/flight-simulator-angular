@@ -16,69 +16,74 @@
 					</div>
 				</div>
 			</div>
-
-			<div class="form-group">
-				<label class="form-control-label" for="field_division">Division<span class="text-danger">*</span></label>
-				<select class="form-control" id="field_division" name="division" formControlName="divisionId"
-					placeholder="Enter Division"
-					[ngClass]="{ 'is-invalid': isFormSubmitted && parentFormGroup.get(addressOf).get(addressType).get('divisionId').errors,
-					'is-valid': parentFormGroup.get(addressOf).get(addressType).get('divisionId').touched && 
-					!parentFormGroup.get(addressOf).get(addressType).get('divisionId').errors }">
-					<option value="">Select One</option>
-					<option [value]="division.id" *ngFor="let division of divisions">{{division.name}}</option>
-				</select>
-				<div *ngIf="isFormSubmitted && parentFormGroup.get(addressOf).get(addressType).get('divisionId').errors"
-					class="invalid-feedback">
-					<div *ngIf="parentFormGroup.get(addressOf).get(addressType).get('divisionId')?.errors?.required">
-						division is required.
+			<div class="form-row">
+				<div class="col-md-3">
+					<div class="form-group">
+						<label class="form-control-label" for="field_division">Division<span class="text-danger">*</span></label>
+						<select class="form-control" id="field_division" name="division" formControlName="divisionId"
+							placeholder="Enter Division" [ngClass]="{ 'is-invalid': isFormSubmitted && parentFormGroup.get(addressOf).get(addressType).get('divisionId').errors,
+							'is-valid': parentFormGroup.get(addressOf).get(addressType).get('divisionId').touched && 
+							!parentFormGroup.get(addressOf).get(addressType).get('divisionId').errors }">
+							<option value="">Select One</option>
+							<option [value]="division.id" *ngFor="let division of divisions">{{division.name}}</option>
+						</select>
+						<div *ngIf="isFormSubmitted && parentFormGroup.get(addressOf).get(addressType).get('divisionId').errors"
+							class="invalid-feedback">
+							<div *ngIf="parentFormGroup.get(addressOf).get(addressType).get('divisionId')?.errors?.required">
+								division is required.
+							</div>
+						</div>
 					</div>
 				</div>
-			</div>
-
-			<div class="form-group">
-				<label class="form-control-label" for="field_district">District<span class="text-danger">*</span></label>
-				<select class="form-control" id="field_district" name="district" formControlName="districtId"
-					placeholder="Enter District"
-					[ngClass]="{ 'is-invalid': isFormSubmitted && parentFormGroup.get(addressOf).get(addressType).get('districtId').errors,
-					'is-valid': parentFormGroup.get(addressOf).get(addressType).get('districtId').touched && 
-					!parentFormGroup.get(addressOf).get(addressType).get('districtId').errors }">
-					<option value="">Select One</option>
-					<option [value]="district.id" *ngFor="let district of districts">{{district.name}}</option>
-				</select>
-				<div *ngIf="isFormSubmitted && parentFormGroup.get(addressOf).get(addressType).get('districtId').errors"
-					class="invalid-feedback">
-					<div *ngIf="parentFormGroup.get(addressOf).get(addressType).get('districtId')?.errors?.required">
-						district is required.
+				<div class="col-md-3">
+					<div class="form-group">
+						<label class="form-control-label" for="field_district">District<span class="text-danger">*</span></label>
+						<select class="form-control" id="field_district" name="district" formControlName="districtId"
+							placeholder="Enter District" [ngClass]="{ 'is-invalid': isFormSubmitted && parentFormGroup.get(addressOf).get(addressType).get('districtId').errors,
+							'is-valid': parentFormGroup.get(addressOf).get(addressType).get('districtId').touched && 
+							!parentFormGroup.get(addressOf).get(addressType).get('districtId').errors }">
+							<option value="">Select One</option>
+							<option [value]="district.id" *ngFor="let district of districts">{{district.name}}</option>
+						</select>
+						<div *ngIf="isFormSubmitted && parentFormGroup.get(addressOf).get(addressType).get('districtId').errors"
+							class="invalid-feedback">
+							<div *ngIf="parentFormGroup.get(addressOf).get(addressType).get('districtId')?.errors?.required">
+								district is required.
+							</div>
+						</div>
 					</div>
 				</div>
-			</div>
-
-			<div class="form-group">
-				<label class="form-control-label" for="field_thana">Thana<span class="text-danger">*</span></label>
-				<select class="form-control" id="field_thana" name="thana" formControlName="thanaId" placeholder="Enter Thana"
-					[ngClass]="{ 'is-invalid': isFormSubmitted && parentFormGroup.get(addressOf).get(addressType).get('thanaId').errors,'is-valid': parentFormGroup.get(addressOf).get(addressType).get('thanaId').touched && !parentFormGroup.get(addressOf).get(addressType).get('thanaId').errors }">
-					<option value="">Select One</option>
-					<option [value]="thana.id" *ngFor="let thana of thanas">{{thana.name}}</option>
-				</select>
-				<div *ngIf="isFormSubmitted && parentFormGroup.get(addressOf).get(addressType).get('thanaId').errors"
-					class="invalid-feedback">
-					<div *ngIf="parentFormGroup.get(addressOf).get(addressType).get('thanaId')?.errors?.required">
-						thana is required.
+				<div class="col-md-3">
+					<div class="form-group">
+						<label class="form-control-label" for="field_thana">Thana<span class="text-danger">*</span></label>
+						<select class="form-control" id="field_thana" name="thana" formControlName="thanaId"
+							placeholder="Enter Thana"
+							[ngClass]="{ 'is-invalid': isFormSubmitted && parentFormGroup.get(addressOf).get(addressType).get('thanaId').errors,'is-valid': parentFormGroup.get(addressOf).get(addressType).get('thanaId').touched && !parentFormGroup.get(addressOf).get(addressType).get('thanaId').errors }">
+							<option value="">Select One</option>
+							<option [value]="thana.id" *ngFor="let thana of thanas">{{thana.name}}</option>
+						</select>
+						<div *ngIf="isFormSubmitted && parentFormGroup.get(addressOf).get(addressType).get('thanaId').errors"
+							class="invalid-feedback">
+							<div *ngIf="parentFormGroup.get(addressOf).get(addressType).get('thanaId')?.errors?.required">
+								thana is required.
+							</div>
+						</div>
 					</div>
 				</div>
-			</div>
-
-			<div class="form-group" hidden>
-				<label class="form-control-label" for="field_postOffice">Post Office<span class="text-danger">*</span></label>
-				<select class="form-control" id="field_postOffice" name="postOffice" formControlName="postCode"
-					placeholder="Enter Postoffice"
-					[ngClass]="{ 'is-invalid': isFormSubmitted && parentFormGroup.get(addressOf).get(addressType).get('postCode').errors,'is-valid': parentFormGroup.get(addressOf).get(addressType).get('postCode').touched && !parentFormGroup.get(addressOf).get(addressType).get('postCode').errors }">
-					<option value="">Select One</option>
-				</select>
-				<div *ngIf="isFormSubmitted && parentFormGroup.get(addressOf).get(addressType).get('postCode').errors"
-					class="invalid-feedback">
-					<div *ngIf="parentFormGroup.get(addressOf).get(addressType).get('postCode')?.errors?.required">
-						streetNo is required.
+				<div class="col-md-3">
+					<div class="form-group">
+						<label class="form-control-label" for="field_postOffice">Post Office<span
+								class="text-danger">*</span></label>
+						<input class="form-control" id="field_postOffice" name="postOffice" formControlName="postCode"
+							placeholder="Enter Post Code" [ngClass]="{ 'is-invalid': isFormSubmitted && parentFormGroup.get(addressOf).get(addressType).get('postCode').errors,
+							'is-valid': parentFormGroup.get(addressOf).get(addressType).get('postCode').touched && 
+							!parentFormGroup.get(addressOf).get(addressType).get('postCode').errors }" />
+						<div *ngIf="isFormSubmitted && parentFormGroup.get(addressOf).get(addressType).get('postCode').errors"
+							class="invalid-feedback">
+							<div *ngIf="parentFormGroup.get(addressOf).get(addressType).get('postCode')?.errors?.required">
+								Post Code is required.
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>

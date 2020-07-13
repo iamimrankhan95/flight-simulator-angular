@@ -63,8 +63,10 @@ export class CRMFormComponent implements OnInit {
     gender: ['', [Validators.required]],
     email: [''],
     maritalStatus: ['', [Validators.required]],
+    isHusband: [true, [Validators.required]],
     spouseName: ['', [Validators.required]],
     fatherName: ['', [Validators.required]],
+    fatherOrHusbandName: ['', [Validators.required]],
     motherName: ['', [Validators.required]],
     dob: [''],
     occupation: ['', [Validators.required]],
@@ -108,12 +110,7 @@ export class CRMFormComponent implements OnInit {
     );
 
     if (confirm) {
-      this.crmHttpService.addCustomerRelation(crmFormValue)
-        .subscribe(
-          () => {
-            // this.toastr.success('CRM saved successfully', 'Successful');
-          }
-        );
+      this.crmHttpService.addCustomerRelation(crmFormValue).subscribe();
     }
 
   }

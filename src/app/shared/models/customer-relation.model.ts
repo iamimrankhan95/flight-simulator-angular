@@ -14,6 +14,8 @@ export class CustomerRelation {
   fatherName: string;
   gender: string;
   id: number;
+  isHusband: boolean;
+  fatherOrHusbandName: string;
   maritalStatus: string;
   motherName: string;
   msisdn: string;
