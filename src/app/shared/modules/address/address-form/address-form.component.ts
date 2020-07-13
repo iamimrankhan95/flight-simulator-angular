@@ -38,11 +38,11 @@ export class AddressFormComponent implements OnInit {
       divisions => this.divisions = divisions
     );
 
-    this.addressHttpService.getDistricts().subscribe(
+    this.appService.getDistricts().subscribe(
       districts => this.districts = districts
     );
 
-    this.addressHttpService.getThanas().subscribe(
+    this.appService.getThanas().subscribe(
       thanas => this.thanas = thanas
     );
   }

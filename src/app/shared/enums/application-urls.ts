@@ -27,11 +27,11 @@ export const applicationUrl = {
     dummyData: 'assets/divisions.json'
   },
   district: {
-    get: environment.apiUrl + 'user/update-password',
+    read: environment.apiUrl + 'data/district-list',
     dummyData: 'assets/districts.json'
   },
   thana: {
-    get: environment.apiUrl + 'user/update-password',
+    read: environment.apiUrl + 'data/thana-list',
     dummyData: 'assets/thanas.json'
   }
 }

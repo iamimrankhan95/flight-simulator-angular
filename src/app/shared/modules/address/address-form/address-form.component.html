@@ -60,7 +60,7 @@
 							placeholder="Enter Thana"
 							[ngClass]="{ 'is-invalid': isFormSubmitted && parentFormGroup.get(addressOf).get(addressType).get('thanaId').errors,'is-valid': parentFormGroup.get(addressOf).get(addressType).get('thanaId').touched && !parentFormGroup.get(addressOf).get(addressType).get('thanaId').errors }">
 							<option value="">Select One</option>
-							<option [value]="thana.id" *ngFor="let thana of thanas">{{thana.name}}</option>
+							<option [value]="thana.id" *ngFor="let thana of thanas">{{thana.thana}}</option>
 						</select>
 						<div *ngIf="isFormSubmitted && parentFormGroup.get(addressOf).get(addressType).get('thanaId').errors"
 							class="invalid-feedback">
