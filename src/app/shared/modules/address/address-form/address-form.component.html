@@ -2,20 +2,6 @@
 	<div [formGroupName]="addressOf">
 		<div [formGroupName]="addressType">
 			<label for=""><b>{{addressType === 'presentAddressForm' ? 'Present Address' :'Permanent Address'}}</b></label>
-			<div class="form-group">
-				<label class="form-control-label" for="field_address">Address<span class="text-danger">*</span></label>
-				<textarea rows="3" type="text" class="form-control" name="address" id="field_address" formControlName="address"
-					placeholder="Enter House No., Street No."
-					[ngClass]="{ 'is-invalid': isFormSubmitted && parentFormGroup.get(addressOf).get(addressType).get('address').errors,
-					'is-valid': parentFormGroup.get(addressOf).get(addressType).get('address').touched && !parentFormGroup.get(addressOf).get(addressType).get('address').errors }">
-				</textarea>
-				<div *ngIf="isFormSubmitted && parentFormGroup.get(addressOf).get(addressType).get('address').errors"
-					class="invalid-feedback">
-					<div *ngIf="parentFormGroup.get(addressOf).get(addressType).get('address')?.errors?.required">
-						address is required.
-					</div>
-				</div>
-			</div>
 			<div class="form-row">
 				<div class="col-md-3">
 					<div class="form-group">
@@ -84,6 +70,20 @@
 								Post Code is required.
 							</div>
 						</div>
+					</div>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="form-control-label" for="field_address">Address<span class="text-danger">*</span></label>
+				<textarea rows="3" type="text" class="form-control" name="address" id="field_address" formControlName="address"
+					placeholder="Enter House No., Road No."
+					[ngClass]="{ 'is-invalid': isFormSubmitted && parentFormGroup.get(addressOf).get(addressType).get('address').errors,
+					'is-valid': parentFormGroup.get(addressOf).get(addressType).get('address').touched && !parentFormGroup.get(addressOf).get(addressType).get('address').errors }">
+				</textarea>
+				<div *ngIf="isFormSubmitted && parentFormGroup.get(addressOf).get(addressType).get('address').errors"
+					class="invalid-feedback">
+					<div *ngIf="parentFormGroup.get(addressOf).get(addressType).get('address')?.errors?.required">
+						address is required.
 					</div>
 				</div>
 			</div>

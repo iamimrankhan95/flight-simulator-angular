@@ -74,20 +74,16 @@
               Accused Org. Name
             </th>
             <th class="text-center" style="width: 20%">
-              Accused Org. Address
-            </th>
-            <th class="text-center" style="width: 20%">
               Options
             </th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let item of customerRelations">
-            <td>{{item.complainedOn | date}}</td>
-            <td class="text-center">{{item.uniqueid}}</td>
+            <td>{{item.complainDate | date}}</td>
+            <td class="text-center">{{item.uniqueId}}</td>
             <td class="text-center">{{item.contactNo}}</td>
             <td class="text-center">{{item.accusedOrganizationName}}</td>
-            <td class="text-center">{{item.accusedOrganizationAddress}}</td>
             <td>
               <a class="btn btn-info btn-sm" routerLink="../../crm/create">View Details</a>
             </td>

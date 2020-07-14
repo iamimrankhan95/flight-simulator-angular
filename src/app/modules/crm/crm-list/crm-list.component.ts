@@ -6,6 +6,7 @@ import { NgbCalendar, NgbDate, NgbDateParserFormatter, NgbInputDatepicker } from
 import { NgbDateCustomParserFormatter } from '../../../shared/modules/shared/pipes/date-fomatter';
 import { Subject } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
+import { CrmDtoForList } from '../../../shared/models/dto/crm-dto-for-list';
 @Component({
   selector: 'app-crm-list',
   templateUrl: './crm-list.component.html',
@@ -41,7 +42,7 @@ export class CrmListComponent implements OnInit, OnDestroy {
   @ViewChild('f') f: NgbInputDatepicker;
   @ViewChild('t') t: NgbInputDatepicker;
   // customerRelations: CustomerRelation[];
-  customerRelations: any[];
+  customerRelations: CrmDtoForList[] = [];
 
   constructor(private crmHttpService: CRMHttpService,
     private toastr: ToastrService) {

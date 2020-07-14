@@ -11,6 +11,7 @@ import { ICRMListPageConfig } from './crm-list/icrm-list-page-config';
 import { CRMService } from './crm.service';
 import { ToastrService } from 'ngx-toastr';
 import { CrmDetailsDto } from '../../shared/models/dto/crm-details-dto';
+import { CrmDtoForList } from '../../shared/models/dto/crm-dto-for-list';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -33,7 +34,7 @@ export class CRMHttpService {
   }
 
   /** GET heroes from the server */
-  getCustomerRelations(pageConfig: ICRMListPageConfig): Observable<CrmDetailsDto[]> {
+  getCustomerRelations(pageConfig: ICRMListPageConfig): Observable<CrmDtoForList[]> {
     // const params = this.constructParam(pageConfig);
     return this.http.get<any[]>(applicationUrl.crm.read)
       .pipe(
