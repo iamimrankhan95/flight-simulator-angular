@@ -8,14 +8,16 @@ export class User {
     public username?: string,
     public password?: string,
     public joiningDate?: string,
-    public active?: boolean) {
-      this.id = id;
-      this.name = name;
-      this.contactNo = contactNo;
-      this.email = email;
-      this.username = username;
-      this.password = password;
-      this.joiningDate = joiningDate;
-      this.active = active;
+    public active?: boolean,
+    public departmentId?: number,
+    public companyId?: number) {
+    this.id = id;
+    this.name = name;
+    this.contactNo = contactNo;
+    this.email = email;
+    this.username = username;
+    this.password = password;
+    this.joiningDate = joiningDate;
+    this.active = active;
   }
 }

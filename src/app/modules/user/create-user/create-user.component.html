@@ -102,7 +102,7 @@
                       <label class="col-form-label" for="password">Password</label>
                       <div class="input-group">
                         <input class="form-control" id="password" [type]="fieldTextType ? 'text' : 'password'"
-                          placeholder="Password" formControlName="password" required autofocus [ngClass]="{
+                          placeholder="Password" formControlName="password" required [ngClass]="{
                             'is-invalid': submitted && f.password.errors,
                             'is-valid': f.password.touched && !f.password.errors
                           }" />
@@ -141,6 +141,7 @@
                         [ngClass]="{ 'is-invalid': submitted && simpleForm.get('companyId').errors,
                         'is-valid': simpleForm.get('companyId').touched && !simpleForm.get('companyId').errors }">
                         <option value="">Select One</option>
+                        <option value="1">DNCRP</option>
                         <!-- <option [value]="status.value" *ngFor="let status of maritalStatus">{{status.name}}</option> -->
                       </select>
                       <div *ngIf="submitted && f['companyId'].errors" class="invalid-feedback">
@@ -159,6 +160,7 @@
                           [ngClass]="{ 'is-invalid': submitted && simpleForm.get('departmentId').errors,
                           'is-valid': simpleForm.get('departmentId').touched && !simpleForm.get('departmentId').errors }">
                           <option value="">Select One</option>
+                          <option value="1">DNCRP</option>
                           <!-- <option [value]="status.value" *ngFor="let status of maritalStatus">{{status.name}}</option> -->
                         </select>
                         <div *ngIf="submitted && f['departmentId'].errors" class="invalid-feedback">
@@ -192,7 +194,7 @@
                 </div>
                 <div class="form-group">
                   <button class="btn btn-primary" type="submit">
-                    Register
+                    {{isEditModel?'Update':'Register'}}
                     <div *ngIf="simpleForm.valid && submitted && !submissionError">
                       <app-otp-modal [contactNo]="userContactNo"></app-otp-modal>
                     </div>

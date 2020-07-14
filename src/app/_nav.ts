@@ -33,7 +33,7 @@ export const navItems: INavData[] = [
   },
   {
     name: 'User List',
-    url: '/home/users/users',
+    url: '/home/users/list',
     icon: 'fa fa-address-book'
   }
 ];

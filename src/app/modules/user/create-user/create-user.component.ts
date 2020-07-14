@@ -6,6 +6,8 @@ import { OtpService } from '../../../shared/modules/otp/otp.service';
 import { Subscription } from 'rxjs';
 import { ConfirmationDialogService } from '../../../shared/modules/notification/confirmation-dialog/confirmation-dialog.service';
 import { ToastrService } from 'ngx-toastr';
+import { ActivatedRoute, Router } from '@angular/router';
+import { User } from '../../../shared/models/user';
 
 @Component({
   selector: 'app-create-user',
@@ -42,13 +44,18 @@ export class CreateUserComponent implements OnInit, OnDestroy {
   public userContactNo: number;
   otpVerificationSubscription: Subscription;
   public passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
+  updateUserId: number;
+  isEditModel: boolean;
+  user: import("d:/Office/Projects/DNCRP-frontend/core-ui-base/src/app/shared/models/user").User;
+  loginUsername: any;
 
   constructor(
     private formbuilder: FormBuilder,
     private userDataService: UserDataService,
     private otpService: OtpService,
     private confirmationDialogService: ConfirmationDialogService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private route: ActivatedRoute, private router: Router,
   ) {
     this.maxDate.setDate(this.maxDate.getDate() + 0);
   }
@@ -59,10 +66,16 @@ export class CreateUserComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.createForm();
+    this.updateUserId = +this.route.snapshot.paramMap.get('id');
+    if (this.updateUserId) {
+      this.isEditModel = true;
+      this.getUserInfo();
+    }
   }
 
   createForm() {
     this.simpleForm = this.formbuilder.group({
+      id: [''],
       name: ['', [Validators.required]],
       contactNo: [
         '',
@@ -76,6 +89,32 @@ export class CreateUserComponent implements OnInit, OnDestroy {
       departmentId: ['', [Validators.required]],
       active: [''],
     });
+  }
+
+  getUserInfo() {
+    this.userDataService.getUser(this.updateUserId).subscribe(
+      (response) => {
+        console.log(response);
+        this.user = response;
+        this.setFormValues(this.user);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
+  setFormValues(info: User) {
+    this.f.id.setValue(this.updateUserId);
+    this.f.name.setValue(info.name);
+    this.f.contactNo.setValue(info.contactNo);
+    this.f.email.setValue(info.email);
+    this.f.joiningDate.setValue(info.joiningDate);
+    this.f.username.setValue(info.username);
+    this.f.password.setValue('');
+    this.f.companyId.setValue(info.companyId);
+    this.f.departmentId.setValue(info.departmentId);
+    this.f.active.setValue(info.active);
   }
 
   async onSubmit() {
@@ -97,29 +136,50 @@ export class CreateUserComponent implements OnInit, OnDestroy {
           )
         );
         console.log(this.simpleForm.value);
-        this.otpService.openOtpModal();
-        this.otpVerificationSubscription = this.otpService
-          .onOtpVerification()
-          .subscribe((isVerified) => {
-            if (isVerified) {
-              console.log('verified');
-              this.userDataService.register(this.simpleForm.value).subscribe(
-                (response) => {
-                  console.log(response);
-                  this.toastr.success('User created successfully', 'Successful');
-                  this.onReset();
-                },
-                (error) => {
-                  console.log(error);
-                  this.toastr.error('Something went wrong', 'Error');
-                  this.submitted = false;
+        if (this.isEditModel) {
+          this.userDataService
+            .updateUser(this.simpleForm.value)
+            .subscribe(
+              (response) => {
+                this.toastr.success('User Information Updated Successfully', 'Successful');
+                const user = JSON.parse(localStorage.getItem('loggedInUser'));
+                this.loginUsername = user.username;
+                if (this.simpleForm.get('username').value === this.loginUsername) {
+                  this.router.navigate(['/auth/login']);
+                } else {
+                  this.router.navigate(['/home/users/list']);
                 }
-              );
-            } else {
-              console.log('not verified');
-            }
-            this.otpVerificationSubscription.unsubscribe();
-          });
+              },
+              (error) => {
+                this.toastr.error('Something went wrong', 'Error');
+              }
+            );
+        } else {
+
+          this.otpService.openOtpModal();
+          this.otpVerificationSubscription = this.otpService
+            .onOtpVerification()
+            .subscribe((isVerified) => {
+              if (isVerified) {
+                console.log('verified');
+                this.userDataService.register(this.simpleForm.value).subscribe(
+                  (response) => {
+                    console.log(response);
+                    this.toastr.success('User created successfully', 'Successful');
+                    this.onReset();
+                  },
+                  (error) => {
+                    console.log(error);
+                    this.toastr.error('Something went wrong', 'Error');
+                    this.submitted = false;
+                  }
+                );
+              } else {
+                console.log('not verified');
+              }
+              this.otpVerificationSubscription.unsubscribe();
+            });
+        }
       }
       console.log('modal not touched');
     }

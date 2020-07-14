@@ -132,7 +132,7 @@ export class UpdateUserComponent implements OnInit {
             if (this.simpleForm.get('username').value === this.loginUsername) {
               this.router.navigate(['/auth/login']);
             } else {
-              this.router.navigate(['/home/users/users']);
+              this.router.navigate(['/home/users/list']);
             }
           },
           (error) => {

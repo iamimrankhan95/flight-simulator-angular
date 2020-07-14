@@ -15,12 +15,16 @@ const routes: Routes = [
     path: 'create',
     redirectTo: '',
   },
-  { path: 'users', component: ListUserComponent, data: { title: 'User List' } },
   {
-    path: 'update/:id',
-    component: UpdateUserComponent,
-    data: { title: 'Update User' },
+    path: 'create/:id',
+    component: CreateUserComponent,
   },
+  { path: 'list', component: ListUserComponent, data: { title: 'User List' } },
+  // {
+  //   path: 'update/:id',
+  //   component: UpdateUserComponent,
+  //   data: { title: 'Update User' },
+  // },
 ];
 
 @NgModule({
@@ -28,4 +32,4 @@ const routes: Routes = [
   imports: [CommonModule, RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class UserRoutingModule {}
+export class UserRoutingModule { }
