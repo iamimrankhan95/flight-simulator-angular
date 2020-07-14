@@ -18,6 +18,11 @@ const routes: Routes = [
     }
   },
   {
+    path: 'create/:id', component: CRMFormComponent, data: {
+      title: 'Update Customer Relation'
+    }
+  },
+  {
     path: 'details/:id', component: CrmDetailsComponent
   },
   // {

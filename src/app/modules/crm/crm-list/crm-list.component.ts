@@ -7,6 +7,7 @@ import { NgbDateCustomParserFormatter } from '../../../shared/modules/shared/pip
 import { Subject } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { CrmDtoForList } from '../../../shared/models/dto/crm-dto-for-list';
+import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-crm-list',
   templateUrl: './crm-list.component.html',
@@ -45,6 +46,7 @@ export class CrmListComponent implements OnInit, OnDestroy {
   customerRelations: CrmDtoForList[] = [];
 
   constructor(private crmHttpService: CRMHttpService,
+    private route: ActivatedRoute, private router: Router,
     private toastr: ToastrService) {
   }
 

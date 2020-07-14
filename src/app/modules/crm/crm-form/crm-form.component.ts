@@ -8,6 +8,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Constants } from '../../../shared/enums/Constants';
 import { CustomerRelation } from '../../../shared/models/customer-relation.model';
 import { NgbDateCustomParserFormatter } from '../../../shared/modules/shared/pipes/date-fomatter';
+import { ActivatedRoute, Router, Params } from '@angular/router';
 @Component({
   selector: 'app-crm-form',
   templateUrl: './crm-form.component.html',
@@ -78,17 +79,61 @@ export class CRMFormComponent implements OnInit {
     applicationType: ['', [Validators.required]],
   });
   isParmanentSame: any = false;
+  isEditModel = false;
+  crmIdToBeEdited: any;
+  isEditMode: boolean;
+  crmToBeEdited: void;
 
   constructor(private fb: FormBuilder,
     private crmHttpService: CRMHttpService,
     private confirmationDialogService: ConfirmationDialogService,
+    private route: ActivatedRoute, private router: Router,
     private toastr: ToastrService) { }
 
   ngOnInit(): void {
+    this.route.params.subscribe(
+      (params: Params) => {
+        this.crmIdToBeEdited = params['id'] ? params['id'] : null;
+        this.isEditMode = params['id'] != null;
+        if (this.isEditMode) {
+          this.getCrmById(+this.crmIdToBeEdited);
+        }
+      }
+    );
   }
 
-  initForms(): void {
+  getCrmById(crmIdToBeEdited: number) {
+    this.crmHttpService.getCustomerRelation(crmIdToBeEdited).subscribe(
+      crm => this.initFormForEdit(crm)
+    );
+  }
 
+  initFormForEdit(crm): void {
+    this.crmForm.patchValue({
+      id: crm.id,
+      uniqueid: crm.uniqueid,
+      agentId: crm.agentId,
+      msisdn: crm.msisdn,
+      contactNo: crm.contactNo,
+      nidNumber: crm.nidNumber,
+      compliantName: crm.compliantName,
+      gender: crm.gender,
+      email: crm.email,
+      // maritalStatus: crm.maritalStatus,
+      isHusband: crm.isHusband,
+      // spouseName: crm.spouseName,
+      // fatherName: crm.fatherName,
+      fatherOrHusbandName: crm.fatherOrHusbandName,
+      motherName: crm.motherName,
+      dob: crm.dob,
+      occupation: crm.occupation,
+      accusedOrganizationName: crm.accusedOrganizationName,
+      // accusedOrganizationAddress: crm.accusedOrganizationAddress,
+      problemDescription: crm.problemDescription,
+      // complainantAddress: crm.complainantAddress,
+      ticketStatus: crm.ticketStatus,
+      applicationType: crm.applicationType,
+    });
   }
 
   previousState(): void {
@@ -118,6 +163,7 @@ export class CRMFormComponent implements OnInit {
   samePermanentAddress(event: any): CustomerRelation {
     let crmFormValue;
     this.isParmanentSame = typeof (event) === 'boolean' ? event : event.target.checked;
+
     if (this.isParmanentSame) {
       this.crmForm.get('complainantAddress').get('permanentAddressForm').enable();
       const presentAddress = this.crmForm.get('complainantAddress').get('presentAddressForm').value;
@@ -129,6 +175,7 @@ export class CRMFormComponent implements OnInit {
         divisionId: presentAddress.divisionId,
         postCode: presentAddress.postCode
       });
+
       console.log(this.crmForm.get('complainantAddress').get('permanentAddressForm').value);
       crmFormValue = this.crmForm.value;
       // console.log(crmFormValue);

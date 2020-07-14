@@ -6,7 +6,7 @@ import { OtpService } from '../../../shared/modules/otp/otp.service';
 import { Subscription } from 'rxjs';
 import { ConfirmationDialogService } from '../../../shared/modules/notification/confirmation-dialog/confirmation-dialog.service';
 import { ToastrService } from 'ngx-toastr';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, Params } from '@angular/router';
 import { User } from '../../../shared/models/user';
 
 @Component({
@@ -45,8 +45,8 @@ export class CreateUserComponent implements OnInit, OnDestroy {
   otpVerificationSubscription: Subscription;
   public passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
   updateUserId: number;
-  isEditModel: boolean;
-  user: import("d:/Office/Projects/DNCRP-frontend/core-ui-base/src/app/shared/models/user").User;
+  isEditMode: boolean = false;
+  user: User;
   loginUsername: any;
 
   constructor(
@@ -66,11 +66,15 @@ export class CreateUserComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.createForm();
-    this.updateUserId = +this.route.snapshot.paramMap.get('id');
-    if (this.updateUserId) {
-      this.isEditModel = true;
-      this.getUserInfo();
-    }
+    this.route.params.subscribe(
+      (params: Params) => {
+        this.updateUserId = params['id'] ? +params['id'] : null;
+        this.isEditMode = params['id'] != null;
+        if (this.isEditMode) {
+          this.getUserInfo();
+        }
+      }
+    );
   }
 
   createForm() {
@@ -121,7 +125,7 @@ export class CreateUserComponent implements OnInit, OnDestroy {
     this.submitted = true;
     if (this.simpleForm.valid) {
 
-      if (this.isEditModel) {
+      if (this.isEditMode) {
         const confirm = await this.confirmationDialogService.confirm(
           'Confirmation',
           'Are you sure you want to Update this User?',

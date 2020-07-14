@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { User } from '../../shared/models/user';
-import { tap, catchError } from 'rxjs/operators';
+import { tap, catchError, map } from 'rxjs/operators';
 import { HttpErrorHandler, HandleError } from '../../shared/services/http-error-handler.service';
 import { applicationUrl } from '../../shared/enums/application-urls';
 
@@ -38,6 +38,9 @@ export class UserDataService {
       responseType: 'json'
     })
       .pipe(
+        map((response) => {
+          return response.responseList;
+        }),
         tap(_ => console.log(_)),
         catchError(this.handleError('getUsers', []))
       );
@@ -56,11 +59,14 @@ export class UserDataService {
 
   getUser(userId: number) {
     const tempUrl = applicationUrl.user.readByID + '/' + userId;
-    return this.http.get<User>(tempUrl);
-    // .pipe(
-    //   tap((_) => console.log(`fetched user id=${userId}`)),
-    //   catchError(this.handleError<User>(`getUser id=${userId}`))
-    // );
+    return this.http.get<any>(tempUrl)
+    .pipe(
+      map((response) => {
+        return response.responseObject;
+      }),
+      tap((_) => console.log(`fetched user id=${userId}`)),
+      catchError(this.handleError<User>(`getUser id=${userId}`))
+    );
   }
 
   updateUser(user: User) {

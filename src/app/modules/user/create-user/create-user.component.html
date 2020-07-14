@@ -194,7 +194,7 @@
                 </div>
                 <div class="form-group">
                   <button class="btn btn-primary" type="submit">
-                    {{isEditModel?'Update':'Register'}}
+                    {{isEditMode?'Update':'Register'}}
                     <div *ngIf="simpleForm.valid && submitted && !submissionError">
                       <app-otp-modal [contactNo]="userContactNo"></app-otp-modal>
                     </div>

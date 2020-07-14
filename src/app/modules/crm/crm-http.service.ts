@@ -38,16 +38,16 @@ export class CRMHttpService {
     // const params = this.constructParam(pageConfig);
     return this.http.get<any[]>(applicationUrl.crm.read)
       .pipe(
+        tap((response: any) => {
+          if (response.status === 'SUCCESS') {
+            this.toastr.success('CRM loaded successfully!', 'Success')
+          }
+          console.log(response);
+        }),
         map((response: any) => {
           console.log(response);
-          return response;
+          return response.responseList;
         }),
-        // tap((response: any) => {
-        //   if (response.status === 'SUCCESS') {
-        //     this.toastr.success('CRM loaded successfully!', 'Success')
-        //   }
-        //   console.log(response);
-        // }),
         catchError(this.handleError('getCustomerRelations', []))
       );
   }
@@ -94,8 +94,20 @@ export class CRMHttpService {
 
   // Get information on specific crm
   getCustomerRelation(crmID: number) {
-    const tempUrl = applicationUrl.crm.find + '/' + crmID;
-    return this.http.get<any>(tempUrl, httpOptions);
+    return this.http.get<any>(applicationUrl.crm.find + crmID)
+      .pipe(
+        tap((response: any) => {
+          if (response.status === 'SUCCESS') {
+            this.toastr.success('CRM loaded successfully!', 'Success');
+          }
+          console.log(response);
+        }),
+        // map((response: any) => {
+        //   console.log(response);
+        //   return response.responseObject;
+        // }),
+        catchError(this.handleError('getCustomerRelations', {}))
+      );
   }
 
   /** DELETE: delete the hero from the server */
