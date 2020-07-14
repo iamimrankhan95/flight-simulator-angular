@@ -52,6 +52,7 @@ export class CreateUserComponent implements OnInit, OnDestroy {
   ) {
     this.maxDate.setDate(this.maxDate.getDate() + 0);
   }
+
   ngOnDestroy(): void {
     // this.otpVerificationSubscription.unsubscribe();
   }
@@ -71,28 +72,30 @@ export class CreateUserComponent implements OnInit, OnDestroy {
       username: ['', [Validators.required]],
       password: ['', [Validators.required, Validators.minLength(8), Validators.pattern(this.passwordRegex)]],
       joiningDate: [this.maxDate, [Validators.required]],
+      companyId: ['', [Validators.required]],
+      departmentId: ['', [Validators.required]],
       active: [''],
     });
   }
 
   async onSubmit() {
     this.submitted = true;
-      if (this.simpleForm.valid) {
-        const confirm = await this.confirmationDialogService.confirm(
-          'Confirmation',
-          'Are you sure you want to CREATE a New User?',
-          'Yes',
-          'No',
-          'md'
+    if (this.simpleForm.valid) {
+      const confirm = await this.confirmationDialogService.confirm(
+        'Confirmation',
+        'Are you sure you want to CREATE a New User?',
+        'Yes',
+        'No',
+        'md'
+      );
+      if (confirm) {
+        this.f.joiningDate.setValue(
+          formatDate(
+            this.simpleForm.get('joiningDate').value,
+            'dd/MM/yyyy',
+            'en-UK'
+          )
         );
-        if (confirm) {
-            this.f.joiningDate.setValue(
-              formatDate(
-                this.simpleForm.get('joiningDate').value,
-                'dd/MM/yyyy',
-                'en-UK'
-              )
-            );
         console.log(this.simpleForm.value);
         this.otpService.openOtpModal();
         this.otpVerificationSubscription = this.otpService
