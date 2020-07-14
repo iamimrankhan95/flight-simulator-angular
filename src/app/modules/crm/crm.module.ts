@@ -11,6 +11,7 @@ import { CrmDetailsComponent } from './crm-details/crm-details.component';
 import { CrmListComponent } from './crm-list/crm-list.component';
 import { DataTablesModule } from 'angular-datatables';
 import { NotificationModule } from '../../shared/modules/notification/notification.module';
+import { EscalationModule } from '../escalation/escalation.module';
 @NgModule({
   declarations: [
     CRMFormComponent,
@@ -23,7 +24,8 @@ import { NotificationModule } from '../../shared/modules/notification/notificati
     AddressModule,
     FontAwesomeModule,
     DataTablesModule,
-    NotificationModule
+    NotificationModule,
+    EscalationModule
   ],
   providers: [CRMHttpService, CRMService]
 })

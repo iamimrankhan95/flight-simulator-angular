@@ -1,0 +1,25 @@
+<div class=" animated fadeIn">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          Application status
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-3">
+              <div class="form-group">
+                <label class="form-control-label" for="field_ticketStatus">Ticket Status</label>
+                <select class="form-control" id="field_ticketStatus" name="ticketStatus" [(ngModel)]="selectedStatus">
+                  <option value="">Select One</option>
+                  <option [value]="ticketStatus.id" *ngFor="let ticketStatus of ticketStatuses">{{ticketStatus.name}}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <app-create-escalation></app-create-escalation>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

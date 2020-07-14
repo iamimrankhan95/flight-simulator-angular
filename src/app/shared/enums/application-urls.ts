@@ -36,5 +36,10 @@ export const applicationUrl = {
     read: environment.apiUrl + 'data/thana-list',
     readByDistrictId: environment.apiUrl + 'data/district-wise-thana-list/',
     dummyData: 'assets/thanas.json'
+  },
+  ticket: {
+    status: {
+      read: environment.apiUrl + 'data/ticket-status-list',
+    }
   }
 }
