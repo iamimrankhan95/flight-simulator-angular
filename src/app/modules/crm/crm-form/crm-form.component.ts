@@ -100,10 +100,10 @@ export class CRMFormComponent implements OnInit {
     console.log(crmFormValue);
 
     this.isFormSubmitted = true;
-    // if (!this.crmForm.valid) {
-    //   console.log('not valid');
-    //   return;
-    // }
+    if (!this.crmForm.valid) {
+      console.log('not valid');
+      return;
+    }
     const confirm = await this.confirmationDialogService.confirm('Confirm Request',
       'Are you sure about creating this CRM',
       'Yes', 'No', 'md'

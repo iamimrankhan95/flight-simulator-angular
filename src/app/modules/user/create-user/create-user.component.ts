@@ -120,23 +120,24 @@ export class CreateUserComponent implements OnInit, OnDestroy {
   async onSubmit() {
     this.submitted = true;
     if (this.simpleForm.valid) {
-      const confirm = await this.confirmationDialogService.confirm(
-        'Confirmation',
-        'Are you sure you want to CREATE a New User?',
-        'Yes',
-        'No',
-        'md'
-      );
-      if (confirm) {
-        this.f.joiningDate.setValue(
-          formatDate(
-            this.simpleForm.get('joiningDate').value,
-            'dd/MM/yyyy',
-            'en-UK'
-          )
+
+      if (this.isEditModel) {
+        const confirm = await this.confirmationDialogService.confirm(
+          'Confirmation',
+          'Are you sure you want to Update this User?',
+          'Yes',
+          'No',
+          'md'
         );
-        console.log(this.simpleForm.value);
-        if (this.isEditModel) {
+        if (confirm) {
+          this.f.joiningDate.setValue(
+            formatDate(
+              this.simpleForm.get('joiningDate').value,
+              'dd/MM/yyyy',
+              'en-UK'
+            )
+          );
+
           this.userDataService
             .updateUser(this.simpleForm.value)
             .subscribe(
@@ -154,8 +155,24 @@ export class CreateUserComponent implements OnInit, OnDestroy {
                 this.toastr.error('Something went wrong', 'Error');
               }
             );
-        } else {
+        }
+      } else {
 
+        const confirm = await this.confirmationDialogService.confirm(
+          'Confirmation',
+          'Are you sure you want to CREATE a New User?',
+          'Yes',
+          'No',
+          'md'
+        );
+        if (confirm) {
+          this.f.joiningDate.setValue(
+            formatDate(
+              this.simpleForm.get('joiningDate').value,
+              'dd/MM/yyyy',
+              'en-UK'
+            )
+          );
           this.otpService.openOtpModal();
           this.otpVerificationSubscription = this.otpService
             .onOtpVerification()
@@ -180,6 +197,7 @@ export class CreateUserComponent implements OnInit, OnDestroy {
               this.otpVerificationSubscription.unsubscribe();
             });
         }
+
       }
       console.log('modal not touched');
     }
