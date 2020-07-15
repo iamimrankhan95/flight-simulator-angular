@@ -6,8 +6,8 @@ export class Constants {
         { value: 'divorced', name: 'Divorced' },
     ];
     public static readonly gender = [
-        { value: 'male', name: 'Male' },
-        { value: 'female', name: 'Female' },
-        { value: 'other', name: 'Other' },
+        { id: 1, name: 'Male' },
+        { id: 2, name: 'Female' },
+        { id: 3, name: 'Other' },
     ];
 }

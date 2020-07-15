@@ -9,6 +9,7 @@ import { Constants } from '../../../shared/enums/Constants';
 import { CustomerRelation } from '../../../shared/models/customer-relation.model';
 import { NgbDateCustomParserFormatter } from '../../../shared/modules/shared/pipes/date-fomatter';
 import { ActivatedRoute, Router, Params } from '@angular/router';
+import { CrmDto } from '../../../shared/models/dto/crm-dto';
 @Component({
   selector: 'app-crm-form',
   templateUrl: './crm-form.component.html',
@@ -49,6 +50,13 @@ export class CRMFormComponent implements OnInit {
       districtId: ['', [Validators.required]],
       thanaId: ['', [Validators.required]],
       postCode: ['']
+    }),
+    permanentAddressForm: this.fb.group({
+      address: [''],
+      divisionId: ['',],
+      districtId: ['',],
+      thanaId: ['',],
+      postCode: ['']
     })
   });
 
@@ -63,10 +71,10 @@ export class CRMFormComponent implements OnInit {
     compliantName: ['', [Validators.required]],
     gender: ['', [Validators.required]],
     email: [''],
-    maritalStatus: ['', [Validators.required]],
+    maritalStatus: [''],
     isHusband: [true, [Validators.required]],
-    spouseName: ['', [Validators.required]],
-    fatherName: ['', [Validators.required]],
+    spouseName: [''],
+    fatherName: [''],
     fatherOrHusbandName: ['', [Validators.required]],
     motherName: ['', [Validators.required]],
     dob: [''],
@@ -79,9 +87,8 @@ export class CRMFormComponent implements OnInit {
     applicationType: ['', [Validators.required]],
   });
   isParmanentSame: any = false;
-  isEditModel = false;
+  isEditMode = false;
   crmIdToBeEdited: any;
-  isEditMode: boolean;
   crmToBeEdited: void;
 
   constructor(private fb: FormBuilder,
@@ -104,11 +111,11 @@ export class CRMFormComponent implements OnInit {
 
   getCrmById(crmIdToBeEdited: number) {
     this.crmHttpService.getCustomerRelation(crmIdToBeEdited).subscribe(
-      crm => this.initFormForEdit(crm)
+      (crm: CustomerRelation) => this.initFormForEdit(crm)
     );
   }
 
-  initFormForEdit(crm): void {
+  initFormForEdit(crm: CustomerRelation): void {
     this.crmForm.patchValue({
       id: crm.id,
       uniqueid: crm.uniqueid,
@@ -119,18 +126,16 @@ export class CRMFormComponent implements OnInit {
       compliantName: crm.compliantName,
       gender: crm.gender,
       email: crm.email,
-      // maritalStatus: crm.maritalStatus,
+      maritalStatus: crm.maritalStatus,
       isHusband: crm.isHusband,
-      // spouseName: crm.spouseName,
-      // fatherName: crm.fatherName,
       fatherOrHusbandName: crm.fatherOrHusbandName,
       motherName: crm.motherName,
       dob: crm.dob,
       occupation: crm.occupation,
       accusedOrganizationName: crm.accusedOrganizationName,
-      // accusedOrganizationAddress: crm.accusedOrganizationAddress,
+      accusedOrganizationAddress: crm.accusedOrganizationAddress,
       problemDescription: crm.problemDescription,
-      // complainantAddress: crm.complainantAddress,
+      complainantAddress: crm.complainantAddress,
       ticketStatus: crm.ticketStatus,
       applicationType: crm.applicationType,
     });
@@ -140,25 +145,38 @@ export class CRMFormComponent implements OnInit {
     window.location.reload();
   }
 
-  async save() {
+  async onSubmit() {
     const crmFormValue = this.samePermanentAddress(this.isParmanentSame);
-    console.log(crmFormValue);
 
     this.isFormSubmitted = true;
     if (!this.crmForm.valid) {
+      console.log(this.crmForm);
       console.log('not valid');
       return;
     }
-    const confirm = await this.confirmationDialogService.confirm('Confirm Request',
-      'Are you sure about creating this CRM',
-      'Yes', 'No', 'md'
-    );
+    if (this.isEditMode) {
+      const confirm = await this.confirmationDialogService.confirm('Confirm Request',
+        'Are you sure about Updating this CRM',
+        'Yes', 'No', 'md'
+      );
 
-    if (confirm) {
-      this.crmHttpService.addCustomerRelation(crmFormValue).subscribe();
+      if (confirm) {
+        this.crmHttpService.updateCrmData(crmFormValue, this.crmIdToBeEdited).subscribe(
+          (crm: CustomerRelation) => this.initFormForEdit(crm)
+        );
+      }
+    } else {
+      const confirm = await this.confirmationDialogService.confirm('Confirm Request',
+        'Are you sure about creating this CRM',
+        'Yes', 'No', 'md'
+      );
+
+      if (confirm) {
+        this.crmHttpService.addCustomerRelation(crmFormValue).subscribe();
+      }
     }
-
   }
+
 
   samePermanentAddress(event: any): CustomerRelation {
     let crmFormValue;
@@ -167,7 +185,7 @@ export class CRMFormComponent implements OnInit {
     if (this.isParmanentSame) {
       this.crmForm.get('complainantAddress').get('permanentAddressForm').enable();
       const presentAddress = this.crmForm.get('complainantAddress').get('presentAddressForm').value;
-      console.log(presentAddress);
+      // console.log(presentAddress);
       this.crmForm.get('complainantAddress').get('permanentAddressForm').patchValue({
         address: presentAddress.address,
         thanaId: presentAddress.thanaId,
@@ -176,7 +194,7 @@ export class CRMFormComponent implements OnInit {
         postCode: presentAddress.postCode
       });
 
-      console.log(this.crmForm.get('complainantAddress').get('permanentAddressForm').value);
+      // console.log(this.crmForm.get('complainantAddress').get('permanentAddressForm').value);
       crmFormValue = this.crmForm.value;
       // console.log(crmFormValue);
       this.crmForm.get('complainantAddress').get('permanentAddressForm').disable();

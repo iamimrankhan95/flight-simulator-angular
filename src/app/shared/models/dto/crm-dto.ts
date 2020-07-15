@@ -17,6 +17,7 @@ export class CrmDto {
   'fatherOrHusbandName': string;
   'genderId': number;
   'id': number;
+  uniqueId: number;
   'isHusband': number;
   'motherName': string;
   'msisdn': string;

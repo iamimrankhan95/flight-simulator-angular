@@ -12,6 +12,7 @@ import { CRMService } from './crm.service';
 import { ToastrService } from 'ngx-toastr';
 import { CrmDetailsDto } from '../../shared/models/dto/crm-details-dto';
 import { CrmDtoForList } from '../../shared/models/dto/crm-dto-for-list';
+import { CrmDto } from '../../shared/models/dto/crm-dto';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -45,7 +46,6 @@ export class CRMHttpService {
           console.log(response);
         }),
         map((response: any) => {
-          console.log(response);
           return response.responseList;
         }),
         catchError(this.handleError('getCustomerRelations', []))
@@ -81,7 +81,7 @@ export class CRMHttpService {
 
   /** POST: add a new hero to the database */
   addCustomerRelation(customerRelation: CustomerRelation): Observable<CustomerRelation> {
-    return this.http.post<any>(applicationUrl.crm.create, this.crmService.convertToCrmDto(customerRelation), httpOptions)
+    return this.http.post<any>(applicationUrl.crm.create, this.crmService.convertToCrmDto(customerRelation, null), httpOptions)
       .pipe(
         tap((response) => {
           if (response.status === 'SUCCESS') {
@@ -93,7 +93,7 @@ export class CRMHttpService {
   }
 
   // Get information on specific crm
-  getCustomerRelation(crmID: number) {
+  getCustomerRelation(crmID: number): Observable<CustomerRelation> {
     return this.http.get<any>(applicationUrl.crm.find + crmID)
       .pipe(
         tap((response: any) => {
@@ -102,11 +102,10 @@ export class CRMHttpService {
           }
           console.log(response);
         }),
-        // map((response: any) => {
-        //   console.log(response);
-        //   return response.responseObject;
-        // }),
-        catchError(this.handleError('getCustomerRelations', {}))
+        map((response: any) => {
+          return this.crmService.convertToCrmFromCrmDto(response.responseObject);
+        }),
+        catchError(this.handleError<CustomerRelation>('getCustomerRelations', new CustomerRelation()))
       );
   }
 
@@ -120,13 +119,16 @@ export class CRMHttpService {
   }
 
   /** PUT: update the hero on the server. Returns the updated hero upon success. */
-  updateHero(hero: CustomerRelation): Observable<CustomerRelation> {
-    httpOptions.headers =
-      httpOptions.headers.set('Authorization', 'my-new-auth-token');
-
-    return this.http.put<CustomerRelation>(applicationUrl.crm.update, hero, httpOptions)
-      .pipe(
-        catchError(this.handleError('updateHero', hero))
+  updateCrmData(crmData: CustomerRelation, crmId: number): Observable<CustomerRelation> {
+    return this.http.put<any>(applicationUrl.crm.update, this.crmService.convertToCrmDto(crmData, crmId))
+      .pipe(tap((response: any) => {
+        if (response.status === 'SUCCESS') {
+          this.toastr.success(response.status, 'Success');
+        }
+        console.log(response);
+      }), map((response: any) => {
+        return crmData;
+      }), catchError(this.handleError('updateCrmData', crmData))
       );
   }
 }

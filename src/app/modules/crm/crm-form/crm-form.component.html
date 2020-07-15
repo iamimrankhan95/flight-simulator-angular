@@ -6,7 +6,7 @@
 					<i class="fa fa-check"></i>Create Customer Relation
 				</div>
 				<div class="card-body">
-					<form class="needs-validation" name="crmForm" role="form" novalidate (ngSubmit)="save()"
+					<form class="needs-validation" name="crmForm" role="form" novalidate (ngSubmit)="onSubmit()"
 						[formGroup]="crmForm">
 						<fieldset>
 							<legend>Customer Information</legend>
@@ -145,7 +145,7 @@
 											[ngClass]="{ 'is-invalid': isFormSubmitted && crmForm.get('gender').errors,
 											'is-valid': crmForm.get('gender').touched && !crmForm.get('gender').errors }">
 											<option selected value="" disabled>Select One</option>
-											<option [value]="genderItem.value" *ngFor="let genderItem of gender">{{genderItem.name}}</option>
+											<option [value]="genderItem.id" *ngFor="let genderItem of gender">{{genderItem.name}}</option>
 										</select>
 										<div *ngIf="isFormSubmitted && crmForm.get('gender').errors" class="invalid-feedback">
 											<div *ngIf="crmForm.get('gender')?.errors?.required">
@@ -299,4 +299,4 @@
     <div class="col-md-6"></div>
 </div> -->
 
-<app-escalation-container></app-escalation-container>
+<!-- <app-escalation-container></app-escalation-container> -->

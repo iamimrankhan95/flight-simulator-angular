@@ -12,7 +12,7 @@ export class CustomerRelation {
   dob: any;
   email: string;
   fatherName: string;
-  gender: string;
+  gender: number;
   id: number;
   isHusband: boolean;
   fatherOrHusbandName: string;
@@ -24,7 +24,7 @@ export class CustomerRelation {
   problemDescription: string;
   spouseName: string;
   ticketStatus: string;
-  uniqueid: string;
+  uniqueid: number;
   constructor(
   ) {
   }
