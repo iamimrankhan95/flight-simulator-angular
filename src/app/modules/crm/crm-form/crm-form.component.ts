@@ -116,29 +116,7 @@ export class CRMFormComponent implements OnInit {
   }
 
   initFormForEdit(crm: CustomerRelation): void {
-    this.crmForm.patchValue({
-      id: crm.id,
-      uniqueid: crm.uniqueid,
-      agentId: crm.agentId,
-      msisdn: crm.msisdn,
-      contactNo: crm.contactNo,
-      nidNumber: crm.nidNumber,
-      compliantName: crm.compliantName,
-      gender: crm.gender,
-      email: crm.email,
-      maritalStatus: crm.maritalStatus,
-      isHusband: crm.isHusband,
-      fatherOrHusbandName: crm.fatherOrHusbandName,
-      motherName: crm.motherName,
-      dob: crm.dob,
-      occupation: crm.occupation,
-      accusedOrganizationName: crm.accusedOrganizationName,
-      accusedOrganizationAddress: crm.accusedOrganizationAddress,
-      problemDescription: crm.problemDescription,
-      complainantAddress: crm.complainantAddress,
-      ticketStatus: crm.ticketStatus,
-      applicationType: crm.applicationType,
-    });
+    this.crmForm.patchValue(crm);
   }
 
   previousState(): void {
