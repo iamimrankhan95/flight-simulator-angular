@@ -41,5 +41,11 @@ export const applicationUrl = {
     status: {
       read: environment.apiUrl + 'data/ticket-status-list',
     }
+  },
+  company: {
+    read: environment.apiUrl + 'data/company-list',
+  },
+  department: {
+    read: environment.apiUrl + 'data/department-list',
   }
 }

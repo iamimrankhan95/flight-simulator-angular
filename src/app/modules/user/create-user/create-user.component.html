@@ -141,8 +141,8 @@
                         [ngClass]="{ 'is-invalid': submitted && simpleForm.get('companyId').errors,
                         'is-valid': simpleForm.get('companyId').touched && !simpleForm.get('companyId').errors }">
                         <option value="">Select One</option>
-                        <option value="1">DNCRP</option>
-                        <!-- <option [value]="status.value" *ngFor="let status of maritalStatus">{{status.name}}</option> -->
+                        <!-- <option value="1">DNCRP</option> -->
+                        <option [value]="company.id" *ngFor="let company of companies">{{company.name}}</option>
                       </select>
                       <div *ngIf="submitted && f['companyId'].errors" class="invalid-feedback">
                         <div *ngIf="f['companyId'].errors.required">
@@ -160,8 +160,9 @@
                           [ngClass]="{ 'is-invalid': submitted && simpleForm.get('departmentId').errors,
                           'is-valid': simpleForm.get('departmentId').touched && !simpleForm.get('departmentId').errors }">
                           <option value="">Select One</option>
-                          <option value="1">DNCRP</option>
-                          <!-- <option [value]="status.value" *ngFor="let status of maritalStatus">{{status.name}}</option> -->
+                          <!-- <option value="1">DNCRP</option> -->
+                          <option [value]="department.id" *ngFor="let department of departments">{{department.name}}
+                          </option>
                         </select>
                         <div *ngIf="submitted && f['departmentId'].errors" class="invalid-feedback">
                           <div *ngIf="f['departmentId'].errors.required">

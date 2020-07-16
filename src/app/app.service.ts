@@ -4,6 +4,8 @@ import { Observable, Observer } from 'rxjs';
 import { AppHttpService } from './app-http.service';
 import { DistrictDto } from './shared/models/dto/district-dto.model';
 import { ThanaDto } from './shared/models/dto/thana-dto.model';
+import { CompanyDto } from './shared/models/dto/company-dto';
+import { DepartmentDto } from './shared/models/dto/department-dto';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +17,8 @@ export class AppService {
   thanas: ThanaDto[] = [];
   filteredDistrictListByDivisionId: DistrictDto[];
   filteredThanaListByDistrictId: ThanaDto[];
+  companies: CompanyDto[] = [];
+  departments: DepartmentDto[] = [];
   constructor(
     private appHttpService: AppHttpService
   ) { }
@@ -94,6 +98,36 @@ export class AppService {
         }
       );
       // }
+    });
+  }
+
+  getCompanies(): Observable<CompanyDto[]> {
+    return new Observable((observer: Observer<CompanyDto[]>) => {
+      if (this.companies.length > 0) {
+        observer.next(this.companies);
+      } else {
+        this.appHttpService.getCompanies().subscribe(
+          (companies: CompanyDto[]) => {
+            this.companies = companies;
+            observer.next(this.companies);
+          }
+        );
+      }
+    });
+  }
+
+  getDepartments(): Observable<DepartmentDto[]> {
+    return new Observable((observer: Observer<DepartmentDto[]>) => {
+      if (this.departments.length > 0) {
+        observer.next(this.departments);
+      } else {
+        this.appHttpService.getDepartments().subscribe(
+          (departments: DepartmentDto[]) => {
+            this.departments = departments;
+            observer.next(this.departments);
+          }
+        );
+      }
     });
   }
 }

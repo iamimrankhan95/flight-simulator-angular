@@ -8,6 +8,8 @@ import { tap, map, catchError } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { DistrictDto } from './shared/models/dto/district-dto.model';
 import { ThanaDto } from './shared/models/dto/thana-dto.model';
+import { CompanyDto } from './shared/models/dto/company-dto';
+import { DepartmentDto } from './shared/models/dto/department-dto';
 
 @Injectable({
   providedIn: 'root'
@@ -83,10 +85,27 @@ export class AppHttpService {
       params: params
     }).pipe(
       map((response: any) => {
-        console.log(response);
         return response.responseList;
       }),
       catchError(this.handleError('getThanasByDistrictsId', []))
+    );
+  }
+
+  getCompanies(): Observable<CompanyDto[]> {
+    return this.http.get<any>(applicationUrl.company.read).pipe(
+      map((response: any) => {
+        return response.responseList;
+      }),
+      catchError(this.handleError('getCompanies', []))
+    );
+  }
+
+  getDepartments(): Observable<DepartmentDto[]> {
+    return this.http.get<any>(applicationUrl.department.read).pipe(
+      map((response: any) => {
+        return response.responseList;
+      }),
+      catchError(this.handleError('getDepartments', []))
     );
   }
 

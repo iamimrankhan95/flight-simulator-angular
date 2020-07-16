@@ -8,6 +8,9 @@ import { ConfirmationDialogService } from '../../../shared/modules/notification/
 import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { User } from '../../../shared/models/user';
+import { AppService } from '../../../app.service';
+import { CompanyDto } from '../../../shared/models/dto/company-dto';
+import { DepartmentDto } from '../../../shared/models/dto/department-dto';
 
 @Component({
   selector: 'app-create-user',
@@ -48,11 +51,14 @@ export class CreateUserComponent implements OnInit, OnDestroy {
   isEditMode: boolean = false;
   user: User;
   loginUsername: any;
+  companies: CompanyDto[];
+  departments: DepartmentDto[];
 
   constructor(
     private formbuilder: FormBuilder,
     private userDataService: UserDataService,
     private otpService: OtpService,
+    private appService: AppService,
     private confirmationDialogService: ConfirmationDialogService,
     private toastr: ToastrService,
     private route: ActivatedRoute, private router: Router,
@@ -66,6 +72,15 @@ export class CreateUserComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.createForm();
+    this.appService.getCompanies().subscribe(
+      (companies: CompanyDto[]) => {
+        this.companies = companies;
+        this.appService.getDepartments().subscribe(
+          (departments: DepartmentDto[]) => this.departments = departments
+        );
+      }
+    );
+
     this.route.params.subscribe(
       (params: Params) => {
         this.updateUserId = params['id'] ? +params['id'] : null;
