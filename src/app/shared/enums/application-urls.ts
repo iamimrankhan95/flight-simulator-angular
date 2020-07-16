@@ -14,7 +14,8 @@ export const applicationUrl = {
     update: environment.apiUrl + 'crm/update/',
     delete: environment.apiUrl + 'crm/delete/',
     find: environment.apiUrl + 'crm/find/',
-    dummyData: 'assets/data.json'
+    dummyData: 'assets/data.json',
+    ticketStatusUpdate: environment.apiUrl + 'crm/ticketStatusUpdate',
   },
   auth: {
     login: environment.apiUrl + 'auth'

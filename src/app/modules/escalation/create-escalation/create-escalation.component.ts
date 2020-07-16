@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { EscalationService } from '../escalation.service';
+import { EscalationHttpService } from '../escalation-http.service';
 
 @Component({
   selector: 'app-create-escalation',
@@ -9,14 +11,17 @@ import { FormBuilder, Validators } from '@angular/forms';
 export class CreateEscalationComponent implements OnInit {
 
   isEscalationFormSubmitted = false;
-  @ViewChild('escalationFormRef') escalationFormEl;
+
   escalationForm = this.fb.group({
     id: [''],
     department: ['', [Validators.required]],
-    user: ['', [Validators.required]],
+    // user: ['', [Validators.required]],
     message: ['']
   });
-  constructor(private fb: FormBuilder) { }
+
+  constructor(private fb: FormBuilder,
+    private escalationService: EscalationService,
+    private escalationHttpService: EscalationHttpService) { }
 
   ngOnInit(): void {
 
@@ -28,9 +33,11 @@ export class CreateEscalationComponent implements OnInit {
 
   onSubmitEscalationForm() {
     this.isEscalationFormSubmitted = true;
-    console.log(this.escalationForm.value);
     if (!this.escalationForm.valid) {
+      console.log(this.escalationForm);
       return;
     }
+
+    this.escalationHttpService.updateTicketStatus(this.escalationForm.value).subscribe();
   }
 }

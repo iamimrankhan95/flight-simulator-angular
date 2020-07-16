@@ -27,7 +27,7 @@
       <main>
         <p class="text-center" style="font-weight: bold;">Complain Assign</p>
         <form class="needs-validation" (ngSubmit)="onSubmitEscalationForm()" name="escalationForm" role="form"
-          novalidate [formGroup]="escalationForm" #escalationFormRef>
+          novalidate [formGroup]="escalationForm">
           <div class="form-row mb-3">
             <label for="cc" class="col-md-2 col-form-label">To Department:</label>
             <div class="col-md-10">
@@ -42,7 +42,7 @@
               </div>
             </div>
           </div>
-          <div class="form-row mb-3">
+          <!-- <div class="form-row mb-3">
             <label for="bcc" class="col-md-2 col-form-label">To User:</label>
             <div class="col-md-10">
               <input type="email" class="form-control" name="user" id="field_user" formControlName="user"
@@ -54,7 +54,7 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div> -->
           <div class="form-row mb-3">
             <label for="bcc" class="col-md-2 col-form-label">Message:</label>
             <div class="col-md-10">

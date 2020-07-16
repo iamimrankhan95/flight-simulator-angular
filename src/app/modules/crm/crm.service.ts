@@ -9,6 +9,7 @@ import { Address } from '../../shared/models/address.model';
   providedIn: 'root'
 })
 export class CRMService {
+  selectedCrmId: number;
 
   constructor(private parserFormatter: NgbDateCustomParserFormatter) { }
 

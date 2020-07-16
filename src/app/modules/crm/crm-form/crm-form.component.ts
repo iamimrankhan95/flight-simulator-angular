@@ -10,6 +10,7 @@ import { CustomerRelation } from '../../../shared/models/customer-relation.model
 import { NgbDateCustomParserFormatter } from '../../../shared/modules/shared/pipes/date-fomatter';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { CrmDto } from '../../../shared/models/dto/crm-dto';
+import { CRMService } from '../crm.service';
 @Component({
   selector: 'app-crm-form',
   templateUrl: './crm-form.component.html',
@@ -93,6 +94,7 @@ export class CRMFormComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
     private crmHttpService: CRMHttpService,
+    private crmService: CRMService,
     private confirmationDialogService: ConfirmationDialogService,
     private route: ActivatedRoute, private router: Router,
     private toastr: ToastrService) { }
@@ -103,6 +105,7 @@ export class CRMFormComponent implements OnInit {
         this.crmIdToBeEdited = params['id'] ? params['id'] : null;
         this.isEditMode = params['id'] != null;
         if (this.isEditMode) {
+          this.crmService.selectedCrmId = +this.crmIdToBeEdited;
           this.getCrmById(+this.crmIdToBeEdited);
         }
       }
