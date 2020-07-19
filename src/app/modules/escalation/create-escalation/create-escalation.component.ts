@@ -23,7 +23,7 @@ export class CreateEscalationComponent implements OnInit {
   departments: DepartmentDto[];
 
   constructor(private fb: FormBuilder,
-    private escalationService: EscalationService,
+    public escalationService: EscalationService,
     private escalationHttpService: EscalationHttpService,
     private appHttpService: AppHttpService) { }
 

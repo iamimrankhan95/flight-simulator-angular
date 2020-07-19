@@ -11,6 +11,7 @@ import { NgbDateCustomParserFormatter } from '../../../shared/modules/shared/pip
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { CrmDto } from '../../../shared/models/dto/crm-dto';
 import { CRMService } from '../crm.service';
+import { TicketStatus } from '../../../shared/models/dto/ticket-status-dto';
 @Component({
   selector: 'app-crm-form',
   templateUrl: './crm-form.component.html',
@@ -21,6 +22,7 @@ import { CRMService } from '../crm.service';
 })
 export class CRMFormComponent implements OnInit {
 
+  ticketStatuses: TicketStatus[] = Constants.ticketStatus;
   today = new Date();
   fromMinDate = { year: this.today.getFullYear() - 100, month: 1, day: 1 };
   fromMaxDate = { year: this.today.getFullYear(), month: this.today.getMonth() + 1, day: this.today.getDate() };
