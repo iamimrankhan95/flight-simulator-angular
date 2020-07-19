@@ -84,9 +84,10 @@ export class CRMFormComponent implements OnInit {
     accusedOrganizationAddress: this.accusedOrganaizationAddressForm,
     problemDescription: ['', [Validators.required, Validators.maxLength(500)]],
     complainantAddress: this.complainantAddressForm,
-    ticketStatus: ['', [Validators.required]],
-    applicationType: ['', [Validators.required]],
+    ticketStatus: ['2', [Validators.required]],
+    applicationType: ['1', [Validators.required]],
   });
+
   isParmanentSame: any = false;
   isEditMode = false;
   crmIdToBeEdited: any;

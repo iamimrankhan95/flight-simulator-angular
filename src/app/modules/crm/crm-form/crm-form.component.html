@@ -23,7 +23,8 @@
 										<label class="form-control-label" for="field_msisdn">Msisdn<span
 												class="text-danger">*</span></label>
 										<input type="text" class="form-control" name="msisdn" id="field_msisdn" formControlName="msisdn"
-											[ngClass]="{ 'is-invalid': isFormSubmitted && crmForm.get('msisdn').errors,'is-valid': crmForm.get('msisdn').touched && !crmForm.get('msisdn').errors }" />
+											[ngClass]="{ 'is-invalid': isFormSubmitted && crmForm.get('msisdn').errors,
+											'is-valid': crmForm.get('msisdn').touched && !crmForm.get('msisdn').errors }" />
 										<div *ngIf="isFormSubmitted && crmForm.get('msisdn').errors" class="invalid-feedback">
 											<div *ngIf="crmForm.get('msisdn').errors.required">Msisdn is required</div>
 										</div>
@@ -33,9 +34,14 @@
 									<div class="form-group">
 										<label class="form-control-label" for="field_ticketStatus">Ticket Status<span
 												class="text-danger">*</span></label>
-										<input type="text" class="form-control" name="ticketStatus" id="field_ticketStatus"
-											formControlName="ticketStatus"
-											[ngClass]="{ 'is-invalid': isFormSubmitted && crmForm.get('ticketStatus').errors,'is-valid': crmForm.get('ticketStatus').touched && !crmForm.get('ticketStatus').errors }" />
+										<select type="text" class="form-control" name="ticketStatus" id="field_ticketStatus"
+											formControlName="ticketStatus" [ngClass]="{ 'is-invalid': isFormSubmitted && crmForm.get('ticketStatus').errors,
+												'is-valid': crmForm.get('ticketStatus').touched && !crmForm.get('ticketStatus').errors }" disabled>
+											<option value="" disabled>Select One</option>
+											<option value="2" selected>Pending</option>
+											<option value="1">New</option>
+											<!-- <option [value]="status.value" *ngFor="let status of maritalStatus">{{status.name}}</option> -->
+										</select>
 										<div *ngIf="isFormSubmitted && crmForm.get('ticketStatus').errors" class="invalid-feedback">
 											<div *ngIf="crmForm.get('ticketStatus').errors.required">Ticket Status is required</div>
 										</div>
@@ -45,9 +51,13 @@
 									<div class="form-group">
 										<label class="form-control-label" for="field_applicationType">Application Type<span
 												class="text-danger">*</span></label>
-										<input type="text" class="form-control" name="applicationType" id="field_applicationType"
-											formControlName="applicationType"
-											[ngClass]="{ 'is-invalid': isFormSubmitted && crmForm.get('applicationType').errors,'is-valid': crmForm.get('applicationType').touched && !crmForm.get('applicationType').errors }" />
+										<select class="form-control" name="applicationType" id="field_applicationType"
+											formControlName="applicationType" [ngClass]="{ 'is-invalid': isFormSubmitted && crmForm.get('applicationType').errors,
+												'is-valid': crmForm.get('applicationType').touched && !crmForm.get('applicationType').errors }" disabled>
+											<option value="" disabled>Select One</option>
+											<option value="1" selected>CRM</option>
+											<!-- <option [value]="status.value" *ngFor="let status of maritalStatus">{{status.name}}</option> -->
+										</select>
 										<div *ngIf="isFormSubmitted && crmForm.get('applicationType').errors" class="invalid-feedback">
 											<div *ngIf="crmForm.get('applicationType').errors.required">Application Type is required</div>
 										</div>
@@ -71,8 +81,7 @@
 								</div>
 								<div class="col-md-3">
 									<div class="form-group">
-										<label class="form-control-label" for="field_nidNumber">NID<span
-												class="text-danger">*</span></label>
+										<label class="form-control-label" for="field_nidNumber">NID</label>
 										<input type="text" class="form-control" name="nidNumber" id="field_nidNumber"
 											formControlName="nidNumber"
 											[ngClass]="{ 'is-invalid': isFormSubmitted && crmForm.get('nidNumber').errors,'is-valid': crmForm.get('nidNumber').touched && !crmForm.get('nidNumber').errors }" />
@@ -107,8 +116,7 @@
 							<div class="form-row">
 								<div class="col-md-3">
 									<div class="form-group">
-										<label class="form-control-label" for="field_maritalStatus">Marital Status<span
-												class="text-danger">*</span></label>
+										<label class="form-control-label" for="field_maritalStatus">Marital Status</label>
 										<select class="form-control" id="field_maritalStatus" name="maritalStatus"
 											formControlName="maritalStatus" placeholder="Marital Status"
 											[ngClass]="{ 'is-invalid': isFormSubmitted && crmForm.get('maritalStatus').errors,'is-valid': crmForm.get('maritalStatus').touched && !crmForm.get('maritalStatus').errors }">
@@ -173,17 +181,18 @@
 								<div class="col-md-4">
 									<div class="form-group">
 										<label class="form-control-label" for="field_fatherOrHusbandName">
-											<select class="" id="isHusband" name="isHusband" formControlName="isHusband" placeholder="" 
-											[ngStyle]="{'border-color':isFormSubmitted && crmForm.get('isHusband').errors ? 'red' : 'black'}">
+											<select class="" id="isHusband" name="isHusband" formControlName="isHusband" placeholder=""
+												[ngStyle]="{'border-color':isFormSubmitted && crmForm.get('isHusband').errors ? 'red' : 'black'}">
 												<option value=true>Spouse</option>
 												<option value=false>Father</option>
-											</select> 
+											</select>
 											<div *ngIf="isFormSubmitted && crmForm.get('isHusband').errors">
 												<div *ngIf="crmForm.get('isHusband')?.errors?.required">
 													This field is required.
 												</div>
 											</div>
-											Name<span class="text-danger">*</span></label>
+											Name<span class="text-danger">*</span>
+										</label>
 										<input type="text" class="form-control" name="fatherOrHusbandName" id="field_fatherOrHusbandName"
 											formControlName="fatherOrHusbandName" [ngClass]="{ 'is-invalid': isFormSubmitted && crmForm.get('fatherOrHusbandName').errors,
 											'is-valid': crmForm.get('fatherOrHusbandName').touched && !crmForm.get('fatherOrHusbandName').errors }" />
