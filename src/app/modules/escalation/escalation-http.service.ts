@@ -48,14 +48,14 @@ export class EscalationHttpService {
     return this.http.post<any>(applicationUrl.crm.ticketStatusUpdate,
       this.escalationService.convertToTicketStatusUpdateDto(statusData))
       .pipe(
-        map((response: any) => {
-          return response.responseList;
-        }),
         tap((response: any) => {
           if (response.status === 'SUCCESS') {
-            this.toastr.success(response.message, 'Success')
+            this.toastr.success('Ticket status updated successfully', 'Success');
           }
           console.log(response);
+        }),
+        map((response: any) => {
+          return response.responseList;
         }),
         catchError(this.handleError('getTicketStatuses', statusData))
       );

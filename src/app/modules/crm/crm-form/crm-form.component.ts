@@ -136,6 +136,9 @@ export class CRMFormComponent implements OnInit {
       console.log('not valid');
       return;
     }
+
+    console.log(this.crmForm.value);
+
     if (this.isEditMode) {
       const confirm = await this.confirmationDialogService.confirm('Confirm Request',
         'Are you sure about Updating this CRM',

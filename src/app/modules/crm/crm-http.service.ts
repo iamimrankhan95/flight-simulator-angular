@@ -123,7 +123,7 @@ export class CRMHttpService {
     return this.http.put<any>(applicationUrl.crm.update, this.crmService.convertToCrmDto(crmData, crmId))
       .pipe(tap((response: any) => {
         if (response.status === 'SUCCESS') {
-          this.toastr.success(response.status, 'Success');
+          this.toastr.success('CRM information updated successfully!', 'Success');
         }
         console.log(response);
       }), map((response: any) => {

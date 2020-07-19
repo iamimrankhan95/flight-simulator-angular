@@ -41,6 +41,7 @@ export class CreateEscalationComponent implements OnInit {
 
   onSubmitEscalationForm() {
     this.isEscalationFormSubmitted = true;
+    
     if (!this.escalationForm.valid) {
       console.log(this.escalationForm);
       return;
