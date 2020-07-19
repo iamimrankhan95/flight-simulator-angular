@@ -153,7 +153,11 @@ export class CRMFormComponent implements OnInit {
       );
 
       if (confirm) {
-        this.crmHttpService.addCustomerRelation(crmFormValue).subscribe();
+        this.crmHttpService.addCustomerRelation(crmFormValue).subscribe(
+          () => {
+            this.router.navigate(['/home/crm/list']);
+          }
+        );
       }
     }
   }

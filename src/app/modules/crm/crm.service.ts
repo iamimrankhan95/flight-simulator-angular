@@ -65,7 +65,7 @@ export class CRMService {
     crm.nidNumber = crmDto.nidNumber;
     crm.occupation = crmDto.occupation;
     crm.problemDescription = crmDto.problemDescription;
-    crm.ticketStatus = '';
+    crm.ticketStatus = crmDto.ticketStatusId;
     return crm;
   }
 }

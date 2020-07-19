@@ -23,7 +23,7 @@ export class CustomerRelation {
   occupation: string;
   problemDescription: string;
   spouseName: string;
-  ticketStatus: string;
+  ticketStatus: number;
   uniqueid: number;
   constructor(
   ) {

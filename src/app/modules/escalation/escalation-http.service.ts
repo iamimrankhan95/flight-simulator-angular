@@ -44,12 +44,11 @@ export class EscalationHttpService {
       );
   }
 
-  updateTicketStatus(statusData) {
+  updateTicketStatus(statusData): Observable<TicketStatus[]> {
     return this.http.post<any>(applicationUrl.crm.ticketStatusUpdate,
       this.escalationService.convertToTicketStatusUpdateDto(statusData))
       .pipe(
         map((response: any) => {
-          console.log(response);
           return response.responseList;
         }),
         tap((response: any) => {
@@ -58,7 +57,7 @@ export class EscalationHttpService {
           }
           console.log(response);
         }),
-        catchError(this.handleError('getTicketStatuses', []))
+        catchError(this.handleError('getTicketStatuses', statusData))
       );
   }
 }

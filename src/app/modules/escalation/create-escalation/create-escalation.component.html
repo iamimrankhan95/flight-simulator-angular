@@ -31,9 +31,14 @@
           <div class="form-row mb-3">
             <label for="cc" class="col-md-2 col-form-label">To Department:</label>
             <div class="col-md-10">
-              <input type="email" class="form-control" name="department" id="field_department"
-                formControlName="department" placeholder="Type department name" [ngClass]="{ 'is-invalid': isEscalationFormSubmitted && escalationForm.get('department').errors,
-                'is-valid': escalationForm.get('department').touched && !escalationForm.get('department').errors }">
+              <select class="form-control" name="department" id="field_department" formControlName="department"
+                [ngClass]="{ 'is-invalid': isEscalationFormSubmitted && escalationForm.get('department').errors,
+              'is-valid': escalationForm.get('department').touched && !escalationForm.get('department').errors }">
+                <option value="">Select One</option>
+                <!-- <option value="1">DNCRP</option> -->
+                <option [value]="department.id" *ngFor="let department of departments">{{department.name}}
+                </option>
+              </select>
               <div *ngIf="isEscalationFormSubmitted && escalationForm.get('department').errors"
                 class="invalid-feedback">
                 <div *ngIf="escalationForm.get('department')?.errors?.required">

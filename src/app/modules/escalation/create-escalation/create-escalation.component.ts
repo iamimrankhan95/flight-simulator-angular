@@ -2,6 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { EscalationService } from '../escalation.service';
 import { EscalationHttpService } from '../escalation-http.service';
+import { AppHttpService } from '../../../app-http.service';
+import { DepartmentDto } from '../../../shared/models/dto/department-dto';
 
 @Component({
   selector: 'app-create-escalation',
@@ -18,13 +20,19 @@ export class CreateEscalationComponent implements OnInit {
     // user: ['', [Validators.required]],
     message: ['']
   });
+  departments: DepartmentDto[];
 
   constructor(private fb: FormBuilder,
     private escalationService: EscalationService,
-    private escalationHttpService: EscalationHttpService) { }
+    private escalationHttpService: EscalationHttpService,
+    private appHttpService: AppHttpService) { }
 
   ngOnInit(): void {
+    this.appHttpService.getDepartments().subscribe(
+      departments => this.departments = departments
+    );
 
+    this.escalationService.selectedTicketStatusId = 5;
   }
 
   submitEscalationForm() {
