@@ -25,10 +25,10 @@
           </ul>
         </nav> -->
       <main>
-        <p class="text-center" style="font-weight: bold;">Complain Assign</p>
+        <p class="text-center" style="font-weight: bold;">Complain {{}}</p>
         <form class="needs-validation" (ngSubmit)="onSubmitEscalationForm()" name="escalationForm" role="form"
           novalidate [formGroup]="escalationForm">
-          <div class="form-row mb-3">
+          <div class="form-row mb-3" [hidden]="escalationService.selectedTicketStatusId !== 5">
             <label for="cc" class="col-md-2 col-form-label">To Department:</label>
             <div class="col-md-10">
               <select class="form-control" name="department" id="field_department" formControlName="department"
