@@ -21,7 +21,10 @@ export class EscalationContainerComponent implements OnInit {
 
   getTicketStatuses() {
     this.escalationHttpService.getTicketStatuses().subscribe(
-      ticketStatuses => this.ticketStatuses = ticketStatuses
+      ticketStatuses => {
+        this.ticketStatuses = ticketStatuses;
+        this.selectedStatus = this.ticketStatuses.find(x => x.id === 5)
+      }
     );
   }
 

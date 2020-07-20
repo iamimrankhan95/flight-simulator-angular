@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { applicationUrl } from '../../shared/enums/application-urls';
 import { tap, catchError } from 'rxjs/operators';
+import { JsonPipe } from '@angular/common';
+
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type': 'application/json',
@@ -14,6 +16,7 @@ const httpOptions = {
   providedIn: 'root',
 })
 export class AuthenticationService {
+
   private authToken;
   private currentUserSubject: BehaviorSubject<any>;
   public currentUser: Observable<any>;
@@ -31,10 +34,7 @@ export class AuthenticationService {
   }
 
   login(credential: any) {
-    return this.http.post<any>(applicationUrl.auth.login, credential, {
-      observe: 'body',
-      responseType: 'json'
-    }).pipe(
+    return this.http.post<any>(applicationUrl.auth.login, credential).pipe(
       tap((response) => {
         localStorage.setItem('loggedInUser', JSON.stringify(response));
         localStorage.setItem('loggedInUserToken', response.accessToken);
@@ -50,6 +50,10 @@ export class AuthenticationService {
 
   getAuthorizationToken() {
     return 'Bearer ' + localStorage.getItem('loggedInUserToken');
+  }
+
+  getUserRole() {
+    return JSON.parse(localStorage.getItem('loggedInUser')).roles[0].name;
   }
 
   handleError(error) {

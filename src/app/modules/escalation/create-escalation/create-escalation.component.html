@@ -25,7 +25,9 @@
           </ul>
         </nav> -->
       <main>
-        <p class="text-center" style="font-weight: bold;">Complain {{selectedTicketStatus?.name}}</p>
+        <p class="text-center" style="font-weight: bold;">Complain
+          {{selectedTicketStatus?.name?.charAt(0).toUpperCase()}}{{selectedTicketStatus?.name?.slice(1).toLowerCase() }}
+        </p>
         <form class="needs-validation" (ngSubmit)="onSubmitEscalationForm()" name="escalationForm" role="form"
           novalidate [formGroup]="escalationForm">
           <div class="form-row mb-3" [hidden]="escalationService.selectedTicketStatusId !== 5">
