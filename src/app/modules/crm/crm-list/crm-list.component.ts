@@ -8,6 +8,7 @@ import { Subject } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { CrmDtoForList } from '../../../shared/models/dto/crm-dto-for-list';
 import { ActivatedRoute, Router } from '@angular/router';
+import { DataTableDirective } from 'angular-datatables';
 @Component({
   selector: 'app-crm-list',
   templateUrl: './crm-list.component.html',
@@ -42,7 +43,8 @@ export class CrmListComponent implements OnInit, OnDestroy {
   toMaxDate = { year: this.today.getFullYear(), month: this.today.getMonth() + 1, day: this.today.getDate() };
   @ViewChild('f') f: NgbInputDatepicker;
   @ViewChild('t') t: NgbInputDatepicker;
-  // customerRelations: CustomerRelation[];
+  @ViewChild(DataTableDirective, { static: false })
+  dtElement: DataTableDirective;
   customerRelations: CrmDtoForList[] = [];
 
   constructor(private crmHttpService: CRMHttpService,
@@ -64,8 +66,21 @@ export class CrmListComponent implements OnInit, OnDestroy {
     this.crmHttpService.getCustomerRelations(pageConfig)
       .subscribe(
         (customerRelations: any) => {
-          this.customerRelations = [...customerRelations];
+          this.customerRelations = customerRelations;
           this.dtTrigger.next();
+        }
+      );
+  }
+
+  getCustomerRelationsByParam(pageConfig) {
+    this.crmHttpService.getCustomerRelationsByParam(pageConfig)
+      .subscribe(
+        (customerRelations: any) => {
+          this.customerRelations = customerRelations;
+          this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+            dtInstance.destroy();
+            this.dtTrigger.next();
+          });
         }
       );
   }
@@ -92,19 +107,15 @@ export class CrmListComponent implements OnInit, OnDestroy {
   }
 
   onEnter() {
-    // this.pageConfig.currentPage = this.startPage;
-    // this.navigationForAdmin();
-  }
-
-  onSearchChange(phone: string) {
-    // if (phone === '') {
-    //   this.pageConfig.currentPage = this.startPage;
-    //   // this.navigationForAdmin();
-    // }
+    this.getCustomerRelationsByParam(this.pageConfig);
   }
 
   onChangeSearchBy() {
-    if (this.pageConfig.searchBy === 'mobileNo') {
+    this.changePlaceholderForSearch();
+  }
+
+  changePlaceholderForSearch() {
+    if (this.pageConfig.searchBy === 'contactNo') {
       this.placeHolderForSearchKey = 'Enter Mobile Number.';
     } else {
       this.placeHolderForSearchKey = 'Enter Ticket Number.';

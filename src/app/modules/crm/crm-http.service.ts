@@ -52,14 +52,31 @@ export class CRMHttpService {
       );
   }
 
+  getCustomerRelationsByParam(pageConfig: ICRMListPageConfig): Observable<CrmDtoForList[]> {
+    const params = this.constructParam(pageConfig);
+    return this.http.get<any[]>(applicationUrl.crm.findCrmByParam, { params })
+      .pipe(
+        tap((response: any) => {
+          if (response.status === 'SUCCESS') {
+            this.toastr.success('CRM loaded successfully!', 'Success')
+          }
+          console.log(response);
+        }),
+        map((response: any) => {
+          return response.responseList;
+        }),
+        catchError(this.handleError('getCustomerRelationsByParam', []))
+      );
+  }
+
   constructParam(pageConfig: ICRMListPageConfig): HttpParams {
     let params = new HttpParams()
-      .set('pageNo', (pageConfig.pageNo - 1).toString())
-      .set('pageSize', pageConfig.pageSize.toString())
-      .set('mobileNo', pageConfig.mobileNo ? pageConfig.mobileNo : '')
-      .set('fromDate', pageConfig.fromDate ? pageConfig.fromDate : '')
-      .set('toDate', pageConfig.toDate ? pageConfig.toDate : '')
-      .set('status', pageConfig.status);
+      .set(pageConfig.searchBy, pageConfig.searchKey ? pageConfig.searchKey : '');
+
+    if (!pageConfig.searchKey) {
+      params = params.delete(pageConfig.searchBy);
+    }
+
     return params;
   }
 

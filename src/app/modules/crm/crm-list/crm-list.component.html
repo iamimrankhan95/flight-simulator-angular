@@ -7,7 +7,7 @@
       </div>
     </div>
     <div class="card-body">
-      <div class="row">
+      <!-- <div class="row">
         <div class="col-md-2">
           <label class="col-form-label" for="fromDate">From date</label>
           <div class="input-group">
@@ -33,7 +33,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
       <div class="row">
         <div class="col-md-2 offset-md-5" style="padding-right: 0px;">
           <label class="pull-right" style="padding-top: 6px;">Search By:</label>
@@ -44,12 +44,12 @@
               <select id="searchBy" name="searchBy" class="form-control" (change)="onChangeSearchBy()"
                 [(ngModel)]="pageConfig.searchBy">
                 <option selected value="" disabled>Select One</option>
-                <option value="mobileNo">Mobile No.</option>
-                <option value="ticketNo">Ticket No.</option>
+                <option value="contactNo">Mobile No.</option>
+                <option value="ticketId">Ticket No.</option>
               </select>
             </div>
             <input type="text" class="form-control" [disabled]="placeHolderForSearchKey === ''"
-              placeholder="{{placeHolderForSearchKey}}" />
+              placeholder="{{placeHolderForSearchKey}}" [(ngModel)]="pageConfig.searchKey"/>
             <div class="input-group-prepends">
               <button type="button" (click)="onEnter()" class="btn btn-success"><span><i
                     class="fa fa-search"></i></span> Search</button>

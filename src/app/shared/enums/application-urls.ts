@@ -16,6 +16,7 @@ export const applicationUrl = {
     find: environment.apiUrl + 'crm/find/',
     dummyData: 'assets/data.json',
     ticketStatusUpdate: environment.apiUrl + 'crm/ticketStatusUpdate',
+    findCrmByParam: environment.apiUrl + 'crm/find-crm-by-param',
   },
   auth: {
     login: environment.apiUrl + 'auth'
