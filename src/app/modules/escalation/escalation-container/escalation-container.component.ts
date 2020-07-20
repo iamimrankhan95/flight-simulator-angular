@@ -10,13 +10,12 @@ import { EscalationHttpService } from '../escalation-http.service';
 })
 export class EscalationContainerComponent implements OnInit {
 
-  selectedStatus: any;
+  selectedStatus: TicketStatus = new TicketStatus();
   ticketStatuses: TicketStatus[] = [];
   constructor(private escalationService: EscalationService,
     private escalationHttpService: EscalationHttpService) { }
 
   ngOnInit(): void {
-    this.selectedStatus = 5;
     this.getTicketStatuses();
   }
 
@@ -26,8 +25,9 @@ export class EscalationContainerComponent implements OnInit {
     );
   }
 
-  onSelectStatus(statusId: string) {
-    this.escalationService.selectedTicketStatusId = +statusId;
+  onSelectStatus() {
+    this.escalationService.selectedTicketStatus = this.selectedStatus;
+    this.escalationService.selectedTicketStatusId = this.selectedStatus.id;
   }
 
 }

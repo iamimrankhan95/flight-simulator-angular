@@ -1,9 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { EscalationService } from '../escalation.service';
 import { EscalationHttpService } from '../escalation-http.service';
 import { AppHttpService } from '../../../app-http.service';
 import { DepartmentDto } from '../../../shared/models/dto/department-dto';
+import { TicketStatus } from '../../../shared/models/dto/ticket-status-dto';
 
 @Component({
   selector: 'app-create-escalation',
@@ -13,6 +14,8 @@ import { DepartmentDto } from '../../../shared/models/dto/department-dto';
 export class CreateEscalationComponent implements OnInit {
 
   isEscalationFormSubmitted = false;
+  @Input()
+  selectedTicketStatus: TicketStatus;
 
   escalationForm = this.fb.group({
     id: [''],
@@ -20,6 +23,7 @@ export class CreateEscalationComponent implements OnInit {
     // user: ['', [Validators.required]],
     message: ['']
   });
+
   departments: DepartmentDto[];
 
   constructor(private fb: FormBuilder,
@@ -41,7 +45,7 @@ export class CreateEscalationComponent implements OnInit {
 
   onSubmitEscalationForm() {
     this.isEscalationFormSubmitted = true;
-    
+
     if (!this.escalationForm.valid) {
       console.log(this.escalationForm);
       return;

@@ -55,6 +55,7 @@ export class EscalationHttpService {
           console.log(response);
         }),
         map((response: any) => {
+          this.escalationService.ticketStatuses = response.responseList;
           return response.responseList;
         }),
         catchError(this.handleError('getTicketStatuses', statusData))

@@ -11,14 +11,15 @@
               <div class="form-group">
                 <label class="form-control-label" for="field_ticketStatus">Ticket Status</label>
                 <select class="form-control" id="field_ticketStatus" name="ticketStatus"
-                (change)="onSelectStatus($event.target.value)" [(ngModel)]="selectedStatus">
+                  (ngModelChange)="onSelectStatus()" [(ngModel)]="selectedStatus">
                   <option value="">Select One</option>
-                  <option [value]="ticketStatus.id" *ngFor="let ticketStatus of ticketStatuses">{{ticketStatus.name}}</option>
+                  <option [ngValue]="ticketStatus" *ngFor="let ticketStatus of ticketStatuses">{{ticketStatus.name}}
+                  </option>
                 </select>
               </div>
             </div>
           </div>
-          <app-create-escalation></app-create-escalation>
+          <app-create-escalation [selectedTicketStatus]="selectedStatus" ></app-create-escalation>
         </div>
       </div>
     </div>

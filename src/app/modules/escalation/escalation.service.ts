@@ -12,6 +12,7 @@ export class EscalationService {
 
   ticketStatuses: TicketStatus[] = [];
   selectedTicketStatusId: number;
+  selectedTicketStatus: TicketStatus;
   constructor(
     private crmService: CRMService
   ) { }
