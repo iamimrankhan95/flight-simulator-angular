@@ -13,30 +13,29 @@ import { AuthenticationService } from '../../auth/authentication.service';
 })
 export class EscalationContainerComponent implements OnInit {
 
-  selectedTicketStatus: TicketStatus = new TicketStatus();
+  selectedTicketStatus: any;
   ticketStatuses: TicketStatus[] = [];
   constructor(private escalationService: EscalationService,
     private escalationHttpService: EscalationHttpService,
     private authService: AuthenticationService) { }
 
   ngOnInit(): void {
+    this.selectedTicketStatus = '';
     this.getTicketStatuses();
-    this.escalationService.changeTickedStatus(null);
   }
 
   getTicketStatuses() {
     this.escalationHttpService.getTicketStatuses().subscribe(
       ticketStatuses => {
         if (this.authService.getUserRole() === 'AD') {
-
           this.ticketStatuses = ticketStatuses.filter(x => AppConstant.ticketStatusForAD.find(y => y.name === x.name));
-          this.selectedTicketStatus = this.ticketStatuses.find(x => x.id === 5);
+          // this.selectedTicketStatus = this.ticketStatuses.find(x => x.id === 5);
         } else if (this.authService.getUserRole() === 'RD') {
           this.ticketStatuses = ticketStatuses.filter(x => AppConstant.ticketStatusForRD.find(y => y.name === x.name));
-          this.selectedTicketStatus = this.ticketStatuses.find(x => x.id === 5);
+          // this.selectedTicketStatus = this.ticketStatuses.find(x => x.id === 5);
         } else if (this.authService.getUserRole() === 'AGENT') {
           this.ticketStatuses = ticketStatuses.filter(x => AppConstant.ticketStatusForAgent.find(y => y.name === x.name));
-          this.selectedTicketStatus = this.ticketStatuses.find(x => x.id === 5);
+          // this.selectedTicketStatus = this.ticketStatuses.find(x => x.id === 5);
         }
       }
     );

@@ -3,7 +3,7 @@
     <div class="col-md-12">
       <div class="card">
         <div class="card-header">
-          Application status
+          <b>Update Ticket status</b>
         </div>
         <div class="card-body">
           <div class="row">
@@ -12,14 +12,14 @@
                 <label class="form-control-label" for="field_ticketStatus">Ticket Status</label>
                 <select class="form-control" id="field_ticketStatus" name="ticketStatus"
                   (change)="onSelectStatus($event.target.value)" [(ngModel)]="selectedTicketStatus">
-                  <option value="">Select One</option>
+                  <option value="" disabled>Select One</option>
                   <option [ngValue]="ticketStatus" *ngFor="let ticketStatus of ticketStatuses">{{ticketStatus.name}}
                   </option>
                 </select>
               </div>
             </div>
           </div>
-          <app-create-escalation></app-create-escalation>
+          <app-create-escalation *ngIf="selectedTicketStatus"></app-create-escalation>
         </div>
       </div>
     </div>

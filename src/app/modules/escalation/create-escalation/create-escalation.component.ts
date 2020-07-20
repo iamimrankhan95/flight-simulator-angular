@@ -5,6 +5,8 @@ import { EscalationHttpService } from '../escalation-http.service';
 import { AppHttpService } from '../../../app-http.service';
 import { DepartmentDto } from '../../../shared/models/dto/department-dto';
 import { TicketStatus } from '../../../shared/models/dto/ticket-status-dto';
+import { ToastrService } from 'ngx-toastr';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-escalation',
@@ -29,13 +31,25 @@ export class CreateEscalationComponent implements OnInit, OnDestroy {
   constructor(private fb: FormBuilder,
     public escalationService: EscalationService,
     private escalationHttpService: EscalationHttpService,
-    private appHttpService: AppHttpService) { }
+    private appHttpService: AppHttpService,
+    private toastr: ToastrService,
+    private route: ActivatedRoute, private router: Router,
+  ) { }
 
   ngOnInit(): void {
 
     this.appHttpService.getDepartments().subscribe(
       departments => this.departments = departments
     );
+
+    this.selectedTicketStatus = this.escalationService.selectedTicketStatus;
+    if (this.selectedTicketStatus.id === 5) {
+      this.escalationForm.get('department').setValidators([Validators.required]);
+      this.escalationForm.controls['department'].updateValueAndValidity();
+    } else {
+      this.escalationForm.get('department').setValidators([]);
+      this.escalationForm.controls['department'].updateValueAndValidity();
+    }
 
     this.ticketStatusChangedSubscription = this.escalationService.ticketStatusChanged$.subscribe(
       (ticketStatus: TicketStatus) => {
@@ -66,7 +80,16 @@ export class CreateEscalationComponent implements OnInit, OnDestroy {
       return;
     }
 
-    this.escalationHttpService.updateTicketStatus(this.escalationForm.value).subscribe();
+    if (!this.escalationService.selectedTicketStatus) {
+      this.toastr.error('Please select the Complain status', 'Error')
+      return;
+    }
+
+    this.escalationHttpService.updateTicketStatus(this.escalationForm.value).subscribe(
+      () => {
+        this.router.navigate(['/home/crm/list']);
+      }
+    );
 
   }
 
