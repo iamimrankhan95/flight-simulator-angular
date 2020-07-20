@@ -11,7 +11,7 @@
               <div class="form-group">
                 <label class="form-control-label" for="field_ticketStatus">Ticket Status</label>
                 <select class="form-control" id="field_ticketStatus" name="ticketStatus"
-                  (ngModelChange)="onSelectStatus()" [(ngModel)]="selectedStatus">
+                  (change)="onSelectStatus($event.target.value)" [(ngModel)]="selectedTicketStatus">
                   <option value="">Select One</option>
                   <option [ngValue]="ticketStatus" *ngFor="let ticketStatus of ticketStatuses">{{ticketStatus.name}}
                   </option>
@@ -19,7 +19,7 @@
               </div>
             </div>
           </div>
-          <app-create-escalation [selectedTicketStatus]="selectedStatus" ></app-create-escalation>
+          <app-create-escalation></app-create-escalation>
         </div>
       </div>
     </div>

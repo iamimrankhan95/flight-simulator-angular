@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Input } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, OnDestroy } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { EscalationService } from '../escalation.service';
 import { EscalationHttpService } from '../escalation-http.service';
@@ -11,11 +11,9 @@ import { TicketStatus } from '../../../shared/models/dto/ticket-status-dto';
   templateUrl: './create-escalation.component.html',
   styleUrls: ['./create-escalation.component.css']
 })
-export class CreateEscalationComponent implements OnInit {
+export class CreateEscalationComponent implements OnInit, OnDestroy {
 
   isEscalationFormSubmitted = false;
-  @Input()
-  selectedTicketStatus: TicketStatus;
 
   escalationForm = this.fb.group({
     id: [''],
@@ -25,6 +23,8 @@ export class CreateEscalationComponent implements OnInit {
   });
 
   departments: DepartmentDto[];
+  selectedTicketStatus: TicketStatus = new TicketStatus();
+  ticketStatusChangedSubscription: any;
 
   constructor(private fb: FormBuilder,
     public escalationService: EscalationService,
@@ -32,11 +32,25 @@ export class CreateEscalationComponent implements OnInit {
     private appHttpService: AppHttpService) { }
 
   ngOnInit(): void {
+
     this.appHttpService.getDepartments().subscribe(
       departments => this.departments = departments
     );
 
-    this.escalationService.selectedTicketStatusId = 5;
+    this.ticketStatusChangedSubscription = this.escalationService.ticketStatusChanged$.subscribe(
+      (ticketStatus: TicketStatus) => {
+        console.log(ticketStatus);
+        this.selectedTicketStatus = ticketStatus;
+        if (ticketStatus.id === 5) {
+          this.escalationForm.get('department').setValidators([Validators.required]);
+          this.escalationForm.controls['department'].updateValueAndValidity();
+        } else {
+          this.escalationForm.get('department').setValidators([]);
+          this.escalationForm.controls['department'].updateValueAndValidity();
+        }
+      }
+    );
+
   }
 
   submitEscalationForm() {
@@ -44,6 +58,7 @@ export class CreateEscalationComponent implements OnInit {
   }
 
   onSubmitEscalationForm() {
+
     this.isEscalationFormSubmitted = true;
 
     if (!this.escalationForm.valid) {
@@ -52,5 +67,11 @@ export class CreateEscalationComponent implements OnInit {
     }
 
     this.escalationHttpService.updateTicketStatus(this.escalationForm.value).subscribe();
+
+  }
+
+  ngOnDestroy() {
+    // prevent memory leak when component destroyed
+    this.ticketStatusChangedSubscription.unsubscribe();
   }
 }

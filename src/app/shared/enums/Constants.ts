@@ -1,4 +1,4 @@
-export class Constants {
+export class AppConstant {
 	public static readonly maxFileSize = 10 * 1024 * 1024; // ten MB
 
 	public static readonly maritalStatus = [
@@ -28,5 +28,22 @@ export class Constants {
 		{ id: 12, name: 'WITHDRAWN', description: 'Withdrawn by citizen', priority: 0 },
 		{ id: 13, name: 'CANCELLED', description: 'Cancelled by AD', priority: 0 },
 	];
+
+	public static readonly ticketStatusForAD = [
+		{ id: 5, name: 'ASSIGNED', description: 'Assigned by AD to respective department', priority: 0 },
+		{ id: 7, name: 'HOLD', description: 'Hold by AD', priority: 0 },
+		{ id: 9, name: 'CLOSE', description: 'Finalize by AD', priority: 0 },
+		{ id: 11, name: 'REJECTED', description: 'Rejected by AD', priority: 0 },
+		{ id: 13, name: 'CANCELLED', description: 'Cancelled by AD', priority: 0 },
+	];
+
+	public static readonly ticketStatusForRD = [
+		{ id: 8, name: 'DONE', description: 'Action taken and forwarded to AD', priority: 0 },
+	];
+
+	public static readonly ticketStatusForAgent = [
+		{ id: 2, name: 'PENDING', description: 'Waiting for evidence from the Complainant', priority: 0 },
+	];
+
 
 }

@@ -5,7 +5,7 @@ import { IOption } from 'ng-select';
 import { CRMHttpService } from '../crm-http.service';
 import { ConfirmationDialogService } from '../../../shared/modules/notification/confirmation-dialog/confirmation-dialog.service';
 import { ToastrService } from 'ngx-toastr';
-import { Constants } from '../../../shared/enums/Constants';
+import { AppConstant } from '../../../shared/enums/Constants';
 import { CustomerRelation } from '../../../shared/models/customer-relation.model';
 import { NgbDateCustomParserFormatter } from '../../../shared/modules/shared/pipes/date-fomatter';
 import { ActivatedRoute, Router, Params } from '@angular/router';
@@ -22,12 +22,12 @@ import { TicketStatus } from '../../../shared/models/dto/ticket-status-dto';
 })
 export class CRMFormComponent implements OnInit {
 
-  ticketStatuses: TicketStatus[] = Constants.ticketStatus;
+  ticketStatuses: TicketStatus[] = AppConstant.ticketStatus;
   today = new Date();
   fromMinDate = { year: this.today.getFullYear() - 100, month: 1, day: 1 };
   fromMaxDate = { year: this.today.getFullYear(), month: this.today.getMonth() + 1, day: this.today.getDate() };
-  maritalStatus = Constants.maritalStatus;
-  gender = Constants.gender;
+  maritalStatus = AppConstant.maritalStatus;
+  gender = AppConstant.gender;
   isFormSubmitted = false;
   complainantAddressForm = this.fb.group({
     presentAddressForm: this.fb.group({
