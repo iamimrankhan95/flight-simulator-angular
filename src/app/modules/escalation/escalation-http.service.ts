@@ -58,7 +58,7 @@ export class EscalationHttpService {
           this.escalationService.ticketStatuses = response.responseList;
           return response.responseList;
         }),
-        catchError(this.handleError('getTicketStatuses', statusData))
+        catchError(this.handleError('updateTicketStatus', statusData))
       );
   }
 }
