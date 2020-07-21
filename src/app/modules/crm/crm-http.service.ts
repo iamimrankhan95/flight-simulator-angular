@@ -72,11 +72,11 @@ export class CRMHttpService {
   }
 
   constructParam(pageConfig: ICRMListPageConfig): HttpParams {
+    let loggedInUser = this.authService.getLoggedInUser();
     let params = new HttpParams()
       .set(pageConfig.searchBy, pageConfig.searchKey ? pageConfig.searchKey : '')
-      .set('companyId', this.authService.getLoggedInUser().companyId.toString())
-      .set('departmentId', this.authService.getLoggedInUser().departmentId.toString())
-      .set('companyId', this.authService.getLoggedInUser().companyId.toString());
+      .set('companyId', loggedInUser.companyId.toString())
+      .set('departmentId', loggedInUser.departmentId.toString());
 
     if (!pageConfig.searchKey) {
       params = params.delete(pageConfig.searchBy);
