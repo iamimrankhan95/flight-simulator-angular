@@ -18,7 +18,7 @@ const httpOptions = {
 })
 export class AuthenticationService {
 
-  public loggedInUser: User = new User();
+  public loggedInUser: User ;
   private authToken;
   private currentUserSubject: BehaviorSubject<any>;
   public currentUser: Observable<any>;
@@ -53,9 +53,13 @@ export class AuthenticationService {
   }
 
   logout(): void {
+    this.clearUserData();
+    this.router.navigate(['/']);
+  }
+
+  clearUserData() {
     localStorage.clear();
     this.loggedInUser = null;
-    this.router.navigate(['/']);
   }
 
   getAuthorizationToken() {
@@ -67,7 +71,12 @@ export class AuthenticationService {
   }
 
   getLoggedInUser(): User {
-    return this.loggedInUser;
+    if (this.loggedInUser === null || this.loggedInUser === undefined) {
+      this.logout();
+      return;
+    } else {
+      return this.loggedInUser;
+    }
   }
 
   handleError(error) {

@@ -27,6 +27,6 @@ import { EscalationModule } from '../escalation/escalation.module';
     NotificationModule,
     EscalationModule
   ],
-  providers: [CRMHttpService, CRMService]
+  providers: []
 })
 export class CRMModule { }

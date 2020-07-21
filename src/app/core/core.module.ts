@@ -12,6 +12,7 @@ import { AddressHttpService } from '../shared/modules/address/address-http.servi
 import { AppService } from '../app.service';
 import { NgbDateCustomParserFormatter } from '../shared/modules/shared/pipes/date-fomatter';
 import { AppHttpService } from '../app-http.service';
+import { CRMService } from '../modules/crm/crm.service';
 
 
 
@@ -32,7 +33,9 @@ import { AppHttpService } from '../app-http.service';
     httpInterceptorProviders,
     MessageService,
     AddressHttpService,
-    NgbDateCustomParserFormatter
+    NgbDateCustomParserFormatter,
+    CRMHttpService,
+    CRMService
   ]
 })
 export class CoreModule { }
