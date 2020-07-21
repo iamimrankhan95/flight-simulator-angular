@@ -63,7 +63,7 @@ export class CrmListComponent implements OnInit, OnDestroy {
   }
 
   getCustomerRelations(pageConfig) {
-    this.crmHttpService.getCustomerRelations(pageConfig)
+    this.crmHttpService.getCustomerRelationsByParam(pageConfig)
       .subscribe(
         (customerRelations: any) => {
           this.customerRelations = customerRelations;

@@ -10,7 +10,10 @@ export class User {
     public joiningDate?: string,
     public active?: boolean,
     public departmentId?: number,
-    public companyId?: number) {
+    public companyId?: number,
+    public roles?: any,
+    public permission?: any
+  ) {
     this.id = id;
     this.name = name;
     this.contactNo = contactNo;

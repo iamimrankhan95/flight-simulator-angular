@@ -5,6 +5,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { applicationUrl } from '../../shared/enums/application-urls';
 import { tap, catchError } from 'rxjs/operators';
 import { JsonPipe } from '@angular/common';
+import { User } from '../../shared/models/user';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -17,6 +18,7 @@ const httpOptions = {
 })
 export class AuthenticationService {
 
+  public loggedInUser: User = new User();
   private authToken;
   private currentUserSubject: BehaviorSubject<any>;
   public currentUser: Observable<any>;
@@ -38,6 +40,13 @@ export class AuthenticationService {
       tap((response) => {
         localStorage.setItem('loggedInUser', JSON.stringify(response));
         localStorage.setItem('loggedInUserToken', response.accessToken);
+        this.loggedInUser = new User();
+        this.loggedInUser.companyId = response.companyId;
+        this.loggedInUser.departmentId = response.departmentId;
+        this.loggedInUser.permission = response.permission;
+        this.loggedInUser.roles = response.roles;
+        this.loggedInUser.id = response.userId;
+        this.loggedInUser.username = response.username;
         this.authToken = response.accessToken;
       }), catchError(this.handleError)
     );
@@ -45,6 +54,7 @@ export class AuthenticationService {
 
   logout(): void {
     localStorage.clear();
+    this.loggedInUser = null;
     this.router.navigate(['/']);
   }
 
@@ -54,6 +64,10 @@ export class AuthenticationService {
 
   getUserRole() {
     return JSON.parse(localStorage.getItem('loggedInUser')).roles[0].name;
+  }
+
+  getLoggedInUser(): User {
+    return this.loggedInUser;
   }
 
   handleError(error) {

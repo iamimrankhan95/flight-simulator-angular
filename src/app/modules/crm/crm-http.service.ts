@@ -13,6 +13,7 @@ import { ToastrService } from 'ngx-toastr';
 import { CrmDetailsDto } from '../../shared/models/dto/crm-details-dto';
 import { CrmDtoForList } from '../../shared/models/dto/crm-dto-for-list';
 import { CrmDto } from '../../shared/models/dto/crm-dto';
+import { AuthenticationService } from '../auth/authentication.service';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -29,7 +30,8 @@ export class CRMHttpService {
     private http: HttpClient,
     httpErrorHandler: HttpErrorHandler,
     private crmService: CRMService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private authService: AuthenticationService
   ) {
     this.handleError = httpErrorHandler.createHandleError('CRMHttpService');
   }
@@ -71,7 +73,10 @@ export class CRMHttpService {
 
   constructParam(pageConfig: ICRMListPageConfig): HttpParams {
     let params = new HttpParams()
-      .set(pageConfig.searchBy, pageConfig.searchKey ? pageConfig.searchKey : '');
+      .set(pageConfig.searchBy, pageConfig.searchKey ? pageConfig.searchKey : '')
+      .set('companyId', this.authService.getLoggedInUser().companyId.toString())
+      .set('departmentId', this.authService.getLoggedInUser().departmentId.toString())
+      .set('companyId', this.authService.getLoggedInUser().companyId.toString());
 
     if (!pageConfig.searchKey) {
       params = params.delete(pageConfig.searchBy);
