@@ -38,7 +38,11 @@ export class HttpErrorHandler {
         message = `server returned code ${error.status}`;
       }
 
-      this.toastr.error(error.error.message, 'Error');
+      if (error.status === 0) {
+        this.toastr.error('Connect to the VPN', 'Error');
+      } else {
+        this.toastr.error(error.error.message, 'Error');
+      }
       // TODO: better job of transforming error for user consumption
       console.log(`${serviceName}: ${operation} failed: ${message}`);
       // Let the app keep running by returning a safe result.

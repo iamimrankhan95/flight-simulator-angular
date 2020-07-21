@@ -284,7 +284,7 @@
 								</div>
 							</div>
 						</fieldset>
-						<div>
+						<div *ngIf="authService.getUserRole()==='AGENT'">
 							<button type="button" id="cancel-save" class="btn btn-secondary" routerLink="/dashboard">
 								<span>Cancel</span>
 							</button>
@@ -306,4 +306,4 @@
     <div class="col-md-6"></div>
 </div> -->
 
-<app-escalation-container *ngIf="isEditMode"></app-escalation-container>
+<app-escalation-container *ngIf="isEditMode && authService.getUserRole()!=='AGENT'" ></app-escalation-container>

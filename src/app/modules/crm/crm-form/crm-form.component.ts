@@ -12,6 +12,7 @@ import { ActivatedRoute, Router, Params } from '@angular/router';
 import { CrmDto } from '../../../shared/models/dto/crm-dto';
 import { CRMService } from '../crm.service';
 import { TicketStatus } from '../../../shared/models/dto/ticket-status-dto';
+import { AuthenticationService } from '../../auth/authentication.service';
 @Component({
   selector: 'app-crm-form',
   templateUrl: './crm-form.component.html',
@@ -29,6 +30,7 @@ export class CRMFormComponent implements OnInit {
   maritalStatus = AppConstant.maritalStatus;
   gender = AppConstant.gender;
   isFormSubmitted = false;
+
   complainantAddressForm = this.fb.group({
     presentAddressForm: this.fb.group({
       address: ['', [Validators.required]],
@@ -62,7 +64,6 @@ export class CRMFormComponent implements OnInit {
       postCode: ['']
     })
   });
-
 
   crmForm = this.fb.group({
     id: [''],
@@ -99,8 +100,10 @@ export class CRMFormComponent implements OnInit {
     private crmHttpService: CRMHttpService,
     private crmService: CRMService,
     private confirmationDialogService: ConfirmationDialogService,
-    private route: ActivatedRoute, private router: Router,
-    private toastr: ToastrService) { }
+    private route: ActivatedRoute,
+    private router: Router,
+    private toastr: ToastrService,
+    public authService: AuthenticationService) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(
