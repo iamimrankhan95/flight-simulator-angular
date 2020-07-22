@@ -33,7 +33,7 @@ export class CRMService {
     crmDto.nidNumber = crm.nidNumber;
     crmDto.occupation = crm.occupation;
     crmDto.problemDescription = crm.problemDescription;
-    crmDto.ticketStatusId = 1;
+    crmDto.ticketStatusId = crm.ticketStatus;
     crmDto.departmentId = 1;
     crmDto.usersId = 1;
     crmDto.companyId = 1;
