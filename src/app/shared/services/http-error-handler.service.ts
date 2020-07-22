@@ -45,8 +45,9 @@ export class HttpErrorHandler {
       }
       // TODO: better job of transforming error for user consumption
       console.log(`${serviceName}: ${operation} failed: ${message}`);
+      error.error.safeData = result;
       // Let the app keep running by returning a safe result.
-      return throwError(result);
+      return throwError(error);
     };
 
   }
