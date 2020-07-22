@@ -18,7 +18,7 @@ const httpOptions = {
 })
 export class AuthenticationService {
 
-  public loggedInUser: User ;
+  public loggedInUser: User;
   private authToken;
   private currentUserSubject: BehaviorSubject<any>;
   public currentUser: Observable<any>;
@@ -71,7 +71,8 @@ export class AuthenticationService {
   }
 
   getLoggedInUser(): User {
-    if (this.loggedInUser === null || this.loggedInUser === undefined) {
+    const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
+    if (loggedInUser === null || loggedInUser === undefined) {
       this.logout();
       return;
     } else {
