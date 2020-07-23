@@ -15,7 +15,7 @@ export class DefaultLayoutComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private authenticationservice: AuthenticationService) { }
+    public authenticationservice: AuthenticationService) { }
 
   ngOnInit() {
     // const user = JSON.parse(localStorage.getItem('currentUser'));
@@ -38,7 +38,6 @@ export class DefaultLayoutComponent implements OnInit {
 
   logoutClick() {
     this.authenticationservice.logout();
-    this.router.navigate(['/auth/login']);
   }
 
   ChangePassword() {

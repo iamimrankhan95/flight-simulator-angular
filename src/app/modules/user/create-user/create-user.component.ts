@@ -105,7 +105,7 @@ export class CreateUserComponent implements OnInit, OnDestroy {
       password: ['', [Validators.required, Validators.minLength(8), Validators.pattern(this.passwordRegex)]],
       joiningDate: [this.maxDate, [Validators.required]],
       companyId: ['', [Validators.required]],
-      departmentId: ['', [Validators.required]],
+      departmentId: [''],
       active: [''],
     });
   }

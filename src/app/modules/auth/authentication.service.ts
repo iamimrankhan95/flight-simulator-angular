@@ -54,7 +54,7 @@ export class AuthenticationService {
 
   logout(): void {
     this.clearUserData();
-    this.router.navigate(['/']);
+    this.router.navigate(['/auth/login']);
   }
 
   clearUserData() {
@@ -76,7 +76,7 @@ export class AuthenticationService {
       this.logout();
       return;
     } else {
-      return this.loggedInUser;
+      return loggedInUser;
     }
   }
 
