@@ -1,10 +1,6 @@
-import { Injectable } from '@angular/core';
 import { ValidatorFn, AbstractControl, FormGroup, ValidationErrors, FormControl } from '@angular/forms';
 
-@Injectable({
-  providedIn: 'root'
-})
-export class ValidationFormsService {
+export class CustomeValidator {
 
   errorMessages: any;
 
@@ -56,10 +52,12 @@ export class ValidationFormsService {
     };
   }
 }
-export function onlyNumeric(nameRe: RegExp): ValidatorFn {
+
+export function onlyNumeric(): ValidatorFn {
   return (control: AbstractControl): { [key: string]: any } | null => {
+    let nameRe: RegExp = new RegExp('^[0-9]*$');
     const forbidden = nameRe.test(control.value);
-    return forbidden ? { 'onlyNumeric': { value: control.value } } : null;
+    return !forbidden ? { 'onlyNumeric': { value: control.value } } : null;
   };
 }
 
@@ -82,3 +80,14 @@ export const trimValidator: ValidatorFn = (control: FormControl) => {
   }
   return null;
 };
+
+export function nidValidation(): ValidatorFn {
+  return (control: AbstractControl): { [key: string]: any } | null => {
+    let controlVal = control.value.toString();
+    let forbidden;
+    if (!(controlVal.length === 10 || controlVal.length === 13 || controlVal.length === 17)) {
+      forbidden = true;
+    }
+    return forbidden ? { 'forbiddenName': { value: control.value } } : null;
+  };
+}

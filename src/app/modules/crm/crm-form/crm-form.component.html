@@ -81,11 +81,14 @@
 									<div class="form-group">
 										<label class="form-control-label" for="field_nidNumber">NID</label>
 										<input type="text" class="form-control" name="nidNumber" id="field_nidNumber"
-											formControlName="nidNumber"
-											[ngClass]="{ 'is-invalid': isFormSubmitted && crmForm.get('nidNumber').errors,'is-valid': crmForm.get('nidNumber').touched && !crmForm.get('nidNumber').errors }" />
+											formControlName="nidNumber" [ngClass]="{ 'is-invalid': isFormSubmitted && crmForm.get('nidNumber').errors,
+											'is-valid': crmForm.get('nidNumber').touched && !crmForm.get('nidNumber').errors }" />
 										<div *ngIf="isFormSubmitted && crmForm.get('nidNumber').errors" class="invalid-feedback">
-											<div *ngIf="crmForm.get('nidNumber')?.errors?.required">
-												Nid Number is required.
+											<div *ngIf="crmForm.get('nidNumber')?.errors?.onlyNumeric">
+												Only numeric value is allowed.
+											</div>
+											<div *ngIf="crmForm.get('nidNumber')?.errors?.forbiddenName">
+												Nid Number length can only be 10,13,17
 											</div>
 										</div>
 									</div>
@@ -306,4 +309,4 @@
     <div class="col-md-6"></div>
 </div> -->
 
-<app-escalation-container *ngIf="isEditMode && authService.getUserRole()!=='AGENT'" ></app-escalation-container>
+<app-escalation-container *ngIf="isEditMode && authService.getUserRole()!=='AGENT'"></app-escalation-container>

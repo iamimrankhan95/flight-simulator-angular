@@ -13,6 +13,7 @@ import { CrmDto } from '../../../shared/models/dto/crm-dto';
 import { CRMService } from '../crm.service';
 import { TicketStatus } from '../../../shared/models/dto/ticket-status-dto';
 import { AuthenticationService } from '../../auth/authentication.service';
+import { nidValidation, onlyNumeric } from '../../../shared/services/validation-forms.service';
 @Component({
   selector: 'app-crm-form',
   templateUrl: './crm-form.component.html',
@@ -71,7 +72,7 @@ export class CRMFormComponent implements OnInit {
     agentId: [''],
     msisdn: ['', [Validators.required]],
     contactNo: ['', [Validators.required]],
-    nidNumber: [''],
+    nidNumber: ['', [Validators.required, onlyNumeric(), nidValidation()]],
     compliantName: ['', [Validators.required]],
     gender: ['', [Validators.required]],
     email: [''],
@@ -170,7 +171,6 @@ export class CRMFormComponent implements OnInit {
       }
     }
   }
-
 
   samePermanentAddress(event: any): CustomerRelation {
     let crmFormValue;
