@@ -192,29 +192,19 @@ export class CreateUserComponent implements OnInit, OnDestroy {
               'en-UK'
             )
           );
-          this.otpService.openOtpModal();
-          this.otpVerificationSubscription = this.otpService
-            .onOtpVerification()
-            .subscribe((isVerified) => {
-              if (isVerified) {
-                console.log('verified');
-                this.userDataService.register(this.simpleForm.value).subscribe(
-                  (response) => {
-                    console.log(response);
-                    this.toastr.success('User created successfully', 'Successful');
-                    this.onReset();
-                  },
-                  (error) => {
-                    console.log(error);
-                    this.toastr.error('Something went wrong', 'Error');
-                    this.submitted = false;
-                  }
-                );
-              } else {
-                console.log('not verified');
-              }
-              this.otpVerificationSubscription.unsubscribe();
-            });
+
+          this.userDataService.register(this.simpleForm.value).subscribe(
+            (response) => {
+              console.log(response);
+              this.toastr.success('User created successfully', 'Successful');
+              this.onReset();
+            },
+            (error) => {
+              console.log(error);
+              this.toastr.error('Something went wrong', 'Error');
+              this.submitted = false;
+            }
+          );
         }
 
       }

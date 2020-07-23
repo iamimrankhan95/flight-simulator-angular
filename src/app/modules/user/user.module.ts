@@ -20,7 +20,7 @@ import { NotificationModule } from '../../shared/modules/notification/notificati
     DataTablesModule,
     SharedModule,
     BsDatepickerModule.forRoot(),
-    OtpModule.forChild(),
+    // OtpModule.forChild(),
     NotificationModule
   ]
 })
