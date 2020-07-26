@@ -195,9 +195,9 @@
                 <div class="form-group">
                   <button class="btn btn-primary" type="submit">
                     {{isEditMode?'Update':'Register'}}
-                    <div *ngIf="simpleForm.valid && submitted && !submissionError">
+                    <!-- <div *ngIf="simpleForm.valid && submitted && !submissionError">
                       <app-otp-modal [contactNo]="userContactNo"></app-otp-modal>
-                    </div>
+                    </div> -->
                   </button>
                   <button class="btn btn-danger" type="button" (click)="onReset();">
                     Reset
@@ -211,4 +211,4 @@
     </div>
   </div>
 </div>
-<app-otp-modal></app-otp-modal>
+<!-- <app-otp-modal></app-otp-modal> -->

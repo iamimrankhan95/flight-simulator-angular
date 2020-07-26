@@ -57,7 +57,6 @@ export class CreateUserComponent implements OnInit, OnDestroy {
   constructor(
     private formbuilder: FormBuilder,
     private userDataService: UserDataService,
-    private otpService: OtpService,
     private appService: AppService,
     private confirmationDialogService: ConfirmationDialogService,
     private toastr: ToastrService,
