@@ -18,35 +18,24 @@ const httpOptions = {
 })
 export class AuthenticationService {
 
-  public loggedInUser: User;
+  public currentUser: User;
   private authToken;
-  private currentUserSubject: BehaviorSubject<any>;
-  public currentUser: Observable<any>;
 
   constructor(private router: Router, private http: HttpClient) {
-    // this.currentUserSubject =  new BehaviorSubject<any>(JSON.parse(localStorage.getItem('currentUser')));
-    // comment out the line above and remove the one below when api sends response
-    this.currentUserSubject = new BehaviorSubject<any>(
-      localStorage.getItem('currentUser')
-    );
-  }
-
-  public get currentUserValue(): any {
-    return this.currentUserSubject.value;
   }
 
   login(credential: any) {
     return this.http.post<any>(applicationUrl.auth.login, credential).pipe(
       tap((response) => {
-        localStorage.setItem('loggedInUser', JSON.stringify(response));
-        localStorage.setItem('loggedInUserToken', response.accessToken);
-        this.loggedInUser = new User();
-        this.loggedInUser.companyId = response.companyId;
-        this.loggedInUser.departmentId = response.departmentId;
-        this.loggedInUser.permission = response.permission;
-        this.loggedInUser.roles = response.roles;
-        this.loggedInUser.id = response.userId;
-        this.loggedInUser.username = response.username;
+        localStorage.setItem('currentUser', JSON.stringify(response));
+        localStorage.setItem('currentUserToken', response.accessToken);
+        this.currentUser = new User();
+        this.currentUser.companyId = response.companyId;
+        this.currentUser.departmentId = response.departmentId;
+        this.currentUser.permission = response.permission;
+        this.currentUser.roles = response.roles;
+        this.currentUser.id = response.userId;
+        this.currentUser.username = response.username;
         this.authToken = response.accessToken;
       }), catchError(this.handleError)
     );
@@ -59,24 +48,24 @@ export class AuthenticationService {
 
   clearUserData() {
     localStorage.clear();
-    this.loggedInUser = null;
+    this.currentUser = null;
   }
 
   getAuthorizationToken() {
-    return 'Bearer ' + localStorage.getItem('loggedInUserToken');
+    return 'Bearer ' + localStorage.getItem('currentUserToken');
   }
 
   getUserRole() {
-    return JSON.parse(localStorage.getItem('loggedInUser')).roles[0].name;
+    return JSON.parse(localStorage.getItem('currentUser')).roles[0].name;
   }
 
-  getLoggedInUser(): User {
-    const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
-    if (loggedInUser === null || loggedInUser === undefined) {
+  getCurrentUser(): User {
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    if (currentUser === null || currentUser === undefined) {
       this.logout();
       return;
     } else {
-      return loggedInUser;
+      return currentUser;
     }
   }
 

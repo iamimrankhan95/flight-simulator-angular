@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 import { AuthenticationService } from '../authentication.service';
 import { ToastrService } from 'ngx-toastr';
 
@@ -27,7 +27,18 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.authenticationService.clearUserData();
+    console.log('on inint');
+    // reset login status
+    this.authenticationService.logout();
+
+    // get return url from route parameters or default to '/'
+    // this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/home';
+    this.route.queryParams.subscribe(
+      (params: Params) => {
+        this.returnUrl = params['returnUrl'] ? params['returnUrl'] : '/home';
+        console.log(this.returnUrl);
+      }
+    );
     this.createForm();
   }
 
@@ -49,7 +60,7 @@ export class LoginComponent implements OnInit {
       return;
     } else {
       this.authenticationService.login(this.loginForm.value).subscribe(
-        (res) => this.router.navigate(['/home']),
+        (res) => this.router.navigateByUrl(this.returnUrl),
         (error) => this.toastr.error('Please try with your correct username and password', 'Wrong credential!')
       );
 

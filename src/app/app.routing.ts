@@ -6,6 +6,7 @@ import { DefaultLayoutComponent } from './containers';
 
 import { P404Component } from './modules/error/404.component';
 import { P500Component } from './modules/error/500.component';
+import { AuthGuard } from './modules/auth/auth.guard';
 
 
 export const routes: Routes = [
@@ -24,6 +25,7 @@ export const routes: Routes = [
     data: {
       title: 'Home'
     },
+    canActivate: [AuthGuard],
     children: [
       {
         path: '',
@@ -36,7 +38,7 @@ export const routes: Routes = [
       },
       {
         path: 'crm',
-        loadChildren: () => import('./modules/crm/crm.module').then(m => m.CRMModule)
+        loadChildren: () => import('./modules/crm/crm.module').then(m => m.CRMModule),
       },
       {
         path: 'users',
