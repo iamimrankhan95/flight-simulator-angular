@@ -24,6 +24,7 @@ import { nidValidation, onlyNumeric } from '../../../shared/services/validation-
 })
 export class CRMFormComponent implements OnInit {
 
+  isCollapsed: boolean = false;
   ticketStatuses: TicketStatus[] = AppConstant.ticketStatus;
   today = new Date();
   fromMinDate = { year: this.today.getFullYear() - 100, month: 1, day: 1 };
@@ -198,5 +199,13 @@ export class CRMFormComponent implements OnInit {
       // console.log(crmFormValue);
     }
     return crmFormValue;
+  }
+
+  collapsed(event: any): void {
+    // console.log(event);
+  }
+
+  expanded(event: any): void {
+    // console.log(event);
   }
 }

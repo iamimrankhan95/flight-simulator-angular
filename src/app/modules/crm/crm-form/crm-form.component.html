@@ -4,8 +4,14 @@
 			<div class="card">
 				<div class="card-header">
 					<i class="fa fa-check"></i>Create Customer Relation
+					<div class="card-header-actions" style="height: 21px;">
+						<label class="switch switch-sm switch-label switch-info">
+							<input type="checkbox" class="switch-input" (change)="isCollapsed = !isCollapsed" checked>
+							<span class="switch-slider" data-checked="On" data-unchecked="Off"></span>
+						</label>
+					</div>
 				</div>
-				<div class="card-body">
+				<div class="card-body" (collapsed)="collapsed($event)" (expanded)="expanded($event)" [collapse]="isCollapsed">
 					<form class="needs-validation" name="crmForm" role="form" novalidate (ngSubmit)="onSubmit()"
 						[formGroup]="crmForm">
 						<fieldset>
@@ -303,10 +309,5 @@
 		<!--/.col-->
 	</div>
 </div>
-
-<!-- <div class="form-row">
-    <div class="col-md-6"></div>
-    <div class="col-md-6"></div>
-</div> -->
 
 <app-escalation-container *ngIf="isEditMode && authService.getUserRole()!=='AGENT'"></app-escalation-container>

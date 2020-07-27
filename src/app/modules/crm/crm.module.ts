@@ -12,6 +12,8 @@ import { CrmListComponent } from './crm-list/crm-list.component';
 import { DataTablesModule } from 'angular-datatables';
 import { NotificationModule } from '../../shared/modules/notification/notification.module';
 import { EscalationModule } from '../escalation/escalation.module';
+// Collapse Component
+import { CollapseModule } from 'ngx-bootstrap/collapse';
 @NgModule({
   declarations: [
     CRMFormComponent,
@@ -25,7 +27,8 @@ import { EscalationModule } from '../escalation/escalation.module';
     FontAwesomeModule,
     DataTablesModule,
     NotificationModule,
-    EscalationModule
+    EscalationModule,
+    CollapseModule
   ],
   providers: []
 })

@@ -17,7 +17,8 @@ import { EscalationHttpService } from './escalation-http.service';
     EscalationRoutingModule
   ],
   exports:[
-    EscalationContainerComponent
+    EscalationContainerComponent,
+    EscalationDetailsComponent
   ],
   providers:[EscalationService, EscalationHttpService]
 })
