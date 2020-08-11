@@ -15,36 +15,19 @@ import { AppConstant } from '../../shared/enums/Constants';
 export class FlightSimulatorComponent implements OnInit {
 
   isCollapsed: boolean = false;
-  ticketStatuses: TicketStatus[] = AppConstant.ticketStatus;
+  fli: TicketStatus[] = AppConstant.ticketStatus;
   today = new Date();
   fromMinDate = { year: this.today.getFullYear() - 100, month: 1, day: 1 };
-  fromMaxDate = { year: this.today.getFullYear(), month: this.today.getMonth() + 1, day: this.today.getDate() };
+  fromMaxDate = { year: this.today.getFullYear() + 100, month: 1, day: 1 };
   maritalStatus = AppConstant.maritalStatus;
   gender = AppConstant.gender;
   isFormSubmitted = false;
 
   crmForm = this.fb.group({
-    id: [''],
-    uniqueid: [''],
-    agentId: [''],
-    msisdn: ['', [Validators.required]],
-    contactNo: ['', [Validators.required]],
-    nidNumber: ['', [Validators.required, onlyNumeric(), nidValidation()]],
-    compliantName: ['', [Validators.required]],
-    gender: ['', [Validators.required]],
-    email: [''],
-    maritalStatus: [''],
-    isHusband: [true, [Validators.required]],
-    spouseName: [''],
-    fatherName: [''],
-    fatherOrHusbandName: ['', [Validators.required]],
-    motherName: ['', [Validators.required]],
-    dob: [''],
-    occupation: ['', [Validators.required]],
-    accusedOrganizationName: ['', [Validators.required]],
-    problemDescription: ['', [Validators.required, Validators.maxLength(500)]],
-    ticketStatus: ['2', [Validators.required]],
-    applicationType: ['1', [Validators.required]],
+    DepartureAirportCode: ['', [Validators.required]],
+    ArrivalAirportCode: ['', [Validators.required]],
+    DepartureDate: [''],
+    ReturnDate: [''],
   });
 
   constructor(private fb: FormBuilder,
