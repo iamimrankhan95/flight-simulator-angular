@@ -33,7 +33,7 @@ export class FlightListComponent implements OnInit {
   ngOnInit(): void {
     this.route.queryParams.subscribe(
       (params: Params) => {
-        this.ngxLoader.start()
+        this.ngxLoader.start();
         this.flightSimulatorRequest.DepartureAirportCode = params['DepartureAirportCode'] ? params['DepartureAirportCode'] : '';
         this.flightSimulatorRequest.ArrivalAirportCode = params['ArrivalAirportCode'] ? params['ArrivalAirportCode'] : '';
         this.flightSimulatorRequest.DepartureDate = params['DepartureDate'] ? params['DepartureDate'] : '';
