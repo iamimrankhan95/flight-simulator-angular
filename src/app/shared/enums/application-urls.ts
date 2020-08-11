@@ -49,5 +49,8 @@ export const applicationUrl = {
   },
   department: {
     read: environment.apiUrl + 'data/department-list',
+  },
+  flightSimulator: {
+    read: 'http://nmflightapi.azurewebsites.net/api/flight',
   }
-}
+};

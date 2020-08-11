@@ -2,12 +2,13 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { FlightSimulatorRoutingModule } from './flight-simulator-routing.module';
-import { FlightSimulatorComponent } from './flight-simulator.component';
 import { SharedModule } from '../../shared/modules/shared/shared.module';
+import { FlightListComponent } from './flight-list/flight-list.component';
+import { FlightSimulatorComponent } from './flight-simulator-form/flight-simulator.component';
 
 
 @NgModule({
-  declarations: [FlightSimulatorComponent],
+  declarations: [FlightSimulatorComponent, FlightListComponent],
   imports: [
     CommonModule,
     SharedModule,
