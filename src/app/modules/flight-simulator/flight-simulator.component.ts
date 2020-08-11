@@ -21,13 +21,15 @@ export class FlightSimulatorComponent implements OnInit {
   fromMaxDate = { year: this.today.getFullYear() + 100, month: 1, day: 1 };
   maritalStatus = AppConstant.maritalStatus;
   gender = AppConstant.gender;
-  isFormSubmitted = false;
+  isFlightFormSubmitted = false;
 
   crmForm = this.fb.group({
-    DepartureAirportCode: ['', [Validators.required]],
-    ArrivalAirportCode: ['', [Validators.required]],
-    DepartureDate: [''],
-    ReturnDate: [''],
+    DepartureAirportCode: ['',
+      [Validators.required, Validators.maxLength(3), Validators.minLength(3), Validators.pattern('^$|^[A-Za-z0-9]+')]],
+    ArrivalAirportCode: ['',
+      [Validators.required, Validators.maxLength(3), Validators.minLength(3), Validators.pattern('^$|^[A-Za-z0-9]+')]],
+    DepartureDate: ['', [Validators.required]],
+    ReturnDate: ['', [Validators.required]],
   });
 
   constructor(private fb: FormBuilder,
@@ -41,6 +43,12 @@ export class FlightSimulatorComponent implements OnInit {
   }
 
   async onSubmit() {
+    this.isFlightFormSubmitted = true;
+    if (!this.crmForm.valid) {
+      console.log('not valid', this.crmForm);
+      return;
+    }
+    console.log('valid', this.crmForm.value);
   }
 
 }
