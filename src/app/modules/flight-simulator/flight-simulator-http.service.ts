@@ -11,6 +11,7 @@ import { CrmDtoForList } from '../../shared/models/dto/crm-dto-for-list';
 import { AuthenticationService } from '../auth/authentication.service';
 import { FlightSimulatorResponseObject } from '../../shared/models/dto/flight-simulator-response.dto';
 import { FlightSimulatorService } from './flight-simulator.service';
+import { FlightSimulatorRequest } from '../../shared/models/dto/flight-simulator-request.dto';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -35,9 +36,14 @@ export class FlightSimulatorHttpService {
     this.handleError = httpErrorHandler.createHandleError('FlightSimulatorHttpService');
   }
 
-  getFlightSimulatorResponseObjects(formData): Observable<FlightSimulatorResponseObject[]> {
-    const requestData = this.flightSimulatorService.convertToRequestData(formData);
-    return this.http.post<FlightSimulatorResponseObject[]>(applicationUrl.flightSimulator.read, requestData)
+  getFlightSimulatorResponseObjects(flightSimulatorRequest: FlightSimulatorRequest): Observable<FlightSimulatorResponseObject[]> {
+    let params = new HttpParams()
+      .set('DepartureAirportCode', (flightSimulatorRequest.DepartureAirportCode))
+      .set('ArrivalAirportCode', flightSimulatorRequest.ArrivalAirportCode)
+      .set('DepartureDate', (flightSimulatorRequest.DepartureDate))
+      .set('ReturnDate', flightSimulatorRequest.ReturnDate);
+
+    return this.http.get<FlightSimulatorResponseObject[]>(applicationUrl.flightSimulator.read, { params })
       .pipe(
         tap((flightSimulatorResponseObjectList: FlightSimulatorResponseObject[]) => {
           if (flightSimulatorResponseObjectList) {

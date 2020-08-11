@@ -1,1 +1,61 @@
-<p>flight-list works!</p>
+<div class="animated fadeIn">
+  <div class="card">
+    <div class="card-header">
+      <b>Flights</b>
+    </div>
+    <div class="card-body">
+      <div class="row mb-3">
+        <div class="col-md-4 offset-md-8">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text"><i class="fa fa-search"></i></span>
+            </div>
+            <input type="text" class="form-control" [(ngModel)]="filterQuery" placeholder="Search by Airline Name" />
+          </div>
+        </div>
+      </div>
+      <table class="table table-striped table-hover table-responsive-lg" [mfData]="flights | dataFilter : filterQuery: 'AirlineName' "
+        #mf="mfDataTable" [mfRowsOnPage]="10">
+        <thead>
+          <tr>
+            <th style="width: 20%">
+              <mfDefaultSorter by="name">Airline Logo</mfDefaultSorter>
+            </th>
+            <th style="width: 20%">
+              <mfDefaultSorter by="AirlineName">Airline Name</mfDefaultSorter>
+            </th>
+            <th style="width: 10%">
+              <mfDefaultSorter by="OutboundFlightsDuration">Outbound flight duration</mfDefaultSorter>
+            </th>
+            <th style="width: 20%">
+              <mfDefaultSorter by="InboundFlightsDuration">Inbound flight duration</mfDefaultSorter>
+            </th>
+            <th style="width: 10%">
+              <mfDefaultSorter by="TotalAmount">Total amount in USD</mfDefaultSorter>
+            </th>
+            <th style="width: 20%">
+              <mfDefaultSorter by="city">Action</mfDefaultSorter>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of mf.data">
+            <td><img [src]="item.AirlineLogoAddress" alt="" class="img-responsive"></td>
+            <td>{{item.AirlineName}}</td>
+            <td>{{item.OutboundFlightsDuration}}</td>
+            <td>{{item.InboundFlightsDuration }}</td>
+            <td>{{item.TotalAmount}}</td>
+            <td>XXX</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="6">
+              <mfBootstrapPaginator [rowsOnPageSet]="[5,10,15]"></mfBootstrapPaginator>
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+</div>

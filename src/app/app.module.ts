@@ -35,6 +35,7 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
 import { CoreModule } from './core/core.module';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
+// import { NgxUiLoaderModule } from 'ngx-ui-loader';
 @NgModule({
   imports: [
     BrowserModule,
@@ -49,6 +50,7 @@ import { ToastrModule } from 'ngx-toastr';
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
     CoreModule,
+    NgxUiLoaderModule,
     HttpClientModule,
     ToastrModule.forRoot({
       timeOut: 3000,

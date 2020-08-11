@@ -6,7 +6,7 @@
           <i class="fa fa-check"></i>Form for the User Input
         </div>
         <div class="card-body">
-          <form class="needs-validation" name="crmForm" role="form" novalidate (ngSubmit)="onSubmit()"
+          <form class="needs-validation" name="flightFrm" role="form" novalidate (ngSubmit)="onSubmit()"
             [formGroup]="flightFrm">
             <fieldset>
               <legend>Flight Information</legend>
@@ -17,18 +17,18 @@
                         class="text-danger">*</span></label>
                     <input type="text" class="form-control" name="DepartureAirportCode" id="field_DepartureAirportCode"
                       formControlName="DepartureAirportCode"
-                      [ngClass]="{ 'is-invalid': isFlightFormSubmitted && crmForm.get('DepartureAirportCode').errors,
-                      'is-valid': crmForm.get('DepartureAirportCode').touched && !crmForm.get('DepartureAirportCode').errors }" />
-                    <div *ngIf="isFlightFormSubmitted && crmForm.get('DepartureAirportCode').errors"
+                      [ngClass]="{ 'is-invalid': isFlightFormSubmitted && flightFrm.get('DepartureAirportCode').errors,
+                      'is-valid': flightFrm.get('DepartureAirportCode').touched && !flightFrm.get('DepartureAirportCode').errors }" />
+                    <div *ngIf="isFlightFormSubmitted && flightFrm.get('DepartureAirportCode').errors"
                       class="invalid-feedback">
-                      <div *ngIf="crmForm.get('DepartureAirportCode')?.errors?.required">
+                      <div *ngIf="flightFrm.get('DepartureAirportCode')?.errors?.required">
                         Departure airport code is required.
                       </div>
                       <div
-                        *ngIf="crmForm.get('DepartureAirportCode')?.errors?.maxlength || crmForm.get('DepartureAirportCode')?.errors?.minlength">
+                        *ngIf="flightFrm.get('DepartureAirportCode')?.errors?.maxlength || flightFrm.get('DepartureAirportCode')?.errors?.minlength">
                         Code length can only be 3.
                       </div>
-                      <div *ngIf="crmForm.get('DepartureAirportCode')?.errors?.pattern">
+                      <div *ngIf="flightFrm.get('DepartureAirportCode')?.errors?.pattern">
                         Code value can only be Alphanumeric.
                       </div>
                     </div>
@@ -39,18 +39,18 @@
                     <label class="form-control-label" for="field_ArrivalAirportCode">Arrival airport code<span
                         class="text-danger">*</span></label>
                     <input type="text" class="form-control" name="ArrivalAirportCode" id="field_ArrivalAirportCode"
-                      formControlName="ArrivalAirportCode" [ngClass]="{ 'is-invalid': isFlightFormSubmitted && crmForm.get('ArrivalAirportCode').errors,
-											'is-valid': crmForm.get('ArrivalAirportCode').touched && !crmForm.get('ArrivalAirportCode').errors }" />
-                    <div *ngIf="isFlightFormSubmitted && crmForm.get('ArrivalAirportCode').errors"
+                      formControlName="ArrivalAirportCode" [ngClass]="{ 'is-invalid': isFlightFormSubmitted && flightFrm.get('ArrivalAirportCode').errors,
+											'is-valid': flightFrm.get('ArrivalAirportCode').touched && !flightFrm.get('ArrivalAirportCode').errors }" />
+                    <div *ngIf="isFlightFormSubmitted && flightFrm.get('ArrivalAirportCode').errors"
                       class="invalid-feedback">
-                      <div *ngIf="crmForm.get('ArrivalAirportCode')?.errors?.required">
+                      <div *ngIf="flightFrm.get('ArrivalAirportCode')?.errors?.required">
                         Arrival airport code is required.
                       </div>
                       <div
-                        *ngIf="crmForm.get('ArrivalAirportCode')?.errors?.maxlength || crmForm.get('ArrivalAirportCode')?.errors?.minlength">
+                        *ngIf="flightFrm.get('ArrivalAirportCode')?.errors?.maxlength || flightFrm.get('ArrivalAirportCode')?.errors?.minlength">
                         Code length can only be 3.
                       </div>
-                      <div *ngIf="crmForm.get('ArrivalAirportCode')?.errors?.pattern">
+                      <div *ngIf="flightFrm.get('ArrivalAirportCode')?.errors?.pattern">
                         Code value can only be Alphanumeric.
                       </div>
                     </div>
@@ -66,16 +66,16 @@
                       <input id="field_DepartureDate" type="text" class="form-control" name="DepartureDate"
                         formControlName="DepartureDate" placeholder="dd/mm/yyyy" (click)="DepartureDate.toggle()"
                         ngbDatepicker #DepartureDate="ngbDatepicker" [minDate]="fromMinDate" [maxDate]="fromMaxDate"
-                        [ngClass]="{ 'is-invalid': isFlightFormSubmitted && crmForm.get('DepartureDate').errors,
-                    'is-valid': crmForm.get('DepartureDate').touched && !crmForm.get('DepartureDate').errors }" />
+                        [ngClass]="{ 'is-invalid': isFlightFormSubmitted && flightFrm.get('DepartureDate').errors,
+                    'is-valid': flightFrm.get('DepartureDate').touched && !flightFrm.get('DepartureDate').errors }" />
                       <div class="input-group-append">
                         <button class="btn btn-outline-secondary fa fa-calendar fa-lg" (click)="DepartureDate.toggle()"
                           type="button">
                         </button>
                       </div>
-                      <div *ngIf="isFlightFormSubmitted && crmForm.get('DepartureDate').errors"
+                      <div *ngIf="isFlightFormSubmitted && flightFrm.get('DepartureDate').errors"
                         class="invalid-feedback">
-                        <div *ngIf="crmForm.get('DepartureDate')?.errors?.required">
+                        <div *ngIf="flightFrm.get('DepartureDate')?.errors?.required">
                           Departure Date is required.
                         </div>
                       </div>
@@ -90,15 +90,15 @@
                       <input id="field_ReturnDate" type="text" class="form-control" name="ReturnDate"
                         formControlName="ReturnDate" placeholder="dd/mm/yyyy" (click)="ReturnDate.toggle()"
                         ngbDatepicker #ReturnDate="ngbDatepicker" [minDate]="fromMinDate" [maxDate]="fromMaxDate"
-                        [ngClass]="{ 'is-invalid': isFlightFormSubmitted && crmForm.get('ReturnDate').errors,
-                    'is-valid': crmForm.get('ReturnDate').touched && !crmForm.get('ReturnDate').errors }" />
+                        [ngClass]="{ 'is-invalid': isFlightFormSubmitted && flightFrm.get('ReturnDate').errors,
+                    'is-valid': flightFrm.get('ReturnDate').touched && !flightFrm.get('ReturnDate').errors }" />
                       <div class="input-group-append">
                         <button class="btn btn-outline-secondary fa fa-calendar fa-lg" (click)="ReturnDate.toggle()"
                           type="button">
                         </button>
                       </div>
-                      <div *ngIf="isFlightFormSubmitted && crmForm.get('ReturnDate').errors" class="invalid-feedback">
-                        <div *ngIf="crmForm.get('ReturnDate')?.errors?.required">
+                      <div *ngIf="isFlightFormSubmitted && flightFrm.get('ReturnDate').errors" class="invalid-feedback">
+                        <div *ngIf="flightFrm.get('ReturnDate')?.errors?.required">
                           Return Date Date is required.
                         </div>
                       </div>

@@ -5,14 +5,15 @@ import { FlightSimulatorRoutingModule } from './flight-simulator-routing.module'
 import { SharedModule } from '../../shared/modules/shared/shared.module';
 import { FlightListComponent } from './flight-list/flight-list.component';
 import { FlightSimulatorComponent } from './flight-simulator-form/flight-simulator.component';
-
+import { DataTableModule } from 'angular2-datatable';
 
 @NgModule({
   declarations: [FlightSimulatorComponent, FlightListComponent],
   imports: [
     CommonModule,
     SharedModule,
-    FlightSimulatorRoutingModule
+    FlightSimulatorRoutingModule,
+    DataTableModule
   ]
 })
 export class FlightSimulatorModule { }
