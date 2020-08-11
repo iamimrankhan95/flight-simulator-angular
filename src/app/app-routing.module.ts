@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 import { P404Component } from './modules/error/404.component';
 import { P500Component } from './modules/error/500.component';
 import { DefaultLayoutComponent } from './containers';
@@ -22,13 +22,7 @@ const routes: Routes = [
     data: {
       title: 'Home'
     },
-    canActivate: [AuthGuard],
     children: [
-      {
-        path: '',
-        component: DefaultLayoutComponent,
-        pathMatch: 'full'
-      },
       {
         path: 'dashboard',
         loadChildren: () => import('./modules/dashboard/dashboard.module').then(m => m.DashboardModule)
@@ -67,7 +61,7 @@ const routes: Routes = [
 
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
