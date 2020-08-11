@@ -35,7 +35,8 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
 import { CoreModule } from './core/core.module';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
-// import { NgxUiLoaderModule } from 'ngx-ui-loader';
+import { NgxUiLoaderModule } from 'ngx-ui-loader';
+
 @NgModule({
   imports: [
     BrowserModule,

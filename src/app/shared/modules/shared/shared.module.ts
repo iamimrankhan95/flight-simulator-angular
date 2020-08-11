@@ -5,12 +5,11 @@ import { RouterModule } from '@angular/router';
 import { DataFilterPipe } from './pipes/datafilterpipe';
 import { ReplaceNullWithText } from './pipes/replace-null-with-text.pipe';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { LoaderComponent } from './loader/loader.component';
 @NgModule({
   declarations: [
     DataFilterPipe,
     ReplaceNullWithText,
-    LoaderComponent,
+    // LoaderComponent,
     // NotPermittedComponent,
     // ShowOnPermissionDirective
   ],
@@ -27,8 +26,8 @@ import { LoaderComponent } from './loader/loader.component';
     ReactiveFormsModule,
     NgbModule,
     DataFilterPipe,
-    ReplaceNullWithText,
-    LoaderComponent,
+    ReplaceNullWithText
+    // LoaderComponent,
     // NotPermittedComponent,
     // ShowOnPermissionDirective
   ]
