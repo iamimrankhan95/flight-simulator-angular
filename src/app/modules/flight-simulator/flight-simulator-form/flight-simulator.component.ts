@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { ConfirmationDialogService } from '../../../shared/modules/notification/confirmation-dialog/confirmation-dialog.service';
-import { onlyNumeric, nidValidation } from '../../../shared/services/validation-forms.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { TicketStatus } from '../../../shared/models/dto/ticket-status-dto';
 import { AppConstant } from '../../../shared/enums/Constants';
 import { FlightSimulatorHttpService } from '../flight-simulator-http.service';
 import { FlightSimulatorResponseObject } from '../../../shared/models/dto/flight-simulator-response.dto';
@@ -32,7 +29,6 @@ export class FlightSimulatorComponent implements OnInit {
   });
 
   constructor(private fb: FormBuilder,
-    private confirmationDialogService: ConfirmationDialogService,
     private route: ActivatedRoute,
     private router: Router,
     private toastr: ToastrService,

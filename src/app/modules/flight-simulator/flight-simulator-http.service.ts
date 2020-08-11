@@ -7,8 +7,6 @@ import { Observable } from 'rxjs';
 import { catchError, tap, map } from 'rxjs/operators';
 import { HttpErrorHandler, HandleError } from '../../shared/services/http-error-handler.service';
 import { ToastrService } from 'ngx-toastr';
-import { CrmDtoForList } from '../../shared/models/dto/crm-dto-for-list';
-import { AuthenticationService } from '../auth/authentication.service';
 import { FlightSimulatorResponseObject } from '../../shared/models/dto/flight-simulator-response.dto';
 import { FlightSimulatorService } from './flight-simulator.service';
 import { FlightSimulatorRequest } from '../../shared/models/dto/flight-simulator-request.dto';
@@ -30,7 +28,6 @@ export class FlightSimulatorHttpService {
     private http: HttpClient,
     httpErrorHandler: HttpErrorHandler,
     private toastr: ToastrService,
-    private authService: AuthenticationService,
     private flightSimulatorService: FlightSimulatorService
   ) {
     this.handleError = httpErrorHandler.createHandleError('FlightSimulatorHttpService');

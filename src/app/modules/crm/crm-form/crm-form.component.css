@@ -1,7 +1,0 @@
-input[readonly] {
-  background-color: white;
-}
-
-select[disabled] {
-  background-color: white;
-}

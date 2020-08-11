@@ -3,18 +3,12 @@ import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 import { P404Component } from './modules/error/404.component';
 import { P500Component } from './modules/error/500.component';
 import { DefaultLayoutComponent } from './containers';
-import { AuthGuard } from './modules/auth/auth.guard';
-import { DashboardComponent } from './modules/dashboard/dashboard.component';
 
 const routes: Routes = [
   {
     path: '',
     redirectTo: 'home',
     pathMatch: 'full'
-  },
-  {
-    path: 'auth',
-    loadChildren: () => import('./modules/auth/auth.module').then(m => m.AuthModule)
   },
   {
     path: 'home',
@@ -32,18 +26,6 @@ const routes: Routes = [
         path: 'flight-simulator',
         loadChildren: () => import('./modules/flight-simulator/flight-simulator.module').then(m => m.FlightSimulatorModule)
       },
-      {
-        path: 'crm',
-        loadChildren: () => import('./modules/crm/crm.module').then(m => m.CRMModule),
-      },
-      {
-        path: 'users',
-        loadChildren: () => import('./modules/user/user.module').then(m => m.UserModule)
-      },
-      {
-        path: 'escalation',
-        loadChildren: () => import('./modules/escalation/escalation.module').then(m => m.EscalationModule)
-      }
     ]
   },
   {
