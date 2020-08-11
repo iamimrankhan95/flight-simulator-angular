@@ -24,8 +24,13 @@ const routes: Routes = [
     },
     children: [
       {
-        path: 'dashboard',
-        loadChildren: () => import('./modules/dashboard/dashboard.module').then(m => m.DashboardModule)
+        path: '',
+        redirectTo: 'flight-simulator',
+        pathMatch: 'full'
+      },
+      {
+        path: 'flight-simulator',
+        loadChildren: () => import('./modules/flight-simulator/flight-simulator.module').then(m => m.FlightSimulatorModule)
       },
       {
         path: 'crm',
