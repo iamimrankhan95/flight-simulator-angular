@@ -11,37 +11,12 @@ export class DefaultLayoutComponent implements OnInit {
   public sidebarMinimized = false;
   public navItems = navItems;
   public loginUsername: string;
-  // public loginId: number;
+  title = 'flight-simulator';
 
   constructor(
     private router: Router,
     public authenticationservice: AuthenticationService) { }
 
   ngOnInit() {
-    // const user = JSON.parse(localStorage.getItem('currentUser'));
-    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    this.loginUsername = currentUser.username;
-    // comment out the above line and remove the line below
-    // const user = localStorage.getItem('currentUser');
-    // if (user) {
-    //   console.log(user);
-    //   this.loginUsername = user;
-    //   // this.loginId = user.data.id;
-    // } else {
-    //   this.router.navigate(['/auth/login']);
-    // }
   }
-
-  toggleMinimize(e) {
-    this.sidebarMinimized = e;
-  }
-
-  logoutClick() {
-    this.authenticationservice.logout();
-  }
-
-  ChangePassword() {
-    this.router.navigate(['/home/profile/change-password/']);
-  }
-
 }
