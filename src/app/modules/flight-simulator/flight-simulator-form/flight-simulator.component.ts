@@ -39,7 +39,12 @@ export class FlightSimulatorComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  async onSubmit() {
+  reset() {
+    this.isFlightFormSubmitted = false;
+    this.flightFrm.reset();
+  }
+
+  onSubmit() {
     this.isFlightFormSubmitted = true;
     if (!this.flightFrm.valid) {
       this.toastr.error('Form validation failed', 'Error');
