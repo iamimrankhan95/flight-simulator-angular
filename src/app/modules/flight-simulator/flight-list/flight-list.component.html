@@ -9,8 +9,9 @@
         <div class="card-body">
           <div class="row pb-4 pt-4"
             style="background-color: rgb(211,211,211,0.3);display: flex;display: flex;justify-content: space-evenly">
-            <div class="col-md-8 form-inline">
-              <label>{{"Filter with your budget: " | translate}}&nbsp;<input type="number" class="form-control"
+            <div class="col-md-10">
+              <div class="d-flex justify-content-center form-inline">
+                <label>{{"Filter according to your budget: " | translate}}&nbsp;<input type="number" class="form-control"
                   [(ngModel)]="minAmount" placeholder="Min" />
                 <input type="number" class="form-control" [(ngModel)]="maxAmount" placeholder="Max" /></label>
               <button type="button" class="btn btn-primary" (click)="filter()">
@@ -19,6 +20,7 @@
               <button type="button" class="btn btn-danger" (click)="clearFilter()">
                 <span>Clear Filter</span>
               </button>
+              </div>
             </div>
           </div>
           <div class="row mb-3 mt-1">
