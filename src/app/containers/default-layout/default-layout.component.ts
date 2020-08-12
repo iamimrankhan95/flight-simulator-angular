@@ -1,6 +1,7 @@
-import {Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { navItems } from '../../_nav';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-dashboard',
@@ -13,7 +14,14 @@ export class DefaultLayoutComponent implements OnInit {
   title = 'flight-simulator';
 
   constructor(
-    private router: Router) { }
+    private router: Router,
+    public translateService: TranslateService) {
+    translateService.addLangs(['en', 'fr']);
+    translateService.setDefaultLang('en');
+
+    const browserLang = translateService.getBrowserLang();
+    translateService.use(browserLang.match(/en|fr/) ? browserLang : 'en');
+  }
 
   ngOnInit() {
   }
