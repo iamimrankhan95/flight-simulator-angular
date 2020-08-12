@@ -15,8 +15,11 @@ import { NgxUiLoaderService } from 'ngx-ui-loader';
 export class FlightListComponent implements OnInit {
 
   filterQuery = '';
+  minAmount = '';
+  maxAmount = '';
   flightSimulatorRequest: FlightSimulatorRequest;
   flights: FlightSimulatorResponseObject[];
+  filteredFlights: FlightSimulatorResponseObject[];
   constructor(private route: ActivatedRoute,
     private router: Router, private toastr: ToastrService,
     private flightSimulatorHttpService: FlightSimulatorHttpService,
@@ -42,7 +45,7 @@ export class FlightListComponent implements OnInit {
           .subscribe(
             (flightSimulatorResponseObject: FlightSimulatorResponseObject[]) => {
               this.flightSimulatorService.flights = flightSimulatorResponseObject;
-              this.flights = flightSimulatorResponseObject;
+              this.filteredFlights = flightSimulatorResponseObject;
               this.ngxLoader.stop();
             }
           );
@@ -50,4 +53,13 @@ export class FlightListComponent implements OnInit {
     );
   }
 
+  filter() {
+    this.filteredFlights = this.flightSimulatorService.flights
+      .filter(x => +this.maxAmount >= x.TotalAmount && x.TotalAmount >= +this.minAmount);
+  }
+
+  clearFilter() {
+    this.maxAmount = this.minAmount = null;
+    this.filteredFlights = this.flightSimulatorService.flights;
+  }
 }
