@@ -2,9 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { AppConstant } from '../../../shared/enums/Constants';
 import { FlightSimulatorHttpService } from '../flight-simulator-http.service';
-import { FlightSimulatorResponseObject } from '../../../shared/models/dto/flight-simulator-response.dto';
 import { FlightSimulatorService } from '../flight-simulator.service';
 
 @Component({

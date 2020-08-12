@@ -11,18 +11,22 @@ export class DefaultLayoutComponent implements OnInit {
   public sidebarMinimized = false;
   public navItems = navItems;
   public loginUsername: string;
-  title = 'flight-simulator';
-
+  param = { title: 'ফ্লাইট-সিমুলেটার' };
   constructor(
     private router: Router,
     public translateService: TranslateService) {
-    translateService.addLangs(['en', 'fr']);
-    translateService.setDefaultLang('en');
+    translateService.addLangs(['en', 'bn']);
+    translateService.setDefaultLang('bn');
 
     const browserLang = translateService.getBrowserLang();
-    translateService.use(browserLang.match(/en|fr/) ? browserLang : 'en');
+    translateService.use(translateService.defaultLang);
   }
 
   ngOnInit() {
+  }
+
+  translate(SelectedLang) {
+    this.param.title = SelectedLang === 'bn' ? 'ফ্লাইট-সিমুলেটার' : 'flight-simulator';
+    this.translateService.use(SelectedLang);
   }
 }

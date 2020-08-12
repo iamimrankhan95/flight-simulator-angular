@@ -3,13 +3,15 @@
     <div class="col-sm-6 col-md-6 offset-3">
       <div class="card">
         <div class="card-header">
-          <i class="fa fa-check"></i>Form for the User Input
+          <i class="fa fa-check"></i>{{'flight-simulator-form.form-header' | translate}}
         </div>
         <div class="card-body">
           <form class="needs-validation" name="flightFrm" role="form" novalidate (ngSubmit)="onSubmit()"
             [formGroup]="flightFrm">
             <fieldset>
-              <legend><h5>Flight Information</h5></legend>
+              <legend>
+                <h5>Flight Information</h5>
+              </legend>
               <div class="form-row">
                 <div class="col-md-6">
                   <div class="form-group">

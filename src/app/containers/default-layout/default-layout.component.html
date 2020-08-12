@@ -296,7 +296,8 @@
   <div class="spacer"></div>
   <label>
     {{ 'HOME.SELECT' | translate }}
-    <select #langSelect (change)="translateService.use(langSelect.value)">
+    <select #langSelect
+      (change)="param.title=langSelect.value==='bn'? 'ফ্লাইট-সিমুলেটার':'flight-simulator';translateService.use(langSelect.value)">
       <option *ngFor="let lang of translateService.getLangs()" [value]="lang"
         [selected]="lang === translateService.currentLang">{{ lang }}</option>
     </select>
@@ -332,7 +333,7 @@
       </g>
     </svg>
 
-    <span> {{'HOME.title' | translate}}</span>
+    <span> {{'HOME.title' | translate:param}}</span>
 
     <svg id="rocket-smoke" alt="Rocket Ship Smoke" xmlns="http://www.w3.org/2000/svg" width="516.119" height="1083.632"
       viewBox="0 0 516.119 1083.632">

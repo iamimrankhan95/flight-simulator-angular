@@ -5,19 +5,19 @@ import { RouterModule } from '@angular/router';
 import { DataFilterPipe } from './pipes/datafilterpipe';
 import { ReplaceNullWithText } from './pipes/replace-null-with-text.pipe';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { TranslateModule } from '@ngx-translate/core';
+import { transcode } from 'buffer';
 @NgModule({
   declarations: [
     DataFilterPipe,
     ReplaceNullWithText,
-    // LoaderComponent,
-    // NotPermittedComponent,
-    // ShowOnPermissionDirective
   ],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    NgbModule
+    NgbModule,
+    TranslateModule
   ],
   exports: [
     RouterModule,
@@ -26,10 +26,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ReactiveFormsModule,
     NgbModule,
     DataFilterPipe,
-    ReplaceNullWithText
-    // LoaderComponent,
-    // NotPermittedComponent,
-    // ShowOnPermissionDirective
+    ReplaceNullWithText,
+    TranslateModule
   ]
 })
 export class SharedModule { }

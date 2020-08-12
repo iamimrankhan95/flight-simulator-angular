@@ -1,9 +1,9 @@
 {
   "HOME": {
     "SELECT": "Change language",
-    "title": "flight-simulator app is running!"
+    "title": "{{title}} app is running!"
   },
   "flight-simulator-form": {
-    
+    "form-header": "Form for the User Input"
   }
 }
